@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    {% include "_h2_border.html" %}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Introduction to Scratch.</h1>
+
+    <hr />
+
+    <p>Scratch is a language that allows you to drag and drop blocks to write programs.</p>
+
+    <p>I would recommend using Scratch 2.0.  If you are using a raspberry pi you will be using Scratch 1.4.</p>
+    
+    <p>Here is the scratch website: <a href="https://scratch.mit.edu/" target="_blank">click here</a>.</p>
+    
+    <p>To install the Scratch 2.0 Offline Editor please watch my video. <em>(It it useful to run it in full screen mode.)</em></p>
+    
+    <h2>Downloading the Scratch 2.0 Offline Editor</h2>
+    <br />
+    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/gC2ToRcSMS8?rel=0" frameborder="0" allowfullscreen></iframe>
+
+    <h2>How to Program in Scratch</h2>
+    <br />
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/iX3UsgEwh-s?rel=0" frameborder="0" allowfullscreen></iframe>
+    
+    <br />
+    
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
+{% endblock %}

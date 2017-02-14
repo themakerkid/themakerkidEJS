@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+    {% include "_h2_border.html" %}
+{% endblock %}
+
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Welcome to The MAKER Kid Getting Started page.</h1>
+</div>
+<h2>What is a Maker? (By Make:)</h2>
+<p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/rUoZwuSDikY?rel=0" frameborder="0" allowfullscreen></iframe>
+</p>
+{% endblock %}

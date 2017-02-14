@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/khanProjStyle.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    <h1>Some of my Khan Processing Projects</h1>
+    <ul class="grid-nav">
+        <li><a href="{{ url_for('.animations') }}">Animation</a></li>
+        <li><a href="{{ url_for('.mouseOver') }}">Mouse Over</a></li>
+        <li><a href="{{ url_for('.drawing') }}" class="active">Drawings</a></li>
+    </ul>
+    <div id="four-columns" class="grid-container" style="display:block;">
+        <ul class="rig columns-4">
+            <li>
+                <h4 class="centered">Animal Attack</h4>
+                <img src="/static/images/tech/khan_static_pictures/animalAttack.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#animal-attack-static" href="{{ url_for('static', filename='getTheCode/staticAnimalAttack.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade no-center" id="animal-attack-static" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Brown Bear Eyes</h4>
+                <img src="/static/images/tech/khan_static_pictures/brownBearEyes.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#brown-bear-eyes" href="{{ url_for('static', filename='getTheCode/brownBearEyes.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="brown-bear-eyes" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Build a House</h4>
+                <img src="/static/images/tech/khan_static_pictures/buildAHouse.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#build-a-house" href="{{ url_for('static', filename='getTheCode/buildAHouse.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="build-a-house" role="dialog">
+                    <div class="modal-dialog modal-md">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Double Rainbow</h4>
+                <img src="/static/images/tech/khan_static_pictures/doubleRainbow.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#double-rainbow" href="{{ url_for('static', filename='getTheCode/doubleRainbow.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="double-rainbow" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Fish Tank</h4>
+                <img src="/static/images/tech/khan_static_pictures/fishTank.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#fish-tank" href="{{ url_for('static', filename='getTheCode/fishTank.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="fish-tank" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Minecraft Bookshelf</h4>
+                <img src="/static/images/tech/khan_static_pictures/MINECRAFTBOOKSHELF.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#mc" href="{{ url_for('static', filename='getTheCode/minecraftBookshelf.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="mc" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Moles in the Holes</h4>
+                <img src="/static/images/tech/khan_static_pictures/molesInHolesNoImg.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#mole" href="{{ url_for('static', filename='getTheCode/mole.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="mole" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="centered">Frog</h4>
+                <img src="/static/images/tech/khan_static_pictures/frog.png" />
+                <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#frog" href="{{ url_for('static', filename='getTheCode/frog.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="frog" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('body')
+                .hide()
+                .fadeIn(1500);
+        });
+        (function() {
+            new Clipboard('#copy-button');
+        })();
+    </script>
+{% endblock %}

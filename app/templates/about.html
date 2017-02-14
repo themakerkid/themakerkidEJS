@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        /*		background: url(../images/texture_old_map.png);*/
+        background-color: lightgoldenrodyellow;
+    }
+    
+    .content {
+        width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+    }
+    
+    .content h1 {
+        font-weight: 400;
+        /*		text-transform: uppercase;*/
+        margin: 0;
+    }
+    
+    .content h2 {
+        font-weight: 400;
+        /*		text-transform: uppercase;*/
+        color: #333;
+        margin: 0 0 20px;
+    }
+    
+    .content p {
+        font-size: 1em;
+        font-weight: 300;
+        line-height: 1.5em;
+        margin: 0 0 20px;
+    }
+    
+    .content p:last-child {
+        margin: 0;
+    }
+    
+    .content,
+    button {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #ff0;
+        color: #000;
+        width: 100%;
+        text-align: left;
+        text-decoration: none;
+    }
+    
+    .content a.button:hover {
+        background: #000;
+        color: #ff0;
+    }
+    
+    .content.title {
+        position: relative;
+        background: none;
+        /*		border: 2px dashed #333;*/
+    }
+    
+    .content.title h1 span.demo {
+        display: inline-block;
+        font-size: .5em;
+        padding: 5px 10px;
+        background: #000;
+        color: #fff;
+        vertical-align: top;
+        margin: 7px 0 0;
+    }
+    /*.content.title .back-to-article {
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+        }
+        .content.title .back-to-article a {
+            padding: 10px 20px;
+            background: #f60;
+            color: #fff;
+            text-decoration: none;
+        }
+        .content.title .back-to-article a:hover {
+            background: #f90;
+        }
+        .content.title .back-to-article a i {
+            margin-left: 5px;
+        }*/
+    
+    .content.white {
+        background: #fff;
+        box-shadow: 0 0 10px #999;
+    }
+    
+    .content.black {
+        background: #000;
+    }
+    
+    .content.black p {
+        color: #999;
+    }
+    
+    .content.black p a {
+        color: #08c;
+    }
+    
+    .accordion-container {
+        width: 100%;
+        margin: 0 0 20px;
+        clear: both;
+        color: white !important;
+    }
+    
+    .accordion-toggle {
+        position: relative;
+        display: block;
+        padding: 20px;
+        font-size: 1.5em;
+        font-weight: 300;
+        background: #999;
+        color: #fff;
+        text-decoration: none;
+    }
+    
+    .accordion-toggle.open {
+        background: #333;
+        color: #fff;
+    }
+    
+    .accordion-toggle:hover {
+        background: #666;
+        text-decoration: none;
+    }
+    
+    .accordion-toggle span.toggle-icon {
+        position: absolute;
+        top: 9px;
+        right: 20px;
+        font-size: 1.5em;
+    }
+    
+    .accordion-content {
+        display: none;
+        padding: 20px;
+        padding: 20px;
+        overflow: auto;
+        color: black;
+        font-size: 1.5em;
+    }
+    
+    .accordion-content img {
+        display: block;
+        float: left;
+        margin: 0 15px 10px 0;
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .todelete {
+        background-color: red;
+        color: white;
+    }
+    /* media query for mobile */
+    
+    @media (max-width: 767px) {
+        .content {
+            width: auto;
+        }
+        .accordion-content {
+            padding: 10px 0;
+            overflow: inherit;
+        }
+    }
+</style>
+{% endblock %}
+
+<!--<div class="content title">
+        <span class="back-to-article"><a href="#">Back to Article <i class="fa fa-angle-right"></i></a></span>
+    </div>-->
+<!--/.content-->
+{% block page_content %}
+<div class="content white">
+    <h1>About The MAKER Kid</h1>
+    <br />
+    <div class="accordion-container open">
+        <button href="#" class="accordion-toggle">Purpose of this Website <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content" id="first-acc">
+            <img src="{{ url_for('static', filename='images/about/creeper5.jpg') }}" />
+            <p>Are you a kid who is interested in making cool stuff like robots and other projects, but don't know where to get started?
+            <br />
+            <br />The MAKER Kid is a learning website where kids aged 6-14 can get together and learn about making stuff. You can even share ideas and projects with other kids.</p>
+
+            <p>Have a look around this website. There are simple projects to get started with, or more advanced projects which use coding and electronics.</p>
+
+            <p>Interested in getting involved, or don't really understand how some of the projects work? Then simply register with this website and you can post messages and comments, share code with other kids, and hopefully get an answer to your questions.</p>
+
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+    <div class="accordion-container">
+        <button href="#" class="accordion-toggle">A little about me <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content">
+            <img src="{{ url_for('static', filename='images/about/creeper5.jpg') }}" />
+            <p>Hi Kids, I'm Benjamin, creator of <strong>The MAKER Kid website</strong>. I am 10 years old and live in Dublin, Ireland. <strong>I AM NOT THE MAKER KID</strong>. The MAKER Kid is any kid that is interested in making stuff, and visits this Website... like what you are doing right now!!</p>
+            <p>Since I was a little kid, I was always trying to figure out how things work. I started off on Lego<sup>&reg;</sup> and Meccano<sup>&reg;</sup>, building lots of challenging models, before asking my parents for a Lego<sup>&reg;</sup> Mindstorms Robot. Unfortunately, I didn't get the Mindstorms Robot, but I did get an <a target="_blank" href="https://www.arduino.cc/"> Arduino</a> and later a <a target="_blank" href="https://www.raspberrypi.org/"> Raspberry Pi.</a> As you can see from the picture from the previous tab, I am a big Minecraft fan. I come from a family of makers. My Mum loves making costumes, and my Dad loves tinkering with Electronics.</p>
+
+            <p>I began coding when I was 6 years old (a long time ago!), starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi. I won the Best Educational Content Award at the annual <a target="_blank" href="http://scratch.ie/home"> Scratch competition</a> in 2015, with my project <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flash must be activated.">Snapshot Of our World</a>. I joined Coderdojo in Summer 2015 originally at the <a target="_blank" href="https://dublin.sciencegallery.com/">Science Gallery</a>, before we moved to <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> in Zalando beside Google Headquarters.</p>
+
+            <p>At <a target="_blank" href="https://coderdojo.com/">Coderdojo</a>, I learned how to code websites. and mobile devices, before moving onto Raspberry Pi and Python.</p>
+ 
+          <p>I was invited by Coderdojo to showcase my Maker Kid project at the RDS BTYSTE exhibition. You can read my blog <a target="_blank" href="http://coderdojowarehouse.com/blog/?cat=17">My Day at BTYSTE</a> here.</p>
+          <p> Besides Coding, I enjoy Swimming, Tennis, Golf, Chess and of course Minecraft.</p>
+
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+    <div class="accordion-container">
+        <button href="#" class="accordion-toggle">Why I built this Website <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content">
+            <p>I love making stuff and wanted to show other kids that making stuff is fun. If kids try some of my exercises they will soon realise that making stuff is great fun and there are great resources in our own country.</p>
+            
+            <p>I wanted to use all the stuff that I learned in both CoderDojo and individually, under one big project.</p>
+            
+            <p>I wanted to establish links with other kids who are interested in making stuff, and provide a forum where they could communicate and learn from each other.</p>
+            
+            <p>My Mum wanted me to design a website for our Local Residents&#39; Assocation but I decided that I should start with one for kids like me. I wanted to learn other skills like making videos and editing images.  </p>
+            
+            <p>My website is built by a kid, for Irish kids and kids all around the world, with relevant hints, ideas and guidelines on how to get started and have fun with all areas of making stuff.</p>
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+    <div class="accordion-container">
+        <button href="#" class="accordion-toggle">How I built this Website <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content">
+            <img src="{{ url_for('static', filename='images/about/code_logo.svg') }}" />
+            <br />
+            <p>This website was hand coded from scratch using the skills I learned at CoderDojo @ Warehouse, and on various websites.</p>
+            <p>
+                I built this website using CSS/Bootstrap, HTML, JavaScript/JQuery, Python and SQLite (change to new sql database later). The Server is based on the Flask Framework which is a lightweight Python Micro framework.</p>
+            <br />
+            <br />
+            <p>If you are wondering what these languages are, then check out some of the links on the the <a href="{{ url_for('main.coding') }}">Coding</a> section of the Website.</p>
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+    <div class="accordion-container">
+        <button href="#" class="accordion-toggle">Credits <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content">
+            <img src="{{ url_for('static', filename='images/about/credits.jpg') }}" />
+            <br />
+
+            <p>Thanks to all the Mentors and committee at CoderDojo Dublin @ Warehouse, especially Brian, Ed, Ren&eacute; and Anna.</p>
+            
+            <hr />
+
+            <p>Thanks to Sal and all the team at KHAN Academy for your fantastic learning website.</p>
+            
+            <hr />
+
+            <p>Thanks to Miguel Grinberg for his excellent Flask book.</p>
+            
+            <hr />
+                       
+            <p>Thanks to Ali Jafarian for his cool Jquery tutorials (which includes this page).</p>
+            
+            <hr />
+            
+            <p>Thanks to Wikimedia Commons and Pixabay for some of the images.</p>
+
+            <p><em>Sorry. The pictures do not line up.</em></p>
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+    <div class="accordion-container">
+        <button href="#" class="accordion-toggle">Future Enhancements <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <div class="accordion-content">
+            <p> I have so many plans to make the website better. I intend to add a lot more more content on coding with added projects.</p>
+        </div>
+        <!--/.accordion-content-->
+    </div>
+    <!--/.accordion-container-->
+</div>
+<!--/.content-->
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-------------------- JS -------------------->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.accordion-toggle').on('click', function(event) {
+            event.preventDefault();
+            // create accordion variables
+            var accordion = $(this);
+            var accordionContent = accordion.next('.accordion-content');
+            var accordionToggleIcon = $(this).children('.toggle-icon');
+
+            // toggle accordion content
+            accordionContent.slideToggle(250);
+
+            // change plus/minus icon
+            if (accordion.hasClass("open")) {
+                accordionToggleIcon.html("<i class='fa fa-plus-circle'></i>");
+                accordion.removeClass("open");
+            } else {
+                accordionToggleIcon.html("<i class='fa fa-minus-circle'></i>");
+                accordion.addClass("open");
+            }
+        });
+    });
+</script>
+{% endblock %}

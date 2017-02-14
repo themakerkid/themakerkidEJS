@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/css/slider.css" />
+    {% include "_h2_border.html" %}
+    {% include "_img_left.html" %}
+    <style type="text/css">
+        p {
+            font-size: 1.25em;
+        }
+        
+        section {
+            clear: both;
+            margin-top: 0;
+        }
+        
+        #right {
+            margin-left: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Irish National Scratch Competition 2015 - Best Educational Project Winner ({{ time }} years ago)</h1>
+    </div>
+    
+    <section>
+        <div class="slider">
+            <div class="slide-viewer">
+                <div class="slide-group">
+                    <div class="slide slide-1">
+                        <img src="{{ url_for('static', filename='images/slide-1.jpg') }}" alt="Description of my project" />
+                    </div>
+                    <div class="slide slide-2">
+                        <img src="{{ url_for('static', filename='images/slide-2.jpg') }}" alt="Continents" />
+                    </div>
+                    <div class="slide slide-3">
+                        <img src="{{ url_for('static', filename='images/slide-3.jpg') }}" alt="Wonders & Landmarks" />
+                    </div>
+                    <div class="slide slide-4">
+                        <img src="{{ url_for('static', filename='images/slide-4.jpg') }}" alt="Wonders & Landmarks Mini Quiz" />
+                    </div>
+                    <div class="slide slide-5">
+                        <img src="{{ url_for('static', filename='images/slide-5.jpg') }}" alt="Oceans & Seas" />
+                    </div>
+                    <div class="slide slide-6">
+                        <img src="{{ url_for('static', filename='images/slide-6.jpg') }}" alt="Animals" />
+                    </div>
+                    <div class="slide slide-7">
+                        <img src="{{ url_for('static', filename='images/slide-7.jpg') }}" alt="Countries & Flags" />
+                    </div>
+                    <div class="slide slide-8">
+                        <img src="{{ url_for('static', filename='images/slide-8.jpg') }}" alt="Master Quiz Question" />
+                    </div>
+                    <div class="slide slide-9">
+                        <img src="{{ url_for('static', filename='images/slide-9.jpg') }}" alt="End of my project (Party!!!)" />
+                    </div>
+                </div>
+            </div>
+            <div class="slide-buttons"></div>
+        </div>
+
+    </section>
+
+    <img src="{{ url_for('static', filename='images/award.jpg') }}" class="img-float-left" />
+    <p>I began coding when I was 6 years old, starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi. I won the Best Educational Content Award at the annual <a href="http://scratch.ie/home"> Scratch competition</a> In Ireland in 2015, with my project <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flask must be activated.">Snapshot Of our World</a>.</p>
+    <img src="{{ url_for('static', filename='images/scratchMedal.jpg') }}" />
+    <img src="{{ url_for('static', filename='images/scratchTrophy.jpg') }}" id="right" />
+    <!--
+    <iframe id="project" allowtransparency="true" width="970" height="804" src="//scratch.mit.edu/projects/embed/49812240/?autostart=false" frameborder="0"></iframe><br />-->
+    <br />
+    <p><i id="scratch-project">(Note: Please be patient as this project is quite large.)</i></p>
+<!--    <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/49812240/?autostart=false" frameborder="0" allowfullscreen></iframe>-->
+    
+    <br />
+
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <script src="/static/js/slider.js"></script>
+{% endblock %}

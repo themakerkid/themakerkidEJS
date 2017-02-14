@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
+{% endblock %}
+
+{% block page_content %}
+    <h1>Learning Resources</h1>
+
+    <hr />
+
+    <h2>Exploring Arduino</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Arduino Project Handbook</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_project_handbook.jpg') }}" />
+        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
+    </p>
+
+    <h2>Programming Arduino. Next Steps.</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_next_steps.jpg') }}" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Arduino for Teens (Advanced)</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_teens.jpg') }}" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+{% endblock %}

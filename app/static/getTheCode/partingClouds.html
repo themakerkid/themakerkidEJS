@@ -1,0 +1,67 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Parting Clouds Source Code (By The MAKER Kid)</h2>
+    </div>
+    <button class="button btn btn-danger" id="copy-button" data-clipboard-target="#copy-content">Copy</button>
+
+    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+    <pre id="copy-content" style="background-color:#ffffd0; text-align:left;">
+<code class="language-less no-center">&lt;!-- By Benjamin --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;!-- start of the document --&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Parting Clouds&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id="mycanvas"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.3.6/processing.min.js"&gt;&lt;/script&gt; &lt;!-- processing.js --&gt;
+&lt;script&gt;
+    var sketchProc = function () {
+        with(processingInstance) {
+            size(400, 400);
+            frameRate(30);
+
+            noStroke();
+            var leftX = 170;
+            var rightX = 262;
+            var sunRadius = 100;
+
+            var draw = function() {
+                background(184, 236, 255);
+
+                fill(255, 170, 0);
+                ellipse(200, 100, sunRadius, sunRadius);
+
+                sunRadius +=2;
+
+                // clouds 
+                fill(255, 255, 255);
+                // left cloud
+                ellipse(leftX, 150, 126, 97);
+                ellipse(leftX+62, 150, 70, 60);
+                ellipse(leftX-62, 150, 70, 60);
+
+                // right cloud
+                ellipse(rightX, 100, 126, 97);
+                ellipse(rightX+62, 100, 70, 60);
+                ellipse(rightX-62, 100, 70, 60);
+
+                leftX--;
+                rightX++;
+                if (sunRadius > 300) { // looping
+                    sunRadius = 100;
+                }
+            };
+        }
+    }
+&lt;/script&gt;
+&lt;script type="application/javascript"&gt;
+    var canvas = document.getElementById("mycanvas");
+    var processingInstance = new Processing(canvas, sketchProc);
+&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+</div>

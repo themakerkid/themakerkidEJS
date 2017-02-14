@@ -1,0 +1,79 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Minecraft Bookshelf Source Code (By The MAKER Kid)</h2>
+    </div>
+    <button class="button btn btn-danger" id="copy-button" data-clipboard-target="#copy-content">Copy</button>
+
+    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+    <pre id="copy-content" style="background-color:#ffffd0;">
+<code class="language-less">&lt;!-- By The MAKER Kid --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;!-- start of the document --&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Minecraft Bookshelf&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id="mycanvas"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.3.6/processing.min.js"&gt;&lt;/script&gt; &lt;!-- processing.js --&gt;
+&lt;script&gt;
+    var sketchProc = function () {
+        with(processingInstance) {
+            size(400, 400);
+            frameRate(30);
+
+            var books = [
+            {
+                title: "Minecraft: Redstone Handbook,",
+                stars: 4,
+                author: "CNB Minecraft"
+            },
+
+            {
+                title: "Minecraft: Combat Handbook,",
+                stars: 4,
+                author: "Stephanie Milton"
+            },
+
+            {
+                title: "Minecraft: Beginners Handbook,",
+                stars: 4,
+                author: "Stephanie Milton"
+            },
+
+            {
+                title: "Minecraft: Construction Handbook,",
+                stars: 4,
+                author: "FyreUK"
+            }
+            ];
+
+            // draw shelf
+            fill(173, 117, 33);
+            rect(0, 120, width, 10);
+
+            // draw the books
+            for (var k = 0; k &lt; books.length; k++) {
+                fill(214, 255, 219);
+                rect(10 + k * 100, 20, 90, 100);
+                fill(0, 0, 0);
+                text(books[k].title, 15 + k * 100, 29, 70, 100);
+                text(books[k].author, 15 + k * 100, 73, 70, 100);
+            }
+            for (var j = 0; j &lt; books.length; j++) {
+                for (var i = 0; i &lt; books[j].stars; i++) {
+                    image(getImage("cute/Star"), 13 + i * 20 + j * 100, 90, 20, 30);
+                }
+            }
+        }
+    }
+&lt;/script&gt;
+&lt;script type="application/javascript"&gt;
+    var canvas = document.getElementById("mycanvas");
+    var processingInstance = new Processing(canvas, sketchProc);
+&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+</div>

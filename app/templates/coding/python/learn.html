@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
+    {% include "_h2_border.html" %}
+{% endblock %}
+
+{% block page_content %}
+    <h1>Learning Resources</h1>
+
+    <hr />
+
+    <h2>Python Basics (Python 3)</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/python/python_basics.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Hello World Second Edition (Python 2.7 and 3 but mostly 2.7)</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/python/hello_world.jpg') }}" />
+        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
+    </p>
+
+    <h2>Adventures in Minecraft (Python 2.7 (extra important) )</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/python/adventures_in_minecraft.jpg') }}" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Automate the Boring Stuff with Python (Python 3)</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/book_reviews/python/automate_boring.jpg') }}" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+{% endblock %}

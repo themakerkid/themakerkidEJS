@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/khanProjStyle.css') }}">
+    <style>
+        .canvas-caption {
+            display: inline-block;
+        }
+        
+        canvas {
+            display: inline-block;
+            text-align: center;
+            margin-right: 0px;
+        }
+        
+        /* If no grey border, circles at the edge will not look good. */
+        #mycanvas2 {
+            border: 1px solid #dedddd;
+        }
+        
+        .no-center {
+            text-align: left;
+        }
+        
+        p.description {
+            height: 40px;
+        }
+
+        .reload-one {
+            float: right;
+        }
+    </style>
+{% endblock %}
+
+<!-- The body of the webpage, where all visible stuff lies. -->
+
+{% block page_content %}
+    <h1>Some of my Mouse Over Projects</h1>
+    <ul class="grid-nav">
+        <li><a href="{{ url_for('.animations') }}">Animation</a></li>
+        <li><a href="{{ url_for('.mouseOver') }}" class="active">Mouse Over</a></li>
+        <li><a href="{{ url_for('.drawing') }}">Drawings</a></li>
+        <!--
+        <br />
+
+        <button role="button" id="reload-btn" class="btn btn-success">Reload All <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        -->
+    </ul>
+    <div class="canvas-caption">
+        <h3>Flower Grower</h3>
+        <p class="description">            
+        This program makes the flowers grow when
+            <br />you click on the background.
+        </p>
+        <canvas id="mycanvas"></canvas>
+        <div class="no-center">
+            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#flower-grower" href="{{ url_for('static', filename='getTheCode/flowerMaker.html') }}">Get the Code!!</button>
+            <!-- Modal -->
+            <div class="modal fade" id="flower-grower" role="dialog">
+                <div class="modal-dialog modal-md">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Error</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Sorry the file was probably moved.</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" class="btn-success btn-sm reload-one" id="flowerReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
+    </div>
+    <div class="canvas-caption">
+        <h3>Mouse Movement Mania</h3>
+        <p class="description">When you move the mouse it draws a circle and
+            <br />changes the colour (or color) of the circle.</p>
+        <canvas id="mycanvas2"></canvas>
+        <div class="no-center">
+            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#mouse-movement" href="{{ url_for('static', filename='getTheCode/mouseMovement.html') }}">Get the Code!!</button>
+            <!-- Modal -->
+            <div class="modal fade no-center" id="mouse-movement" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Mouse Movement Mania</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Sorry the file was probably moved.</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="button" class="btn-success btn-sm reload-one" id="mouseMovementReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
+    </div>
+    <div class="canvas-caption">
+        <h3>Irish Flag Painter</h3>
+        <p class="description">Like Mouse Movement Mania, but draws the<br />
+            Irish Flag instead.</p>
+        <canvas id="mycanvas3"></canvas>
+        <div class="no-center">
+            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#irish-flag" href="{{ url_for('static', filename='getTheCode/irishFlag.html') }}">Get the Code!!</button>
+            <!-- Modal -->
+            <div class="modal fade no-center" id="irish-flag" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Mouse</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Sorry the file was probably moved.</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" class="btn-success btn-sm reload-one" id="irishReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
+    </div>
+    <div class="canvas-caption">
+        <h3>Crazy Painter</h3>
+        <p class="description">Like the one before but draws a tiny circle
+            <br />instead.</p>
+        <canvas id="mycanvas4"></canvas>
+        <div class="no-center">
+            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#crazy-painter" href="{{ url_for('static', filename='getTheCode/crazyPainter.html') }}">Get the Code!!</button>
+            <!-- Modal -->
+            <div class="modal fade" id="crazy-painter" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Error</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Sorry the file was probably moved.</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" class="btn-success btn-sm reload-one" id="crazyReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+        </div>
+    </div>
+    <br />
+    <em><small>Reload icons are free <a href="http://getbootstrap.com/components/#glyphicons" target="_blank">Bootstrap glyphicons</a>.</small></em>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}   
+    <!-- run all the javascript stuff -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
+    <!-- Include the processing.js commands -->
+    <script src="{{ url_for('static', filename='js/processing-1.3.6.min.js') }}"></script>
+    <!-- The actual source code for the programs -->
+    <script src="{{ url_for('static', filename='js/flowerMakerInheritence.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/mouseMovement.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/irishFlag.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/crazypainter.js') }}"></script>
+    <script type="text/javascript">
+        var canvas = document.getElementById("mycanvas"); //get the canvas that processingjs will use
+        var processingInstance = new Processing(canvas, sketchProc); 
+        var canvas2 = document.getElementById("mycanvas2"); //get the canvas that processingjs will use
+        var processingInstance2 = new Processing(canvas2, sketchProc2); 
+        var canvas3 = document.getElementById("mycanvas3"); //get the canvas that processingjs will use
+        var processingInstance3 = new Processing(canvas3, sketchProc3); 
+        var canvas4 = document.getElementById("mycanvas4"); //get the canvas that processingjs will use
+        var processingInstance4 = new Processing(canvas4, sketchProc4); 
+    </script>
+    <script>
+        (function() {
+            new Clipboard('#copy-button');
+        })();
+    </script>
+    <script type="text/javascript">
+        //function reloadAll() {
+            //reloadFlowerGrower()
+            //reloadMouseMovement()
+            //reloadIrishFlag()
+            //reloadCrazyPainter()
+        //}
+
+        function reloadFlowerGrower() {
+            processingInstance = new Processing(canvas, sketchProc);
+        }
+
+        function reloadMouseMovement() {
+            processingInstance2 = new Processing(canvas2, sketchProc2);
+        }
+
+        function reloadIrishFlag() {
+            processingInstance3 = new Processing(canvas3, sketchProc3);
+        }
+
+        function reloadCrazyPainter() {
+            processingInstance4 = new Processing(canvas4, sketchProc4);
+        }
+        
+        //var reloadBtn = document.getElementById("reload-btn");
+        //reloadBtn.onclick = reloadAll;
+        
+        var flowerReload = document.getElementById("flowerReload");
+        flowerReload.onclick = reloadFlowerGrower;
+        
+        var mouseMovementReload = document.getElementById("mouseMovementReload");
+        mouseMovementReload.onclick = reloadMouseMovement;
+
+        var irishReload = document.getElementById("irishReload");
+        irishReload.onclick = reloadIrishFlag;
+
+        var crazyReload = document.getElementById("crazyReload");
+        crazyReload.onclick = reloadCrazyPainter;
+    </script>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crazy Painter</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="Code">
+</head>
+
+<body>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Crazy Painter Source Code (By The MAKER Kid)</h2>
+    </div>
+    <button class="button btn btn-danger" id="copy-button" data-clipboard-target="#copy-content">Copy</button>
+
+    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+    <pre id="copy-content" style="background-color:#ffffd0;">
+<code class="language-less">&lt;!-- By The MAKER Kid --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;!-- start of the document --&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Crazy Painter&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id="mycanvas"&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.3.6/processing.min.js"&gt;&lt;/script&gt; &lt;-- processing.js --&gt;
+&lt;script&gt;
+    var sketchProc = function () {
+        with(processingInstance) {
+            size(400, 400);
+            frameRate(30);
+
+            background(245, 204, 204); // background colour
+            noStroke(); // no border
+            var draw = function () { // repeatedly called draw function
+                fill(mouseY, mouseY, mouseX); // fill colour
+                ellipse(mouseX, mouseY, 10, 10); // the actual ellipse
+            };
+        }
+    }
+&lt;/script&gt;
+&lt;script type="application/javascript"&gt;
+    var canvas = document.getElementById("mycanvas");
+    var processingInstance = new Processing(canvas, sketchProc);
+&lt;/script&gt;
+
+&lt;/html&gt;</code></pre>
+    <!--
+    <div class="modal-footer">
+    </div>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
+    <script>
+        (function() {
+            new Clipboard('#copy-button');
+        })();
+    </script>-->
+</body>
+
+</html>

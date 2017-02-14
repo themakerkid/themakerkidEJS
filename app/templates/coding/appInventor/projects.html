@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    {% include "_h2_border.html" %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Projects / Apps</h1>
+    </div>
+    <h2>How to use .apk files (You must read this to move on)</h2>
+    <h3>
+        All the apps on this page will be downloaded via .apk. You will have to have an Android device to use .apk files.
+    </h3>
+    <p>
+        <h3>Just don&#39;t forget to go to Settings > Security and check Unknown Sources.</h3>
+        <h4>If you&#39;re visiting this website via a computer, follow these steps:</h4>
+        <ol>
+            <li>Download the .apk file on to your computer. On this website you will just hit the Green Buttons.</li>
+            <li>Plug in your Android device via USB Cable. You might be asked if you want to charge your phone or to connect it as a media device.</li>
+            <li>Choose <strong>Media Device</strong>.</li>
+            <li>Copy the .apk file on to your phone (it can be any folder on the phone).</li>
+            <li>Find the .apk file and right-click on it and hit <strong>Install</strong>.</li>
+            <li>That&#39;s it!</li>
+        </ol>
+        
+        <h4>If you&#39;re visiting this website via a tablet or a phone, you will follow these steps.</h4>
+        <ol>
+            <li>Just hit the appropiate Green Button.</li>
+            <li>Go to your <strong>Downloads</strong>.</li>
+            <li>Tap on the .apk file.</li>
+            <li>Tap <strong>Yes</strong> when prompted.</li>
+            <li>That&#39;s it!</li>
+        </ol>
+    </p>
+
+    <h2>Bluetooth Controlled NeoPixel LEDs</h2>
+    <p>
+        <img src="{{ url_for('static', filename='images/coding/disconnected.png') }}" height="300" />
+        I presume you have watched the video on the <a href="{{ url_for('main.hardProj') }}">Bluetooth Controlled NeoPixel LEDs</a> becuase this app relies on the circuit.
+        <a class="btn btn-success" href="{{ url_for('static', filename='NeoPixelControl.apk') }}">Download the NeoPixel Control App</a>
+    </p>
+{% endblock %}

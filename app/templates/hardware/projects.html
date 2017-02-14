@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+    {% include "_h2_border.html" %}
+{% endblock %}
+
+{% block page_content %}
+<h1>Hardware Projects</h1>
+
+<hr />
+
+<h2>Introduction to Arduino</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JkbAz5osHuQ?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<h2>Bluetooth controlled NeoPixels with Arduino</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mPt6O2TAXwE?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<h2>Neopixel Ring with Adafruit Gemma</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe>
+{% endblock %}

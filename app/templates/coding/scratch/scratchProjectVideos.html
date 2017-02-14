@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="/static/css/slider.css" />
+    {% include "_h2_border.html" %}
+    <style type="text/css">
+        p {
+            font-size: 1.25em;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>My Project Videos</h1>
+    </div>
+
+    <h2>Intro to my project</h2>
+    <p>This video shows you the intro to my scratch project. Do not run these videos in full screen mode because the quality is really bad if you do.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/v-e1x9FkEeA?rel=0" frameborder="0" allowfullscreen></iframe>
+    
+    <h2>Continents</h2>
+    <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/MdrBHO7dKcQ?rel=0" frameborder="0" allowfullscreen></iframe>
+
+    <h2>Wonders &amp; Landmarks</h2>
+    <p>Learn about the Wonders of the world, like the Eiffel Tower or Machu Picchu. In the mini quiz, you match the name with the Wonder or Landmark.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5fo9EzNKYOo?rel=0" frameborder="0" allowfullscreen></iframe>
+    
+    <h2>Oceans &amp; Seas</h2>
+    <p>Hover over the letters to find the name of the sea. Hover over the fish to find the name of the ocean. Click on a fish/letter to get information. No mini quiz here.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ATQDtcERhtw?rel=0" frameborder="0" allowfullscreen></iframe>
+    
+    <h2>Animals</h2>
+    <p>Learn about different animals around the world. Like the Pirahna, the Wolf and the Panda. When you feel like you have finished you can try the drag-and-drop mini quiz.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/7tFQFNCYfvQ?rel=0" frameborder="0" allowfullscreen></iframe>
+    
+    <h2>Countries &amp; Flags</h2>
+    <p>Hover over a flag to find out the country and captial. No mini quiz here. You don&#39;t get information if you click on the flag.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/UD-WPH6-9CU?rel=0" frameborder="0" allowfullscreen></iframe>
+    <br />
+    <!--<a href="http://scratch.mit.edu/projects/49812240/" title="Flash must be activated." target="_blank">My project on the scratch website.</a>-->
+<!--    <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/49812240/?autostart=false" frameborder="0" allowfullscreen></iframe>-->
+    
+    <br />
+
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
+{% endblock %}

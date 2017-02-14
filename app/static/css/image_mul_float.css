@@ -1,0 +1,10 @@
+p {
+    font-size: 1.25em;
+    float: right;
+}
+img {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: none;
+    vertical-align: top;
+}
