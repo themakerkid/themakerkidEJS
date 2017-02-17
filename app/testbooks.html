@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>The MAKER Kid - Scratch - Learning Resources</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Bootstrap -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-submenu.min.css" />
+    <style type="text/css">
+        #starting, #hardware, #basic, #advanced, #eng, #maths, #other {
+            cursor: pointer;
+        }
+
+        li.dropdown-submenu a {
+            cursor: pointer;
+        }
+
+        footer p {
+            float: left !important;
+        }
+        
+        p {
+            font-size: 1.33em;
+        }
+        
+        #icon {
+            vertical-align: top;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        body {
+            padding-top: 60px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/css/image_mul_float.css" />
+    <style>
+    h2 {
+        color: darkblue;
+        border-bottom: 1px solid #000;
+    }
+</style> 
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+  </head>
+  <body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="/static/images/manga_head.png" width="25" id="icon"> The MAKER Kid</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/about">About</a></li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" id="starting">Getting Started <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="/starting">Introduction</a></li>
+                            <li><a tabindex="0" href="/starting/learn">Learning Resources</a></li>
+                            <li><a tabindex="0" href="/starting/books">Books to get Started</a></li>
+                            <li><a tabindex="0" href="/starting/famous">Famous Makers <br /> &amp; Technologists</a></li>
+                            <li><a tabindex="0" href="/starting/events">Events</a></li>
+                            <li><a tabindex="0" href="/starting/glossary">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Hardware <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="/hardware">Introduction</a></li>
+                            <li><a tabindex="0" href="/hardware/learn">Learning Resources</a></li>
+                            <li><a tabindex="0" href="/hardware/books">Engineering Books</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Electronics</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/hardware/electronics">Getting Started</a></li>
+                                    <li><a href="/hardware/electronics/arduino">Arduino</a></li>
+                                </ul>
+                            </li>
+                            <li><a tabindex="0" href="/hardware/robotics">Robotics</a></li>
+                            <li><a tabindex="0" href="/hardware/projects">Projects</a></li>
+                            <li><a tabindex="0" href="/hardware/toys">Engineering Toys</a></li>
+                            <li><a tabindex="0" href="/hardware/competitionsAndEvents">Competitions &amp; Events</a></li>
+                            <li><a tabindex="0" href="/hardware/glossary">Glossary</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Raspberry Pi</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="/raspi">Getting Started</a></li>
+                                    <li><a tabindex="0" href="/raspi/learn">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="/raspi/python">Python</a></li>
+                                    <li><a tabindex="0" href="/raspi/codeWeb">Coding Websites</a></li>
+                                    <li><a tabindex="0" href="/raspi/hardware">Hardware</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu id="basic">Coding<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="/coding">Introduction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Scratch</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/scratch">Getting Started</a></li>
+                                    <li><a href="/scratch/learn">Learning Resources</a></li>
+                                    <li><a href="/scratch/project">Award Winning Project</a></li>
+                                    <li><a href="/scratch/project/videos/">Project Videos</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Website Coding</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="/webCoding">Getting Started</a></li>
+                                    <li><a tabindex="0" href="/webCoding/learn">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="/webCoding/thisWebsite">This Website</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">App Inventor</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="/appInventor">Getting Started</a></li>
+                                    <li><a tabindex="0" href="/appInventor/learn">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="/appInventor/projects">Projects</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Processing</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="/processing">Getting Started</a></li>
+                                    <li><a tabindex="0" href="/processing/learn">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="/processing/khan/drawing">Khan Projects</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Python</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="/coding/python">Getting Started</a></li>
+                                    <li><a tabindex="0" href="/coding/python/learn">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="/coding/python/this">This Website</a></li>
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a tabindex="0" href="/coding/eventsCompetitions">Events &amp; Competitions</a></li>
+                            <li><a tabindex="0" href="/coding/glossary">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" id="other">Fun Stuff <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="/funstuff/toys">Cool Toys</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a tabindex="0" href="/blog/">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="container">
+    <p id="noscript"><strong>Please enable Javascript to improve your experience.</strong></p>
+    
+    <!--[if lt IE 9]>
+        <a class="btn btn-danger" href="browsehappy.com">Please upgrade your browser to improve your experience.</a>
+    <![endif]-->
+    
+    <h1>Learning Resources</h1>
+
+    <hr />
+
+    <h2>Super Scratch Programming Adventure (Scratch 2.0 only)</h2>
+    <p>
+        <img src="/static/images/book_reviews/scratch/super_scratch_programming.jpg" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Scratch Programming. In easy steps. (Scratch 1.4 and 2.0)</h2>
+    <p>
+        <img src="/static/images/book_reviews/scratch/scratch_mcmanus.jpg" />
+        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
+    </p>
+
+    <h2>Scratch 2.0 Game Development (Scratch 2.0 only)</h2>
+    <p>
+        <img src="/static/images/book_reviews/scratch/scratch_chiang.jpg" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+
+    <h2>Learn to Program with Scratch (Scratch 2.0 only)</h2>
+    <p>
+        <img src="/static/images/book_reviews/scratch/scratch_marji.jpg" />
+        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
+    </p>
+    <a role="button" class="btn btn-primary" href="/scratch/project/videos/">Project Videos</a>
+    <a role="button" class="btn btn-primary" href="/scratch">Getting Started</a>
+    <a role="button" class="btn btn-primary" href="/scratch/project">My Project</a>
+
+    <footer>
+        
+        <p>&copy; 2017 - The MAKER Kid</p>
+        
+    </footer>
+</div>
+
+
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap-submenu.min.js"></script>
+<script>
+    $(function() {
+        $('[data-submenu]').submenupicker();
+        $('#noscript').remove();
+    });
+</script>
+
+  </body>
+</html>
