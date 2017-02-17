@@ -7,7 +7,7 @@ from . import main
 
 @main.app_errorhandler(404)
 def error_404(e):
-    return "Page not found!"
+    return render_template("404.html", title="Not Found", year=datetime.now().year)
 
 @main.route("/")
 def index():

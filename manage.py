@@ -4,12 +4,21 @@
 # Import the necessary libraries
 from flask import Flask
 from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
 from app.main import main as main_blueprint
 from app.blog import blog as blog_blueprint
-from app import app
+from app import create_app, db
+import app.models
 
-# Create the manager for command line arguments
+# Get the app
+app = create_app()
+
+# Create the manager for command line arguments and with added options
 manager = Manager(app)
+
+# Initialise Flask-Migrate and cli cmd
+migrate = Migrate(app, db)
+manager.add_command("db", MigrateCommand)
 
 # Register the blueprints with the application
 app.register_blueprint(main_blueprint)
