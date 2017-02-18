@@ -25,6 +25,7 @@ def login():
 @blog.route('/logout')
 @login_required
 def logout():
+    name = current_user.username
     logout_user()
-    flash("You have been logged out of the application.")
+    flash("You have been logged out of the application, " + name + ".")
     return redirect(url_for('.index'))
