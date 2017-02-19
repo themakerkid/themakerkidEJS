@@ -32,7 +32,9 @@
         {% for post in posts %}
         <li>
             <a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}   By {{ post.author.username|capitalize }} {{ moment(post.date_posted).fromNow(refresh=True) }}</a>
+            {% if current_user.username == post.author.username %}
             <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>

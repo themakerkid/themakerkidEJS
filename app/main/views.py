@@ -9,6 +9,14 @@ from . import main
 def error_404(e):
     return render_template("404.html", title="Not Found", year=datetime.now().year)
 
+@main.app_errorhandler(500)
+def error_500(e):
+    return render_template("500.html", title="Internal Server Error", year=datetime.now().year)
+
+@main.app_errorhandler(403)
+def error_403(e):
+    return render_template("403.html", title="Forbidden", year=datetime.now().year)
+
 @main.route("/")
 def index():
     return render_template("index.html", title="Home Page", year=datetime.now().year)

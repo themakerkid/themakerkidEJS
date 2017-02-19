@@ -138,6 +138,7 @@
                     <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
                     {% if current_user.is_authenticated %}
                     <li><a tabindex="0" href="{{ url_for('blog.logout') }}">Logout</a></li>
+                    <li><a tabindex="0" href="#">{{ current_user.username }}</a></li>
                     {% else %}
                     <li><a tabindex="0" href="{{ url_for('blog.login') }}">Login</a></li>
                     {% endif %}

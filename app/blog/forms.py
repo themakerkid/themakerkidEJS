@@ -22,3 +22,7 @@ class PostForm(FlaskForm):
     body = TextAreaField("Content", validators=[Required()])
     #tags = StringField("Tags (Please seperate with commas with no spaces in between them)", validators=[Required()])
     submit = SubmitField("Submit")
+
+class CommentForm(FlaskForm):
+    body = TextAreaField("Content", validators=[Required()])
+    submit = SubmitField("Save")

@@ -1,21 +1,88 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block styles %}
     {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
     <style>
         #editBtn {
             float: right;
+        }
+
+        #comBtn {
+            position: relative;
+            top: 10%;
+            left: 90%;
         }
     </style>
 {% endblock %}
 
 {% block page_content %}
-    <h1>{{ post.title }} By {{ post.author.username|capitalize }}</h1><a id="editBtn" href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>
-    <p>
-        {% if post.body_html %}
-        {{ post.body_html|safe }}
-        {% else %}
-        {{ post.body }}
-        {% endif %}
-    </p>
+    <h1>{{ post.title }} By {{ post.author.username|capitalize }}</h1>{% if current_user.username == post.author.username %}<a id="editBtn" href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>{% endif %}
+    {% if post.body_html %}
+    {{ post.body_html|safe }}
+    {% else %}
+    {{ post.body }}
+    {% endif %}
+
+    <hr />
+
+    <h2>Comments</h2>
+    {% if current_user.is_authenticated %}
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#comForm" id="comBtn">Add a comment!</button>
+    <!-- Modal 
+    <div class="modal fade" id="comForm" role="dialog">
+        <div class="modal-dialog modal-md">
+
+            Modal content
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add a comment</h4>
+                </div>
+                <div class="modal-body">
+                    <h5>{# wtf.quick_form(form) #}</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+    <div id="formAcc">
+        {{ wtf.quick_form(form) }}
+    </div>
+    {% endif %}
+    <ul>
+        {% for comment in comments %}
+        <li>{% if comment.body_html %}{{ comment.body_html|safe }}{% else %}{{ comment.body }}{% endif %} By {{ comment.author.username|capitalize }} {{ moment(comment.date_posted).fromNow(refresh=True) }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+    <script>
+        $('textarea').attr('data-provide', 'markdown');
+        $("#submit").addClass("btn btn-success");
+        $("#formAcc").hide()
+        $("#comBtn").on("click", function() {
+            $("#formAcc").slideToggle();
+        });
+        $cancelBtn = $("<button>");
+        $cancelBtn.appendTo("form");
+        $cancelBtn.addClass("btn btn-danger");
+        $cancelBtn.text("Cancel");
+        $cancelBtn.on("click", function() {
+            $("#formAcc").slideUp();
+        });
+        /*
+        $cancelBtn.on("click", function() {
+            $("#body").val("");
+        });*/
+    </script>
+    {{ moment.include_moment() }}
 {% endblock %}
