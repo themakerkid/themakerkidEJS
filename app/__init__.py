@@ -9,6 +9,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -25,6 +26,9 @@ login.login_view = 'blog.login'
 # Create the Database object
 db = SQLAlchemy()
 
+# Create the Moment object (for calculating time)
+moment = Moment()
+
 def create_app():
     # Create app
     app = Flask(__name__)
@@ -38,5 +42,6 @@ def create_app():
     bootstrap.init_app(app)
     login.init_app(app)
     db.init_app(app)
+    moment.init_app(app)
 
     return app

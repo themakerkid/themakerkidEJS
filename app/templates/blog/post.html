@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        #editBtn {
+            float: right;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <h1>{{ post.title }} By {{ post.author.username|capitalize }}</h1><a id="editBtn" href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>
+    <p>
+        {% if post.body_html %}
+        {{ post.body_html|safe }}
+        {% else %}
+        {{ post.body }}
+        {% endif %}
+    </p>
+{% endblock %}

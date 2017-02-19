@@ -1,6 +1,7 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from markdown import markdown
 from . import db, login
 
 class User(db.Model, UserMixin):
@@ -12,6 +13,7 @@ class User(db.Model, UserMixin):
     confirmed = db.Column(db.Boolean, default=False)
     date_registered = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    posts = db.relationship('Post', backref="author", lazy="dynamic")
 
     @property
     def password(self):
@@ -22,6 +24,21 @@ class User(db.Model, UserMixin):
     
     def chk_psswd(self, password):
         return check_password_hash(self.password_hash, password)
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    body = db.Column(db.Text)
+    body_html = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    title = db.Column(db.String(64))
+
+    @staticmethod
+    def body_changed(target, value, oldvalue, initiator):
+        target.body_html = markdown(value, output_format='html')
+
+db.event.listen(Post.body, 'set', Post.body_changed)
 
 @login.user_loader
 def load_user(id):

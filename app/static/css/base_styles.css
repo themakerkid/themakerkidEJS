@@ -1,0 +1,33 @@
+#starting, #hardware, #basic, #advanced, #eng, #maths, #other {
+    cursor: pointer;
+}
+
+li.dropdown-submenu a {
+    cursor: pointer;
+}
+
+footer p {
+    float: left !important;
+}
+
+p {
+    font-size: 1.33em;
+}
+
+#icon {
+    vertical-align: top;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.md-editor {
+    border: 1px solid grey !important;
+}
+
+.md-header {
+    border-bottom: 1px solid grey !important;
+}

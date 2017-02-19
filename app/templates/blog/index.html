@@ -1,7 +1,61 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <style>
+        .edit-btn {
+            float: right;
+            margin-right: 20%;
+        }
+    </style>
+{% endblock %}
+
+{% if current_user.is_authenticated %}
+    {% set logged_in = True %}
+{% else %}
+    {% set logged_in = False %}
+{% endif %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Welcome to the blog{% if current_user.is_authenticated %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
-</div>
+    <div class="page-header">
+        <h1>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
+    </div>
+    {% if logged_in %}
+    {{ wtf.quick_form(form) }}
+    {% endif %}
+    <hr />
+    <h2>Posts</h2>
+    <hr />
+    <ul>
+        {% for post in posts %}
+        <li>
+            <a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}   By {{ post.author.username|capitalize }} {{ moment(post.date_posted).fromNow(refresh=True) }}</a>
+            <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+    {% if logged_in %}
+    <script>
+        $('textarea').attr('data-provide', 'markdown');
+        $('textarea').attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
+        $button = $('<button>');
+        $button.addClass('btn btn-danger');
+        $button.text("Cancel");
+        $button.appendTo("form");
+        $button.on("click", function() {
+            $("#body").val("");
+            $("#title").val("");
+        });
+        $("#submit").addClass("btn btn-success");
+    </script>
+    {% endif %}
+    {{ moment.include_moment() }}
 {% endblock %}
