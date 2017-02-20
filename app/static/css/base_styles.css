@@ -1,4 +1,4 @@
-#starting, #hardware, #basic, #advanced, #eng, #maths, #other {
+#starting, #hardware, #basic, #advanced, #eng, #maths, #other, #account {
     cursor: pointer;
 }
 
@@ -30,4 +30,8 @@ body {
 
 .md-header {
     border-bottom: 1px solid grey !important;
+}
+
+#design-coded {
+    float: right;
 }

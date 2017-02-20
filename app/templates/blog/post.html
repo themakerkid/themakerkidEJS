@@ -27,7 +27,7 @@
 
     <hr />
 
-    <h2>Comments</h2>
+    <h2 id="comments">Comments</h2>
     {% if current_user.is_authenticated %}
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#comForm" id="comBtn">Add a comment!</button>
     <!-- Modal 
@@ -72,10 +72,11 @@
         $("#comBtn").on("click", function() {
             $("#formAcc").slideToggle();
         });
-        $cancelBtn = $("<button>");
-        $cancelBtn.appendTo("form");
+        $cancelBtn = $("#cancel");
+        //$("form").after($cancelBtn);
         $cancelBtn.addClass("btn btn-danger");
-        $cancelBtn.text("Cancel");
+        //$cancelBtn.attr('id', 'cancel-btn');
+        //$cancelBtn.text("Cancel");
         $cancelBtn.on("click", function() {
             $("#formAcc").slideUp();
         });

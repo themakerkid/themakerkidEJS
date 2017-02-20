@@ -5,7 +5,7 @@
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
     <style>
-        .edit-btn {
+        .post-controls {
             float: right;
             margin-right: 20%;
         }
@@ -25,16 +25,19 @@
     {% if logged_in %}
     {{ wtf.quick_form(form) }}
     {% endif %}
-    <hr />
+    <br />
     <h2>Posts</h2>
     <hr />
     <ul>
         {% for post in posts %}
         <li>
             <a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}   By {{ post.author.username|capitalize }} {{ moment(post.date_posted).fromNow(refresh=True) }}</a>
-            {% if current_user.username == post.author.username %}
-            <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a>
-            {% endif %}
+            <div class="post-controls">
+                <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }} {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
+                {% if current_user.username == post.author.username %}
+                <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a>
+                {% endif %}
+            </div>
         </li>
         {% endfor %}
     </ul>
@@ -48,14 +51,15 @@
     <script>
         $('textarea').attr('data-provide', 'markdown');
         $('textarea').attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
-        $button = $('<button>');
-        $button.addClass('btn btn-danger');
-        $button.text("Cancel");
-        $button.appendTo("form");
-        $button.on("click", function() {
-            $("#body").val("");
-            $("#title").val("");
-        });
+        $cancelBtn = $('<button>');
+        $cancelBtn.addClass('btn btn-danger');
+        //$cancelBtn.text("Cancel");
+        //$cancelBtn.appendTo("form");
+        //$cancelBtn.on("click", function() {
+        //    $("#body").val("");
+        //    $("#title").val("");
+        //    window.location.reload()
+        //});
         $("#submit").addClass("btn btn-success");
     </script>
     {% endif %}

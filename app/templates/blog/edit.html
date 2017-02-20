@@ -18,12 +18,12 @@
     <script>
         $('textarea').attr('data-provide', 'markdown');
         $("#submit").addClass("btn btn-success");
-        $cancelBtn = $("<button>");
-        $cancelBtn.appendTo("form");
+        $cancelBtn = $("#cancel");
+        //$cancelBtn.appendTo("form");
         $cancelBtn.addClass("btn btn-danger");
-        $cancelBtn.text("Cancel");
-        $cancelBtn.on("click", function() {
-            window.history.go(-1);
-        });
+        //$cancelBtn.text("Cancel");
+        //$cancelBtn.on("click", function() {
+        //    window.history.go(-1);
+        //});
     </script>
 {% endblock %}
