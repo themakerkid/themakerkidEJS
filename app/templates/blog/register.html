@@ -5,19 +5,17 @@
     <div class="page-header">
         <h1>Register</h1>
     </div>
-    {{ wtf.quick_form(form) }}
+    {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script>
-        $("#submit").removeClass("btn-default").addClass("btn-success");
         $cancelBtn = $("#cancel");
-        $cancelBtn.addClass("btn btn-danger");
         //$cancelBtn.text("Cancel");
         //$cancelBtn.appendTo("form");
-        //$cancelBtn.on("click", function() {
-        //    window.history.go(-1);
-        //});
+        $cancelBtn.on("click", function() {
+            window.history.go(-1);
+        });
     </script>
 {% endblock %}

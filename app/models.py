@@ -47,6 +47,11 @@ class User(db.Model, UserMixin):
         hash = self.avatar_hash or hashlib.md5(self.parents_email.encode('utf-8')).hexdigest()
         full_url = "%s/%s?s=%i&d=%s&?r=%s" % (base_url, hash, size, default, rating)
         return full_url
+    
+    def resetPassword(self, password):
+        self.password = password
+        db.session.add(self)
+        return True
 
 class Post(db.Model):
     __tablename__ = 'posts'

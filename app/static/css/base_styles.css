@@ -24,14 +24,6 @@ body {
     padding-top: 60px;
 }
 
-.md-editor {
-    border: 1px solid grey !important;
-}
-
-.md-header {
-    border-bottom: 1px solid grey !important;
-}
-
 #design-coded {
     float: right;
 }

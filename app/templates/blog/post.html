@@ -51,7 +51,7 @@
         </div>
     </div>-->
     <div id="formAcc">
-        {{ wtf.quick_form(form) }}
+        {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
     </div>
     {% endif %}
     <ul>
@@ -74,7 +74,7 @@
         });
         $cancelBtn = $("#cancel");
         //$("form").after($cancelBtn);
-        $cancelBtn.addClass("btn btn-danger");
+        //$cancelBtn.addClass("btn btn-danger");
         //$cancelBtn.attr('id', 'cancel-btn');
         //$cancelBtn.text("Cancel");
         $cancelBtn.on("click", function() {

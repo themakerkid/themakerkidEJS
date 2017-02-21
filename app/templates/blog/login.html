@@ -2,8 +2,19 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Login to The MAKER Kid</h1>
-</div>
-{{ wtf.quick_form(form) }}
+    <div class="page-header">
+        <h1>Login</h1>
+    </div>
+    {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
+    <hr />
+    <p>Forgotten your password? <a href="{{ url_for('blog.resetPassword') }}">Click here</a>.</p>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $("#cancel").on("click", function() {
+            window.history.go(-1);
+        });
+    </script>
 {% endblock %}

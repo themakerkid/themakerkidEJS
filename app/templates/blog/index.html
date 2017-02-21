@@ -23,7 +23,7 @@
         <h1>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
     </div>
     {% if logged_in %}
-    {{ wtf.quick_form(form) }}
+    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
     {% endif %}
     <br />
     <h2>Posts</h2>
@@ -49,10 +49,12 @@
     <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
     {% if logged_in %}
     <script>
-        $('textarea').attr('data-provide', 'markdown');
-        $('textarea').attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
-        $cancelBtn = $('<button>');
-        $cancelBtn.addClass('btn btn-danger');
+        $textarea = $('textarea');
+        $textarea.attr('data-provide', 'markdown');
+        $textarea.attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
+        $textarea.attr('rows', 12);
+        //$cancelBtn = $('<button>');
+        //$cancelBtn.addClass('btn btn-danger');
         //$cancelBtn.text("Cancel");
         //$cancelBtn.appendTo("form");
         //$cancelBtn.on("click", function() {
@@ -60,7 +62,8 @@
         //    $("#title").val("");
         //    window.location.reload()
         //});
-        $("#submit").addClass("btn btn-success");
+        //$("#submit").addClass("btn btn-success");
+        $("#cancel").detach();
     </script>
     {% endif %}
     {{ moment.include_moment() }}

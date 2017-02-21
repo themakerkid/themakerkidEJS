@@ -1,8 +1,7 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, request, url_for, abort
 from flask_login import login_user, logout_user, current_user, login_required
-from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile
-from wtforms import ValidationError
+from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPassword
 from ..models import Comment, User, Post, db
 from . import blog
 
@@ -119,3 +118,18 @@ def editProfile():
             return redirect(url_for('.profile', username=current_user.username))
     form.about_me.data = current_user.about_me
     return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=datetime.now().year, form=form)
+
+@blog.route('/reset-password', methods=['GET', 'POST'])
+def resetPassword():
+    if current_user.is_authenticated:
+        return redirect(url_for('.index'))
+    form = ResetPassword()
+    if request.method == "POST":
+        if checkBtn("submit", form):
+            user = User.query.filter_by(parents_email=form.parents_email.data).first()
+            if user.resetPassword(form.password.data):
+                flash("Your password has been updated")
+                return redirect(url_for('.login'))
+            else:
+                flash("The password could not be updated")
+    return render_template("blog/resetPassword.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)

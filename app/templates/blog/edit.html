@@ -8,7 +8,7 @@
 
 {% block page_content %}
     <h1>Edit {{ post.title }} By {{ post.author.username|capitalize }}</h1>
-    {{ wtf.quick_form(form) }}
+    {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
 {% endblock %}
 
 {% block scripts %}
