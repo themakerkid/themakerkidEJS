@@ -20,14 +20,11 @@ def before():
 def index():
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     form = PostForm()
-    if request.form == "POST":
-        if checkBtn("cancel", form):
-            return redirect(url_for('.index'))
-        elif checkBtn("submit", form):
-            post = Post(title=form.title.data, body=form.body.data, author=current_user._get_current_object())
-            db.session.add(post)
-            db.session.commit()
-            return redirect(url_for('.post', id=post.id))
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, body=form.body.data, author=current_user._get_current_object())
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('.post', id=post.id))
     return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, form=form, posts=posts)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])

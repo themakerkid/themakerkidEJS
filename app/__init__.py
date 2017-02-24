@@ -13,7 +13,7 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-basedir = 'C:/projects/themakerkidEJS'
+basedir = '/home/declan/projects/themakerkidEJS'
 
 # Create the Bootstrap object to add the bootstrap folder (venv/Lib/site-packages/flask_bootstrap/templates/bootstrap/) to the templates
 bootstrap = Bootstrap()
@@ -44,5 +44,13 @@ def create_app():
     login.init_app(app)
     db.init_app(app)
     moment.init_app(app)
+
+    # Register the blueprints with the application
+    from app.main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+
+    from app.blog import blog as blog_blueprint
+    app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
     return app

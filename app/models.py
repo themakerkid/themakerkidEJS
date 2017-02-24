@@ -1,10 +1,12 @@
-from flask import request
+from flask import request, Markup
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from markdown import markdown
-import hashlib
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.extra import ExtraExtension
 from . import db, login
+import hashlib
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -58,31 +60,45 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    #body_html = db.Column(db.Text)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     title = db.Column(db.String(64))
 
-    @staticmethod
-    def body_changed(target, value, oldvalue, initiator):
-        target.body_html = markdown(value, output_format='html')
+    #@staticmethod
+    #def body_changed(target, value, oldvalue, initiator):
+    #    target.body_html = markdown(value, output_format='html')
 
-db.event.listen(Post.body, 'set', Post.body_changed)
+#db.event.listen(Post.body, 'set', Post.body_changed)
+
+    @property
+    def body_html(self):
+        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
+        extras = ExtraExtension()
+        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        return Markup(markdown_content)
 
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
-    body_html = db.Column(db.Text)
+    #body_html = db.Column(db.Text)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
-    @staticmethod
-    def body_changed(target, value, oldvalue, initiator):
-        target.body_html = markdown(value, output_format='html')
+    #@staticmethod
+    #def body_changed(target, value, oldvalue, initiator):
+    #    target.body_html = markdown(value, output_format='html')
 
-db.event.listen(Comment.body, 'set', Comment.body_changed)
+#db.event.listen(Comment.body, 'set', Comment.body_changed)
+
+    @property
+    def body_html(self):
+        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
+        extras = ExtraExtension()
+        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        return Markup(markdown_content)
 
 @login.user_loader
 def load_user(id):
