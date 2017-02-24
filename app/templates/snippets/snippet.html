@@ -19,11 +19,11 @@
 {% endblock %}
 
 {% block page_content %}
-    <h1>{{ post.title }} By {{ post.author.username|capitalize }}</h1>{% if current_user.username == post.author.username %}<a id="editBtn" href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>{% endif %}
-    {% if post.body_html %}
-    {{ post.body_html|safe }}
+    <h1>{{ snippet.title }} By {{ snippet.author.username|capitalize }}, {{ language }}</h1>{% if current_user.username == snippet.author.username %}<a id="editBtn" href="{{ url_for('snippets.edit', id=snippet.id) }}" class="btn btn-primary">Edit</a>{% endif %}
+    {% if snippet.body_html %}
+    {{ snippet.body_html|safe }}
     {% else %}
-    {{ post.body }}
+    {{ snippet.body }}
     {% endif %}
 
     <hr />
@@ -56,14 +56,14 @@
     </div>
     <br />
     {% endif %}
-    {% if post.comments.count() >= 1 %}
+    {% if snippet.comments.count() >= 1 %}
     <ol>
         {% for comment in comments %}
         <li>{% if comment.body_html %}{{ comment.body_html|safe }}{% else %}{{ comment.body }}{% endif %} By {{ comment.author.username|capitalize }} {{ moment(comment.date_posted).fromNow(refresh=True) }}</li>
         {% endfor %}
     </ol>
     {% else %}
-    <p>No one has commented on this post yet.</p>
+    <p>No one has commented on this snippet yet.</p>
     {% endif %}
 {% endblock %}
 

@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     posts = db.relationship('Post', backref="author", lazy="dynamic")
     comments = db.relationship('Comment', backref="author", lazy="dynamic")
+    snippets = db.relationship('Snippet', backref="author", lazy="dynamic")
+    snippet_comments = db.relationship('SnippetComment', backref="author", lazy="dynamic")
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -86,6 +88,59 @@ class Comment(db.Model):
     #body_html = db.Column(db.Text)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
+
+    #@staticmethod
+    #def body_changed(target, value, oldvalue, initiator):
+    #    target.body_html = markdown(value, output_format='html')
+
+#db.event.listen(Comment.body, 'set', Comment.body_changed)
+
+    @property
+    def body_html(self):
+        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
+        extras = ExtraExtension()
+        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+class Snippet(db.Model):
+    HTML = 1
+    CSS = 2
+    JAVASCRIPT = 3
+    ARDUINO_C = 4
+    PYTHON = 5
+    OTHER = 6
+
+    __tablename__ = 'snippets'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    body = db.Column(db.Text)
+    #body_html = db.Column(db.Text)
+    code_type_id = db.Column(db.SmallInteger)
+    comments = db.relationship('SnippetComment', backref='snippet', lazy='dynamic')
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    title = db.Column(db.String(64))
+
+    #@staticmethod
+    #def body_changed(target, value, oldvalue, initiator):
+    #    target.body_html = markdown(value, output_format='html')
+
+#db.event.listen(Post.body, 'set', Post.body_changed)
+
+    @property
+    def body_html(self):
+        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
+        extras = ExtraExtension()
+        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+class SnippetComment(db.Model):
+    __tablename__ = 'snippet_comments'
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    body = db.Column(db.Text)
+    #body_html = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    snippet_id = db.Column(db.Integer, db.ForeignKey('snippets.id'))
 
     #@staticmethod
     #def body_changed(target, value, oldvalue, initiator):

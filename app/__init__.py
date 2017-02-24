@@ -53,4 +53,7 @@ def create_app():
     from app.blog import blog as blog_blueprint
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
+    from app.snippets import snippets as snippets_bluprint
+    app.register_blueprint(snippets_bluprint, url_prefix='/snippets')
+
     return app
