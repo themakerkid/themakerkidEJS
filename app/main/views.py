@@ -1,8 +1,11 @@
-# By Benjamin 12/02/2017
+# By Benjamin 12/02/2017 - today
 # This is all the routes for the app.
 
 from datetime import datetime
-from flask import render_template
+from flask import render_template, request, url_for, redirect
+from ..models import Post, Snippet, Comment, SnippetComment, db
+from .forms import SearchForm
+from ..blog.views import checkBtn
 from . import main
 
 @main.app_errorhandler(404)
@@ -220,3 +223,22 @@ def techGlossary():
 @main.route('/funstuff/toys')
 def funToys():
     return render_template('coolToys.html', title="Fun Stuff - Cool Toys", year=datetime.now().year)
+
+@main.route('/search', methods=['GET', 'POST'])
+def search():
+    form = SearchForm()
+    if request.method == "POST":
+        if checkBtn('cancel', form):
+            pass
+        return redirect(url_for('.searchResults', q=form.search.data))
+    return render_template('search.html', title="Search", year=datetime.now().year, form=form)
+
+@main.route('/search-results')
+def searchResults():
+    q = request.args.get("q")
+    # Get results from ALL of the models
+    post_results = Post.query.whoosh_search(q, 50).all()
+    snippet_results = Snippet.query.whoosh_search(q, 50).all()
+    comment_results = Comment.query.whoosh_search(q, 50).all()
+    snippet_comment_results = SnippetComment.query.whoosh_search(q, 50).all()
+    return render_template('searchResults.html', title="Search Results - " + q, year=datetime.now().year, post_results=post_results, snippet_results=snippet_results, comment_results=comment_results, snippet_comment_results=snippet_comment_results, q=q)

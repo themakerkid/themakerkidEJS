@@ -136,6 +136,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
                     <li><a tabindex="0" href="{{ url_for('snippets.index') }}">Code Snippets</a></li>
                     <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
                     {% if current_user.is_authenticated %}

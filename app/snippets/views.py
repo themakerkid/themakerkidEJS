@@ -73,4 +73,5 @@ def edit(id):
             return redirect(url_for('.snippet', id=id))
     form.title.data = snippet.title
     form.body.data = snippet.body
+    form.language.data = snippet.code_type_id
     return render_template("snippets/edit.html", title="Edit Snippet - " + snippet.title, year=datetime.now().year, snippet=snippet, form=form, language=language)

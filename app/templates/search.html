@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Search</h1>
+    </div>
+    {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $("#cancel").on("click", function() {
+            if ($("#search").hasClass('has-error')) {
+                window.history.go(-2);
+            }
+            else {
+                window.history.go(-1);
+            }
+        });
+    </script>
+{% endblock %}

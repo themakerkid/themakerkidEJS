@@ -59,6 +59,8 @@ class User(db.Model, UserMixin):
 
 class Post(db.Model):
     __tablename__ = 'posts'
+    __searchable__ = ['title', 'body']
+
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
@@ -82,6 +84,8 @@ class Post(db.Model):
 
 class Comment(db.Model):
     __tablename__ = 'comments'
+    __searchable__ = ['body']
+
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
@@ -111,6 +115,8 @@ class Snippet(db.Model):
     OTHER = 6
 
     __tablename__ = 'snippets'
+    __searchable__ = ['title', 'body']
+    
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
@@ -135,6 +141,8 @@ class Snippet(db.Model):
 
 class SnippetComment(db.Model):
     __tablename__ = 'snippet_comments'
+    __searchable__ = ['body']
+    
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)

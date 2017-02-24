@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Search Results for "{{ q }}"</h1>
+    </div>
+    {% if post_results|length > 0 or snippet_results|length > 0 or comment_results|length > 0 or snippet_comment_results|length > 0 %}
+    <ol>
+        {% for result in post_results %}
+            <li><a href="{{ url_for('blog.post', id=result.id) }}">{{ q }} has been found in a post called {{ result.title }}</a></li>
+        {% endfor %}
+        {% for result in snippet_results %}
+            <li><a href="{{ url_for('snippets.snippet', id=result.id) }}">{{ q }} has been found in a code snippet called {{ result.title }}</a></li>
+        {% endfor %}
+        {% for result in comment_results %}
+            <li><a href="{{ url_for('blog.post', id=result.post.id) }}#comments">{{ q }} has been found in a comment in a post called {{ result.post.title }}</a></li>
+        {% endfor %}
+        {% for result in snippet_comment_results %}
+            <li><a href="{{ url_for('snippets.snippet', id=result.snippet.id) }}#comments">{{ q }} has been found in a comment in a code snippet called {{ result.snippet.title }}</a></li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p>No results have been found!</p>
+    <a href="{{ url_for('main.search') }}" class="btn btn-primary">Search for something else!</a>
+    {% endif %}
+{% endblock %}
