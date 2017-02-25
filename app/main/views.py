@@ -2,10 +2,12 @@
 # This is all the routes for the app.
 
 from datetime import datetime
-from flask import render_template, request, url_for, redirect
+from flask import render_template, request, url_for, redirect, flash
+from flask_login import login_required, current_user
 from ..models import Post, Snippet, Comment, SnippetComment, db
 from .forms import SearchForm
 from ..blog.views import checkBtn
+from ..mail import send_email
 from . import main
 
 @main.app_errorhandler(404)
@@ -19,6 +21,18 @@ def error_500(e):
 @main.app_errorhandler(403)
 def error_403(e):
     return render_template("403.html", title="Forbidden", year=datetime.now().year)
+
+@main.before_app_request
+def checkConfirm():
+    if current_user.is_authenticated and \
+            current_user.confirmed == False and \
+            request.endpoint[:5] != 'main.' and \
+            request.endpoint != 'main.confirm' and \
+            request.endpoint != 'blog.login' and \
+            request.endpoint != 'blog.logout' and \
+            request.endpoint[:7] != 'static.':
+        return redirect(url_for('main.unconfirmed'))
+
 
 @main.route("/")
 def index():
@@ -242,3 +256,31 @@ def searchResults():
     comment_results = Comment.query.whoosh_search(q, 50).all()
     snippet_comment_results = SnippetComment.query.whoosh_search(q, 50).all()
     return render_template('searchResults.html', title="Search Results - " + q, year=datetime.now().year, post_results=post_results, snippet_results=snippet_results, comment_results=comment_results, snippet_comment_results=snippet_comment_results, q=q)
+
+@main.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed == True:
+        return redirect(url_for('blog.index'))
+    if current_user.confirmAccount(token):
+        flash("We have confirmed your account, %s!" % current_user.username.capitalize(), 'success')
+        return redirect(url_for('blog.index'))
+    else:
+        flash("The confirmation link is invalid or has expired.", 'error')
+        return redirect(url_for('blog.index'))
+
+@main.route('/unconfirmed')
+@login_required
+def unconfirmed():
+    if current_user.confirmed == True:
+        return redirect(url_for('blog.index'))
+    return render_template('unconfirmed.html', title="Unconfirmed User", year=datetime.now().year)
+
+@main.route('/resend-confirmation-email')
+@login_required
+def resendConfirmationEmail():
+    token = current_user.generateConfirmationToken()
+    send_email(current_user.parents_email, 'Confirm Your Account',
+                'confirm', user=current_user, token=token)
+    flash("We have sent you another confirmation email.", 'info')
+    return redirect(url_for('.unconfirmed'))

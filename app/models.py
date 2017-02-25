@@ -1,6 +1,7 @@
-from flask import request, Markup
+from flask import request, Markup, current_app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
 from markdown import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
@@ -54,6 +55,22 @@ class User(db.Model, UserMixin):
     
     def resetPassword(self, password):
         self.password = password
+        db.session.add(self)
+        return True
+
+    def generateConfirmationToken(self, expiration=3600):
+        serializer = Serializer(current_app.config["SECRET_KEY"], expiration)
+        return serializer.dumps({'confirm_id': self.id})
+
+    def confirmAccount(self, token):
+        serializer = Serializer(current_app.config["SECRET_KEY"])
+        try:
+            data = serializer.loads(token)
+        except:
+            return False
+        if data["confirm_id"] != self.id:
+            return False
+        self.confirmed = True
         db.session.add(self)
         return True
 

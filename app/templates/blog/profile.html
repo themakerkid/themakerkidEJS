@@ -14,7 +14,7 @@
         {% if user.about_me %}
         {{ user.about_me }}
         {% else %}
-        No information about {{ user.username }} has been given.
+        No information about {{ user.username|capitalize }} has been given.
         {% endif %}
         <br />
         Member since {{ moment(user.date_registered).format('D/MM/YYYY') }}.

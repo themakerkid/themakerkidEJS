@@ -1,0 +1,7 @@
+<h1>Hello, {{ user.username|capitalize }}!</h1>
+<p>Please click on the link below to confirm your account:</p>
+<a href="{{ url_for('main.confirm', token=token, _external=True) }}">Confirm your account</a>
+<br />
+<p>Regards,</p>
+<p>The MAKER Kid website.</p>
+<p><strong><em>Note: Please don't reply to this email address because it won't be answered.</em></strong></p>

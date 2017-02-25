@@ -3,6 +3,7 @@ from flask import render_template, flash, redirect, request, url_for, abort
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPassword
 from ..models import Comment, User, Post, db
+from ..mail import send_email
 from . import blog
 
 def checkBtn(false_value, form):
@@ -92,6 +93,10 @@ def register():
             user = User(username=form.username.data, parents_email=form.email.data, password=form.password.data)
             db.session.add(user)
             db.session.commit()
+            token = user.generateConfirmationToken()
+            send_email(user.parents_email, 'Confirm Your Account',
+                       'confirm', user=user, token=token)
+            flash("We have sent you a confirmation email.", 'info')
             login_user(user, False)
             flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
