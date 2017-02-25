@@ -68,7 +68,7 @@ def login():
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('.index'))
         else:
-            flash("You entered the wrong things!")
+            flash("You have entered something incorrectly!", 'warning')
     return render_template("blog/login.html", form=form, title="Blog - Login", year=datetime.now().year)
 
 @blog.route('/logout')
@@ -76,14 +76,14 @@ def login():
 def logout():
     name = current_user.username
     logout_user()
-    flash("You have been logged out of the application, " + name + ".")
+    flash("You have been logged out of the application, " + name.capitalize() + ".", 'success')
     return redirect(url_for('.index'))
 
 @blog.route('/register', methods=["GET", "POST"])
 def register():
     form = RegisterForm()
     if current_user.is_authenticated:
-        flash("You are already registered!")
+        flash("You are already registered!", 'info')
         return redirect(url_for('.index'))
     if request.method == "POST":
         if checkBtn("cancel", form):
@@ -93,7 +93,7 @@ def register():
             db.session.add(user)
             db.session.commit()
             login_user(user, False)
-            flash("You have been successfully registered and logged in.")
+            flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
     return render_template("blog/register.html", title="Blog - Register", year=datetime.now().year, form=form)
 
@@ -111,7 +111,7 @@ def editProfile():
             return redirect(url_for('.profile', username=current_user.username))
         elif checkBtn("submit", form):
             current_user.about_me = form.about_me.data
-            flash("Your profile has been successfully updated.")
+            flash("Your profile has been successfully updated.", 'success')
             return redirect(url_for('.profile', username=current_user.username))
     form.about_me.data = current_user.about_me
     return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=datetime.now().year, form=form)
@@ -125,8 +125,8 @@ def resetPassword():
         if checkBtn("submit", form):
             user = User.query.filter_by(parents_email=form.parents_email.data).first()
             if user.resetPassword(form.password.data):
-                flash("Your password has been updated")
+                flash("Your password has been updated", 'success')
                 return redirect(url_for('.login'))
             else:
-                flash("The password could not be updated")
+                flash("The password could not be updated", 'error')
     return render_template("blog/resetPassword.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)

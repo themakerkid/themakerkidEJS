@@ -38,7 +38,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Your parents email', validators=[DataRequired(), Email(), Length(1, 64)])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('com_password', message="The two passwords don't match.")])
     com_password = PasswordField('Confirm Password', validators=[DataRequired()])
-    check_email = BooleanField("I agree that I have used my parent's email if I am 12 or under", validators=[DataRequired()], default=True)
+    check_email = BooleanField("I agree that I have used my parent's email if I am 12 or under", validators=[DataRequired("Please confirm that you have used your parent's email")])
     submit = SubmitField("Register", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 
