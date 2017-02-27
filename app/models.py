@@ -53,15 +53,30 @@ class User(db.Model, UserMixin):
         full_url = "%s/%s?s=%i&d=%s&?r=%s" % (base_url, hash, size, default, rating)
         return full_url
     
-    def resetPassword(self, password):
-        self.password = password
-        db.session.add(self)
+    def generateResetToken(self, expiration=3600):
+        serializer = Serializer(current_app.config["SECRET_KEY"], expiration)
+        return serializer.dumps({'reset': self.id, 'email': self.parents_email})
+
+    @staticmethod
+    def resetPassword(password, token):
+        serializer = Serializer(current_app.config["SECRET_KEY"])
+        try:
+            data = serializer.loads(token)
+        except:
+            return False
+        user = User.query.filter_by(parents_email=data["email"]).first()
+        if not user:
+            return False
+        if data["reset"] != user.id:
+            return False
+        user.password = password
+        db.session.add(user)
         return True
 
     def generateConfirmationToken(self, expiration=3600):
         serializer = Serializer(current_app.config["SECRET_KEY"], expiration)
         return serializer.dumps({'confirm_id': self.id})
-
+    
     def confirmAccount(self, token):
         serializer = Serializer(current_app.config["SECRET_KEY"])
         try:
