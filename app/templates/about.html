@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-
-{% block styles %}
-{{ super() }}
+{% extends "base.html" %} {% block styles %} {{ super() }}
 <link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
 
 <style type="text/css">
@@ -187,17 +184,17 @@
 <!--/.content-->
 {% block page_content %}
 <div class="content white">
-    <h1>About The MAKER Kid</h1>
+    <h1>About CodeMaker Buddy</h1>
     <br />
     <div class="accordion-container open">
         <button href="#" class="accordion-toggle">Purpose of this Website <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content" id="first-acc">
             <img src="{{ url_for('static', filename='images/about/creeper5.jpg') }}" />
             <p>Are you a kid who is interested in learning to code, or in making cool stuff using electronics, but don't know where to get started?
-            <br />
-            <br />Welcome to The MAKER Kid website, a place where kids aged 6-14 can get together and learn about making stuff. You can even share ideas, code  and projects with other kids.</p>
+                <br />
+                <br />Welcome to the CodeMaker Buddy website, a place where kids aged 6-14 can get together and learn about making stuff. You can even share ideas, code and projects with other kids.</p>
 
-            <p>Have a look around this website. There are simple coding projects to get started with, or more advanced projects which use coding  and electronics. Interested in getting involved, or don't really understand how some of the projects work?</p>
+            <p>Have a look around this website. There are simple coding projects to get started with, or more advanced projects which use coding and electronics. Interested in getting involved, or don't really understand how some of the projects work?</p>
             <p>Then simply register with this website and you can post messages and comments, share code with other kids, and hopefully get an answer to your questions.</p>
 
         </div>
@@ -208,15 +205,22 @@
         <button href="#" class="accordion-toggle">A little about me <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/me_wizard.png') }}" />
-            <p>Hi Kids, I'm Benjamin, creator of <strong>The MAKER Kid website</strong>. I am 10 years old and live in Dublin, Ireland. <strong>I AM NOT THE MAKER KID</strong>. The MAKER Kid is any kid who is interested in learning code and using electronics and code to make stuff.</p>
-            <p>Ever since I was a little kid, I was always trying to figure out how things work. I started off on Lego<sup>&reg;</sup> and Meccano<sup>&reg;</sup>, building lots of challenging models, before asking my parents for a Lego<sup>&reg;</sup> Mindstorms Robot.</p> <p> Unfortunately, I didn't get the Mindstorms Robot, but I did get an <a target="_blank" href="https://www.arduino.cc/"> Arduino</a> and later a <a target="_blank" href="https://www.raspberrypi.org/"> Raspberry Pi. </a> As you can see from the picture on the left I am a big Minecraft fan. I come from a family of makers. My Mum loves making costumes, and my Dad loves tinkering with Electronics.</p>
+            <p>Hi Kids, I'm Benjamin, creator of the<strong>CodeMaker Buddy website</strong>. I am 10 years old and live in Dublin, Ireland. The CodeMaker Buddy is for any kid who is interested in learning to code and then using electronics and code to make
+                stuff.</p>
+            <p>Ever since I was a little kid, I was always trying to figure out how things work. I started off on Lego<sup>&reg;</sup> and Meccano<sup>&reg;</sup>, building lots of challenging models, before asking my parents for a Lego<sup>&reg;</sup> Mindstorms
+                Robot.</p>
+            <p> Unfortunately, I didn't get the Mindstorms Robot, but I did get an <a target="_blank" href="https://www.arduino.cc/"> Arduino</a> and later a <a target="_blank" href="https://www.raspberrypi.org/"> Raspberry Pi. </a> As you can see from the
+                picture on the left I am a big Minecraft fan. I come from a family of makers. My Mum loves making costumes, and my Dad loves tinkering with Electronics.</p>
 
-            <p>I began coding when I was 6 years old (a long time ago!), starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi.  I won the Best Educational Content Award at the annual <a target="_blank" href="http://scratch.ie/home"> Irish National Scratch competition</a> in 2015, with my project <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flash must be activated.">Snapshot Of our World</a>.  I joined Coderdojo in Summer 2015 originally at the <a target="_blank" href="https://dublin.sciencegallery.com/">Science Gallery</a>, before we moved to <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> in Zalando across the Quay from Google Headquarters.</p>
+            <p>I began coding when I was 6 years old (a long time ago!), starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi. I won the Best Educational Content Award at the annual
+                <a target="_blank" href="http://scratch.ie/home"> Irish National Scratch competition</a> in 2015, with my project <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flash must be activated.">Snapshot Of our World</a>.
+                I joined Coderdojo in Summer 2015 originally at the <a target="_blank" href="https://dublin.sciencegallery.com/">Science Gallery</a>, before we moved to <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a>                in Zalando across the Quay from Google Headquarters.</p>
 
-            <p>At <a target="_blank" href="https://coderdojo.com/">Coderdojo</a>, I learned how to code websites. and mobile devices, before moving onto Raspberry Pi and Python.
-            I attended Coolest Projects 2016  <a target="_blank" href="https://coderdojo.com/news/2015/12/16/coolest-projects-2016-is-on-the-18th-of-june/">Coderdojo Coolest Projects 2016</a>.  After that I started working on this website --- The MAKER Kid.</p>
-          <p>I was invited by Coderdojo to showcase my Maker Kid project at the RDS BTYSTE exhibition. You can read my blog here <a target="_blank" href="http://coderdojowarehouse.com/blog/?cat=17">My Day at BTYSTE</a> here.  A coding club has started at my school, and I am helping out with the mentoring.</p>
-          <p> Besides Coding, I enjoy Swimming, Tennis, Chess and of course Minecraft.</p>
+            <p>At <a target="_blank" href="https://coderdojo.com/">Coderdojo</a>, I learned how to code websites. and mobile devices, before moving onto Raspberry Pi and Python. I attended Coolest Projects 2016 <a target="_blank" href="https://coderdojo.com/news/2015/12/16/coolest-projects-2016-is-on-the-18th-of-june/">Coderdojo Coolest Projects 2016</a>.
+                After that I started working on this website, CodeMaker Buddy.</p>
+            <p>I was invited by Coderdojo to showcase my CodeMaker Buddy project at the RDS BTYSTE exhibition. You can read my blog here <a target="_blank" href="http://coderdojowarehouse.com/blog/?cat=17">My Day at BTYSTE</a> here. A coding club has started
+                at my school, and I am helping out with the mentoring.</p>
+            <p> Besides Coding, I enjoy Swimming, Tennis, Chess and of course Minecraft.</p>
         </div>
         <!--/.accordion-content-->
     </div>
@@ -224,14 +228,14 @@
     <div class="accordion-container">
         <button href="#" class="accordion-toggle">Why I built this Website? <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
-            <p>I wanted to show other kids that coding and making stuff is fun.  If kids try some of the projects they will soon realise that making stuff with code is great fun and that there are great technology resources in our own country.</p>
-            
+            <p>I wanted to show other kids that coding and making stuff is fun. If kids try some of the projects they will soon realise that making stuff with code is great fun and that there are great technology resources in our own country.</p>
+
             <p>I wanted to use all the stuff that I learned in both CoderDojo and at home, under one big project.</p>
-            
+
             <p>I wanted to establish links with other kids who are interested in making stuff, and provide a forum where we could communicate and learn from each other.</p>
-            
-            <p> I wanted to learn other skills like making videos and editing images.  </p>
-            
+
+            <p> I wanted to learn other skills like making videos and editing images. </p>
+
             <p>My website is built by a kid, for Irish kids and kids all around the world, with relevant help and guidelines on how to get started and have fun with all areas of making stuff with code.</p>
         </div>
         <!--/.accordion-content-->
@@ -256,24 +260,24 @@
         <button href="#" class="accordion-toggle">Credits <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/credits.jpg') }}" />
-           
+
 
             <p>Thanks to all the Mentors and committee at CoderDojo Dublin @ Warehouse, especially Brian and Anna. Thanks to Ren&eacute; who got me started with Appinventor and Edmundas who started me with PHP and Bootstrap.</p>
-            
+
             <hr />
 
-            <p>Thanks to Salman Khan and all the team at KHAN Academy <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a>  for your fantastic learning website.</p>
-            
+            <p>Thanks to Salman Khan and all the team at KHAN Academy <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> for your fantastic learning website.</p>
+
             <hr /> <br />
 
             <p>Thanks to Miguel Grinberg for his excellent Flask <a target="_blank" href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">Flask Mege Tutorial</a> . without which this website would not have been possible.</p>
-            
+
             <hr /> <br />
-                       
+
             <p>Thanks to Ali Jafarian for his cool Jquery tutorials <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> (which includes this page).</p>
-            
+
             <hr /> <br />
-            
+
             <p>Thanks to Wikimedia Commons and Pixabay for some of the <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> images.</p>
 
         </div>
@@ -283,18 +287,17 @@
     <div class="accordion-container">
         <button href="#" class="accordion-toggle">Future Enhancements <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
-            <p> My website is far from complete, but I had great fum learning a lot of Python to get this far. I have so many plans to make the website better. I intend to add a lot more content on coding with added projects on Arduino, Raspberry PI, BBC Microbit, and ESP8266.</p>
-            <p> I hope that other kids will like it and suggest improvements, so that I can make it better.  Please register and start a Blog or post comments on the Forum if you want to contribute, here <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a> images.</p> </p>
+            <p> My website is far from complete, but I had great fum learning a lot of Python to get this far. I have so many plans to make the website better. I intend to add a lot more content on coding with added projects on Arduino, Raspberry PI, BBC
+                Microbit, and ESP8266.</p>
+            <p> I hope that other kids will like it and suggest improvements, so that I can make it better. Please register and start a Blog or post comments on the Forum if you want to contribute, here <a target="_blank" href="http://coderdojowarehouse.com/">Coderdojo Dublin @ the Warehouse</a>                images.</p>
+            </p>
         </div>
         <!--/.accordion-content-->
     </div>
     <!--/.accordion-container-->
 </div>
 <!--/.content-->
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
+{% endblock %} {% block scripts %} {{ super() }}
 <!-------------------- JS -------------------->
 <script type="text/javascript">
     $(document).ready(function() {

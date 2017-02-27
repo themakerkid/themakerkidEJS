@@ -1,4 +1,4 @@
-# The MAKER Kid by Benjamin
+# CodeMaker Buddy by Benjamin
 
 ## To set up
 1. Create venv and activate it.
