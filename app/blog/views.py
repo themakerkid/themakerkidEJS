@@ -1,8 +1,9 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, request, url_for, abort
 from flask_login import login_user, logout_user, current_user, login_required
-from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPassword
+from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword
 from ..models import Comment, User, Post, db
+from ..mail import send_email
 from . import blog
 
 def checkBtn(false_value, form):
@@ -92,6 +93,10 @@ def register():
             user = User(username=form.username.data, parents_email=form.email.data, password=form.password.data)
             db.session.add(user)
             db.session.commit()
+            token = user.generateConfirmationToken()
+            send_email(user.parents_email, 'Confirm Your Account',
+                       'confirm', user=user, token=token)
+            flash("We have sent you a confirmation email.", 'info')
             login_user(user, False)
             flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
@@ -117,16 +122,30 @@ def editProfile():
     return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=datetime.now().year, form=form)
 
 @blog.route('/reset-password', methods=['GET', 'POST'])
-def resetPassword():
+def resetPasswordRequest():
     if current_user.is_authenticated:
         return redirect(url_for('.index'))
-    form = ResetPassword()
+    form = ResetPasswordRequest()
     if request.method == "POST":
         if checkBtn("submit", form):
             user = User.query.filter_by(parents_email=form.parents_email.data).first()
-            if user.resetPassword(form.password.data):
-                flash("Your password has been updated", 'success')
-                return redirect(url_for('.login'))
-            else:
-                flash("The password could not be updated", 'error')
+            token = user.generateResetToken()
+            send_email(user.parents_email, 'Reset Your Password',
+                       'resetPassword', user=user, token=token)
+            flash("An email to reset your password has been sent.", 'success')
+            return redirect(url_for('.login'))
+    return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)
+
+@blog.route('/reset-password/<token>', methods=['GET', 'POST'])
+def resetPassword(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('.index'))
+    form = ResetPassword()
+    if form.validate_on_submit():
+        if User.resetPassword(form.password.data, token):
+            flash("Your password has been updated", 'success')
+            return redirect(url_for('.login'))
+        else:
+            flash("The password could not be updated", 'error')
+            return redirect(url_for('.resetPassword'))
     return render_template("blog/resetPassword.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)

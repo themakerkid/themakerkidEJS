@@ -9,6 +9,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -20,12 +21,16 @@ bootstrap = Bootstrap()
 login = LoginManager()
 login.session_protection = 'strong' # Set the Session Protection (basic or strong)
 login.login_view = 'blog.login'
+login.login_message_category = 'info'
 
 # Create the Database object
 db = SQLAlchemy()
 
 # Create the Moment object (for calculating time)
 moment = Moment()
+
+# Create the Mail object (obviously for sending email)
+mail = Mail()
 
 def create_app():
     # Create app
@@ -36,12 +41,18 @@ def create_app():
     # app.config["SQLALCHEMY_DATABASE_URI"] = mysql://username:password@localhost:3306/tmk
     app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or "\xee#\xe7\xf9\xba\xef8\xe9@vvq\x13\xd1\xe8\xf8\xaa\xb4\x05\xaa\x04\x16\xac\xfa"
+    app.config["MAIL_SERVER"] = 'smtp.gmail.com'
+    app.config["MAIL_PORT"] = 465
+    app.config["MAIL_USE_SSL"] = True
+    app.config["MAIL_USERNAME"] = 'themakerkid@gmail.com'
+    app.config["MAIL_PASSWORD"] = 'AlexBaburin2'
     app.debug = True
 
     # Initialise all the extensions
     bootstrap.init_app(app)
     login.init_app(app)
     db.init_app(app)
+    mail.init_app(app)
     moment.init_app(app)
 
     # Register the blueprints with the application

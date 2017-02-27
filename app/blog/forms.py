@@ -55,8 +55,12 @@ class EditProfile(FlaskForm):
     submit = SubmitField("Save", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 
-class ResetPassword(FlaskForm):
+class ResetPasswordRequest(FlaskForm):
     parents_email = StringField("Your parent's email", validators=[DataRequired(), Email()])
+    submit = SubmitField("Submit", false_values="submit")
+    cancel = SubmitField("Cancel", false_values="cancel")
+    
+class ResetPassword(FlaskForm):
     password = PasswordField("New Password", validators=[DataRequired(), EqualTo("com_password", "The passwords don't match.")])
     com_password = PasswordField("Confirm Password", validators=[DataRequired()])
     submit = SubmitField("Submit", false_values="submit")
