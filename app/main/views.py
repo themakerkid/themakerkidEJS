@@ -280,7 +280,7 @@ def unconfirmed():
 @login_required
 def resendConfirmationEmail():
     token = current_user.generateConfirmationToken()
-    send_email(current_user.parents_email, 'Confirm Your Account',
-                'confirm', user=current_user, token=token)
-    flash("We have sent you another confirmation email.", 'info')
+    if send_email(current_user.parents_email, 'Confirm Your Account',
+                'confirm', user=current_user, token=token):
+        flash("We have sent you another confirmation email.", 'info')
     return redirect(url_for('.unconfirmed'))

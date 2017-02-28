@@ -94,9 +94,9 @@ def register():
             db.session.add(user)
             db.session.commit()
             token = user.generateConfirmationToken()
-            send_email(user.parents_email, 'Confirm Your Account',
-                       'confirm', user=user, token=token)
-            flash("We have sent you a confirmation email.", 'info')
+            if send_email(user.parents_email, 'Confirm Your Account',
+                       'confirm', user=user, token=token):
+                flash("We have sent you a confirmation email.", 'info')
             login_user(user, False)
             flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
@@ -130,9 +130,9 @@ def resetPasswordRequest():
         if checkBtn("submit", form):
             user = User.query.filter_by(parents_email=form.parents_email.data).first()
             token = user.generateResetToken()
-            send_email(user.parents_email, 'Reset Your Password',
-                       'resetPassword', user=user, token=token)
-            flash("An email to reset your password has been sent.", 'success')
+            if send_email(user.parents_email, 'Reset Your Password',
+                       'resetPassword', user=user, token=token):
+                flash("An email to reset your password has been sent.", 'success')
             return redirect(url_for('.login'))
     return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)
 

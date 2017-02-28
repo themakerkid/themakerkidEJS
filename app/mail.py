@@ -10,4 +10,4 @@ def send_email(recipient, subject, template, **kwargs):
     try:
         mail.send(msg)
     except:
-        flash("Sorry but we could not send you the email.", 'error')
+        flash("Sorry but we could not send you the email.", 'warning')
