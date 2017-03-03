@@ -55,14 +55,26 @@
     <ol>
         {% for snippet in snippets %}
         <li class="snippet">
-            <a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>
-            {{ snippet.summary_html|safe }}
-            <a href="{{ url_for('snippets.snippet', id=snippet.id) }}" class="btn btn-info">Show more &raquo;</a>
+            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
+                <img src="{{ snippet.author.getAvatar(size=100) }}" class="pull-left img-rounded" style="margin-right: 10px;" />
+            </a>
+            A piece of {{ checkLanguage(snippet) }}
+            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">By {{ snippet.author.username|capitalize }}</a>
+            <span class="pull-right">{{ moment(snippet.date_posted).fromNow(refresh=True) }}</span>
+            <!--<a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>-->
+            {% if not snippet.summary == snippet.body %}
+            <div class="less">{{ snippet.summary_html|safe }}</div>
+            <div class="more">{{ snippet.body_html|safe }}</div>
+            <button class="btn btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
+            {% else %}
+            <div>{{ snippet.body_html|safe }}</div>
+            {% endif %}
+            <p>This is the end of the snippet.</p>
             <div class="post-controls">
-                <br />
-                <a class="comment-btn" href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
+                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}"><span class="label label-primary">Permalink</span></a> 
+                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
                 {% if current_user.username == snippet.author.username %}
-                <a class="edit-btn" href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
+                <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
                 {% endif %}
             </div>
         </li>
@@ -80,17 +92,9 @@
         $textarea.attr('data-provide', 'markdown');
         $textarea.attr('placeholder', 'Please put your code here using Markdown or the buttons above.');
         $textarea.attr('rows', 12);
-        //$cancelBtn = $('<button>');
-        //$cancelBtn.addClass('btn btn-danger');
-        //$cancelBtn.text("Cancel");
-        //$cancelBtn.appendTo("form");
-        //$cancelBtn.on("click", function() {
-        //    $("#body").val("");
-        //    $("#title").val("");
-        //    window.location.reload()
-        //});
-        //$("#submit").addClass("btn btn-success");
+        
         $("#cancel").detach();
+
         if ($("#snippet-form .form-group").hasClass('has-error')) {
             $("#create-new-code-snippet-btn").click();
             $("#search-form .form-group .help-block").detach();
@@ -101,6 +105,26 @@
             scrollTop: $("#snippets").offset().top
         }, 2000);
         {% endif %}
+
+        $(".more").hide();
+
+        $(".snippet button").each(function () {
+            $(this).on("click", function() {
+                $this = $(this);
+                if ($this.hasClass("show-more")) {
+                    $this.html("Show less &raquo;");
+                    $this.removeClass("show-more");
+                    $this.siblings("div.less").hide();
+                    $this.prev().slideDown(1000);
+                }
+                else {
+                    $this.html("Show more &raquo;");
+                    $this.addClass("show-more");
+                    $this.siblings("div.less").slideDown(1000);
+                    $this.prev().hide();
+                }
+            });
+        });
     </script>
     {% endif %}
     {{ moment.include_moment() }}

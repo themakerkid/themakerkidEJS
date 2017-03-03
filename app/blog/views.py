@@ -48,7 +48,7 @@ def filteredPosts():
     elif search_form.validate_on_submit():
         return redirect(url_for('.filteredPosts', q=search_form.search.data))
     posts = Post.query.whoosh_search(q, 50).all()
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, scroll_down=True)
+    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, filtered=True)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):

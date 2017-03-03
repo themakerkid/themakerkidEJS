@@ -54,22 +54,19 @@
     }
     
     #tabs-nav ul li a {
-        background: url({{ url_for('static', filename='images/nav-sprite.jpg')
+        background: url({{ url_for('static', filename='images/nav-sprite.jpg')}})
+        no-repeat;
+        color: #999;
+        display: block;
+        height: 19px;
+        padding: 30px;
+        width: 220px;
+        text-decoration: none;
+        font-size: 1.25em;
+        text-shadow: 1px 1px 1px #000;
+        margin-bottom: 10px;
+        font-family: sans-serif;
     }
-}
-) no-repeat;
-color: #999;
-display: block;
-height: 19px;
-padding: 30px;
-width: 220px;
-text-decoration: none;
-font-size: 1.25em;
-text-shadow: 1px 1px 1px #000;
-margin-bottom: 10px;
-font-family: sans-serif;
-
-}
 #tabs-nav ul li a:hover {
     background-position: 0 -79px;
     color: #fff;
@@ -79,15 +76,11 @@ font-family: sans-serif;
     color: #fff;
 }
 #tabs-content {
-    background: url({{ url_for('static', filename='images/ajax-loader.gif')
-}
-
-}
-) 50% 50% no-repeat;
-float: left;
-height: 400px;
-width: 620px;
-
+    background: url({{ url_for('static', filename='images/ajax-loader.gif')}})
+    50% 50% no-repeat;
+    float: left;
+    height: 400px;
+    width: 620px;
 }
 #tabs-content .profile {
     display: none;
@@ -97,17 +90,12 @@ width: 620px;
     width: 620px;
 }
 #tabs-content .profile .caption {
-    background: url({{ url_for('static', filename='images/trans_black-50.png')
-}
-
-}
-);
-padding: 30px;
-position: absolute;
-right: 0px;
-top: 0px;
-width: 220px;
-
+    background: url({{ url_for('static', filename='images/trans_black-50.png')}});
+    padding: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 220px;
 }
 #tabs-content .profile .caption h2 {
     color: #fff;
