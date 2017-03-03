@@ -57,7 +57,9 @@
         <li class="snippet">
             <a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>
             {{ snippet.summary_html|safe }}
+            <a href="{{ url_for('snippets.snippet', id=snippet.id) }}" class="btn btn-info">Show more &raquo;</a>
             <div class="post-controls">
+                <br />
                 <a class="comment-btn" href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
                 {% if current_user.username == snippet.author.username %}
                 <a class="edit-btn" href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
