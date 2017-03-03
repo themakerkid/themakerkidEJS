@@ -7,8 +7,15 @@
 {% endblock %}
 
 {% block page_content %}
-    <h1>Learning Resources</h1>
 
+    <div class="text-center">
+        <h1>Learning Resources</h1>
+        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
+        <a role="button" class="btn btn-success" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
+        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
+        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
+        <hr />
+    </div>
     <hr />
 
     <h2>Super Scratch Programming Adventure (Scratch 2.0 only)</h2>
@@ -33,7 +40,4 @@
         <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_marji.jpg') }}" />
         This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
     </p>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
 {% endblock %}

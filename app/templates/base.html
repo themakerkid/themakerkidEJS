@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "bootstrap/base.html" %} {% block title %}CodeMaker Buddy - {{ title }}{% endblock %} {% block styles %} {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
@@ -7,6 +8,27 @@
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
+=======
+{% extends "bootstrap/base.html" %}
+
+{% block title %}CodeMaker Buddy - {{ title }}{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+>>>>>>> 2d0c9599079f6a26223d299507e398014b693b62
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
@@ -20,7 +42,131 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+<<<<<<< HEAD
             <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="/static/images/manga_head.png" width="25" id="icon">CodeMaker Buddy</a>
+=======
+                <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="/static/images/manga_head.png" width="25" id="icon">CodeMaker Buddy</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.about') }}">About</a></li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu id="basic">Coding<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="{{ url_for('main.coding') }}">Introduction</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Scratch</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('main.scratch') }}">Getting Started</a></li>
+                                    <li><a href="{{ url_for('main.scratchLearn') }}">Learning Resources</a></li>
+                                    <li><a href="{{ url_for('main.scratchProject') }}">Award Winning Project</a></li>
+                                    <li><a href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Website Coding</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.websiteCoding') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.webCodeLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.webCodeThis') }}">This Website</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">App Inventor</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.appInventor') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.appInventorLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.appInventorProjects') }}">Projects</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Processing</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.processing') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.processingLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.drawing') }}">Khan Projects</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Python</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.techPython') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.techPyThis') }}">This Website</a></li>
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a tabindex="0" href="{{ url_for('main.techEveComp') }}">Events &amp; Competitions</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Hardware <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="{{ url_for('main.hardware') }}">Introduction</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardLearn') }}">Learning Resources</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardBooks') }}">Engineering Books</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Arduino</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
+                                </ul>
+                            </li>
+                            <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers <br /> &amp; Technologists</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Electronics</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('main.hardElec') }}">Getting Started</a></li>
+                                </ul>
+                            </li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardRobot') }}">Robotics</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardProj') }}">Projects</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardToys') }}">Engineering Toys</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardCompEv') }}">Competitions &amp; Events</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.hardGlossary') }}">Glossary</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Raspberry Pi</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.raspi') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.raspiLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.raspiPython') }}">Python</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.raspiCode') }}">Coding Websites</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.raspiHardware') }}">Hardware</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0" id="other">Fun Stuff</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>                
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
+                    <li><a tabindex="0" href="{{ url_for('snippets.index') }}">Code Snippets</a></li>
+                    <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li class="dropdown">
+                        <a tabindex="0" data-toggle="dropdown" id="account">{{ current_user.username|capitalize }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="{{ url_for('blog.profile', username=current_user.username) }}">Profile</a></li>
+                            <li><a tabindex="0" href="{{ url_for('blog.editProfile') }}">Edit Your Profile</a></li>
+                            <li><a tabindex="0" href="{{ url_for('blog.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><a tabindex="0" href="{{ url_for('blog.login') }}">Login</a></li>
+                    <li><a tabindex="0" href="{{ url_for('blog.register') }}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+>>>>>>> 2d0c9599079f6a26223d299507e398014b693b62
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -148,6 +294,7 @@
     <!--[if lt IE 9]>
             <a class="btn btn-danger" href="browsehappy.com">Please upgrade your browser to improve your experience.</a>
         <![endif]-->
+<<<<<<< HEAD
     {% block page_content %}{% endblock %}
     <footer>
         <br /> {% if year %}
@@ -155,6 +302,15 @@
         {% endif %}
         <span id="design-coded">
                 <p>Designed and Coded by Benjamin Murray</p>
+=======
+        {% block page_content %}{% endblock %}
+        <footer>
+            <br /> {% if year %}
+            <p>&copy; {{ year }} - CodeMaker Buddy</p>
+            {% endif %}
+            <span id="design-coded">
+                <p>Designed and Coded By Benjamin Murray</p>
+>>>>>>> 2d0c9599079f6a26223d299507e398014b693b62
             </span>
     </footer>
 </div>

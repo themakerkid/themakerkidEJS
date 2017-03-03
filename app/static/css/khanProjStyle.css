@@ -28,6 +28,20 @@ hr {
     padding: 30px 0;
 }
 */
+.img-surround {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: floralwhite;
+}
+        
+img {
+    border: 1px solid;
+    padding: 0px;
+}
+        
+button {
+    margin: 8px;
+ }
 
 ul.grid-nav {
     list-style: none;

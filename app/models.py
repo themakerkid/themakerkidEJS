@@ -9,6 +9,9 @@ from markdown.extensions.extra import ExtraExtension
 from . import db, login
 import hashlib
 
+hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
+extras = ExtraExtension()
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -152,6 +155,7 @@ class Snippet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
+    summary = db.Column(db.Text)
     #body_html = db.Column(db.Text)
     code_type_id = db.Column(db.SmallInteger)
     comments = db.relationship('SnippetComment', backref='snippet', lazy='dynamic')
@@ -166,10 +170,14 @@ class Snippet(db.Model):
 
     @property
     def body_html(self):
-        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
-        extras = ExtraExtension()
         markdown_content = markdown(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
+
+    def summary_html_default(context):
+        markdown_content = markdown(context.current_parameters['summary'], extensions=[hilite, extras])
+        return markdown_content
+
+    summary_html = db.Column(db.Text, default=summary_html_default)
 
 class SnippetComment(db.Model):
     __tablename__ = 'snippet_comments'

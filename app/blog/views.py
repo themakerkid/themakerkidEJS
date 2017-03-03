@@ -1,7 +1,7 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, request, url_for, abort
+from flask import render_template, flash, redirect, request, url_for, abort, session
 from flask_login import login_user, logout_user, current_user, login_required
-from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword
+from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
 from ..models import Comment, User, Post, db
 from ..mail import send_email
 from . import blog
@@ -19,14 +19,36 @@ def before():
 
 @blog.route('/', methods=['GET', 'POST'])
 def index():
-    posts = Post.query.order_by(Post.date_posted.desc()).all()
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.body.data, author=current_user._get_current_object())
+    post_form = PostForm()
+    search_form = SearchForm()
+    #session["posts"] = Post.query.order_by(Post.date_posted.desc()).all()
+    if not request.args.get("posts"):
+        posts = Post.query.order_by(Post.date_posted.desc()).all()
+    else:
+        posts = request.args.get("posts")
+    if post_form.validate_on_submit():
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post', id=post.id))
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, form=form, posts=posts)
+    elif search_form.validate_on_submit():
+        return redirect(url_for('.filteredPosts', q=search_form.search.data))
+    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts)
+
+@blog.route('/filtered-posts', methods=['GET', 'POST'])
+def filteredPosts():
+    post_form = PostForm()
+    search_form = SearchForm()
+    q = request.args.get("q")
+    if post_form.validate_on_submit():
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('.post', id=post.id))
+    elif search_form.validate_on_submit():
+        return redirect(url_for('.filteredPosts', q=search_form.search.data))
+    posts = Post.query.whoosh_search(q, 50).all()
+    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, scroll_down=True)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
@@ -94,9 +116,9 @@ def register():
             db.session.add(user)
             db.session.commit()
             token = user.generateConfirmationToken()
-            send_email(user.parents_email, 'Confirm Your Account',
-                       'confirm', user=user, token=token)
-            flash("We have sent you a confirmation email.", 'info')
+            if send_email(user.parents_email, 'Confirm Your Account',
+                       'confirm', user=user, token=token):
+                flash("We have sent you a confirmation email.", 'info')
             login_user(user, False)
             flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
@@ -130,9 +152,9 @@ def resetPasswordRequest():
         if checkBtn("submit", form):
             user = User.query.filter_by(parents_email=form.parents_email.data).first()
             token = user.generateResetToken()
-            send_email(user.parents_email, 'Reset Your Password',
-                       'resetPassword', user=user, token=token)
-            flash("An email to reset your password has been sent.", 'success')
+            if send_email(user.parents_email, 'Reset Your Password',
+                       'resetPassword', user=user, token=token):
+                flash("An email to reset your password has been sent.", 'success')
             return redirect(url_for('.login'))
     return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)
 

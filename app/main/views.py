@@ -186,9 +186,17 @@ def hardBooks():
 def hardElec():
     return render_template('hardware/elec.html', title="Hardware - Electronics - Getting Started", year=datetime.now().year)
 
-@main.route('/hardware/electronics/arduino')
-def hardElecArd():
-    return render_template('hardware/ardBooks.html', title="Hardware - Electronics - Arduino", year=datetime.now().year)
+@main.route('/hardware/arduino/start')
+def arduinoStart():
+    return render_template('hardware/arduino/ardStart.html', title="Arduino Home", year=datetime.now().year)
+
+@main.route('/hardware/arduino/learn')
+def arduinoLearn():
+    return render_template('hardware/arduino/ardLearn.html', title="Arduino - Learning Resources", year=datetime.now().year)
+
+@main.route('/hardware/arduino/project')
+def arduinoProject():
+    return render_template('hardware/arduino/ardProject.html', title="Arduino - Project Page", year=datetime.now().year)
 
 @main.route('/hardware/robotics')
 def hardRobot():
@@ -280,7 +288,7 @@ def unconfirmed():
 @login_required
 def resendConfirmationEmail():
     token = current_user.generateConfirmationToken()
-    send_email(current_user.parents_email, 'Confirm Your Account',
-                'confirm', user=current_user, token=token)
-    flash("We have sent you another confirmation email.", 'info')
+    if send_email(current_user.parents_email, 'Confirm Your Account',
+                'confirm', user=current_user, token=token):
+        flash("We have sent you another confirmation email.", 'info')
     return redirect(url_for('.unconfirmed'))

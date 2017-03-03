@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, request, url_for, abort
 from flask_login import login_user, logout_user, current_user, login_required
-from forms import SnippetForm, CommentForm
+from forms import SnippetForm, CommentForm, SearchForm
 from ..models import SnippetComment, User, Snippet, db
 from . import snippets
 
@@ -33,13 +33,36 @@ def before():
 @snippets.route('/', methods=['GET', 'POST'])
 def index():
     snippets = Snippet.query.order_by(Snippet.date_posted.desc()).all()
-    form = SnippetForm()
-    if form.validate_on_submit():
-        post = Snippet(title=form.title.data, body=form.body.data, author=current_user._get_current_object(), code_type_id=form.language.data)
-        db.session.add(post)
+    snippet_form = SnippetForm()
+    search_form = SearchForm()
+    if snippet_form.validate_on_submit():
+        summary = snippet_form.body.data
+        summary = summary.split(' ')
+        summary = summary[:80]
+        summary = ' '.join(summary)
+        summary += '...'
+        snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object(), code_type_id=snippet_form.language.data, summary=summary)
+        db.session.add(snippet)
+        db.session.commit()
+        return redirect(url_for('.snippet', id=snippet.id))
+    elif search_form.validate_on_submit():
+        return redirect(url_for('.filtered', q=search_form.search.data))
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets)
+
+@snippets.route('/filtered', methods=['GET', 'POST'])
+def filtered():
+    snippet_form = SnippetForm()
+    search_form = SearchForm()
+    q = request.args.get("q")
+    if snippet_form.validate_on_submit():
+        snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object())
+        db.session.add(snippet)
         db.session.commit()
         return redirect(url_for('.snippet', id=post.id))
-    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, form=form, snippets=snippets)
+    elif search_form.validate_on_submit():
+        return redirect(url_for('.filtered', q=search_form.search.data))
+    snippets = Snippet.query.whoosh_search(q, 50).all()
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, filtered=True)
 
 @snippets.route('/<int:id>', methods=['GET', 'POST'])
 def snippet(id):
