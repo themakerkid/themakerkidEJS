@@ -15,13 +15,31 @@
 {% block page_content %}
     <div class="page-header">
         <h1>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
+        {% if logged_in %}
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
+        <!-- Modal -->
+        <div class="modal fade no-center" id="create-new-post" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create A New Post</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% if logged_in %}
-    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
-    {% endif %}
-    <br />
-    <h2>Posts</h2>
+    <h2>Search Posts</h2>
+    {{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
+    <h2 id="posts">Posts</h2>
     <hr />
+    {% if posts %}
     <ol>
         {% for post in posts %}
         <li>
@@ -35,6 +53,9 @@
         </li>
         {% endfor %}
     </ol>
+    {% else %}
+    <p>No posts</p>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -58,6 +79,11 @@
         //});
         //$("#submit").addClass("btn btn-success");
         $("#cancel").detach();
+        {% if scroll_down %}
+        $('html, body').animate({
+            scrollTop: $("#posts").offset().top
+        }, 2000);
+        {% endif %}
     </script>
     {% endif %}
     {{ moment.include_moment() }}

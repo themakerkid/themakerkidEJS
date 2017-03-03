@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block head %}
@@ -93,13 +94,20 @@
                             <li><a tabindex="0" href="{{ url_for('main.hardware') }}">Introduction</a></li>
                             <li><a tabindex="0" href="{{ url_for('main.hardLearn') }}">Learning Resources</a></li>
                             <li><a tabindex="0" href="{{ url_for('main.hardBooks') }}">Engineering Books</a></li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0">Arduino</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
+                                    <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
+                                </ul>
+                            </li>
                             <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers <br /> &amp; Technologists</a></li>
                             <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
                             <li class="dropdown-submenu">
                                 <a tabindex="0">Electronics</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url_for('main.hardElec') }}">Getting Started</a></li>
-                                    <li><a href="{{ url_for('main.hardElecArd') }}">Arduino</a></li>
                                 </ul>
                             </li>
                             <li><a tabindex="0" href="{{ url_for('main.hardRobot') }}">Robotics</a></li>
@@ -117,14 +125,14 @@
                                     <li><a tabindex="0" href="{{ url_for('main.raspiHardware') }}">Hardware</a></li>
                                 </ul>
                             </li>
+                            <li class="dropdown-submenu">
+                                <a tabindex="0" id="other">Fun Stuff</a>
+                                <ul class="dropdown-menu">
+                                    <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a tabindex="0" data-toggle="dropdown" id="other">Fun Stuff <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
-                        </ul>
-                    </li>
+                    </li>                
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
@@ -166,7 +174,7 @@
             <p>&copy; {{ year }} - CodeMaker Buddy</p>
             {% endif %}
             <span id="design-coded">
-                <p>Designed and Coded by Benjamin Murray</p>
+                <p>Designed and Coded By Benjamin Murray</p>
             </span>
         </footer>
     </div>

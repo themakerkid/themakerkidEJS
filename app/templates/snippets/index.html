@@ -4,6 +4,15 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style>
+        .snippet {
+            border: 1px solid grey;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    </style>
 {% endblock %}
 
 {% if current_user.is_authenticated %}
@@ -15,17 +24,39 @@
 {% block page_content %}
     <div class="page-header">
         <h1>Welcome to the Code Snippet Sharing{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
+        {% if logged_in %}
+        <button type="button" class="btn btn-success" id="create-new-code-snippet-btn" data-toggle="modal" data-target="#create-new-code-snippet">Create A New Code Snippet</button>
+        <!-- Modal -->
+        <div class="modal fade no-center" id="create-new-code-snippet" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Create A New Code Snippet</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{ wtf.quick_form(snippet_form, id="snippet-form", button_map={'submit': 'success'}) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
     </div>
-    {% if logged_in %}
-    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
-    {% endif %}
-    <br />
+    <h2>Search Snippets</h2>
+    {{ wtf.quick_form(search_form, id='search-form', button_map={'submit': 'success'}) }}
+    {% if filtered %}
+    <h2 class="snippets">Search Results for "{{ request.args.get("q") }}"</h2>
+    {% else %}
     <h2>Snippets</h2>
+    {% endif %}
     <hr />
     <ol>
         {% for snippet in snippets %}
-        <li>
+        <li class="snippet">
             <a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>
+            {{ snippet.summary_html|safe }}
             <div class="post-controls">
                 <a class="comment-btn" href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
                 {% if current_user.username == snippet.author.username %}
@@ -58,6 +89,16 @@
         //});
         //$("#submit").addClass("btn btn-success");
         $("#cancel").detach();
+        if ($("#snippet-form .form-group").hasClass('has-error')) {
+            $("#create-new-code-snippet-btn").click();
+            $("#search-form .form-group .help-block").detach();
+            $("#search-form .form-group").removeClass('has-error');
+        }
+        {% if filtered %}
+        $('html, body').animate({
+            scrollTop: $("#snippets").offset().top
+        }, 2000);
+        {% endif %}
     </script>
     {% endif %}
     {{ moment.include_moment() }}
