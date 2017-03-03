@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block page_content %}
+<div class="page-header">
+    <h1>Registered Users</h1>
+</div>
+{% for user in users %}
+<div class="clearfix">
+    <a href="{{ url_for('blog.profile', username=user.username) }}"><img src="{{ user.getAvatar(size=90) }}" class="pull-left img-rounded">{{ user.username|capitalize }}</a>
+    <p>{% if user.about_me %}{{ user.about_me }}{% else %}No information about {{ user.username|capitalize }} has been given.{% endif %}</p>
+</div>
+<br /> {% endfor %} {% endblock %}
