@@ -54,40 +54,48 @@
     <h2>Snippets</h2>
     {% endif %}
     <hr />
-    <ul id="snippets">
-        {% for snippet in snippets %}
-        <li class="snippet">
-            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
-                <img src="{{ snippet.author.getAvatar(size=100) }}" class="pull-left img-rounded" style="margin-right: 10px;" />
-            </a>
-            A piece of {{ checkLanguage(snippet) }}
-            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">By {{ snippet.author.username|capitalize }}</a>
-            called {{ snippet.title }}
-            <span class="pull-right">{{ moment(snippet.date_posted).fromNow(refresh=True) }}</span>
-            <!--<a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>-->
-            {% if not snippet.summary == snippet.body %}
-            <div class="less">{{ snippet.summary_html|safe }}
-                <p>More content on this snippet...</p>
-            </div>
-            <div class="more">{{ snippet.body_html|safe }}
-                <p>This is the end of the snippet.</p>
-            </div>
-            <button class="btn btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
-            {% else %}
-            <div>{{ snippet.body_html|safe }}
-                <p>This is the end of the snippet.</p>
-            </div>
-            {% endif %}
-            <div class="post-controls">
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}"><span class="label label-primary">Permalink</span></a> 
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
-                {% if current_user.username == snippet.author.username %}
-                <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
+    {% if snippets|length > 0 %}
+        <ul id="snippets">
+            {% for snippet in snippets %}
+            <li class="snippet">
+                <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
+                    <img src="{{ snippet.author.getAvatar(size=100) }}" class="pull-left img-rounded" style="margin-right: 10px;" />
+                </a>
+                A piece of {{ checkLanguage(snippet) }}
+                <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">By {{ snippet.author.username|capitalize }}</a>
+                called {{ snippet.title }}
+                <span class="pull-right">{{ moment(snippet.date_posted).fromNow(refresh=True) }}</span>
+                <!--<a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>-->
+                {% if not snippet.summary == snippet.body %}
+                <div class="less">{{ snippet.summary_html|safe }}
+                    <p>More content on this snippet...</p>
+                </div>
+                <div class="more">{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
+                <button class="btn btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
+                {% else %}
+                <div>{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
                 {% endif %}
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+                <div class="post-controls">
+                    <a href="{{ url_for('snippets.snippet', id=snippet.id) }}"><span class="label label-primary">Permalink</span></a> 
+                    <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
+                    {% if current_user.username == snippet.author.username %}
+                    <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            {% if filtered %}
+                <p>No results.</p>
+            {% else %}
+                <p>No snippets have been created yet.</p>
+            {% endif %}
+        {% endif %}
     {{ macros.addPagination(pagination, '.index') }}
 {% endblock %}
 
@@ -112,7 +120,7 @@
         {% endif %}
         {% if filtered %}
         $('html, body').animate({
-            scrollTop: $("#snippets").offset().top
+            scrollTop: $("#snippets").offset().top - 160
         }, 2000);
         {% endif %}
 
