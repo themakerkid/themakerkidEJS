@@ -40,7 +40,8 @@ def index():
         summary = summary.split(' ')
         summary = summary[:80]
         summary = ' '.join(summary)
-        summary += '...'
+        if not summary == snippet_form.body.data:
+            summary += '...'
         snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object(), code_type_id=snippet_form.language.data, summary=summary)
         db.session.add(snippet)
         db.session.commit()

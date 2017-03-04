@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
 <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 <style type="text/css">
-#wrapper {
+    #wrapper {
         margin: 30px auto 0;
         width: 900px;
         margin-bottom: 20px;
@@ -54,8 +54,7 @@
     }
     
     #tabs-nav ul li a {
-        background: url({{ url_for('static', filename='images/nav-sprite.jpg')}})
-        no-repeat;
+        background: url('/static/images/nav-sprite.jpg') no-repeat;
         color: #999;
         display: block;
         height: 19px;
@@ -67,50 +66,55 @@
         margin-bottom: 10px;
         font-family: sans-serif;
     }
-#tabs-nav ul li a:hover {
-    background-position: 0 -79px;
-    color: #fff;
-}
-#tabs-nav ul li a.active {
-    background-position: 0 -158px;
-    color: #fff;
-}
-#tabs-content {
-    background: url({{ url_for('static', filename='images/ajax-loader.gif')}})
-    50% 50% no-repeat;
-    float: left;
-    height: 400px;
-    width: 620px;
-}
-#tabs-content .profile {
-    display: none;
-    /* hide by default */
-    height: 400px;
-    position: relative;
-    width: 620px;
-}
-#tabs-content .profile .caption {
-    background: url({{ url_for('static', filename='images/trans_black-50.png')}});
-    padding: 30px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 220px;
-}
-#tabs-content .profile .caption h2 {
-    color: #fff;
-    font-family: Garamond,
-    Georgia;
-    margin: 0 0 10px;
-}
-#tabs-content .profile .caption p {
-    color: #ccc;
-    font-family: Arial;
-    font-size: 1.05em;
-    line-height: 1.5em;
-    margin: 0;
-    text-align: left;
-}
+    
+    #tabs-nav ul li a:hover {
+        background-position: 0 -79px;
+        color: #fff;
+    }
+    
+    #tabs-nav ul li a.active {
+        background-position: 0 -158px;
+        color: #fff;
+    }
+    
+    #tabs-content {
+        background: url('/static/images/ajax-loader.gif') 50% 50% no-repeat;
+        float: left;
+        height: 400px;
+        width: 620px;
+    }
+    
+    #tabs-content .profile {
+        display: none;
+        /* hide by default */
+        height: 400px;
+        position: relative;
+        width: 620px;
+    }
+    
+    #tabs-content .profile .caption {
+        background: url('/static/images/trans_black-50.png');
+        padding: 30px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 220px;
+    }
+    
+    #tabs-content .profile .caption h2 {
+        color: #fff;
+        font-family: Garamond, Georgia;
+        margin: 0 0 10px;
+    }
+    
+    #tabs-content .profile .caption p {
+        color: #ccc;
+        font-family: Arial;
+        font-size: 1.05em;
+        line-height: 1.5em;
+        margin: 0;
+        text-align: left;
+    }
 </style>
 {% endblock %} {% block page_content %}
 <div id="wrapper">
@@ -175,7 +179,9 @@
                 <div class="profile" id="martha-lane-fox">
                     <div class="caption">
                         <h2>Martha Lane Fox</h2>
-                        <p>(born 10 February 1973) is a British businesswoman, philanthropist, and public servant. She founded co-founded Lastminute.com in the dotcom boom of the early 2000, and is a is a board member of Twitter, mydeco.com and Marks & Spencer,</p>
+                        <p>(born 10 February 1973) is a British businesswoman, philanthropist, and public servant. She founded co-founded Lastminute.com in the dotcom boom of the early 2000, and is a is a board member of Twitter, mydeco.com and Marks &amp;
+                            Spencer,
+                        </p>
                     </div>
                     <!--/.caption-->
                     <img src="{{ url_for('static', filename='images/tech/martha_lane_fox.jpg') }}" />
