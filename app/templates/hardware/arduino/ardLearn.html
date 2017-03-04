@@ -1,35 +1,109 @@
-{% extends "base.html" %}
-
-{% block styles %}
-{{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
-{% endblock %}
-
-{% block page_content %}
-    <h1>Learning Resources</h1>
-
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% endblock %} {% block page_content %}
+<div class="text-center">
+    <h1>Arduino - Learning Resources</h1>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoProject') }}">Projects</a>
     <hr />
+</div>
 
-    <h2>Exploring Arduino</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<hr />
 
-    <h2>Arduino Project Handbook</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_project_handbook.jpg') }}" />
-        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
-    </p>
+<h2>Exploring Arduino</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and
+    your projects will be part of the adventure.
+</p>
 
-    <h2>Programming Arduino. Next Steps.</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_next_steps.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<h2>Arduino Project Handbook</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_project_handbook.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 -
+    8.
+</p>
 
-    <h2>Arduino for Teens (Advanced)</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_teens.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<h2>Programming Arduino. Next Steps.</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_next_steps.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and
+    your projects will be part of the adventure.
+</p>
+
+<h2>Arduino for Teens (Advanced)</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_teens.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
+    projects will be part of the adventure.
+</p>
+<h1>Engineering &amp; Books</h1>
+<br />
+<h2>Arduino Comic</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_comic.jpg') }}" />
+    <br />The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
+    Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand.
+    <br />
+    <br /> Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Please click here for more information. <a href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a>
+</p>
+<h2>Arduino Project Handbook</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_project_handbook.jpg') }}"><br />
+    <br />The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
+    Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand.
+    <br />
+    <br /> Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Please click here for more information. <a href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a>
+</p>
+
+
+<h2>Exploring Arduino Tools and Techniques for Engineering Wizardry</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" />
+    <br />The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
+    Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand.
+    <br />
+    <br /> Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Please click here for more information. <a href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a>
+</p>
+
+<h2>SciFest</h2>
+
+<p>
+    <img src="{{ url_for('static', filename='images/science/sci-fest.jpg') }}" />
+    <br /> <a href="http://scifest.ie/">SciFest</a> is a series of one-day science fairs for second-level students hosted locally in schools and regional level in third level colleges. It is an all-Ireland science competition where second-level students
+    showcase science, technology, engineering and maths (STEM) projects at a series of one day science fairs held regionally in the 14 Institutes of Technology, DCU and St. Mary’s College, Derry.
+    <br />
+    <br /> The winners from each regional science fair go on to compete at a national final in November, while the national final winner(s) of SciFest 2015, will be presented with a trophy and will represent Ireland at the Intel International Science
+    and Engineering Fair (ISEF) 2016 in Phoenix, Arizona.
+</p>
+<h2>Science Week</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/science/science_week.png') }}" />
+    <br />Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
+    There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+</p>
+<h2>Junior Einsteins Science Club</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/science/science_week.png') }}" />
+    <br />Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
+    There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+</p>
+<h1>Learning Resources</h1>
+
+<hr />
+
+<h2>Exploring Arduino Tools and Techniques for Engineering Wizardry</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and
+    your projects will be part of the adventure.
+</p>
+
+
+<h2>Programming Arduino. Next Steps.</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_next_steps.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and
+    your projects will be part of the adventure.
+</p>
+
+<h2>Arduino for Teens (Advanced)</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_teens.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
+    projects will be part of the adventure.
+</p>
 {% endblock %}

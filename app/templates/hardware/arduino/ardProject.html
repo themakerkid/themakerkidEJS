@@ -1,19 +1,9 @@
-{% extends "base.html" %}
-{% block styles %}
-    {{ super() }}
-    {% include "_h2_border.html" %}
-{% endblock %}
-
-{% block page_content %}
-<h1>Hardware Projects</h1>
-
-<hr />
+{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_h2_border.html" %} {% endblock %} {% block page_content %}
 <div class="text-center">
-    <h1>Introduction to Arduino.</h1>
-    <a role="button" class="btn btn-success" href="{{ url_for('main.scratch') }}">Getting Started</a>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
+    <h1>Arduino Projects</h1>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoProject') }}">Projects</a>
     <hr />
 </div>
 <h2>Introduction to Arduino</h2>
@@ -23,5 +13,4 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mPt6O2TAXwE?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <h2>Neopixel Ring with Adafruit Gemma</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe>
-{% endblock %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe> {% endblock %}

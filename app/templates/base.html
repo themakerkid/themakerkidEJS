@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.about') }}">About</a></li>
                 <li class="dropdown">
-                    <a tabindex="0" data-toggle="dropdown" data-submenu id="basic">Coding<span class="caret"></span></a>
+                    <a tabindex="0" data-toggle="dropdown" data-submenu id="basic">Coder<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a tabindex="0" href="{{ url_for('main.coding') }}">Introduction</a></li>
                         <li class="divider"></li>
@@ -73,16 +73,25 @@
                             </ul>
                         </li>
                         <li class="divider"></li>
+                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Coders</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.techEveComp') }}">Events &amp; Competitions</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Hardware <span class="caret"></span></a>
+                    <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Maker <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a tabindex="0" href="{{ url_for('main.hardware') }}">Introduction</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardLearn') }}">Learning Resources</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardBooks') }}">Engineering Books</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ url_for('main.hardElec') }}">Electronics</a></li>
+                        <!-- <li class="dropdown-submenu">
+                            <a tabindex="0">Electronics</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('main.hardElec') }}">Getting Started</a></li>
+                            </ul>
+                        </li> -->
+                        <!--  <li><a tabindex="0" href="{{ url_for('main.hardLearn') }}">Learning Resources</a></li> 
+                        <li><a tabindex="0" href="{{ url_for('main.hardBooks') }}">Engineering Books</a></li> -->
                         <li class="dropdown-submenu">
                             <a tabindex="0">Arduino</a>
                             <ul class="dropdown-menu">
@@ -91,21 +100,19 @@
                                 <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
                             </ul>
                         </li>
-                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers <br /> &amp; Technologists</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="0">Electronics</a>
+                        <!-- <li><a tabindex="0" href="{{ url_for('main.hardRobot') }}">Robotics</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.hardProj') }}">Projects</a></li>
+                        -->
+                        <li><a tabindex="0" href="{{ url_for('main.hardToys') }}">Cool Toys</a></li>
+                        <!-- <li class="dropdown-submenu">
+                            <a tabindex="0" id="other">Fun Stuff</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url_for('main.hardElec') }}">Getting Started</a></li>
+                                <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
                             </ul>
                         </li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardRobot') }}">Robotics</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardProj') }}">Projects</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardToys') }}">Engineering Toys</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardCompEv') }}">Competitions &amp; Events</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardGlossary') }}">Glossary</a></li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="0">Raspberry Pi</a>
+                        -->
+                        <!-- <li class="dropdown-submenu">
+                         <a tabindex="0">Raspberry Pi</a>
                             <ul class="dropdown-menu">
                                 <li><a tabindex="0" href="{{ url_for('main.raspi') }}">Getting Started</a></li>
                                 <li><a tabindex="0" href="{{ url_for('main.raspiLearn') }}">Learning Resources</a></li>
@@ -114,12 +121,14 @@
                                 <li><a tabindex="0" href="{{ url_for('main.raspiHardware') }}">Hardware</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="0" id="other">Fun Stuff</a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
-                            </ul>
-                        </li>
+                        -->
+                        <li class="divider"></li>
+                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers</a></li>
+                        <!--
+                        <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
+                        -->
+                        <li><a tabindex="0" href="{{ url_for('main.hardCompEv') }}">Events &amp; Competitions</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.hardGlossary') }}">Glossary</a></li>
                     </ul>
                 </li>
             </ul>
