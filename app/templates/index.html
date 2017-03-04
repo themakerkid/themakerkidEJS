@@ -78,42 +78,42 @@
     </p>
     <br />
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Coder</h2>
+            <p>
+                <h5>Coding is magic!! Get Started Here</h5>
+            </p>
+            <p><a class="btn btn-info" href="{{ url_for('main.coding') }}">Learn more &raquo;</a></p>
+            <img src="{{ url_for('static', filename='images/coding/coding2.jpg') }}" />
+        </div>
+        <div class="col-md-3">
+            <h2>Maker</h2>
+            <p>
+                <h5>Use code to control Hardware!</h5>
+            </p>
+            <p><a class="btn btn-info" href="{{ url_for('main.hardware') }}">Learn more &raquo;</a></p>
+            <img src="{{ url_for('static', filename='images/hardware/NeopixelNanoWithBluetooth_bb2.jpg') }}" />
+        </div>
+        <div class="col-md-3">
+            <h2>Buddy</h2>
+            <p>
+                <h5>Add Posts and Comments!</h5>
+            </p>
+            <p><a class="btn btn-info" href="{{ url_for('blog.index') }}">Learn more &raquo;</a></p>
+            <img src="{{ url_for('static', filename='images/fun_stuff/fun_stuff.png') }}" height="142" width="200" />
+        </div>
+        <div class="col-md-3">
+            <h2>Share</h2>
+            <p>
+                <h5>Share Code Snippets and Projects!</h5>
+            </p>
+            <p><a class="btn btn-info" href="{{ url_for('snippets.index') }}">Learn more &raquo;</a></p>
+            <img src="{{ url_for('static', filename='images/getting_started/getting_started.jpg') }}" width="220" height="142" />
+        </div>
 
-<div class="row">
-
-    <div class="col-md-3">
-        <h2>Coder</h2>
-        <p>
-            <h5>Coding is magic! Get Started</h5>
-        </p>
-        <p><a class="btn btn-info" href="{{ url_for('main.coding') }}">Learn more &raquo;</a></p>
-        <img src="{{ url_for('static', filename='images/coding/coding2.jpg') }}" />
     </div>
-    <div class="col-md-3">
-        <h2>Maker</h2>
-        <p>
-            <h5>Use code to control Hardware!</h5>
-        </p>
-        <p><a class="btn btn-info" href="{{ url_for('main.hardware') }}">Learn more &raquo;</a></p>
-        <img src="{{ url_for('static', filename='images/hardware/NeopixelNanoWithBluetooth_bb2.jpg') }}" />
-    </div>
-    <div class="col-md-3">
-        <h2>Buddy</h2>
-        <p>
-            <h5>Add Posts and Comments!</h5>
-        </p>
-        <p><a class="btn btn-info" href="{{ url_for('blog.index') }}">Learn more &raquo;</a></p>
-        <img src="{{ url_for('static', filename='images/fun_stuff/fun_stuff.png') }}" height="142" width="200" />
-    </div>
-    <div class="col-md-3">
-        <h2>Share</h2>
-        <p>
-            <h5>Share Code Snippets and Projects!</h5>
-        </p>
-        <p><a class="btn btn-info" href="{{ url_for('snippets.index') }}">Learn more &raquo;</a></p>
-        <img src="{{ url_for('static', filename='images/getting_started/getting_started.jpg') }}" width="220" height="142" />
-    </div>
-
 </div>
 {% endblock %} {% block scripts %} {{ super() }}
 <script type="text/javascript">

@@ -1,43 +1,74 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<style>
+    .img-responsive {
+        width: 80%;
+    }
+</style>
+{% endblock %} {% block page_content %}
 
-{% block styles %}
-{{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
-    {% include "_h2_border.html" %} 
-{% endblock %}
-
-{% block page_content %}
-
-    <div class="text-center">
-        <h1>Learning Resources</h1>
-        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
-        <a role="button" class="btn btn-success" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
-        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
-        <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
-        <hr />
-    </div>
+<div class="text-center">
+    <h1>Learning Resources</h1>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
     <hr />
+</div>
+<hr />
 
-    <h2>Super Scratch Programming Adventure (Scratch 2.0 only)</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/scratch/super_scratch_programming.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
 
-    <h2>Scratch Programming. In easy steps. (Scratch 1.4 and 2.0)</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_mcmanus.jpg') }}" />
-        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
-    </p>
 
-    <h2>Scratch 2.0 Game Development (Scratch 2.0 only)</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_chiang.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<!-- Start of Books -->
 
-    <h2>Learn to Program with Scratch (Scratch 2.0 only)</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_marji.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
-{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/scratch/super_scratch_programming.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8">
+            <div>
+                <h3 class="text-primary">Super Scratch Programming Adventure (Scratch 2.0 only)</h3>
+                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <!-- SP -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_mcmanus.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-md-8">
+            <div>
+                <h3 class="text-primary">Scratch Programming. In easy steps. (Scratch 1.4 and 2.0)</h3>
+                <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <!--SGD  -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_chiang.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-md-8">
+            <div>
+                <h3 class="text-primary">Scratch 2.0 Game Development (Scratch 2.0 only)</h3>
+                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <!-- LPS -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/scratch/scratch_marji.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-md-8">
+            <div>
+                <h3 class="text-primary">Learn to Program with Scratch (Scratch 2.0 only)</h3>
+                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+            </div>
+        </div>
+    </div>
+    <br/> {% endblock %}

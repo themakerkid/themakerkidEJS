@@ -1,11 +1,4 @@
-{% extends "base.html" %}
-{% block styles %}
-    {{ super() }}
-    {% include "_h2_border.html" %}
-{% endblock %}
-
-{% block page_content %}
-<hr />
+{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_h2_border.html" %} {% endblock %} {% block page_content %}
 <div class="text-center">
     <h1>Introduction to Arduino.</h1>
     <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
@@ -20,5 +13,4 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mPt6O2TAXwE?rel=0" frameborder="0" allowfullscreen></iframe>
 
 <h2>Neopixel Ring with Adafruit Gemma</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe>
-{% endblock %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe> {% endblock %}

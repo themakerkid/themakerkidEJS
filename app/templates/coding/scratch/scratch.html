@@ -1,24 +1,62 @@
-{% extends "base.html" %} 
-{% block styles %} {{ super() }}
-{% include "_h2_border.html" %} 
-{% endblock %} 
-{% block page_content %}
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link rel="stylesheet" type="text/css" href="/static/css/slider.css" /> {% include "_h2_border.html" %}
+<style type="text/css">
+    p {
+        font-size: 1.25em;
+    }
+    
+    .video-text-right {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 1;
+        background: #f8f8f8;
+        float: right;
+    }
+</style>
+{% endblock %} {% block page_content %}
+<title>Use Scratch 2.0 on Raspberry Pi - The MagPi MagazineThe MagPi Magazine</title>
 <div class="text-center">
-    <h1>Introduction to Scratch.</h1>
+    <h1>Scratch - Getting Started
+    </h1>
     <a role="button" class="btn btn-success" href="{{ url_for('main.scratch') }}">Getting Started</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
     <hr />
-</div>
-<p>Scratch is a language that allows you to drag and drop blocks to write programs. I would recommend using Scratch 2.0. If
-    you are using a raspberry pi you will be using Scratch 1.4. Here is the scratch website: <a href="https://scratch.mit.edu/"
-        target="_blank">click here</a>. To install the Scratch 2.0 Offline Editor please watch my video. <em>(It it useful to run it in full screen mode.)</em>
+</div>>
+<p>Scratch is a language that allows you to drag and drop blocks to write programs. I would recommend using Scratch 2.0. If you are using a raspberry pi you will be using Scratch 1.4. Here is the scratch website: <a href="https://scratch.mit.edu/" target="_blank">click here</a>.
+    To install the Scratch 2.0 Offline Editor please watch my video. <em>(It it useful to run it in full screen mode.)</em>
 </p>
-<h2>Downloading the Scratch 2.0 Offline Editor</h2>
-<br />
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gC2ToRcSMS8?rel=0" frameborder="0" allowfullscreen></iframe>
-<h2>How to Program in Scratch</h2>
-<br />
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iX3UsgEwh-s?rel=0" frameborder="0" allowfullscreen></iframe>
-<br /> {% endblock %}
+
+<!-- Start of Videos -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/gC2ToRcSMS8?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="video-text-right">
+                <h2>Downloading the Scratch 2.0 Offline Editor</h2>
+                <p>I made this video to show you how to get started with downloading the Scratch 2.0 Offline Editor.</p>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <!-- Continents -->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/iX3UsgEwh-s?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="video-text-right">
+                <h2>How to Program in Scratch.</h2>
+                <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
+            </div>
+        </div>
+    </div>
+    <br/> {% endblock %}

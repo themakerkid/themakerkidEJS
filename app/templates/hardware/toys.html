@@ -1,36 +1,34 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% endblock %} {% block page_content %}
+<h1>Engineering Toys</h1>
 
-{% block styles %}
-{{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
-{% endblock %}
+<hr />
 
-{% block page_content %}
-    <h1>Engineering Toys</h1>
+<h2>Snap Circuits</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/snap_circuits.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
+    projects will be part of the adventure.
+</p>
 
-    <hr />
+<h2>Leonardo Da Vinci Catapult</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
+    projects will be part of the adventure.
+</p>
+<h2>Rubik's Cube</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects
+    will be part of the adventure.
+</p>
 
-    <h2>Snap Circuits</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/snap_circuits.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<h2>River Crossing</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
+</p>
 
-    <h2>Leonardo Da Vinci Catapult</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<h2>Meccanoid G15</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
+</p>
 
-    <h2>K&#39;nex Rollercoaster</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
-
-    <h2>Meccanoid <em>(Advanced)</em></h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoidG15.jpg') }}" />
-        This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
 {% endblock %}

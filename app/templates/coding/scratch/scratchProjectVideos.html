@@ -52,14 +52,18 @@
     .scroll-top-wrapper i.fa {
         line-height: inherit;
     }
+    
     .video-text-right {
-    width: 100%;
-    height: 100%;
-    margin: 10;
-    padding: 10;
-    background: #f8f8f8;
-}
-.video-text-righ{ float:right; }
+        width: 100%;
+        height: 100%;
+        margin: 10;
+        padding: 10;
+        background: #f8f8f8;
+    }
+    
+    .video-text-right {
+        float: right;
+    }
 </style>
 {% endblock %} {% block page_content %}
 <div class="text-center">
@@ -86,8 +90,8 @@
             </div>
         </div>
     </div>
-     <br/>
-     <!-- Continents -->
+    <br/>
+    <!-- Continents -->
     <div class="row">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-4by3">
@@ -97,8 +101,7 @@
         <div class="col-md-6">
             <div class="video-text-right">
                 <h2>Continents</h2>
-                <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz
-    as well.</p>
+                <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
             </div>
         </div>
     </div>
@@ -107,20 +110,20 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/5fo9EzNKYOo?rel=0"></iframe>
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/5fo9EzNKYOo?rel=0"></iframe>
             </div>
         </div>
         <div class="col-md-6">
             <div class="video-text-right">
                 <h2>Wonders &amp; Landmarks</h2>
-                <p>Learn about the Wonders of the world, like the Eiffel Tower or Machu Picchu. In the mini quiz, you match the name with the
-    Wonder or Landmark.<</p>
+                <p>Learn about the Wonders of the world, like the Eiffel Tower or Machu Picchu. In the mini quiz, you match the name with the Wonder or Landmark.
+                </p>
             </div>
         </div>
-    <br/>
+        <br/>
     </div>
-     <br/>
-     <!-- Oceans and Seas -->
+    <br/>
+    <!-- Oceans and Seas -->
     <div class="row">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-4by3">
@@ -130,8 +133,7 @@
         <div class="col-md-6">
             <div class="video-text-right">
                 <h2>Oceans &amp; Seas</h2>
-                <p>Hover over the letters to find the name of the sea. Hover over the fish to find the name of the ocean. Click on a fish/letter
-    to get information. No mini quiz here.</p>
+                <p>Hover over the letters to find the name of the sea. Hover over the fish to find the name of the ocean. Click on a fish/letter to get information. No mini quiz here.</p>
             </div>
         </div>
     </div>
@@ -146,13 +148,12 @@
         <div class="col-md-6">
             <div class="video-text-right">
                 <h2>Animals</h2>
-                <p>Learn about different animals around the world. Like the Pirahna, the Wolf and the Panda. When you feel like you have finished
-    you can try the drag-and-drop.</p>
+                <p>Learn about different animals around the world. Like the Pirahna, the Wolf and the Panda. When you feel like you have finished you can try the drag-and-drop.</p>
             </div>
         </div>
     </div>
-     <br/>
-     <!-- Countries and Flags -->
+    <br/>
+    <!-- Countries and Flags -->
     <div class="row">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-4by3">
@@ -162,8 +163,8 @@
         <div class="col-md-6">
             <div class="video-text-right">
                 <h2>Countries &amp; Flags</h2>
-                <p>Hover over a flag to find out the country and captial. No mini quiz here. You don&#39;t get information if you click on the
-    flag.</p>
+                <p>Hover over a flag to find out the country and captial. No mini quiz here. You don&#39;t get information if you click on the flag.
+                </p>
             </div>
         </div>
     </div>
@@ -184,11 +185,11 @@
 <script type="text/javascript">
     //Thanks to: http://www.webtipblog.com/adding-scroll-top-button-website/
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        $(function () {
+        $(function() {
 
-            $(document).on('scroll', function () {
+            $(document).on('scroll', function() {
 
                 if ($(window).scrollTop() > 100) {
                     $('.scroll-top-wrapper').addClass('show');
@@ -201,7 +202,7 @@
         });
 
         function scrollToTop() {
-            verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+            verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
             element = $('body');
             offset = element.offset();
             offsetTop = offset.top;
