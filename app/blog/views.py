@@ -94,7 +94,7 @@ def login():
         user = form.validate_credentials(form.user_or_email, form.password)
         if user:
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or session["last_url"] or url_for(".index"))
+            return redirect(request.args.get('next') or session.get("last_url") or url_for(".index"))
         else:
             flash("You have entered something incorrectly!", 'warning')
     return render_template("blog/login.html", form=form, title="Blog - Login", year=datetime.now().year)
@@ -105,7 +105,7 @@ def logout():
     name = current_user.username
     logout_user()
     flash("You have been logged out of the application, " + name.capitalize() + ".", 'success')
-    return redirect(request.args.get('next') or session["last_url"] or url_for('.index'))
+    return redirect(request.args.get('next') or session.get("last_url") or url_for('.index'))
 
 @blog.route('/register', methods=["GET", "POST"])
 def register():

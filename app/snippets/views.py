@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, request, url_for, abort
+from flask import render_template, flash, redirect, request, url_for, abort, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import SnippetForm, CommentForm, SearchForm
 from ..models import SnippetComment, User, Snippet, db
@@ -23,7 +23,7 @@ def checkLanguage(snippet):
     elif snippet.code_type_id == 5:
         return "Python"
     else:
-        return "Other"
+        return "a language not recognized"
 
 @snippets.before_request
 def before():
@@ -32,7 +32,11 @@ def before():
 
 @snippets.route('/', methods=['GET', 'POST'])
 def index():
-    snippets = Snippet.query.order_by(Snippet.date_posted.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    pagination = Snippet.query.order_by(Snippet.date_posted.desc()).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    snippets = pagination.items
     snippet_form = SnippetForm()
     search_form = SearchForm()
     if snippet_form.validate_on_submit():
@@ -48,10 +52,11 @@ def index():
         return redirect(url_for('.snippet', id=snippet.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filtered', q=search_form.search.data))
-    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets)
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
 
 @snippets.route('/filtered', methods=['GET', 'POST'])
 def filtered():
+    page = request.args.get('page', 1, type=int)
     snippet_form = SnippetForm()
     search_form = SearchForm()
     q = request.args.get("q")
@@ -62,8 +67,11 @@ def filtered():
         return redirect(url_for('.snippet', id=post.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filtered', q=search_form.search.data))
-    snippets = Snippet.query.whoosh_search(q, 50).all()
-    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, filtered=True)
+    pagination = Snippet.query.whoosh_search(q, 50).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    snippets = pagination.items
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination, filtered=True)
 
 @snippets.route('/<int:id>', methods=['GET', 'POST'])
 def snippet(id):
