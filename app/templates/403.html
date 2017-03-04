@@ -3,5 +3,15 @@
 {% block page_content %}
     <div class="page-header">
         <h1>Sorry! You are not allowed to do that.</h1>
+        <button class="btn btn-primary" id="go-back">&larr; GO BACK!</button>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $("#go-back").on("click", function() {
+            window.history.go(-1);
+        });
+    </script>
 {% endblock %}

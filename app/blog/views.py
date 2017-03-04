@@ -17,6 +17,11 @@ def before():
     if current_user.is_authenticated:
         current_user.setLastSeen()
 
+@blog.before_app_request
+def beforeApp():
+    if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout":
+        session["last_url"] = url_for(request.endpoint)
+
 @blog.route('/', methods=['GET', 'POST'])
 def index():
     post_form = PostForm()
@@ -89,7 +94,7 @@ def login():
         user = form.validate_credentials(form.user_or_email, form.password)
         if user:
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or url_for('.index'))
+            return redirect(request.args.get('next') or session["last_url"] or url_for(".index"))
         else:
             flash("You have entered something incorrectly!", 'warning')
     return render_template("blog/login.html", form=form, title="Blog - Login", year=datetime.now().year)
@@ -100,7 +105,7 @@ def logout():
     name = current_user.username
     logout_user()
     flash("You have been logged out of the application, " + name.capitalize() + ".", 'success')
-    return redirect(url_for('.index'))
+    return redirect(request.args.get('next') or session["last_url"] or url_for('.index'))
 
 @blog.route('/register', methods=["GET", "POST"])
 def register():
