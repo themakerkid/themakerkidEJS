@@ -20,7 +20,7 @@ def before():
 @blog.before_app_request
 def beforeApp():
     if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout":
-        session["last_url"] = url_for(request.endpoint)
+        session["last_url"] = request.url
 
 @blog.route('/', methods=['GET', 'POST'])
 def index():
