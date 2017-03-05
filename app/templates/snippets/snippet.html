@@ -20,11 +20,7 @@
 
 {% block page_content %}
     <h1>{{ snippet.title }} By {{ snippet.author.username|capitalize }}, {{ language }}</h1>{% if current_user.username == snippet.author.username %}<a id="editBtn" href="{{ url_for('snippets.edit', id=snippet.id) }}" class="btn btn-primary">Edit</a>{% endif %}
-    {% if snippet.body_html %}
     {{ snippet.body_html|safe }}
-    {% else %}
-    {{ snippet.body }}
-    {% endif %}
 
     <hr />
 

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
     <style>
         .snippet {
             border: 1px solid grey;
@@ -52,42 +54,57 @@
     <h2>Snippets</h2>
     {% endif %}
     <hr />
-    <ol>
-        {% for snippet in snippets %}
-        <li class="snippet">
-            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
-                <img src="{{ snippet.author.getAvatar(size=100) }}" class="pull-left img-rounded" style="margin-right: 10px;" />
-            </a>
-            A piece of {{ checkLanguage(snippet) }}
-            <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">By {{ snippet.author.username|capitalize }}</a>
-            <span class="pull-right">{{ moment(snippet.date_posted).fromNow(refresh=True) }}</span>
-            <!--<a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>-->
-            {% if not snippet.summary == snippet.body %}
-            <div class="less">{{ snippet.summary_html|safe }}</div>
-            <div class="more">{{ snippet.body_html|safe }}</div>
-            <button class="btn btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
-            {% else %}
-            <div>{{ snippet.body_html|safe }}</div>
-            {% endif %}
-            <p>This is the end of the snippet.</p>
-            <div class="post-controls">
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}"><span class="label label-primary">Permalink</span></a> 
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
-                {% if current_user.username == snippet.author.username %}
-                <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
+    {% if snippets|length > 0 %}
+        <ul id="snippets">
+            {% for snippet in snippets %}
+            <li class="snippet">
+                <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
+                    <img src="{{ snippet.author.getAvatar(size=100) }}" class="pull-left img-rounded" style="margin-right: 10px;" />
+                </a>
+                A piece of {{ checkLanguage(snippet) }}
+                <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">By {{ snippet.author.username|capitalize }}</a>
+                called {{ snippet.title }}
+                <span class="pull-right">{{ moment(snippet.date_posted).fromNow(refresh=True) }}</span>
+                <!--<a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }}   By {{ snippet.author.username|capitalize }} {{ moment(snippet.date_posted).fromNow(refresh=True) }}</a>-->
+                {% if not snippet.summary == snippet.body %}
+                <div class="less">{{ snippet.summary_html|safe }}
+                    <p>More content on this snippet...</p>
+                </div>
+                <div class="more">{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
+                <button class="btn-sm btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
+                {% else %}
+                <div>{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
                 {% endif %}
-            </div>
-        </li>
-        {% endfor %}
-    </ol>
+                <div class="post-controls">
+                    <a href="{{ url_for('snippets.snippet', id=snippet.id) }}"><span class="label label-primary">Permalink</span></a> 
+                    <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
+                    {% if current_user.username == snippet.author.username %}
+                    <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            {% if filtered %}
+                <p>No results.</p>
+            {% else %}
+                <p>No snippets have been created yet.</p>
+            {% endif %}
+        {% endif %}
+    {{ macros.addPagination(pagination, '.index') }}
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
     <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
-    {% if logged_in %}
     <script>
+        {% if logged_in %}
         $textarea = $('textarea');
         $textarea.attr('data-provide', 'markdown');
         $textarea.attr('placeholder', 'Please put your code here using Markdown or the buttons above.');
@@ -100,10 +117,11 @@
             $("#search-form .form-group .help-block").detach();
             $("#search-form .form-group").removeClass('has-error');
         }
+        {% endif %}
         {% if filtered %}
         $('html, body').animate({
-            scrollTop: $("#snippets").offset().top
-        }, 2000);
+            scrollTop: $("#snippets").offset().top - 220
+        }, 1500);
         {% endif %}
 
         $(".more").hide();
@@ -126,6 +144,5 @@
             });
         });
     </script>
-    {% endif %}
     {{ moment.include_moment() }}
 {% endblock %}

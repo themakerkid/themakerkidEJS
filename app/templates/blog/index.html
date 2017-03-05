@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
 {% endblock %}
 
 {% if current_user.is_authenticated %}
@@ -56,6 +59,11 @@
     {% else %}
     <p>No posts</p>
     {% endif %}
+    {% if filtered %}
+        {{ macros.addPagination(pagination, '.index', filtered=True) }}
+    {% else %}
+        {{ macros.addPagination(pagination, '.index') }}
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
@@ -68,16 +76,6 @@
         $textarea.attr('data-provide', 'markdown');
         $textarea.attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
         $textarea.attr('rows', 12);
-        //$cancelBtn = $('<button>');
-        //$cancelBtn.addClass('btn btn-danger');
-        //$cancelBtn.text("Cancel");
-        //$cancelBtn.appendTo("form");
-        //$cancelBtn.on("click", function() {
-        //    $("#body").val("");
-        //    $("#title").val("");
-        //    window.location.reload()
-        //});
-        //$("#submit").addClass("btn btn-success");
         $("#cancel").detach();
         {% if filtered %}
         $('html, body').animate({

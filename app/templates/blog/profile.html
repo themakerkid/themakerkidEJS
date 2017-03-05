@@ -1,11 +1,26 @@
-{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_img_left.html" %} {% endblock %} {% block page_content %}
-<div class="page-header">
-    <h1>{{ user.username|capitalize }}&#39;s Profile</h1>
-</div>
-<p>
-    <img class="img-float-left" src="{{ user.getAvatar(size=256) }}" /> {% if user.about_me %} {{ user.about_me }} {% else %} No information about {{ user.username|capitalize }} has been given. {% endif %}
-    <br /> Member since {{ moment(user.date_registered).format('D/MM/YYYY') }}.
-    <br /> Last seen {{ moment(user.last_seen).fromNow(refresh=True) }}.
-</p>
-{% if current_user.username == user.username %}
-<a href="{{ url_for('blog.editProfile') }}" class="btn btn-primary">Edit Profile</a> {% endif %} {% endblock %} {% block scripts %} {{ super() }} {{ moment.include_moment() }} {% endblock %}
+{% extends "base.html" %}
+
+{% block page_content %}
+    
+    <div class="page-header">
+        <h1>{{ user.username|capitalize }}&#39;s Profile</h1>
+    </div>
+    <p>
+        <img class="pull-left" src="{{ user.getAvatar(size=256) }}" />{% if user.about_me %}{{ user.about_me }}{% else %}No information about {{ user.username|capitalize }} has been given.{% endif %}
+        <br />Member since {{ moment(user.date_registered).format('DD/MM/YYYY') }}.
+        <br />Last seen {{ moment(user.last_seen).fromNow(refresh=True) }}.
+        <br /><span class="badge">{{ user.posts.count() }}</span> {% if user.posts.count() != 1 %}posts{% else %}post{% endif %}.
+        <br /><span class="badge">{{ user.comments.count() }}</span> {% if user.comments.count() != 1 %}comments on posts{% else %}comment on posts{% endif %}.
+        <br /><span class="badge">{{ user.snippets.count() }}</span> {% if user.snippets.count() != 1 %}snippets{% else %}snippet{% endif %}.
+        <br /><span class="badge">{{ user.snippet_comments.count() }}</span> {% if user.snippet_comments.count() != 1 %}comments on snippets{% else %}comment on snippets{% endif %}.
+    </p>
+    {% if current_user.username == user.username %}
+    <a href="{{ url_for('blog.editProfile') }}" class="btn btn-primary">Edit Profile</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}

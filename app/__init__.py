@@ -41,6 +41,7 @@ def create_app():
     # app.config["SQLALCHEMY_DATABASE_URI"] = mysql://username:password@localhost:3306/tmk
     app.config["SQLALCHEMY_COMMIT_ON_TEARDOWN"] = True
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or "\xee#\xe7\xf9\xba\xef8\xe9@vvq\x13\xd1\xe8\xf8\xaa\xb4\x05\xaa\x04\x16\xac\xfa"
+    app.config["ITEMS_PER_PAGE"] = 20
     app.config["MAIL_SERVER"] = 'smtp.gmail.com'
     app.config["MAIL_PORT"] = 465
     app.config["MAIL_USE_SSL"] = True

@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, request, url_for, abort, session
+from flask import render_template, flash, redirect, request, url_for, abort, session, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
 from ..models import Comment, User, Post, db
@@ -19,18 +19,21 @@ def before():
 
 @blog.before_app_request
 def beforeApp():
-    if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout":
-        session["last_url"] = url_for(request.endpoint)
+    try:
+        if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout":
+            session["last_url"] = request.url
+    except TypeError:
+        pass
 
 @blog.route('/', methods=['GET', 'POST'])
 def index():
+    page = request.args.get("page", 1, type=int)
     post_form = PostForm()
     search_form = SearchForm()
-    #session["posts"] = Post.query.order_by(Post.date_posted.desc()).all()
-    if not request.args.get("posts"):
-        posts = Post.query.order_by(Post.date_posted.desc()).all()
-    else:
-        posts = request.args.get("posts")
+    pagination = Post.query.order_by(Post.date_posted.desc()).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    posts = pagination.items
     if post_form.validate_on_submit():
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
         db.session.add(post)
@@ -38,13 +41,14 @@ def index():
         return redirect(url_for('.post', id=post.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filteredPosts', q=search_form.search.data))
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts)
+    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination)
 
 @blog.route('/filtered-posts', methods=['GET', 'POST'])
 def filteredPosts():
+    page = request.args.get("page")
+    q = request.args.get("q")
     post_form = PostForm()
     search_form = SearchForm()
-    q = request.args.get("q")
     if post_form.validate_on_submit():
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
         db.session.add(post)
@@ -52,8 +56,11 @@ def filteredPosts():
         return redirect(url_for('.post', id=post.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filteredPosts', q=search_form.search.data))
-    posts = Post.query.whoosh_search(q, 50).all()
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, filtered=True)
+    pagination = Post.query.whoosh_search(q, 50).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    posts = pagination.items
+    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination, filtered=True)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
@@ -94,7 +101,7 @@ def login():
         user = form.validate_credentials(form.user_or_email, form.password)
         if user:
             login_user(user, form.remember_me.data)
-            return redirect(request.args.get('next') or session["last_url"] or url_for(".index"))
+            return redirect(request.args.get('next') or session.get("last_url") or url_for(".index"))
         else:
             flash("You have entered something incorrectly!", 'warning')
     return render_template("blog/login.html", form=form, title="Blog - Login", year=datetime.now().year)
@@ -105,7 +112,7 @@ def logout():
     name = current_user.username
     logout_user()
     flash("You have been logged out of the application, " + name.capitalize() + ".", 'success')
-    return redirect(request.args.get('next') or session["last_url"] or url_for('.index'))
+    return redirect(request.args.get('next') or session.get("last_url") or url_for('.index'))
 
 @blog.route('/register', methods=["GET", "POST"])
 def register():

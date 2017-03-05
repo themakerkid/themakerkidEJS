@@ -1,0 +1,7 @@
+#snippets, #posts {
+    list-style-type: none
+}
+
+.snippet:hover, .post:hover {
+    background-color: #f2f2f2;
+}
