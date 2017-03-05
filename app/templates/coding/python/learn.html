@@ -1,5 +1,25 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% include "_h2_border.html" %} {% endblock %} {% block page_content %}
+<style>
+    hr.divider {
+        background-color: #fff;
+        border-top: 1px dashed #8c8b8b;
+    }
+    
+    hr.top {
+        height: 10px;
+        border: 0;
+        box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    }
+    
+    .img-responsive {
+        width: 80%;
+    }
+    
+    .margin-top-20 {
+        margin-top: -20px;
+    }
+</style>
+{% endblock %} {% block page_content %}
 <div class="text-center">
     <h1>Learning Resources</h1>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPython') }}">Getting Started</a></li>
@@ -8,28 +28,62 @@
     <hr />
 </div>
 
-<hr />
+<hr class="top">
 
-<h2>Python Basics (Python 3)</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/python/python_basics.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
-    projects will be part of the adventure.
-</p>
-
-<h2>Hello World Second Edition (Python 2.7 and 3 but mostly 2.7)</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/python/hello_world.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
-</p>
-
-<h2>Adventures in Minecraft (Python 2.7 (extra important) )</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/python/adventures_in_minecraft.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch
-    and your projects will be part of the adventure.
-</p>
-
-<h2>Automate the Boring Stuff with Python (Python 3)</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/python/automate_boring.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
-    projects will be part of the adventure.
-</p>
-{% endblock %}
+<!-- Start of Events -->
+<!-- PF  -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/python/python_basics.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Python Basics (Python 3)</h3>
+            <p>The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
+                Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for
+                a stand. Please click here for more information. <a target="_blank" href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a></p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- BTYSTE -->
+    <div class="row">
+        <div class="col-sm-4 ">
+            <img src="{{ url_for('static', filename='images/book_reviews/python/hello_world.jpg') }}" class="img-responsive img-rounded" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Hello World Second Edition (Python 2.7 and 3 but mostly 2.7)</h3>
+            <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- DM -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/python/adventures_in_minecraft.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Adventures in Minecraft (Python 2.7 (extra important) )</h3>
+            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- SW  -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/python/automate_boring.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8">
+            <h3 class="text-primary">Automate the Boring Stuff with Python (Python 3)</h3>
+            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
+                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+            </p>
+        </div>
+    </div>
+</div>
+<hr class="top"> {% endblock %}
