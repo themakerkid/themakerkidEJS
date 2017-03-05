@@ -27,3 +27,13 @@ body {
 #design-coded {
     float: right;
 }
+
+.pull-left {
+    margin-right: 10px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    body {
+        padding-top: 80px;
+    }
+}

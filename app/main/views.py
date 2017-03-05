@@ -14,15 +14,15 @@ year = datetime.now().year
 
 @main.app_errorhandler(404)
 def error_404(e):
-    return render_template("404.html", title="Not Found", year=year)
+    return render_template("404.html", title="Not Found", year=year), 404
 
 @main.app_errorhandler(500)
 def error_500(e):
-    return render_template("500.html", title="Internal Server Error", year=year)
+    return render_template("500.html", title="Internal Server Error", year=year), 500
 
 @main.app_errorhandler(403)
 def error_403(e):
-    return render_template("403.html", title="Forbidden", year=year)
+    return render_template("403.html", title="Forbidden", year=year), 403
 
 @main.before_app_request
 def checkConfirm():

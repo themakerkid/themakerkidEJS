@@ -33,4 +33,7 @@ venv
 .vscode
 
 # Whoosh Index
-whoosh_index
+whoosh_index/*
+
+# SQLite Database
+*.sqlite

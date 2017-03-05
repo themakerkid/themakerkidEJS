@@ -73,7 +73,7 @@
                 <div class="more">{{ snippet.body_html|safe }}
                     <p>This is the end of the snippet.</p>
                 </div>
-                <button class="btn btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
+                <button class="btn-sm btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button>      
                 {% else %}
                 <div>{{ snippet.body_html|safe }}
                     <p>This is the end of the snippet.</p>
@@ -120,8 +120,8 @@
         {% endif %}
         {% if filtered %}
         $('html, body').animate({
-            scrollTop: $("#snippets").offset().top - 160
-        }, 2000);
+            scrollTop: $("#snippets").offset().top - 220
+        }, 1500);
         {% endif %}
 
         $(".more").hide();

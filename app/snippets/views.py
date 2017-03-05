@@ -42,7 +42,10 @@ def index():
     if snippet_form.validate_on_submit():
         summary = snippet_form.body.data
         summary = summary.split(' ')
-        summary = summary[:80]
+        if snippet_form.language.data == 1:
+            summary = summary[:40]
+        else:
+            summary = summary[:80]
         summary = ' '.join(summary)
         if not summary == snippet_form.body.data:
             summary += '...'

@@ -166,18 +166,22 @@ class Snippet(db.Model):
     #def body_changed(target, value, oldvalue, initiator):
     #    target.body_html = markdown(value, output_format='html')
 
-#db.event.listen(Post.body, 'set', Post.body_changed)
-
     @property
     def body_html(self):
         markdown_content = markdown(self.body, extensions=[hilite, extras])
-        return Markup(markdown_content)
+        return markdown_content
 
     def summary_html_default(context):
         markdown_content = markdown(context.current_parameters['summary'], extensions=[hilite, extras])
         return markdown_content
+    
+    @staticmethod
+    def on_changed_summary(target, value, oldvalue, initiator):
+        target.summary_html = markdown(value, extensions=[hilite, extras])
 
     summary_html = db.Column(db.Text, default=summary_html_default)
+
+db.event.listen(Snippet.summary, 'set', Snippet.on_changed_summary)
 
 class SnippetComment(db.Model):
     __tablename__ = 'snippet_comments'
