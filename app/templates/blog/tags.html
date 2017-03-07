@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block page_content %}
+<div class="page-header">
+    <h1>Available Tags</h1>
+</div>
+
+<div class="well well-lg">
+    <ul class="list-group">
+        {% for tag in all_tags %}
+        <li class="list-group-item"><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

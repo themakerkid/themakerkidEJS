@@ -38,6 +38,10 @@
     .no-relative {
         top: 0px;
     }
+    
+    .img-responsive {
+        width: 80%;
+    }
 </style>
 {% endblock %} {% block page_content %}
 <div class="jumbotron">
@@ -86,7 +90,7 @@
                 <h5>Coding is magic!! Get Started Here</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('main.coding') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/coding/coding2.jpg') }}" />
+            <img src="{{ url_for('static', filename='images/coding/coding2.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-md-3">
             <h2>Maker</h2>
@@ -94,7 +98,7 @@
                 <h5>Use code to control Hardware!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('main.hardware') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/hardware/NeopixelNanoWithBluetooth_bb2.jpg') }}" />
+            <img src="{{ url_for('static', filename='images/hardware/NeopixelNanoWithBluetooth_bb2.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-md-3">
             <h2>Buddy</h2>
@@ -102,7 +106,7 @@
                 <h5>Add Posts and Comments!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('blog.index') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/fun_stuff/fun_stuff.png') }}" height="142" width="200" />
+            <img src="{{ url_for('static', filename='images/fun_stuff/fun_stuff.png') }}" class="img-responsive" />
         </div>
         <div class="col-md-3">
             <h2>Share</h2>
@@ -110,20 +114,19 @@
                 <h5>Share Code Snippets and Projects!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('snippets.index') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/getting_started/getting_started.jpg') }}" width="220" height="142" />
+            <img src="{{ url_for('static', filename='images/coding/code_snippet.png') }}" class="img-responsive" />
         </div>
 
     </div>
-</div>
-{% endblock %} {% block scripts %} {{ super() }}
-<script type="text/javascript">
-    $("#intro-btn").on("click", function() {
-        var src = "https://www.youtube.com/embed/rQ8xqFdG-sM?rel=0"
-        $("#intro-vid").attr("src", src);
-    });
+    {% endblock %} {% block scripts %} {{ super() }}
+    <script type="text/javascript">
+        $("#intro-btn").on("click", function() {
+            var src = "https://www.youtube.com/embed/rQ8xqFdG-sM?rel=0"
+            $("#intro-vid").attr("src", src);
+        });
 
-    $("#intro-vid-modal").on("hide.bs.modal", function() {
-        $("#intro-vid").removeAttr("src");
-    });
-</script>
-{% endblock %}
+        $("#intro-vid-modal").on("hide.bs.modal", function() {
+            $("#intro-vid").removeAttr("src");
+        });
+    </script>
+    {% endblock %}

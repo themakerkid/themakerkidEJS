@@ -137,19 +137,29 @@
                 <li><a tabindex="0" href="{{ url_for('main.users') }}">All Users</a></li>
                 <li><a tabindex="0" href="{{ url_for('snippets.index') }}">Code Snippets</a></li>
                 <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
-                {% if current_user.is_authenticated %}
                 <li class="dropdown">
-                    <a tabindex="0" data-toggle="dropdown" id="account">{{ current_user.username|capitalize }} <span class="caret"></span></a>
+                    <a tabindex="0" data-toggle="dropdown" id="tags">Tags <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a tabindex="0" href="{{ url_for('blog.profile', username=current_user.username) }}">Profile</a></li>
-                        <li><a tabindex="0" href="{{ url_for('blog.editProfile') }}">Edit Your Profile</a></li>
-                        <li><a tabindex="0" href="{{ url_for('blog.logout') }}">Logout</a></li>
-                    </ul>
-                </li>
-                {% else %}
-                <li><a tabindex="0" href="{{ url_for('blog.login') }}">Login</a></li>
-                <li><a tabindex="0" href="{{ url_for('blog.register') }}">Register</a></li>
-                {% endif %}
+                        <li><a href="{{ url_for('blog.tags') }}">Available Tags</a></li>
+                <li class="divider"></li>
+                {% for tag in Tag.query.all() %}
+                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="dropdown">
+                <a tabindex="0" data-toggle="dropdown" id="account">{{ current_user.username|capitalize }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="0" href="{{ url_for('blog.profile', username=current_user.username) }}">Profile</a></li>
+                    <li><a tabindex="0" href="{{ url_for('blog.editProfile') }}">Edit Your Profile</a></li>
+                    <li><a tabindex="0" href="{{ url_for('blog.logout') }}">Logout</a></li>
+                </ul>
+            </li>
+            {% else %}
+            <li><a tabindex="0" href="{{ url_for('blog.login') }}">Login</a></li>
+            <li><a tabindex="0" href="{{ url_for('blog.register') }}">Register</a></li>
+            {% endif %}
             </ul>
         </div>
     </div>

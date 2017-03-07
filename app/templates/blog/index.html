@@ -1,88 +1,65 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% import "_macros.html" as macros %}
-
-{% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
-{% endblock %}
-
-{% if current_user.is_authenticated %}
-    {% set logged_in = True %}
-{% else %}
-    {% set logged_in = False %}
-{% endif %}
-
-{% block page_content %}
-    <div class="page-header">
-        <h1>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
-        {% if logged_in %}
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
-        <!-- Modal -->
-        <div class="modal fade no-center" id="create-new-post" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create A New Post</h4>
-                    </div>
-                    <div class="modal-body">
-                        {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        {% endif %}
-    </div>
-    <h2>Search Posts</h2>
-    {{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
-    <h2 id="posts">Posts</h2>
-    <hr />
-    {% if posts %}
-    <ol>
-        {% for post in posts %}
-        <li>
-            <a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}   By {{ post.author.username|capitalize }} {{ moment(post.date_posted).fromNow(refresh=True) }}</a>
-            <div class="post-controls">
-                <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }} {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a>
-                {% if current_user.username == post.author.username %}
-                <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a>
-                {% endif %}
-            </div>
-        </li>
-        {% endfor %}
-    </ol>
-    {% else %}
-    <p>No posts</p>
-    {% endif %}
-    {% if filtered %}
-        {{ macros.addPagination(pagination, '.index', filtered=True) }}
-    {% else %}
-        {{ macros.addPagination(pagination, '.index') }}
-    {% endif %}
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
-    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% import "_macros.html" as macros %} {% block styles %} {{ super() }}
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" /> {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
+<div class="page-header">
+    <h1>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
     {% if logged_in %}
-    <script>
-        $textarea = $('textarea');
-        $textarea.attr('data-provide', 'markdown');
-        $textarea.attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
-        $textarea.attr('rows', 12);
-        $("#cancel").detach();
-        {% if filtered %}
-        $('html, body').animate({
-            scrollTop: $("#posts").offset().top
-        }, 2000);
-        {% endif %}
-    </script>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
+    <!-- Modal -->
+    <div class="modal fade no-center" id="create-new-post" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create A New Post</h4>
+                </div>
+                <div class="modal-body">
+                    {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
     {% endif %}
-    {{ moment.include_moment() }}
-{% endblock %}
+</div>
+<h2>Search Posts</h2>
+{{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
+<h2 id="posts">Posts</h2>
+<hr /> {% if posts %}
+<ol>
+    {% for post in posts %}
+    <li>
+        <a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}   By {{ post.author.username|capitalize }} {{ moment(post.date_posted).fromNow(refresh=True) }}</a>
+        <br /> {% for tag in post.tags %} {% if tag.id == post.tags[-1].id %} {# The last tag should not have a comma after it. #}
+        <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a> {% else %}
+        <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a>, {% endif %} {% endfor %}
+        <div class="post-controls">
+            <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }} {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username
+            == post.author.username %}
+            <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a> {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+{% else %}
+<p>No posts</p>
+{% endif %} {% if filtered %} {{ macros.addPagination(pagination, '.index', filtered=True) }} {% else %} {{ macros.addPagination(pagination, '.index') }} {% endif %} {% endblock %} {% block scripts %} {{ super() }}
+<script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+<script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+{% if logged_in %}
+<script>
+    $textarea = $('textarea');
+    $textarea.attr('data-provide', 'markdown');
+    $textarea.attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
+    $textarea.attr('rows', 12);
+    $("#cancel").detach();
+</script>
+{% if filtered %}
+<script>
+    $('html, body').animate({
+        scrollTop: $("#posts").offset().top
+    }, 2000);
+</script>
+{% endif %} {% endif %} {{ moment.include_moment() }} {% endblock %}

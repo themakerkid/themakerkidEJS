@@ -2,9 +2,19 @@ from datetime import datetime
 from flask import render_template, flash, redirect, request, url_for, abort, session, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
-from ..models import Comment, User, Post, db
+from ..models import Comment, User, Post, Tag, db
 from ..mail import send_email
 from . import blog
+
+year = datetime.now().year
+
+def parseMultiplePost(form):
+    num_list = form.tags.data
+    return_list = []
+    for i in num_list:
+        tag = Tag.query.filter_by(id=i).first()
+        return_list.append(tag)
+    return return_list
 
 def checkBtn(false_value, form):
     if false_value in request.form and form.validate():
@@ -35,13 +45,14 @@ def index():
         error_out=True)
     posts = pagination.items
     if post_form.validate_on_submit():
-        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
+        tags = parseMultiplePost(post_form)
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post', id=post.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filteredPosts', q=search_form.search.data))
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination)
+    return render_template("blog/index.html", title="Blog - Home Page", year=year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination)
 
 @blog.route('/filtered-posts', methods=['GET', 'POST'])
 def filteredPosts():
@@ -50,7 +61,8 @@ def filteredPosts():
     post_form = PostForm()
     search_form = SearchForm()
     if post_form.validate_on_submit():
-        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object())
+        tags = parseMultiplePost(post_form)
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post', id=post.id))
@@ -60,7 +72,7 @@ def filteredPosts():
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
     posts = pagination.items
-    return render_template("blog/index.html", title="Blog - Home Page", year=datetime.now().year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination, filtered=True)
+    return render_template("blog/index.html", title="Blog - Home Page", year=year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination, filtered=True)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
@@ -74,7 +86,7 @@ def post(id):
             db.session.add(comment)
             return redirect(url_for('.post', id=post.id) + "#comments")
     comments = post.comments.order_by(Comment.date_posted.asc())
-    return render_template("blog/post.html", title="Post - " + post.title, year=datetime.now().year, post=post, form=form, comments=comments)
+    return render_template("blog/post.html", title="Post - " + post.title, year=year, post=post, form=form, comments=comments)
 
 @blog.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -92,7 +104,7 @@ def edit(id):
             return redirect(url_for('.post', id=id))
     form.title.data = post.title
     form.body.data = post.body
-    return render_template("blog/edit.html", title="Edit Post - " + post.title, year=datetime.now().year, post=post, form=form)
+    return render_template("blog/edit.html", title="Edit Post - " + post.title, year=year, post=post, form=form)
 
 @blog.route('/login', methods=["GET", "POST"])
 def login():
@@ -104,7 +116,7 @@ def login():
             return redirect(request.args.get('next') or session.get("last_url") or url_for(".index"))
         else:
             flash("You have entered something incorrectly!", 'warning')
-    return render_template("blog/login.html", form=form, title="Blog - Login", year=datetime.now().year)
+    return render_template("blog/login.html", form=form, title="Blog - Login", year=year)
 
 @blog.route('/logout')
 @login_required
@@ -134,12 +146,12 @@ def register():
             login_user(user, False)
             flash("You have been successfully registered and logged in.", 'success')
             return redirect(url_for('.index'))
-    return render_template("blog/register.html", title="Blog - Register", year=datetime.now().year, form=form)
+    return render_template("blog/register.html", title="Blog - Register", year=year, form=form)
 
 @blog.route('/profile/<username>')
 def profile(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template("blog/profile.html", title="Blog - " + username + "'s Profile", year=datetime.now().year, user=user)
+    return render_template("blog/profile.html", title="Blog - " + username + "'s Profile", year=year, user=user)
 
 @blog.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -153,7 +165,7 @@ def editProfile():
             flash("Your profile has been successfully updated.", 'success')
             return redirect(url_for('.profile', username=current_user.username))
     form.about_me.data = current_user.about_me
-    return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=datetime.now().year, form=form)
+    return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=year, form=form)
 
 @blog.route('/reset-password', methods=['GET', 'POST'])
 def resetPasswordRequest():
@@ -168,7 +180,7 @@ def resetPasswordRequest():
                        'resetPassword', user=user, token=token):
                 flash("An email to reset your password has been sent.", 'success')
             return redirect(url_for('.login'))
-    return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)
+    return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=year, form=form)
 
 @blog.route('/reset-password/<token>', methods=['GET', 'POST'])
 def resetPassword(token):
@@ -182,4 +194,14 @@ def resetPassword(token):
         else:
             flash("The password could not be updated", 'error')
             return redirect(url_for('.resetPassword'))
-    return render_template("blog/resetPassword.html", title="Blog - Reset Your Password", year=datetime.now().year, form=form)
+    return render_template("blog/resetPassword.html", title="Blog - Reset Your Password", year=year, form=form)
+
+@blog.route('/tags/')
+def tags():
+    all_tags = Tag.query.all()
+    return render_template("blog/tags.html", title="Blog - Available Tags", year=year, all_tags=all_tags)
+
+@blog.route('/tag/<int:id>')
+def tag(id):
+    tag = Tag.query.get_or_404(id)
+    return render_template("blog/tag.html", title="Blog - %s Tag" % tag.name.capitalize(), year=year, tag=tag)

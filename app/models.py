@@ -12,6 +12,11 @@ import hashlib
 hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
 extras = ExtraExtension()
 
+post_tags = db.Table("post_tags",
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id')),
+    db.Column('post_id', db.Integer, db.ForeignKey('posts.id'))
+)
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -92,6 +97,9 @@ class User(db.Model, UserMixin):
         db.session.add(self)
         return True
 
+    def __repr__(self):
+        return 'User <%s>' % self.username
+
 class Post(db.Model):
     __tablename__ = 'posts'
     __searchable__ = ['title', 'body']
@@ -103,6 +111,8 @@ class Post(db.Model):
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     title = db.Column(db.String(64))
+    tags = db.relationship('Tag', secondary=post_tags,
+                           backref=db.backref('posts', lazy='dynamic'))
 
     #@staticmethod
     #def body_changed(target, value, oldvalue, initiator):
@@ -116,6 +126,28 @@ class Post(db.Model):
         extras = ExtraExtension()
         markdown_content = markdown(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+
+    def __repr__(self):
+        return 'Tag <%s>' % self.name
+
+def addTag(name):
+    tag = Tag(name=name)
+    db.session.add(tag)
+    db.session.commit()
+    print Tag.query.all()
+
+def addTags(tags_name):
+    for i in range(len(tags_name)):
+        tag = Tag(name=tags_name[i])
+        db.session.add(tag)
+    db.session.commit()
+    print Tag.query.all()
 
 class Comment(db.Model):
     __tablename__ = 'comments'

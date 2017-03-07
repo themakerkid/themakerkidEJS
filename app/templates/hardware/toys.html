@@ -1,34 +1,99 @@
-{% extends "base.html" %} {% block styles %} {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% endblock %} {% block page_content %}
-<h1>Engineering Toys</h1>
+ {% extends "base.html" %} {% block styles %} {{ super() }}
+<style>
+    hr.divider {
+        background-color: #fff;
+        border-top: 1px dashed #8c8b8b;
+    }
+    
+    hr.top {
+        height: 10px;
+        border: 0;
+        box-shadow: 0 10px 10px -10px #8c8b8b inset;
+    }
+    
+    .img-responsive {
+        width: 80%;
+    }
+    
+    .margin-top-20 {
+        margin-top: -20px;
+    }
+</style>
+{% endblock %} {% block page_content %}
+<div class="text-center">
+    <h1>Cool Toys</h1>
+</div>
 
-<hr />
+<hr class="top">
 
-<h2>Snap Circuits</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/toys/snap_circuits.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
-    projects will be part of the adventure.
-</p>
-
-<h2>Leonardo Da Vinci Catapult</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your
-    projects will be part of the adventure.
-</p>
-<h2>Rubik's Cube</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects
-    will be part of the adventure.
-</p>
-
-<h2>River Crossing</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
-</p>
-
-<h2>Meccanoid G15</h2>
-<p>
-    <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
-</p>
+<!-- Start of Events -->
+<!-- SC  -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/toys/snap_circuits.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Snap Circuits</h3>
+            <p>Snap Circuits<a target="_blank" href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a></p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- BTYSTE -->
+    <div class="row">
+        <div class="col-sm-4 ">
+            <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" class="img-responsive img-rounded" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Leonardo Da Vinci Catapult</h3>
+            <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- Tha Cube!!!! -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8 margin-top-20">
+            <h3 class="text-primary">Rubik's Cube</h3>
+            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- River Crossing  -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8">
+            <h3 class="text-primary">River Crossing</h3>
+            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
+                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+            </p>
+        </div>
+    </div>
+    <br/>
+    <hr class="divider">
+    <br/>
+    <!-- Meccanoid  -->
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-8">
+            <h3 class="text-primary">Meccanoid</h3>
+            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
+                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+            </p>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

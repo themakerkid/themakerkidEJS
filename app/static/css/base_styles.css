@@ -1,4 +1,12 @@
-#starting, #hardware, #basic, #advanced, #eng, #maths, #other, #account {
+#starting,
+#hardware,
+#basic,
+#advanced,
+#eng,
+#maths,
+#other,
+#account,
+#tags {
     cursor: pointer;
 }
 
@@ -36,4 +44,8 @@ body {
     body {
         padding-top: 80px;
     }
+}
+
+.bg-danger {
+    padding: 10px 0 10px 10px;
 }

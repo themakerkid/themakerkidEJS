@@ -1,29 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% endblock %} {% block page_content %}
+<div class="page-header">
+    <h1>Coolzzzzzz Toys</h1>
+</div>
 
-{% block styles %}
-{{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" />
-{% endblock %}
+<h2>Rubik's Cube</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects
+    will be part of the adventure.
+</p>
 
-{% block page_content %}
-    <div class="page-header">
-        <h1>Cool Toys</h1>
-    </div>
-    
-    <h2>Rubik's Cube</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" /> This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.
-    </p>
+<h2>River Crossing</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
+</p>
 
-    <h2>River Crossing</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" />
-        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
-    </p>
-
-    <h2>Meccanoid G15</h2>
-    <p>
-        <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" />
-        This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.  
-    </p>
+<h2>Meccanoid G15</h2>
+<p>
+    <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" /> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.
+</p>
 {% endblock %}

@@ -1,8 +1,9 @@
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, ValidationError
-from wtforms.validators import Length, DataRequired, Regexp, Email, EqualTo, Optional, StopValidation
-from ..models import User, db
+from wtforms import BooleanField, PasswordField, SelectMultipleField, StringField, SubmitField, TextAreaField, ValidationError
+from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
+from ..models import Tag, User, db
+
 
 class LoginForm(FlaskForm):
     user_or_email = StringField('Username or Email', validators=[DataRequired(), Length(1, 64,
@@ -22,9 +23,13 @@ class LoginForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
     body = TextAreaField("Content", validators=[DataRequired()])
-    #tags = StringField("Tags (Please seperate with commas with no spaces in between them)", validators=[DataRequired()])
+    tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
     submit = SubmitField("Submit")
     cancel = SubmitField("Cancel", false_values="cancel")
+
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.all()]
 
 class CommentForm(FlaskForm):
     body = TextAreaField("Content", validators=[DataRequired()])
