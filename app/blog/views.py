@@ -16,6 +16,13 @@ def parseMultiplePost(form):
         return_list.append(tag)
     return return_list
 
+def unparseMultiplePost(post):
+    return_list = []
+    for i in post.tags:
+        tag = Tag.query.filter_by(name=i.name).first()
+        return_list.append(tag.id)
+    return return_list
+
 def checkBtn(false_value, form):
     if false_value in request.form and form.validate():
         return True
@@ -101,9 +108,12 @@ def edit(id):
         elif checkBtn("submit", form):
             post.title = form.title.data
             post.body = form.body.data
+            post.tags = parseMultiplePost(form)
+            post.changedBody()
             return redirect(url_for('.post', id=id))
     form.title.data = post.title
     form.body.data = post.body
+    form.tags.data = unparseMultiplePost(post)
     return render_template("blog/edit.html", title="Edit Post - " + post.title, year=year, post=post, form=form)
 
 @blog.route('/login', methods=["GET", "POST"])

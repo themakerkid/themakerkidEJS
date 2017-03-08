@@ -107,7 +107,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     body = db.Column(db.Text)
-    #body_html = db.Column(db.Text)
+    summary = db.Column(db.Text)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     title = db.Column(db.String(64))
@@ -122,10 +122,22 @@ class Post(db.Model):
 
     @property
     def body_html(self):
-        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
-        extras = ExtraExtension()
         markdown_content = markdown(self.body, extensions=[hilite, extras])
-        return Markup(markdown_content)
+        return markdown_content
+    
+    @property
+    def summary_html(self):
+        markdown_content = markdown(self.summary, extensions=[hilite, extras])
+        return markdown_content
+
+    def changedBody(self):
+        new_summary = self.body
+        new_summary = new_summary.split(' ')
+        new_summary = new_summary[:80]
+        new_summary = ' '.join(new_summary)
+        if not new_summary == self.body:
+            new_summary += '...'
+        self.summary = new_summary
 
 class Tag(db.Model):
     __tablename__ = 'tags'

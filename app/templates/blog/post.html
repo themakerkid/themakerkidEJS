@@ -14,9 +14,12 @@
 </style>
 {% endblock %} {% block page_content %}
 <h1>{{ post.title }} By {{ post.author.username|capitalize }}</h1>{% if current_user.username == post.author.username %}<a id="editBtn" href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>{% endif %} {% if post.body_html %} {{ post.body_html|safe
-}} {% else %} {{ post.body }} {% endif %} {% for tag in post.tags %} {% if tag.id == post.tags[-1].id %} {# The last tag should not have a comma after it. #}
+}} {% else %} {{ post.body }} {% endif %}
+<h2>Tags</h2>
+{% if post.tags|length > 0 %} {% for tag in post.tags %} {% if tag.id == post.tags[-1].id %} {# The last tag should not have a comma after it. #}
 <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a> {% else %}
-<a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a>, {% endif %} {% endfor %}
+<a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a>, {% endif %} {% endfor %} {% else %}
+<p>No tags</p> {% endif %}
 
 <hr />
 
