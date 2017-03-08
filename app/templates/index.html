@@ -1,10 +1,5 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
 <style type="text/css">
-    .row {
-        border: 10px solid #d9d9d9;
-        padding: 5px;
-    }
-    
     #logo {
         position: absolute;
         top: -20px;
@@ -25,22 +20,8 @@
         top: 40px;
     }
     
-    a.btn-lg {
-        text-decoration: none;
-    }
-    
-    @media (max-width: 767px) {
-        #logo img {
-            width: 55px;
-        }
-    }
-    
     .no-relative {
         top: 0px;
-    }
-    
-    .img-responsive {
-        width: 80%;
     }
 </style>
 {% endblock %} {% block page_content %}
@@ -57,7 +38,7 @@
         <h3>A place where kids can start coding, make cool projects, learn together, and share code and projects.</h3>
         <h3>Now let&#39;s get started together!</h3>
         <div id="modal-stuff">
-            <button type="button" class="btn-lg btn-primary" data-toggle="modal" data-target="#intro-vid-modal" id="intro-btn">Play Introduction Video</button>
+            <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#intro-vid-modal" id="intro-btn">Play Introduction Video</button>
             <!-- Modal -->
             <div class="modal fade" id="intro-vid-modal" role="dialog">
                 <div class="modal-dialog modal-lg">
@@ -84,37 +65,37 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <h2>Coder</h2>
             <p>
                 <h5>Coding is magic!! Get Started Here</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('main.coding') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/coding/coding2.jpg') }}" class="img-responsive" />
+            <img src="{{ url_for('static', filename='images/home/coding.png') }}" class="img-responsive" />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <h2>Maker</h2>
             <p>
                 <h5>Use code to control Hardware!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('main.hardware') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/hardware/NeopixelNanoWithBluetooth_bb2.jpg') }}" class="img-responsive" />
+            <img src="{{ url_for('static', filename='images/home/NeopixelNanoWithBluetooth_bb.jpg') }}" class="img-responsive" />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <h2>Buddy</h2>
             <p>
                 <h5>Add Posts and Comments!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('blog.index') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/fun_stuff/fun_stuff.png') }}" class="img-responsive" />
+            <img src="{{ url_for('static', filename='images/home/buddy.png') }}" class="img-responsive" />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 col-xs-12">
             <h2>Share</h2>
             <p>
                 <h5>Share Code Snippets and Projects!</h5>
             </p>
             <p><a class="btn btn-info" href="{{ url_for('snippets.index') }}">Learn more &raquo;</a></p>
-            <img src="{{ url_for('static', filename='images/coding/code_snippet.png') }}" class="img-responsive" />
+            <img src="{{ url_for('static', filename='images/home/code_snippet.png') }}" class="img-responsive" />
         </div>
 
     </div>
