@@ -1,25 +1,66 @@
-{% macro addPagination(paginationObj, endpoint) %}
+{% set Tag = g.tag %} {% macro addPagination(paginationObj, endpoint) %}
 <ul class="pagination">
-    <li{% if not paginationObj.has_prev %} class="disabled"{% endif %}>
+    <li{% if not paginationObj.has_prev %} class="disabled" {% endif %}>
         <a href="{% if not paginationObj.has_prev %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page - 1, **kwargs) }}{% endif %}">
             &laquo;
         </a>
-    </li>
-    {% for page in paginationObj.iter_pages() %}
-        {% if page %}
-            {% if page == paginationObj.page %}
-                <li class="active"><a href="#bottom">{{ page }}</a></li>
-            {% else %}
-                <li><a href="{{ url_for(endpoint, page=page, **kwargs) }}">{{ page }}</a></li>
-            {% endif %}
+        </li>
+        {% for page in paginationObj.iter_pages() %} {% if page %} {% if page == paginationObj.page %}
+        <li class="active"><a href="#bottom">{{ page }}</a></li>
         {% else %}
-            <li class="disabled"><a href="#bottom">&hellip;</a></li>
-        {% endif %}
-    {% endfor %}
-    <li{% if not paginationObj.has_next %} class="disabled"{% endif %}>
-        <a href="{% if not paginationObj.has_next %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page + 1, **kwargs) }}{% endif %}">
+        <li><a href="{{ url_for(endpoint, page=page, **kwargs) }}">{{ page }}</a></li>
+        {% endif %} {% else %}
+        <li class="disabled"><a href="#bottom">&hellip;</a></li>
+        {% endif %} {% endfor %}
+        <li{% if not paginationObj.has_next %} class="disabled" {% endif %}>
+            <a href="{% if not paginationObj.has_next %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page + 1, **kwargs) }}{% endif %}">
             &raquo;
         </a>
-    </li>
+            </li>
 </ul>
+{% endmacro %} {% macro blogSidebar() %}
+<!-- Blog Categories Well -->
+
+<div class="well">
+    <h4>Recent Posts</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="list-unstyled">
+                {% set half = Tag.query.all()|length / 2 %} {% for tag in Tag.query.all()[:half|int] %}
+                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                {% endfor %} </ul>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+
+
+<div class="well">
+    <h4>Blog Categories</h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+                {% set half = Tag.query.all()|length / 2 %} {% for tag in Tag.query.all()[:half|int] %}
+                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                {% endfor %} </ul>
+        </div>
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+                {% for tag in Tag.query.all()[half|int:] %}
+                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                {% endfor %} </ul>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <!-- /.row -->
+</div>
+
+
+<!-- Side Widget Well -->
+<div class="well">
+    <h3>Help</h3>
+    <p> If you need to make a post, please hit the New post button above</p>
+</div>
 {% endmacro %}

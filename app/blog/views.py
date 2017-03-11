@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, request, url_for, abort, session, current_app
+from flask import render_template, flash, redirect, request, url_for, abort, session, current_app, g
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
 from ..models import Comment, User, Post, Tag, db
@@ -41,6 +41,7 @@ def beforeApp():
             session["last_url"] = request.url
     except TypeError:
         pass
+    g.tag = Tag
 
 @blog.route('/', methods=['GET', 'POST'])
 def index():

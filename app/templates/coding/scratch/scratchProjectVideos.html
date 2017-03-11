@@ -1,56 +1,7 @@
-{% extends "base.html" %} {% block styles %} {{ super() }}
-<link rel="stylesheet" type="text/css" href="/static/css/slider.css" /> {% include "_h2_border.html" %}
+{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_scroll_top.html" %}
 <style type="text/css">
     p {
         font-size: 1.25em;
-    }
-    
-    .back-to-top {
-        cursor: pointer;
-        position: fixed;
-        bottom: 0;
-        right: 20px;
-        display: none;
-    }
-    
-    .scroll-top-wrapper {
-        position: fixed;
-        opacity: 0;
-        visibility: hidden;
-        overflow: hidden;
-        text-align: center;
-        z-index: 99999999;
-        background-color: #777777;
-        color: #eeeeee;
-        width: 50px;
-        height: 48px;
-        line-height: 48px;
-        right: 30px;
-        bottom: 30px;
-        padding-top: 2px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-        -webkit-transition: all 0.5s ease-in-out;
-        -moz-transition: all 0.5s ease-in-out;
-        -ms-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-    }
-    
-    .scroll-top-wrapper:hover {
-        background-color: #888888;
-    }
-    
-    .scroll-top-wrapper.show {
-        visibility: visible;
-        cursor: pointer;
-        opacity: 1.0;
-    }
-    
-    .scroll-top-wrapper i.fa {
-        line-height: inherit;
     }
     
     .video-text-right {
@@ -98,7 +49,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MdrBHO7dKcQ?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sd-6">
             <div class="video-text-right">
                 <h2>Continents</h2>
                 <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
@@ -113,7 +64,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/5fo9EzNKYOo?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="video-text-right">
                 <h2>Wonders &amp; Landmarks</h2>
                 <p>Learn about the Wonders of the world, like the Eiffel Tower or Machu Picchu. In the mini quiz, you match the name with the Wonder or Landmark.
@@ -130,7 +81,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ATQDtcERhtw?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="video-text-right">
                 <h2>Oceans &amp; Seas</h2>
                 <p>Hover over the letters to find the name of the sea. Hover over the fish to find the name of the ocean. Click on a fish/letter to get information. No mini quiz here.</p>
@@ -145,7 +96,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7tFQFNCYfvQ?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="video-text-right">
                 <h2>Animals</h2>
                 <p>Learn about different animals around the world. Like the Pirahna, the Wolf and the Panda. When you feel like you have finished you can try the drag-and-drop.</p>
@@ -160,7 +111,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UD-WPH6-9CU?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <div class="video-text-right">
                 <h2>Countries &amp; Flags</h2>
                 <p>Hover over a flag to find out the country and captial. No mini quiz here. You don&#39;t get information if you click on the flag.
@@ -179,7 +130,7 @@
             <i class="fa fa-2x fa-arrow-circle-up"></i>
         </span>
 </div>
-{% endblock %} {% block scripts %} {{ super() }}
+{% endblock %} {% block scripts %} {{ super() }} {% include "_scroll_top.html" %}
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
 <script type="text/javascript">
