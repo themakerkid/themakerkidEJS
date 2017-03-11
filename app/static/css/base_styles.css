@@ -49,3 +49,12 @@ body {
 .bg-danger {
     padding: 10px 0 10px 10px;
 }
+
+#scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    opacity: 0.75;
+    z-index: 10000;
+    cursor: pointer;
+}

@@ -32,7 +32,7 @@ def checkConfirm():
             request.endpoint != 'main.confirm' and \
             request.endpoint != 'blog.login' and \
             request.endpoint != 'blog.logout' and \
-            request.endpoint[:7] != 'static.':
+            request.endpoint[:6] != 'static':
         return redirect(url_for('main.unconfirmed'))
 
 

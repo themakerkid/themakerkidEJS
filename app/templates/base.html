@@ -1,10 +1,11 @@
 {% extends "bootstrap/base.html" %} {% block title %}CodeMaker Buddy - {{ title }}{% endblock %} {% block styles %} {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
+{% endblock %} {% block head %} {{ super() }}
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -154,7 +155,6 @@
         </div>
     </div>
 </div>
-</div>
 {% endblock %} {% block content %}
 <div class="container">
     <p id="noscript"><strong>Please enable Javascript to improve your experience.</strong></p>
@@ -174,12 +174,26 @@
         <p class="pull-right">Designed and Coded by Benjamin Murray</p>
     </footer>
 </div>
+<i class="fa fa-3x fa-arrow-circle-up" id="scroll-top"></i>
 {% endblock %} {% block scripts %} {{ super() }}
 <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
 <script>
     $(function() {
         $('[data-submenu]').submenupicker();
         $('#noscript').remove();
+        $('#scroll-top').hide();
+        $('#scroll-top').on('click', function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 1000);
+        });
+        $(document).on('scroll', function() {
+            if ($(window).scrollTop() > 100) {
+                $("#scroll-top").fadeIn(500);
+            } else {
+                $("#scroll-top").fadeOut(500);
+            }
+        });
     });
 </script>
 {% endblock %}

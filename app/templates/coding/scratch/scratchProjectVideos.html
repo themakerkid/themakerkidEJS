@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_scroll_top.html" %}
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
 <style type="text/css">
     p {
         font-size: 1.25em;
@@ -16,7 +19,9 @@
         float: right;
     }
 </style>
-{% endblock %} {% block page_content %}
+{% endblock %}
+
+{% block page_content %}
 <div class="text-center">
     <h1>Project Videos</h1>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratch') }}">Getting Started</a>
@@ -49,7 +54,7 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MdrBHO7dKcQ?rel=0"></iframe>
             </div>
         </div>
-        <div class="col-sd-6">
+        <div class="col-sm-6">
             <div class="video-text-right">
                 <h2>Continents</h2>
                 <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
@@ -123,45 +128,7 @@
 <br />
 <!--<a href="http://scratch.mit.edu/projects/49812240/" title="Flash must be activated." target="_blank">My project on the scratch website.</a>-->
 <!--    <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/49812240/?autostart=false" frameborder="0" allowfullscreen></iframe>-->
-<br />
-<!-- The scroll to top feature -->
-<div class="scroll-top-wrapper ">
-    <span class="scroll-top-inner">
-            <i class="fa fa-2x fa-arrow-circle-up"></i>
-        </span>
-</div>
-{% endblock %} {% block scripts %} {{ super() }} {% include "_scroll_top.html" %}
+{% endblock %} {% block scripts %} {{ super() }}
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
-<script type="text/javascript">
-    //Thanks to: http://www.webtipblog.com/adding-scroll-top-button-website/
-
-    $(document).ready(function() {
-
-        $(function() {
-
-            $(document).on('scroll', function() {
-
-                if ($(window).scrollTop() > 100) {
-                    $('.scroll-top-wrapper').addClass('show');
-                } else {
-                    $('.scroll-top-wrapper').removeClass('show');
-                }
-            });
-
-            $('.scroll-top-wrapper').on('click', scrollToTop);
-        });
-
-        function scrollToTop() {
-            verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-            element = $('body');
-            offset = element.offset();
-            offsetTop = offset.top;
-            $('html, body').animate({
-                scrollTop: offsetTop
-            }, 500, 'linear');
-        }
-
-    });
-</script>
 {% endblock %}

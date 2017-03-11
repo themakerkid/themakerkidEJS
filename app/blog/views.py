@@ -37,11 +37,14 @@ def before():
 @blog.before_app_request
 def beforeApp():
     try:
-        if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout":
+        if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout" and request.endpoint != "blog.public" and request.endpoint != "blog.draft":
             session["last_url"] = request.url
     except TypeError:
         pass
     g.tag = Tag
+    g.post = Post
+    g.current_user = current_user
+    g.db = db
 
 @blog.route('/', methods=['GET', 'POST'])
 def index():
@@ -54,7 +57,8 @@ def index():
     posts = pagination.items
     if post_form.validate_on_submit():
         tags = parseMultiplePost(post_form)
-        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags)
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data)
+        post.changedBody()
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post', id=post.id))
@@ -70,7 +74,8 @@ def filteredPosts():
     search_form = SearchForm()
     if post_form.validate_on_submit():
         tags = parseMultiplePost(post_form)
-        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags)
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data)
+        post.changedBody()
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.post', id=post.id))
@@ -80,11 +85,26 @@ def filteredPosts():
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
     posts = pagination.items
+    for post in posts:
+        if not post.published:
+            posts.pop(-post.id)
     return render_template("blog/index.html", title="Blog - Home Page", year=year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination, filtered=True)
+
+@blog.route('/posts/<username>')
+def posts(username):
+    page = request.args.get("page")
+    user = User.query.filter_by(username=username).first_or_404()
+    pagination = Post.query.order_by(Post.date_posted.desc()).filter_by(author=user).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    posts = pagination.items
+    return render_template("blog/someonesPosts.html", title="Blog - %s's posts" % user.username.capitalize(), year=year, posts=posts, pagination=pagination, user=user)
 
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     post = Post.query.get_or_404(id)
+    if post.published == False and post.author != current_user:
+        abort(403)
     form = CommentForm()
     if request.method == "POST":
         if checkBtn("cancel", form):
@@ -110,12 +130,34 @@ def edit(id):
             post.title = form.title.data
             post.body = form.body.data
             post.tags = parseMultiplePost(form)
+            post.published = form.published.data
             post.changedBody()
             return redirect(url_for('.post', id=id))
     form.title.data = post.title
     form.body.data = post.body
     form.tags.data = unparseMultiplePost(post)
+    form.published.data = post.published
     return render_template("blog/edit.html", title="Edit Post - " + post.title, year=year, post=post, form=form)
+
+@blog.route('/public/<int:id>')
+@login_required
+def public(id):
+    post = Post.query.get_or_404(id)
+    if post.author.username != current_user.username:
+        abort(403)
+    post.published = True
+    flash("Your post is now public.", 'info')
+    return redirect(session["last_url"])
+
+@blog.route('/draft/<int:id>')
+@login_required
+def draft(id):
+    post = Post.query.get_or_404(id)
+    if post.author.username != current_user.username:
+        abort(403)
+    post.published = False
+    flash("Your post is now a draft.", 'info')
+    return redirect(session["last_url"])
 
 @blog.route('/login', methods=["GET", "POST"])
 def login():

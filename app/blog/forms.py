@@ -24,6 +24,7 @@ class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
     body = TextAreaField("Content", validators=[DataRequired()])
     tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
+    published = BooleanField("Do you want to make this public?")
     submit = SubmitField("Submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 

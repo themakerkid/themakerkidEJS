@@ -1,5 +1,5 @@
 from flask import Blueprint
-from ..models import Tag
+from ..models import Tag, Post
 
 main = Blueprint("main", __name__)
 

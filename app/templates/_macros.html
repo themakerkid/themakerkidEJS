@@ -18,49 +18,65 @@
         </a>
             </li>
 </ul>
-{% endmacro %} {% macro blogSidebar() %}
-<!-- Blog Categories Well -->
+{% endmacro %}
 
-<div class="well">
-    <h4>Recent Posts</h4>
-    <div class="row">
-        <div class="col-lg-12">
-            <ul class="list-unstyled">
-                {% set half = Tag.query.all()|length / 2 %} {% for tag in Tag.query.all()[:half|int] %}
-                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
-                {% endfor %} </ul>
+{% macro blogSidebar() %}
+    <!-- Blog Categories Well -->
+
+    <div class="well">
+        <h4>Recent Posts</h4>
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="media-list">
+                    {% set postNum = 4 %}
+                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_(g.post.published == True, g.post.author == g.current_user)).limit(postNum) %}
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="{{ url_for('blog.profile', username=post.author.username) }}">
+                                <img class="media-object img-circle" src="{{ post.author.getAvatar(size=40) }}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ post.author.username }}</h4>
+                            <a href="{{ url_for('blog.post', id=post.id) }}" class="text-muted">{{ post.title }}</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- /.col-lg-6 -->
         </div>
-        <!-- /.col-lg-6 -->
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-</div>
 
 
 
-<div class="well">
-    <h4>Blog Categories</h4>
-    <div class="row">
-        <div class="col-lg-6">
-            <ul class="list-unstyled">
-                {% set half = Tag.query.all()|length / 2 %} {% for tag in Tag.query.all()[:half|int] %}
-                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
-                {% endfor %} </ul>
+    <div class="well">
+        <h4>Blog Categories</h4>
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                    {% set half = (Tag.query.all()|length / 2.0) + 0.5 %}
+                    {% for tag in Tag.query.all()[:half|int] %}
+                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <ul class="list-unstyled">
+                    {% for tag in Tag.query.all()[half|int:] %}
+                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
+                    {% endfor %} </ul>
+            </div>
+            <!-- /.col-lg-6 -->
         </div>
-        <div class="col-lg-6">
-            <ul class="list-unstyled">
-                {% for tag in Tag.query.all()[half|int:] %}
-                <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a></li>
-                {% endfor %} </ul>
-        </div>
-        <!-- /.col-lg-6 -->
+        <!-- /.row -->
     </div>
-    <!-- /.row -->
-</div>
 
 
-<!-- Side Widget Well -->
-<div class="well">
-    <h3>Help</h3>
-    <p> If you need to make a post, please hit the New post button above</p>
-</div>
+    <!-- Side Widget Well -->
+    <div class="well">
+        <h3>Help</h3>
+        <p> If you need to make a post, please hit the New post button above</p>
+    </div>
 {% endmacro %}

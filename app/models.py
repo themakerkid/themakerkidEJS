@@ -110,6 +110,7 @@ class Post(db.Model):
     summary = db.Column(db.Text)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    published = db.Column(db.Boolean, default=True)
     title = db.Column(db.String(64))
     tags = db.relationship('Tag', secondary=post_tags,
                            backref=db.backref('posts', lazy='dynamic'))
@@ -138,6 +139,9 @@ class Post(db.Model):
         if not new_summary == self.body:
             new_summary += '...'
         self.summary = new_summary
+
+    def __repr__(self):
+        return "Post <%s>" % self.title
 
 class Tag(db.Model):
     __tablename__ = 'tags'
