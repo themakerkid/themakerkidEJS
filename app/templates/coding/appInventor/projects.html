@@ -1,6 +1,15 @@
-{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_h2_border.html" %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/image_mul_float.css') }}" /> {% endblock %} {% block page_content %}
+{% extends "base.html" %}
 
+{% block styles %}
+    {{ super() }}
+    <style>
+        .img-responsive {
+            width: 30%;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
 <div class="text-center">
     <h1>Projects / Apps</h1>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.appInventor') }}">Getting Started</a>
@@ -37,8 +46,8 @@
 
 <h2>Bluetooth Controlled NeoPixel LEDs</h2>
 <p>
-    <img src="{{ url_for('static', filename='images/coding/disconnected.png') }}" height="300" /> I presume you have watched the video on the <a href="{{ url_for('main.hardProj') }}">Bluetooth Controlled NeoPixel LEDs</a> becuase this app relies on the
-    circuit.
+    <img src="{{ url_for('static', filename='images/coding/disconnected.png') }}" class="img-responsive pull-left" height="300" /> I presume you have watched the video on the <a href="{{ url_for('main.hardProj') }}">Bluetooth Controlled NeoPixel LEDs</a> becuase this app relies on the
+    circuit. <br />
     <a class="btn btn-success" href="{{ url_for('static', filename='NeoPixelControl.apk') }}">Download the NeoPixel Control App</a>
 </p>
 {% endblock %}

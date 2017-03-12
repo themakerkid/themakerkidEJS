@@ -168,57 +168,61 @@ def startGlossary():
 def startLearn():
     return render_template('starting/learn.html', title="Getting Started - Learning Resources", year=year)
 
-@main.route('/starting/famous')
-def famous():
-    return render_template('starting/famMakeTech.html', title="Getting Started - Famous Makers &amp; Technologists", year=year)
+@main.route('/coding/famous')
+def famousCoders():
+    return render_template('coding/famousCoders.html', title="Getting Started - Famous Coders", year=year)
 
-@main.route('/hardware')
-def hardware():
-    return render_template('hardware/intro.html', title="Hardware - Home Page", year=year)
+@main.route('/maker')
+def maker():
+    return render_template('maker/intro.html', title="Maker - Home Page", year=year)
 
-@main.route('/hardware/learn')
-def hardLearn():
-    return render_template('hardware/learn.html', title="Hardware - Learning Resources", year=year)
+@main.route('/maker/learn')
+def makeLearn():
+    return render_template('maker/learn.html', title="Maker - Learning Resources", year=year)
 
-@main.route('/hardware/books')
-def hardBooks():
-    return render_template('hardware/books.html', title="Hardware - Books", year=year)
+@main.route('/maker/books')
+def makeBooks():
+    return render_template('maker/books.html', title="Maker - Books", year=year)
 
-@main.route('/hardware/electronics')
-def hardElec():
-    return render_template('hardware/elec.html', title="Hardware - Electronics - Getting Started", year=year)
+@main.route('/maker/electronics')
+def makeElec():
+    return render_template('maker/elec.html', title="Maker - Electronics - Getting Started", year=year)
 
-@main.route('/hardware/arduino/start')
+@main.route('/maker/arduino/start')
 def arduinoStart():
-    return render_template('hardware/arduino/ardStart.html', title="Arduino Home", year=year)
+    return render_template('maker/arduino/ardStart.html', title="Arduino Home", year=year)
 
-@main.route('/hardware/arduino/learn')
+@main.route('/maker/arduino/learn')
 def arduinoLearn():
-    return render_template('hardware/arduino/ardLearn.html', title="Arduino - Learning Resources", year=year)
+    return render_template('maker/arduino/ardLearn.html', title="Arduino - Learning Resources", year=year)
 
-@main.route('/hardware/arduino/project')
+@main.route('/maker/arduino/project')
 def arduinoProject():
-    return render_template('hardware/arduino/ardProject.html', title="Arduino - Project Page", year=year)
+    return render_template('maker/arduino/ardProject.html', title="Arduino - Project Page", year=year)
 
-@main.route('/hardware/robotics')
-def hardRobot():
-    return render_template('hardware/robot.html', title="Hardware - Robotics", year=year)
+@main.route('/maker/famous')
+def famousMakers():
+    return render_template('maker/famousMakers.html', title="Maker - Famous Makers", year=year)
 
-@main.route('/hardware/projects')
-def hardProj():
-    return render_template('hardware/projects.html', title="Hardware - Projects", year=year)
+@main.route('/maker/robotics')
+def makeRobot():
+    return render_template('maker/robot.html', title="Maker - Robotics", year=year)
 
-@main.route('/hardware/toys')
-def hardToys():
-    return render_template('hardware/toys.html', title="Hardware - Toys", year=year)
+@main.route('/maker/projects')
+def makeProj():
+    return render_template('maker/projects.html', title="Maker - Projects", year=year)
 
-@main.route('/hardware/competitionsAndEvents')
-def hardCompEv():
-    return render_template('hardware/compEv.html', title="Hardware - Compitions & Events", year=year)
+@main.route('/maker/toys')
+def makeToys():
+    return render_template('maker/toys.html', title="Maker - Toys", year=year)
 
-@main.route('/hardware/glossary')
-def hardGlossary():
-    return render_template('hardware/glossary.html', title="Hardware - Glossary", year=year)
+@main.route('/maker/competitionsAndEvents')
+def makeCompEv():
+    return render_template('maker/compEv.html', title="Maker - Compitions & Events", year=year)
+
+@main.route('/maker/glossary')
+def makeGlossary():
+    return render_template('maker/glossary.html', title="Maker - Glossary", year=year)
 
 @main.route('/coding')
 def coding():

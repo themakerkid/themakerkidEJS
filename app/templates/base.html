@@ -74,7 +74,7 @@
                             </ul>
                         </li>
                         <li class="divider"></li>
-                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Coders</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.famousCoders') }}">Famous Coders</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.techEveComp') }}">Events &amp; Competitions</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>
                     </ul>
@@ -82,17 +82,17 @@
                 <li class="dropdown">
                     <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Maker <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a tabindex="0" href="{{ url_for('main.hardware') }}">Introduction</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.maker') }}">Introduction</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ url_for('main.hardElec') }}">Electronics</a></li>
+                        <li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>
                         <!-- <li class="dropdown-submenu">
                             <a tabindex="0">Electronics</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url_for('main.hardElec') }}">Getting Started</a></li>
+                                <li><a href="{{ url_for('main.makeElec') }}">Getting Started</a></li>
                             </ul>
                         </li> -->
-                        <!--  <li><a tabindex="0" href="{{ url_for('main.hardLearn') }}">Learning Resources</a></li> 
-                        <li><a tabindex="0" href="{{ url_for('main.hardBooks') }}">Engineering Books</a></li> -->
+                        <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
+                        <li><a tabindex="0" href="{{ url_for('main.makeBooks') }}">Engineering Books</a></li> -->
                         <li class="dropdown-submenu">
                             <a tabindex="0">Arduino</a>
                             <ul class="dropdown-menu">
@@ -101,10 +101,10 @@
                                 <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
                             </ul>
                         </li>
-                        <!-- <li><a tabindex="0" href="{{ url_for('main.hardRobot') }}">Robotics</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardProj') }}">Projects</a></li>
+                        <!-- <li><a tabindex="0" href="{{ url_for('main.makeRobot') }}">Robotics</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.makeProj') }}">Projects</a></li>
                         -->
-                        <li><a tabindex="0" href="{{ url_for('main.hardToys') }}">Cool Toys</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.makeToys') }}">Cool Toys</a></li>
                         <!-- <li class="dropdown-submenu">
                             <a tabindex="0" id="other">Fun Stuff</a>
                             <ul class="dropdown-menu">
@@ -124,12 +124,12 @@
                         </li>
                         -->
                         <li class="divider"></li>
-                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.famousMakers') }}">Famous Makers</a></li>
                         <!--
                         <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
                         -->
-                        <li><a tabindex="0" href="{{ url_for('main.hardCompEv') }}">Events &amp; Competitions</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.hardGlossary') }}">Glossary</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.makeCompEv') }}">Events &amp; Competitions</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.makeGlossary') }}">Glossary</a></li>
                     </ul>
                 </li>
             </ul>
@@ -155,7 +155,9 @@
         </div>
     </div>
 </div>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="container">
     <p id="noscript"><strong>Please enable Javascript to improve your experience.</strong></p>
     {% for category, message in get_flashed_messages(with_categories=True) %}
@@ -175,25 +177,28 @@
     </footer>
 </div>
 <i class="fa fa-3x fa-arrow-circle-up" id="scroll-top"></i>
-{% endblock %} {% block scripts %} {{ super() }}
-<script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
-<script>
-    $(function() {
-        $('[data-submenu]').submenupicker();
-        $('#noscript').remove();
-        $('#scroll-top').hide();
-        $('#scroll-top').on('click', function() {
-            $("html, body").animate({
-                scrollTop: 0
-            }, 1000);
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('[data-submenu]').submenupicker();
+            $('#noscript').remove();
+            $('#scroll-top').hide();
+            $('#scroll-top').on('click', function() {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 1000);
+            });
+            $(document).on('scroll', function() {
+                if ($(window).scrollTop() > 100) {
+                    $("#scroll-top").fadeIn(500);
+                } else {
+                    $("#scroll-top").fadeOut(500);
+                }
+            });
         });
-        $(document).on('scroll', function() {
-            if ($(window).scrollTop() > 100) {
-                $("#scroll-top").fadeIn(500);
-            } else {
-                $("#scroll-top").fadeOut(500);
-            }
-        });
-    });
-</script>
+    </script>
 {% endblock %}

@@ -1,8 +1,26 @@
-{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% import "_macros.html" as macros %} {% block styles %} {{ super() }}
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" /> {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style type="text/css">
+        h2.no-margin-bottom {
+            margin-bottom: 0; /* Get rid of the extra spacing underneath the Search Posts h2 element. */
+        }
+    </style>
+{% endblock %}
+
+{% if current_user.is_authenticated %}
+    {% set logged_in = True %}
+{% else %}
+    {% set logged_in = False %}
+{% endif %}
+
+{% block page_content %}
 <div class="row">
     <!-- Blog Entries Column -->
     <div class="col-md-9">
@@ -76,7 +94,7 @@
 
         <!-- Blog Search Well -->
         <div class="well">
-            <h2>Search Posts</h2>
+            <h2 class="no-margin-bottom">Search Posts</h2>
             {{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
             <!-- /.input-group -->
         </div>

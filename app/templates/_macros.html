@@ -20,7 +20,7 @@
 </ul>
 {% endmacro %}
 
-{% macro blogSidebar() %}
+{% macro blogSidebar(is_blog_page=True) %}
     <!-- Blog Categories Well -->
 
     <div class="well">
@@ -29,6 +29,7 @@
             <div class="col-lg-12">
                 <ul class="media-list">
                     {% set postNum = 4 %}
+                    {% if g.current_user.is_authenticated %}
                     {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_(g.post.published == True, g.post.author == g.current_user)).limit(postNum) %}
                     <li class="media">
                         <div class="media-left">
@@ -42,6 +43,21 @@
                         </div>
                     </li>
                     {% endfor %}
+                    {% else %}
+                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter_by(published=True).limit(postNum) %}
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="{{ url_for('blog.profile', username=post.author.username) }}">
+                                <img class="media-object img-circle" src="{{ post.author.getAvatar(size=40) }}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ post.author.username }}</h4>
+                            <a href="{{ url_for('blog.post', id=post.id) }}" class="text-muted">{{ post.title }}</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
@@ -77,6 +93,6 @@
     <!-- Side Widget Well -->
     <div class="well">
         <h3>Help</h3>
-        <p> If you need to make a post, please hit the New post button above</p>
+        <p>If you need to make a post, please hit the Create A New Post button {% if is_blog_page %}above{% else %}on the blog home page{% endif %}.</p>
     </div>
 {% endmacro %}
