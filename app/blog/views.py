@@ -1,46 +1,91 @@
+# blog/views.py - All the routes for the blog
+# By Benjamin Murray
+
+# Import datetime class to get current year
 from datetime import datetime
+
+# Import the template rendering, redirecting, dynamic url generator and the aborting with a status code function
+# Also import the request and session dictionary to check the endpoint and to save things globally respectively
+# Import the flask global to share the Tag and Post models, the current user and the database object to the macros
 from flask import render_template, flash, redirect, request, url_for, abort, session, current_app, g
+
+# Import authentication related things to login and logout users, protect routes so that only logged in users can see it
+# and the current user to get things about the user like his/her username
 from flask_login import login_user, logout_user, current_user, login_required
+
+# Import all the form classes related to the blog to display and handle the forms
 from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
+
+# Import some models to gather all the content in them
 from ..models import Comment, User, Post, Tag, db
+
+# Used to send confirmation email at registration
 from ..mail import send_email
+
+# Import the blog Blueprint to attach some routes to the application
 from . import blog
 
+# Stop repetition of getting current year
 year = datetime.now().year
 
+# Get Tag objects from a list of Tag ids
 def parseMultiplePost(form):
+    # Gather ids
     num_list = form.tags.data
+
+    # Set initial value of list of Tag objects
     return_list = []
+
+    # Iterate through whole list of ids
     for i in num_list:
+        # Turn id into an object
         tag = Tag.query.filter_by(id=i).first()
+
+        # Add that on to the list of Tag objects
         return_list.append(tag)
+    
+    # Return the list of objects back to the caller
     return return_list
 
+# Do the reverse of the above
 def unparseMultiplePost(post):
+    # Set initial value of list of Tag ids
     return_list = []
+
+    # Iterate through the list of objects
     for i in post.tags:
-        tag = Tag.query.filter_by(name=i.name).first()
-        return_list.append(tag.id)
+        # Add the id of the tag to the list of ids
+        return_list.append(i.id)
+    
+    # Return the list of ids back to the caller
     return return_list
 
 def checkBtn(false_value, form):
-    if false_value in request.form and form.validate():
+    if false_value in request.form and form.validate(): # Check that the false value (a value associated with a submit button) on the button is the false value
+                                                        # that was given and that the form validates
         return True
-    else:
+    else: # If one thing fails
         return False
 
 @blog.before_request
 def before():
     if current_user.is_authenticated:
+        # If the user is logged in set their last seen to the current time
         current_user.setLastSeen()
 
 @blog.before_app_request
 def beforeApp():
     try:
-        if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout" and request.endpoint != "blog.public" and request.endpoint != "blog.draft":
+        if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout" and request.endpoint != "blog.public" and request.endpoint != "blog.draft" \
+                and request.endpoint != "main.unconfirmed":
+            # Set the last_url in the session so that routes can redirect back to the last page.
+            # Routes that use last_url cannot change this (because it would otherwise be redirecting back to itself)
             session["last_url"] = request.url
     except TypeError:
+        # A TypeError is thrown by Flask when the dynamic part of a url is missing (for example static files) so do nothing
         pass
+
+    # Set some classes and variables into Flask's global so that the macros can access them (app_context_processor or context_processor doesn't work)
     g.tag = Tag
     g.post = Post
     g.current_user = current_user

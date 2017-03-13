@@ -1,29 +1,54 @@
-# By Benjamin 12/02/2017 - today
-# This is all the routes for the app.
+# main/views.py - contains routes for the content part of this website
+# By Benjamin Murray
 
+# Import all the necessary libraries
+
+# Import datetime to get current year
 from datetime import datetime
-from flask import flash, redirect, render_template, request, url_for
+
+# Import some helper functions to flash messages, render the Jinja2 templates, the user session and to generate dynamic urls
+# Also import the request dictionary to get the search query string from the url bar
+from flask import flash, redirect, render_template, request, url_for, session
+
+# Get the current user to confirm his/her account and to check if the logged in user is unconfirmed
+# Also import the login_required decorator to protect routes so that only logged in users can view it
 from flask_login import current_user, login_required
+
+# Import the main Blueprint to add routes to the application
 from . import main
+
+# Used to check whether a cancel button or a submit button was pressed
 from ..blog.views import checkBtn
+
+# Import send_email function to resend the confirmation email in case the
+# original email was lost
 from ..mail import send_email
+
+# Import all the database models for the full-text search
 from ..models import Comment, Post, Snippet, SnippetComment, User, db
+
+# SearchForm class is needed to display and handle the full-text search form
 from .forms import SearchForm
 
+# Define a year variable to reduce the amount of repetition
 year = datetime.now().year
 
+# Display a nice 404 page to the users
 @main.app_errorhandler(404)
 def error_404(e):
     return render_template("404.html", title="Not Found", year=year), 404
 
+# Display the internal server error page
 @main.app_errorhandler(500)
 def error_500(e):
     return render_template("500.html", title="Internal Server Error", year=year), 500
 
+# Tell the users that they cannot do something
 @main.app_errorhandler(403)
 def error_403(e):
     return render_template("403.html", title="Forbidden", year=year), 403
 
+# Check if the user is unconfirmed
 @main.before_app_request
 def checkConfirm():
     if current_user.is_authenticated and \
@@ -33,11 +58,14 @@ def checkConfirm():
             request.endpoint != 'blog.login' and \
             request.endpoint != 'blog.logout' and \
             request.endpoint[:6] != 'static':
+        # If the user if not confirmed and the browser if not requesting the static files, login page, logout page, confirm page or the content part of
+        # this website, redirect them to the unconfirmed page
         return redirect(url_for('main.unconfirmed'))
 
 
 @main.route("/")
 def index():
+    """Renders the home page"""
     return render_template("index.html", title="Home Page", year=year)
 
 @main.route('/about')
@@ -52,7 +80,7 @@ def scratch():
 
 @main.route('/scratch/learn')
 def scratchLearn():
-    """Renders the Scratch learning page."""
+    """Renders the Scratch learning resources page."""
     return render_template('coding/scratch/scratchLearn.html', title='Scratch - Learning Resources', year=year)
 
 @main.route('/scratch/project')
@@ -62,37 +90,37 @@ def scratchProject():
 
 @main.route('/scratch/project/videos/')
 def scratchProjectVideos():
-    """Renders the Scratch 'Award Winning Project' video page no.1."""
+    """Renders the Scratch 'Award Winning Project' videos page."""
     return render_template('coding/scratch/scratchProjectVideos.html', title='Scratch - Award Winning Project Videos - Page 1', year=year)
 
 @main.route('/processing')
 def processing():
-    """Renders the khan projects page."""
+    """Renders the Processing home page."""
     return render_template('coding/processing/gettingStarted.html', title="Processing - Getting Started", year=year)
 
 @main.route('/processing/learn')
 def processingLearn():
-    """Renders the khan projects page."""
+    """Renders the Processing learning resources page."""
     return render_template('coding/processing/learn.html', title="Processing - Learning Resources", year=year)
 
 @main.route('/webCoding')
 def websiteCoding():
-    """Renders the khan projects page."""
+    """Renders the website coding home page."""
     return render_template('coding/websiteCode/gettingStarted.html', title="Website Coding - Home Page", year=year)
 
 @main.route('/webCoding/learn')
 def webCodeLearn():
-    """Renders the khan projects page."""
+    """Renders the website coding learning resources page."""
     return render_template('coding/websiteCode/learn.html', title="Website Coding - Learning Resources", year=year)
 
 @main.route('/webCoding/thisWebsite')
 def webCodeThis():
-    """Renders the khan projects page."""
+    """Renders the website coding page that is about this website."""
     return render_template('coding/websiteCode/thisWebsite.html', title="Website Coding - Learning Resources", year=year)
 
 @main.route('/appInventor')
 def appInventor():
-    """Renders the app inventor intro page."""
+    """Renders the app inventor home page."""
     return render_template('coding/appInventor/intro.html', title="App Inventor - Home", year=year)
 
 @main.route('/appInventor/learn')
@@ -105,9 +133,11 @@ def appInventorProjects():
     """Renders the app inventor projects page."""
     return render_template('coding/appInventor/projects.html', title="App Inventor - Projects", year=year)
 
+# The routes for raspberry pi have been taken out especially for the Eir Junior Spiders Competition but they will be put back in
+# after the competition so they are being kept in this file
 @main.route('/raspi')
 def raspi():
-    """Renders the khan projects page."""
+    """Renders the raspberry pi home page."""
     return render_template('coding/websiteCode/thisWebsite.html', title="Website Coding - Learning Resources", year=year)
 
 @main.route('/raspi/learn')
@@ -129,25 +159,24 @@ def raspiCode():
 def raspiHardware():
     """Renders the khan projects page."""
     return render_template('coding/websiteCode/thisWebsite.html', title="Website Coding - Learning Resources", year=year)
+# End of raspberry pi routes
 
 @main.route('/processing/khan/drawing')
 def drawing():
-    """Renders the khan projects page."""
+    """Renders the khan projects drawing page."""
     return render_template('coding/khancode/static_projects.html', title="My Khan Projects", year=year)
 
 @main.route('/processing/khan/mouseOver')
 def mouseOver():
+    """Renders the khan projects mouse over page."""
     return render_template('coding/khancode/mouseOverProjects.html', title="Mouse Over Projects", year=year)
 
 @main.route('/processing/khan/animations')
 def animations():
+    """Renders the khan projects animations page."""
     return render_template('coding/khancode/animationProjects.html', title="Animations", year=year)
 
-@main.route('/webCoding')
-def webCode():
-    """Renders the khan projects page."""
-    return render_template('coding/wesiteCode/gettingStarted.html', title="Website Coding - Getting Started", year=year)
-
+# These Getting Started routes have been taken out like the raspberry pi routes for the same reason
 @main.route('/starting')
 def starting():
     return render_template('starting/intro.html', title="Getting Started - Home Page", year=year)
@@ -167,104 +196,138 @@ def startGlossary():
 @main.route('/starting/learn')
 def startLearn():
     return render_template('starting/learn.html', title="Getting Started - Learning Resources", year=year)
+# End of Getting Started routes
 
 @main.route('/coding/famous')
 def famousCoders():
+    """Renders the Famous Coders page."""
     return render_template('coding/famousCoders.html', title="Getting Started - Famous Coders", year=year)
 
 @main.route('/maker')
 def maker():
+    """Renders the Maker home page."""
     return render_template('maker/intro.html', title="Maker - Home Page", year=year)
 
+# This Learning Resources page and Books has been taken out for the same reason as the Getting Started pages.
 @main.route('/maker/learn')
 def makeLearn():
+    """Renders the Maker Learning Resources page."""
     return render_template('maker/learn.html', title="Maker - Learning Resources", year=year)
 
 @main.route('/maker/books')
 def makeBooks():
+    """Renders the Maker home page."""
     return render_template('maker/books.html', title="Maker - Books", year=year)
+# End of Learning Resources and Books
 
 @main.route('/maker/electronics')
 def makeElec():
+    """Renders the Maker Electronics page."""
     return render_template('maker/elec.html', title="Maker - Electronics - Getting Started", year=year)
 
 @main.route('/maker/arduino/start')
 def arduinoStart():
+    """Renders the Maker Arduino Getting Started page."""
     return render_template('maker/arduino/ardStart.html', title="Arduino Home", year=year)
 
 @main.route('/maker/arduino/learn')
 def arduinoLearn():
+    """Renders the Maker Arduino Learning Resources page."""
+    # This Learning Resources page is okay
     return render_template('maker/arduino/ardLearn.html', title="Arduino - Learning Resources", year=year)
 
 @main.route('/maker/arduino/project')
 def arduinoProject():
+    """Renders the Maker Arduino Projects page."""
     return render_template('maker/arduino/ardProject.html', title="Arduino - Project Page", year=year)
 
 @main.route('/maker/famous')
 def famousMakers():
+    """Renders the Famous Makers page."""
     return render_template('maker/famousMakers.html', title="Maker - Famous Makers", year=year)
 
+# The robotics page taken out for the same reason as the Getting Started and the raspberry pi pages
 @main.route('/maker/robotics')
 def makeRobot():
+    """Renders the Maker Robotics page."""
     return render_template('maker/robot.html', title="Maker - Robotics", year=year)
+# End of Robotics page
 
 @main.route('/maker/projects')
 def makeProj():
+    """Renders the Maker Projects page."""
     return render_template('maker/projects.html', title="Maker - Projects", year=year)
 
 @main.route('/maker/toys')
 def makeToys():
+    """Renders the Maker Cool Toys page."""
     return render_template('maker/toys.html', title="Maker - Toys", year=year)
 
 @main.route('/maker/competitionsAndEvents')
 def makeCompEv():
+    """Renders the Maker Competitions and events page."""
     return render_template('maker/compEv.html', title="Maker - Compitions & Events", year=year)
 
 @main.route('/maker/glossary')
 def makeGlossary():
+    """Renders the Maker Glossary page."""
     return render_template('maker/glossary.html', title="Maker - Glossary", year=year)
 
 @main.route('/coding')
 def coding():
+    """Renders the Coding home page."""
     return render_template('coding/intro.html', title="Coding (Basic) - Introduction", year=year)
 
 @main.route('/coding/python')
 def techPython():
+    """Renders the Coding Python home page."""
     return render_template('coding/python/gettingStarted.html', title="Technology - Python - Getting Started", year=year)
 
 @main.route('/coding/python/learn')
 def techPyLearn():
+    """Renders the Coding Python learning resources page."""
     return render_template('coding/python/learn.html', title="Technology - Python - Learning Resources", year=year)
 
 @main.route('/coding/python/this')
 def techPyThis():
+    """Renders the Coding, Python about this website page."""
     return render_template('coding/python/thisWebsite.html', title="Technology - Python - This Website", year=year)
 
 @main.route('/coding/eventsCompetitions')
 def techEveComp():
+    """Renders the Coding Events and Competitions page."""
     return render_template('coding/eveComp.html', title="Technology - Events & Competitions", year=year)
 
 @main.route('/coding/glossary')
 def techGlossary():
+    """Renders the Coding Glossary page."""
     return render_template('coding/glossary.html', title="Technology - Python - This Website", year=year)
 
+# Fun Toys has been taken out for the same reason as the other pages that were taken out
 @main.route('/funstuff/toys')
 def funToys():
+    """Renders the Fun Toys page."""
     return render_template('coolToys.html', title="Fun Stuff - Cool Toys", year=year)
+# End of Fun Toys
 
+# Full-text search form
 @main.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
     if request.method == "POST":
         if checkBtn('cancel', form):
+            # Cancel btn
+            # JavaScript will redirect
             pass
+        # Otherwise redirect to the search resutls page
         return redirect(url_for('.searchResults', q=form.search.data))
     return render_template('search.html', title="Search", year=year, form=form)
 
 @main.route('/search-results')
 def searchResults():
+    # Get the query string
     q = request.args.get("q")
-    # Get results from ALL of the models
+    # Get results from ALL of the models. This is why we imported all of them at the start of the file
     post_results = Post.query.whoosh_search(q, 50).all()
     snippet_results = Snippet.query.whoosh_search(q, 50).all()
     comment_results = Comment.query.whoosh_search(q, 50).all()
@@ -275,11 +338,14 @@ def searchResults():
 @login_required
 def confirm(token):
     if current_user.confirmed == True:
+        # Do nothing if user is already confirmed
         return redirect(url_for('blog.index'))
-    if current_user.confirmAccount(token):
+    if current_user.confirmAccount(token): # Try to confirm account
+        # If successful
         flash("We have confirmed your account, %s!" % current_user.username.capitalize(), 'success')
         return redirect(url_for('blog.index'))
     else:
+        # If not successful
         flash("The confirmation link is invalid or has expired.", 'error')
         return redirect(url_for('blog.index'))
 
@@ -287,19 +353,23 @@ def confirm(token):
 @login_required
 def unconfirmed():
     if current_user.confirmed == True:
-        return redirect(url_for('blog.index'))
+        # Redirect if user is already confirmed
+        return redirect(session.get("last_url") or url_for('blog.index'))
     return render_template('unconfirmed.html', title="Unconfirmed User", year=year)
 
 @main.route('/resend-confirmation-email')
 @login_required
 def resendConfirmationEmail():
+    # Generate token to be sent in email
     token = current_user.generateConfirmationToken()
     if send_email(current_user.parents_email, 'Confirm Your Account',
-                'confirm', user=current_user, token=token):
+                'confirm', user=current_user, token=token): # Try to send the email (Message is flashed from send_email function if not successful)
+        # If successful, flash a message
         flash("We have sent you another confirmation email.", 'info')
     return redirect(url_for('.unconfirmed'))
 
 @main.route('/users')
 def users():
+    # Get all the users from the database
     users = User.query.all()
     return render_template('users.html', title="Registered Users", year=year, users=users)
