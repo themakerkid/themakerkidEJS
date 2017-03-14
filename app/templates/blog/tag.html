@@ -7,7 +7,9 @@
 {% if tag.posts.count() > 0 %}
 <ul class="list-group">
     {% for post in tag.posts %}
+    {% if post.published %}
     <li class="list-group-item"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a></li>
+    {% endif %}
     {% endfor %}
 </ul>
 {% else %}

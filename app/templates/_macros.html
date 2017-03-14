@@ -89,10 +89,11 @@
         <!-- /.row -->
     </div>
 
-
+    {% if g.current_user.is_authenticated %}
     <!-- Side Widget Well -->
     <div class="well">
         <h3>Help</h3>
         <p>If you need to make a post, please hit the Create A New Post button {% if is_blog_page %}above{% else %}on the blog home page{% endif %}.</p>
     </div>
+    {% endif %}
 {% endmacro %}
