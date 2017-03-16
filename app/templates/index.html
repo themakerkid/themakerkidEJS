@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
+<!-- A local Stylesheet for the Home Page only.-->
 <style type="text/css">
     #logo {
         position: absolute;
@@ -29,10 +30,11 @@
     }
 </style>
 {% endblock %} {% block page_content %}
+
 <div class="jumbotron">
     <br />
     <div id="logo">
-        <img src="/static/images/manga_head.png" width="100" />
+        <img src="/static/images/manga_head.png" />
         <h1>CodeMaker Buddy</h1>
     </div>
     <p class="lead">

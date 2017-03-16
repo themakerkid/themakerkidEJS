@@ -2,11 +2,8 @@
 #hardware,
 #basic,
 #advanced,
-#eng,
-#maths,
 #other,
-#account,
-#tags {
+#account {
     cursor: pointer;
 }
 
@@ -40,9 +37,25 @@ body {
     margin-right: 10px;
 }
 
+#logo img {
+    width: 100px;
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
     body {
         padding-top: 120px;
+    }
+}
+
+@media (max-width: 445px) {
+    p.lead {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 340px) {
+    p.lead {
+        margin-top: 100px;
     }
 }
 

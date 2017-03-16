@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
 <style>
     .img-responsive {
-        width: 80%;
+        width: 70%;
     }
 </style>
 {% endblock %} {% block page_content %}
@@ -12,15 +12,19 @@
     <a role="button" class="btn btn-success" href="{{ url_for('main.scratchLearn') }}">Learning Resources</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProject') }}">My Project</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
-    <hr />
 </div>
 <hr />
 
 
-
-<!-- Start of Books -->
-
+<h2>Some Books that you may find useful</h2>
 <div class="container">
+    <p>The Scratch Wiki page is an excellent <a target="_blank" href="https://wiki.scratch.mit.edu/wiki/Scratch">Scratch Wiki</a> place to start. Also there are excellent projects and tutorials on the CoderDojo Kata page <a target="_blank" href="http://kata.coderdojo.com/wiki/Scratch_Tutorials"> compiled . </a>        As you can see from the picture on the left
+    </p>
+
+    <p>I began coding when I was 6 years old (a long time ago!), starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi. I won the Best Educational Content Award at the annual
+        <a target="_blank" href="https://scratch.mit.edu/help/"> Irish National Scratch competition</a> in 2015, with my project <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flash must be activated.">Snapshot Of our World</a>.
+        I joined Coderdojo in Summer 2015 originally at the <a target="_blank" href="https://scratch.mit.edu/studios/1817151/">Science Gallery</a>, before we moved to <a target="_blank" href="https://scratch.mit.edu/help/videos/#">Coderdojo Dublin @ the Warehouse</a>        in Zalando across the Quay from Google Headquarters.</p>
+
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/scratch/super_scratch_programming.jpg') }}" class="img-responsive" />

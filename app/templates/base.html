@@ -1,18 +1,50 @@
+<!--
+
+Hi there.
+
+This is Benjamin here. So, you like looking behind the Page at the source code!!
+
+That's Great! That's how I learn too.
+
+You can see that I used Bootstrap to make the site responsive, JQuery for some cool effects and Font Awesome for the
+scroll to top icon.
+
+I have used Python and Flask for all the server side stuff. Flask is a micro web framework written in Python
+
+I used PythonAnywhere to host this website on the web.
+
+If you have any questions about how the website was made, just make a post on the blog, and one of the members or myself will get back to you.  
+
+Keep Coding.
+
+    Benjamin
+
+-->
+
 {% extends "bootstrap/base.html" %} {% block title %}CodeMaker Buddy - {{ title }}{% endblock %} {% block styles %} {{ super() }}
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
-{% endblock %} {% block head %} {{ super() }}
+<!-- Favicon is the icon displayed in the address bar of this website-->
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
+<!-- Base CSS Stlyesheet for this website -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
+<!-- CSS Styles for highlighting Code Snippets -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+<!-- Font Awesome scalable vector icons. I use them for the "Back To Top" icon to scroll back to the top of long pages.-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 {% endblock %} {% block navbar %}
+<!-- Start of Body  -->
+
+<!-- Main Navigation Bar  -->
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -27,6 +59,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.about') }}">About</a></li>
+                <!-- Coder Submenu  -->
                 <li class="dropdown">
                     <a tabindex="0" data-toggle="dropdown" data-submenu id="basic">Coder<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -79,60 +112,77 @@
                         <li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>
                     </ul>
                 </li>
+                <!-- End Coder Submenu  -->
+                <!-- Maker Submenu  -->
                 <li class="dropdown">
                     <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Maker <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a tabindex="0" href="{{ url_for('main.maker') }}">Introduction</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>
-                        <!-- <li class="dropdown-submenu">
+                        <<<<<<< Updated upstream <li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>
+                <!-- <li class="dropdown-submenu">
                             <a tabindex="0">Electronics</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ url_for('main.makeElec') }}">Getting Started</a></li>
                             </ul>
                         </li> -->
-                        <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
+                <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
                         <li><a tabindex="0" href="{{ url_for('main.makeBooks') }}">Engineering Books</a></li> -->
-                        <li class="dropdown-submenu">
-                            <a tabindex="0">Arduino</a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
-                            </ul>
-                        </li>
-                        <!-- <li><a tabindex="0" href="{{ url_for('main.makeRobot') }}">Robotics</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.makeProj') }}">Projects</a></li>
-                        -->
-                        <li><a tabindex="0" href="{{ url_for('main.makeToys') }}">Cool Toys</a></li>
-                        <!-- <li class="dropdown-submenu">
+                =======
+                <li><a href="{{ url_for('main.hardElec') }}">Electronics</a></li>
+                >>>>>>> Stashed changes
+                <li class="dropdown-submenu">
+                    <a tabindex="0">Arduino</a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
+                    </ul>
+                </li>
+                <<<<<<< Updated upstream <!-- <li><a tabindex="0" href="{{ url_for('main.makeRobot') }}">Robotics</a></li>
+                    <li><a tabindex="0" href="{{ url_for('main.makeProj') }}">Projects</a></li>
+                    -->
+                    <li><a tabindex="0" href="{{ url_for('main.makeToys') }}">Cool Toys</a></li>
+                    <!-- <li class="dropdown-submenu">
                             <a tabindex="0" id="other">Fun Stuff</a>
                             <ul class="dropdown-menu">
                                 <li><a tabindex="0" href="{{ url_for('main.funToys') }}">Cool Toys</a></li>
                             </ul>
                         </li>
                         -->
-                        <!-- <li class="dropdown-submenu">
+                    <!-- <li class="dropdown-submenu">
                          <a tabindex="0">Raspberry Pi</a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="0" href="{{ url_for('main.raspi') }}">Getting Started</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.raspiLearn') }}">Learning Resources</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.raspiPython') }}">Python</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.raspiCode') }}">Coding Websites</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.raspiHardware') }}">Hardware</a></li>
-                            </ul>
-                        </li>
-                        -->
-                        <li class="divider"></li>
-                        <li><a tabindex="0" href="{{ url_for('main.famousMakers') }}">Famous Makers</a></li>
+=======
+                        <li><a tabindex="0" href="{{ url_for('main.hardToys') }}">Cool Toys</a></li>
+                        <!-- Raspberry PI submenu - to be implemented in next major release. -->
+                    <li class="dropdown-submenu">
+                        <a tabindex="0">Raspberry Pi</a> >>>>>>> Stashed changes
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0" href="{{ url_for('main.raspi') }}">Getting Started</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.raspiLearn') }}">Learning Resources</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.raspiPython') }}">Python</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.raspiCode') }}">Coding Websites</a></li>
+                            <li><a tabindex="0" href="{{ url_for('main.raspiHardware') }}">Hardware</a></li>
+                        </ul>
+                    </li>
+                    <!-- End of Raspberry PI submenu -->
+                    <li class="divider"></li>
+                    <<<<<<< Updated upstream <li><a tabindex="0" href="{{ url_for('main.famousMakers') }}">Famous Makers</a></li>
                         <!--
                         <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
                         -->
                         <li><a tabindex="0" href="{{ url_for('main.makeCompEv') }}">Events &amp; Competitions</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.makeGlossary') }}">Glossary</a></li>
-                    </ul>
-                </li>
+                        =======
+                        <li><a tabindex="0" href="{{ url_for('main.famous') }}">Famous Makers</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.hardCompEv') }}">Events &amp; Competitions</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.hardGlossary') }}">Glossary</a></li>
+                        >>>>>>> Stashed changes
+                        </ul>
+                        </li>
+                        <!-- End Coder Submenu  -->
             </ul>
+            <!-- Search,Blog, Code Snippets and user options  -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
                 <li><a tabindex="0" href="{{ url_for('main.users') }}">All Users</a></li>
@@ -152,53 +202,66 @@
                 <li><a tabindex="0" href="{{ url_for('blog.register') }}">Register</a></li>
                 {% endif %}
             </ul>
+            <!-- End of Search,Blog, Code Snippets and user options  -->
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block content %}
-<div class="container">
-    <p id="noscript"><strong>Please enable Javascript to improve your experience.</strong></p>
-    {% for category, message in get_flashed_messages(with_categories=True) %}
-    <div class="alert alert-{{ category }}">
-        <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
-    </div>
-    {% endfor %}
-    <!--[if lt IE 9]>
+<<<<<<< Updated upstream {% endblock %} {% block content %}=======< !-- End of main Navigation Bar -->
+    {% endblock %} {% block content %}
+    <!-- Start of Page Content -->
+    >>>>>>> Stashed changes
+    <div class="container">
+        <p id="noscript" class="text-danger"><strong>Please enable Javascript to improve your experience.</strong></p>
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ category }}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
+        </div>
+        {% endfor %}
+        <!--[if lt IE 9]>
             <a class="btn btn-danger" href="browsehappy.com">Please upgrade your browser to improve your experience.</a>
         <![endif]-->
-    {% block page_content %}{% endblock %}
-    <footer>
-        <br /> {% if year %}
-        <p>&copy; {{ year }} - CodeMaker Buddy</p>
-        {% endif %}
-        <p class="pull-right">Designed and Coded by Benjamin Murray</p>
-    </footer>
-</div>
-<i class="fa fa-3x fa-arrow-circle-up" id="scroll-top"></i>
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
-    <script>
-        $(function() {
-            $('[data-submenu]').submenupicker();
-            $('#noscript').remove();
-            $('#scroll-top').hide();
-            $('#scroll-top').on('click', function() {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
+        {% block page_content %}{% endblock %}
+        <footer>
+            <br /> {% if year %}
+            <p>&copy; {{ year }} - CodeMaker Buddy</p>
+            {% endif %}
+            <p class="pull-right">Designed and Coded by Benjamin Murray</p>
+        </footer>
+    </div>
+    <<<<<<< Updated upstream <i class="fa fa-3x fa-arrow-circle-up" id="scroll-top">
+        </i>
+        {% endblock %} {% block scripts %} {{ super() }}
+        <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
+        <script>
+            $(function() {
+                $('[data-submenu]').submenupicker();
+                $('#noscript').remove();
+                $('#scroll-top').hide();
+                $('#scroll-top').on('click', function() {
+                    $("html, body").animate({
+                        scrollTop: 0
+                    }, 1000);
+                });
+                $(document).on('scroll', function() {
+                    if ($(window).scrollTop() > 100) {
+                        $("#scroll-top").fadeIn(500);
+                    } else {
+                        $("#scroll-top").fadeOut(500);
+                    }
+                });
             });
-            $(document).on('scroll', function() {
-                if ($(window).scrollTop() > 100) {
-                    $("#scroll-top").fadeIn(500);
-                } else {
-                    $("#scroll-top").fadeOut(500);
-                }
+        </script>
+        =======
+        <!-- End of Page Content -->
+        {% endblock %} {% block scripts %}
+        <!-- Start of Global Scripts -->{{ super() }}
+        <!-- Activate Submenus and remove "enabling JavaScript message" -->
+        <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
+        <script>
+            $(function() {
+                $('[data-submenu]').submenupicker();
+                $('#noscript').remove();
             });
-        });
-    </script>
-{% endblock %}
+        </script>
+        <!-- End of Global Scripts -->
+        >>>>>>> Stashed changes {% endblock %}
