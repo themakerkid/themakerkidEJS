@@ -45,8 +45,8 @@ def create_app():
     app.config["MAIL_SERVER"] = 'smtp.gmail.com'
     app.config["MAIL_PORT"] = 465
     app.config["MAIL_USE_SSL"] = True
-    app.config["MAIL_USERNAME"] = 'themakerkid'
-    app.config["MAIL_PASSWORD"] = 'AlexBaburin2'
+    app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+    app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
     app.debug = True
 
     # Initialise all the extensions
