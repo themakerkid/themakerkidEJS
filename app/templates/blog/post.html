@@ -2,11 +2,6 @@
 <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
-<style>
-    .publish-btn {
-        margin-right: 5px;
-    }
-</style>
 {% endblock %} {% block page_content %}
 <div class="row">
     <div class="col-md-9">
@@ -16,12 +11,14 @@
             </div>
             <div class="media-body">
                 {% if current_user.username == post.author.username %}
-                <a href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary pull-right">Edit</a>
-                {% if post.published %}
-                <a href="{{ url_for('blog.draft', id=post.id) }}" class="btn btn-danger pull-right publish-btn">Make Draft</a>
-                {% else %}
-                <a href="{{ url_for('blog.public', id=post.id) }}" class="btn btn-success pull-right publish-btn">Make Public</a>
-                {% endif %}
+                <div class="btn-group pull-right">
+                    <a href="{{ url_for('blog.edit', id=post.id) }}" class="btn btn-primary">Edit</a>
+                    {% if post.published %}
+                    <a href="{{ url_for('blog.draft', id=post.id) }}" class="btn btn-danger">Make Draft</a>
+                    {% else %}
+                    <a href="{{ url_for('blog.public', id=post.id) }}" class="btn btn-success">Make Public</a>
+                    {% endif %}
+                </div>
                 {% endif %}
                 <h1 class="media-heading text-primary">{{ post.title }}</h1>
                 By <a href="{{ url_for('blog.profile', username=post.author.username) }}">{{ post.author.username|capitalize }}</a><br />
@@ -36,7 +33,7 @@
         <hr />
 
         {% if current_user.is_authenticated %}
-        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#comForm" id="comBtn">Add a comment!</button>
+        <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#comForm">Add a comment!</button>
         {% endif %}
         <h2 id="comments">Comments</h2>
         {% if current_user.is_authenticated %}
