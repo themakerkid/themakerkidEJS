@@ -1,238 +1,210 @@
-{% extends "base.html" %}
-
-{% block styles %}
-    {{ super() }}
-    <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-        #wrapper {
-            margin: 30px auto 0;
-            width: 900px;
-            margin-bottom: 20px;
-            padding: 20px;
-        }
-        
-        #wrapper h1 {
-            font-family: 'Play', sans-serif;
-            margin: 0 0 20px;
-            text-align: center;
-            text-shadow: 3px 3px 4px grey;
-        }
-        
-        #wrapper p {
-            margin: 0 0 30px;
-            text-align: center;
-        }
-        /*.container {
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+<style type="text/css">
+    #wrapper {
+        margin: 30px auto 0;
+        width: 900px;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    
+    #wrapper h1 {
+        font-family: 'Play', sans-serif;
+        margin: 0 0 20px;
+        text-align: center;
+        text-shadow: 3px 3px 4px grey;
+    }
+    
+    #wrapper p {
+        margin: 0 0 30px;
+        text-align: center;
+    }
+    /*.container {
                 background: #fff;
                 box-shadow: 0 0 10px #ccc;
                 margin-bottom: 20px;
                 padding: 20px;
                 width: 900px;
             }*/
-        
-        #tabs-container {
-            background: #000;
-            height: 400px;
-            width: 900px;
-        }
-        
-        #tabs-nav {
-            float: left;
-            width: 280px;
-        }
-        
-        #tabs-nav .logo {
-            float: left;
-        }
-        
-        #tabs-nav ul {
-            font-family: Garamond, Georgia;
-            font-size: 1em;
-            list-style: none;
-        }
-        
-        #tabs-nav ul li {
-            border-top: 1px solid #000;
-            float: left;
-        }
-        
-        #tabs-nav ul li a {
-            background: url('/static/images/nav-sprite.jpg') no-repeat;
-            color: #999;
-            display: block;
-            height: 19px;
-            padding: 30px;
-            width: 220px;
-            text-decoration: none;
-            font-size: 1.25em;
-            text-shadow: 1px 1px 1px #000;
-            margin-bottom: 10px;
-            font-family: sans-serif;
-        }
-        
-        #tabs-nav ul li a:hover {
-            background-position: 0 -79px;
-            color: #fff;
-        }
-        
-        #tabs-nav ul li a.active {
-            background-position: 0 -158px;
-            color: #fff;
-        }
-        
-        #tabs-content {
-            background: url('/static/images/ajax-loader.gif') 50% 50% no-repeat;
-            float: left;
-            height: 400px;
-            width: 620px;
-        }
-        
-        #tabs-content .profile {
-            display: none;
-            /* hide by default */
-            height: 400px;
-            position: relative;
-            width: 620px;
-        }
-        
-        #tabs-content .profile .caption {
-            background: url('/static/images/trans_black-50.png');
-            padding: 30px;
-            position: absolute;
-            right: 0px;
-            top: 0px;
-            width: 220px;
-        }
-        
-        #tabs-content .profile .caption h2 {
-            color: #fff;
-            font-family: Garamond, Georgia;
-            margin: 0 0 10px;
-        }
-        
-        #tabs-content .profile .caption p {
-            color: #ccc;
-            font-family: Arial;
-            font-size: 1.05em;
-            line-height: 1.5em;
-            margin: 0;
-            text-align: left;
-        }
-    </style>
-{% endblock %}
+    
+    #tabs-container {
+        background: #000;
+        height: 400px;
+        width: 900px;
+    }
+    
+    #tabs-nav {
+        float: left;
+        width: 280px;
+    }
+    
+    #tabs-nav .logo {
+        float: left;
+    }
+    
+    #tabs-nav ul {
+        font-family: Garamond, Georgia;
+        font-size: 1em;
+        list-style: none;
+    }
+    
+    #tabs-nav ul li {
+        border-top: 1px solid #000;
+        float: left;
+    }
+    
+    #tabs-nav ul li a {
+        background: url('/static/images/nav-sprite.jpg') no-repeat;
+        color: #999;
+        display: block;
+        height: 19px;
+        padding: 30px;
+        width: 220px;
+        text-decoration: none;
+        font-size: 1.25em;
+        text-shadow: 1px 1px 1px #000;
+        margin-bottom: 10px;
+        font-family: sans-serif;
+    }
+    
+    #tabs-nav ul li a:hover {
+        background-position: 0 -79px;
+        color: #fff;
+    }
+    
+    #tabs-nav ul li a.active {
+        background-position: 0 -158px;
+        color: #fff;
+    }
+    
+    #tabs-content {
+        background: url('/static/images/ajax-loader.gif') 50% 50% no-repeat;
+        float: left;
+        height: 400px;
+        width: 620px;
+    }
+    
+    #tabs-content .profile {
+        display: none;
+        /* hide by default */
+        height: 400px;
+        position: relative;
+        width: 620px;
+    }
+    
+    #tabs-content .profile .caption {
+        background: url('/static/images/trans_black-50.png');
+        padding: 30px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 220px;
+    }
+    
+    #tabs-content .profile .caption h2 {
+        color: #fff;
+        font-family: Garamond, Georgia;
+        margin: 0 0 10px;
+    }
+    
+    #tabs-content .profile .caption p {
+        color: #ccc;
+        font-family: Arial;
+        font-size: 1.05em;
+        line-height: 1.5em;
+        margin: 0;
+        text-align: left;
+    }
+</style>
+{% endblock %} {% block page_content %}
+<div id="wrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Famous Coders</h1>
 
-{% block page_content %}
-    <div class="text-center">
-        <h2>What is Technology?</h2><br />
-        <img src="{{ url_for('static', filename='images/Tech_def1.jpg') }}" alt="technology logo" class="pull-left" />
+            <div id="tabs-container">
 
-        <p>
-            <em> Technology is the use of knowledge to invent new devices or tools. Throughout history, technology has made people's lives easier. Although we might think of technology as being the internet, mobile devices and computer game, in reality it has been with us since early the earliest humans. Early humans set themselves apart from other animals when they learned to control fire. Later examples of technology were tools and weapons, the printing press, the telephone and Robots.</em></p>
-        <p>
-
-
-            <br />
-            <h3 class="list-group-item-heading ">A cool video by Tony Montez -- Thanks Tony</h3>
-            <br />
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Giiz81_uzK8" frameborder="0" allowfullscreen></iframe>
-
-
-            <br />
-            <br />
-        </p>
-    </div>
-    <div id="wrapper">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>Famous Coders</h1>
-
-                    <div id="tabs-container">
-
-                        <div id="tabs-nav">
-                            <img src="{{ url_for('static', filename='images/coding/famousCodersLogo.jpg') }}" class="logo" />
-                            <ul>
-                                <li><a href="#" data-id="ada-lovelace" class="active">Ada Lovelace</a></li>
-                                <li><a href="#" data-id="tim-berners">Tim Berners-Lee</a></li>
-                                <li><a href="#" data-id="guido-van-rossum">Guido van Rossum</a></li>
-                                <li><a href="#" data-id="linus-torvalds">Linus Torvalds</a></li>
-                            </ul>
-                        </div>
-                        <!--/#tabs-nav-->
-
-                    <div id="tabs-content">
-
-                        <div class="profile" id="ada-lovelace" style="display: block;">
-                            <div class="caption">
-                                <h2>Ada Lovelace</h2>
-                                <p>was an American information technology entrepreneur and inventor. He was co-founder of Apple Inc., maker of the Macintosh computer, the iPod, the iPhone and the iPad. He was CEO and majority shareholder of Pixar Animation Studios.</p>
-                            </div>
-                            <!--/.caption-->
-                            <img src="{{ url_for('static', filename='images/coding/adaLovelace.jpg') }}" />
-                        </div>
-
-                        <div class="profile" id="tim-berners">
-                            <div class="caption">
-                                <h2>Tim Berners-Lee</h2>
-                                <p>is an English computer scientist, best known as the inventor of the World Wide Web. He wrote the first web browser and server in 1990, while employed at CERN in Switzerland. He is Director of the World Wide Web Consortium (W3C)</p>
-                            </div>
-                            <!--/.caption-->
-                            <img src="{{ url_for('static', filename='images/coding/tim_berners.jpg') }}" />
-                        </div>
-
-
-                        <div class="profile" id="guido-van-rossum">
-                            <div class="caption">
-                                <h2>Guido van Rossum</h2>
-                                <p>(born 10 February 1973) is a British businesswoman, philanthropist, and public servant. She founded co-founded Lastminute.com in the dotcom boom of the early 2000, and is a is a board member of Twitter, mydeco.com and Marks &amp;
-                                    Spencer,
-                                </p>
-                            </div>
-                            <!--/.caption-->
-                            <img src="{{ url_for('static', filename='images/coding/guido_van_rossum.png') }}" width="350" height="400" />
-                        </div>
-
-                        <div class="profile" id="linus-torvalds">
-                            <div class="caption">
-                                <h2>Linus Torvalds</h2>
-                                <p>is an American business magnate, entrepreneur, philanthropist, investor, and programmer. In 1975, Gates and Paul Allen co-founded Microsoft, which became the world's largest PC software company.</p>
-                            </div>
-                            <!--/.caption-->
-                            <img src="{{ url_for('static', filename='images/coding/linus_torvalds.jpg') }}" width="350" height="400" />
-                        </div>
-
-                    </div>
-                    <!--/#tabs-content-->
+                <div id="tabs-nav">
+                    <img src="{{ url_for('static', filename='images/coding/famousCodersLogo.jpg') }}" class="logo" />
+                    <ul>
+                        <li><a href="#" data-id="ada-lovelace" class="active">Ada Lovelace</a></li>
+                        <li><a href="#" data-id="tim-berners">Tim Berners-Lee</a></li>
+                        <li><a href="#" data-id="guido-van-rossum">Guido van Rossum</a></li>
+                        <li><a href="#" data-id="linus-torvalds">Linus Torvalds</a></li>
+                    </ul>
                 </div>
-                <!--/.col-xs-12-->
-            </div>
-            <!--/#tabs-container-->
-        </div>
-        <!--/.row-->
-        <!--        <p>Demo by <a href="http://alijafarian.com/">Ali Jafarian</a></p>-->
-    </div>
-    <!--/#wrapper-->
-{% endblock %}
+                <!--/#tabs-nav-->
 
-{% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // bind our function to the tabs
-            $('#tabs-nav ul li a').click(function(e) {
-                e.preventDefault();
-                // remove the active state from all links
-                $('#tabs-nav ul li a').removeClass("active");
-                // add the active state to the clicked link
-                $(this).addClass("active");
-                // fade out the current container
-                $('.profile').fadeOut(600, function() {
-                    // fade in the clicked container
-                    $('#' + profileID).fadeIn(600);
-                });
-                // define our current profile variable
-                var profileID = $(this).attr("data-id");
+                <div id="tabs-content">
+
+                    <div class="profile" id="ada-lovelace" style="display: block;">
+                        <div class="caption">
+                            <h2>Ada Lovelace</h2>
+                            <p>was an American information technology entrepreneur and inventor. He was co-founder of Apple Inc., maker of the Macintosh computer, the iPod, the iPhone and the iPad. He was CEO and majority shareholder of Pixar Animation Studios.</p>
+                        </div>
+                        <!--/.caption-->
+                        <img src="{{ url_for('static', filename='images/coding/adaLovelace.jpg') }}" />
+                    </div>
+
+                    <div class="profile" id="tim-berners">
+                        <div class="caption">
+                            <h2>Tim Berners-Lee</h2>
+                            <p>is an English computer scientist, best known as the inventor of the World Wide Web. He wrote the first web browser and server in 1990, while employed at CERN in Switzerland. He is Director of the World Wide Web Consortium (W3C)</p>
+                        </div>
+                        <!--/.caption-->
+                        <img src="{{ url_for('static', filename='images/coding/tim_berners.jpg') }}" />
+                    </div>
+
+
+                    <div class="profile" id="guido-van-rossum">
+                        <div class="caption">
+                            <h2>Guido van Rossum</h2>
+                            <p>(born 10 February 1973) is a British businesswoman, philanthropist, and public servant. She founded co-founded Lastminute.com in the dotcom boom of the early 2000, and is a is a board member of Twitter, mydeco.com and Marks
+                                &amp; Spencer,
+                            </p>
+                        </div>
+                        <!--/.caption-->
+                        <img src="{{ url_for('static', filename='images/coding/guido_van_rossum.png') }}" width="350" height="400" />
+                    </div>
+
+                    <div class="profile" id="linus-torvalds">
+                        <div class="caption">
+                            <h2>Linus Torvalds</h2>
+                            <p>is an American business magnate, entrepreneur, philanthropist, investor, and programmer. In 1975, Gates and Paul Allen co-founded Microsoft, which became the world's largest PC software company.</p>
+                        </div>
+                        <!--/.caption-->
+                        <img src="{{ url_for('static', filename='images/coding/linus_torvalds.jpg') }}" width="350" height="400" />
+                    </div>
+
+                </div>
+                <!--/#tabs-content-->
+            </div>
+            <!--/.col-xs-12-->
+        </div>
+        <!--/#tabs-container-->
+    </div>
+    <!--/.row-->
+    <!--        <p>Demo by <a href="http://alijafarian.com/">Ali Jafarian</a></p>-->
+</div>
+<!--/#wrapper-->
+{% endblock %} {% block scripts %} {{ super() }}
+<script type="text/javascript">
+    $(document).ready(function() {
+        // bind our function to the tabs
+        $('#tabs-nav ul li a').click(function(e) {
+            e.preventDefault();
+            // remove the active state from all links
+            $('#tabs-nav ul li a').removeClass("active");
+            // add the active state to the clicked link
+            $(this).addClass("active");
+            // fade out the current container
+            $('.profile').fadeOut(600, function() {
+                // fade in the clicked container
+                $('#' + profileID).fadeIn(600);
             });
+            // define our current profile variable
+            var profileID = $(this).attr("data-id");
         });
-    </script>
+    });
+</script>
 {% endblock %}

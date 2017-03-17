@@ -1,56 +1,117 @@
-{% extends "base.html" %}
-
-{% block styles %}
-    {{ super() }}
-    {% include "_img_left.html" %}
-{% endblock %}
-
-{% block page_content %}
-    <div class="page-header">
-    <h1>Introduction to Coding</h1>
+{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_img_left.html" %}
+<style>
+    h2 {
+        color: #fcd062;
+        text-shadow: grey 0.1em 0.1em 0.2em;
+        margin-top: -10px;
+    }
+    
+    @media (max-width: 770px) {
+        h2 {
+            margin-top: 10px;
+        }
+    }
+</style> {% endblock %} {% block page_content %}
+<div class="row">
+    <div class="col-md-2">
+        <img src="{{ url_for('static', filename='images/coding/magic_wand1.png') }}" alt="technology logo" class="img-responsive" />
     </div>
-        <h2>Whats Covered in this Section?</h2>
-        <p>
-            For the moment, most of the emphasis in this section is on Coding, but I will add other content as time goes on. Coding brings together all aspects of main together. The best thing is that it is easy to get started and you can create whatever you want.</p>
-        <p>
-            <h2>Getting Started</h2>
+    <div class="col-md-10">
+        <img src="{{ url_for('static', filename='images/coding/welcome_code.gif') }}" alt="technology logo" class="img-responsive" />
+        </br> <img src="{{ url_for('static', filename='images/coding/coding_magic2.gif') }}" alt="technology logo" class="img-responsive" />
+    </div>
+    </br>
+</div>
+</br>
+</br>
 
+<!-- What is Code -->
+<div class="row">
+    <div class="col-sm-7">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9LVbhM2VHiY?rel=0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="video-text-right">
+            <h2 class="text-primary">But what is code?</h2>
+            <p>Learn about what code is by watching this cool video.</p>
+            </br>
             <p>
-                Getting Started: Intro to Coding Video Choosing a Language Choosing a platform Choosing an editor My recommendations: Join a Dojo, then choose a language: Scratch, Processing, Python Web (HTML/CSS/Javascript), Mobile Video: Khanacademy coding resources or choose an editors: Scratch Offline Explorer, Notepad++, Nano, Sublime Text, Brackets, Video, Bluefish, Idle,  Other Tools: Simage Editors (Gimp and InkscAPE) ???
+                <h5><em> Video courtesy of Coding@CC4G  Thank you!</em></h5>
             </p>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<!-- What is a Computer Program -->
+<div class="row">
+    <div class="col-sm-7">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/THOEQ5soVpY?rel=0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <div class="video-text-right">
+            <h2 class="text-primary">And what is a Program?</h2>
+            <p>Learn about the different Continents of the world. Click on a continent to get some more information. Try the the mini quiz as well.</p>
+            <p>
+                <h5><em> Video courtesy of Coding@CC4G  Thank you!</em></h5>
+            </p>
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<br/>
+<!-- Getting Started -->
+<div class="row">
+    <h2 class="text-primary">So how do I get started?</h2>
+    <p>
+        Getting Started: Intro to Coding Video Choosing a Language Choosing a platform Choosing an editor My recommendations: Join a Dojo, then choose a language: Scratch, Processing, Python Web (HTML/CSS/Javascript), Mobile Video: Khanacademy coding resources
+        or choose an editors: Scratch Offline Explorer, Notepad++, Nano, Sublime Text, Brackets, Video, Bluefish, Idle, Other Tools: Simage Editors (Gimp and InkscAPE) ???
+    </p>
+</div>
 
 
-            <h2 class=bs-docs-featurette-title>So where do I go from Here?</h2>
-            <p> If you want to get into coding, here are some suggestions. Just hover and click on any of the sections below: </p><br />
-
-            <div class="list-group">
-                <a href="https://coderdojo.com/" class="list-group-item ">
-                    <h3 class="list-group-item-heading ">Join Coder Dojo!</h3>
-                    <p class="list-group-item-text">I have been attending Coderdojo for over a year now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led,  community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.</p>
-                </a>
-                <br />
-                <a href="{{ url_for('main.scratch') }}" class="list-group-item">
-                    <h3 class="list-group-item-heading ">Learn Scratch</h3>
-                    <p class="list-group-item-text">Scratch is a programming language and an online community where children can program and share interactive media such as stories, games, and animation with people from all over the world. To get started kead on over to the Scratch Page, by clicking on this text now.</p>
-                </a>
-                <br />
-                <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-                    <h3 class="list-group-item-heading ">Learn the Processing Language on Khan Academy</h3>
-                    <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in a visual context, and to serve as the foundation for electronic sketchbooks.</p>
-                </a>
-                <br />
-
-                <a href="https://www.khanacademy.org/computing/computer-programming/html-css" class="list-group-item">
-                    <h3 class="list-group-item-heading ">Learn how to create Webpages</h3>
-                    <p class="list-group-item-text">Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the color, font, layout, and more.</p>
-                </a>
-                <br />
 
 
-                <a href="{{ url_for('main.drawing') }}" class="list-group-item">
-                    <h3 class="list-group-item-heading ">Check out some of my Processing code</h3>
-                    <p class="list-group-item-text">I created these Processing examples on the KHAN Academy Animations</p>
-                </a>
-            </div>
-        </p>
+<h2 class=bs-docs-featurette-title>So where do I go from Here?</h2>
+<p> If you want to get into coding, here are some suggestions. Just hover and click on any of the sections below: </p><br />
+
+<div class="list-group">
+    <a href="https://coderdojo.com/" class="list-group-item ">
+        <h3 class="list-group-item-heading ">Join Coder Dojo!</h3>
+        <p class="list-group-item-text">I have been attending Coderdojo for over a year now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
+            websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.</p>
+    </a>
+    <br />
+    <a href="{{ url_for('main.scratch') }}" class="list-group-item">
+        <h3 class="list-group-item-heading ">Learn Scratch</h3>
+        <p class="list-group-item-text">Scratch is a programming language and an online community where children can program and share interactive media such as stories, games, and animation with people from all over the world. To get started kead on over to the Scratch Page, by clicking
+            on this text now.</p>
+    </a>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+        <h3 class="list-group-item-heading ">Learn the Processing Language on Khan Academy</h3>
+        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+            a visual context, and to serve as the foundation for electronic sketchbooks.</p>
+    </a>
+    <br />
+
+    <a href="https://www.khanacademy.org/computing/computer-programming/html-css" class="list-group-item">
+        <h3 class="list-group-item-heading ">Learn how to create Webpages</h3>
+        <p class="list-group-item-text">Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change
+            the color, font, layout, and more.</p>
+    </a>
+    <br />
+
+
+    <a href="{{ url_for('main.drawing') }}" class="list-group-item">
+        <h3 class="list-group-item-heading ">Check out some of my Processing code</h3>
+        <p class="list-group-item-text">I created these Processing examples on the KHAN Academy Animations</p>
+    </a>
+</div>
+</p>
 {% endblock %}
