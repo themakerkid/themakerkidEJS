@@ -200,40 +200,21 @@
         </div>
         <!-- End accordion-content-->
     </div>
-        <div class="accordion-container">
+
+
+    <div class="accordion-container">
         <button href="#" class="accordion-toggle">CodeMaker Buddy Features<span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
-            <p>I wanted to show other kids that coding and making stuff is fun. If kids try some of the projects they will soon realise that making stuff with code is great fun and that there are great technology resources in our own country.</p>
-
-            <p>The getting started section helps kids get setup with hardware and software and explains how to join a Dojo. 
-
-The coding section has fun example projects creted by me in Scratch, App Inventor, Processing and Python.
-All example projects have the source code 
-  
-The maker section has projects with Arduino, and BBC Microbit.  
-
-There is a forum where kids can blog, share ideas, discuss projects and learn together. 
-To post messages and comments, kids must register with their parents’ permission
-
-Video Tutorials created by me to help kids get started.
-
-A code snippet sharing facility.
-
-Useful Links to top learning resources 
-
-Reviews of usefull technology books and some cool STEM toys and kits which I have used/built..
-
-Sections on Famouse Coders and Famous Makers to help inspire kids. 
-
-Useful information on Irish coder and maker events and competitions like Dublin Maker,  and Coolest Projects and Eir Junior Spiders
- .
-.</p>
-
-            <p>I wanted to establish links with other kids who are interested in making stuff, and provide a forum where we could communicate and learn from each other.</p>
-
-            <p> I wanted to learn other skills like making videos and editing images. </p>
-
-            <p>My website is built by a kid, for Irish kids and kids all around the world, with relevant help and guidelines on how to get started and have fun with all areas of making stuff with code.</p>
+            <div class="list-group">
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The coding section has fun example projects creted by me in Scratch, App Inventor, Processing and Python. All example projects have the source code </a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The maker section has projects with Arduino, and BBC Microbit. There is a forum where kids can blog, share ideas, discuss projects and learn together. </a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The Buddy section allows kids to post messages and comments. In order to post kids must register with their parent's/guardian's permission if they are under 13 years of age.</a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The Share section has a code snippet sharing facility, where kids can add snippets of code, which other kids may find useful.</a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">There are video tutorials created by me to help kids get started.</a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">There are other sections on Famouse Coders and Famous Makers to help inspire kids. </a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">There are useful links to top learning resources Reviews of usefull technology books and some cool STEM toys and kits which I have used/built. </a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">Irish coder and maker events and competitions like Dublin Maker, and Coolest Projects and Eir Junior Spiders.</a>
+            </div>
         </div>
         <!-- End accordion-content-->
     </div>
