@@ -1,13 +1,15 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
 <style>
-    h2 {
-        color: maroon;
+    h2,
+    h3 {
+        color: #fcd062;
         text-shadow: grey 0.1em 0.1em 0.2em;
         margin-top: -10px;
     }
     
     @media (max-width: 770px) {
-        h2 {
+        h2,
+        h3 {
             margin-top: 10px;
         }
     }
@@ -85,7 +87,7 @@
 <div class="list-group">
     <a href="https://coderdojo.com/" class="list-group-item ">
         <img src="{{ url_for('static', filename='images/about/coderdojo.jpg') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Join Coder Dojo!</h3>
+        <h3 class="list-group-item-heading ">Join your local CoderDojo!</h3>
         <p class="list-group-item-text">I have been attending Coderdojo for almost 2 years now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
             websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.</p>
     </a>

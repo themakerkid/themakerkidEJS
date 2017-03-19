@@ -14,6 +14,10 @@
     .img-responsive {
         width: 80%;
     }
+    
+    img.margin-bottom {
+        margin-bottom: 10px;
+    }
 </style>
 {% endblock %} {% block page_content %}
 <div class="text-left">
@@ -26,10 +30,15 @@
 <!-- PF  -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/science/primary_science_fair.jpg') }}" class="img-responsive" />
+        <div class="col-sm-5">
+            <img src="{{ url_for('static', filename='images/science/primary_science_fair.jpg') }}" class="img-responsive margin-bottom" />
         </div>
-        <div class="col-sm-8 margin-top-20">
+        <div class="col-sm-7">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/H4haCluK_fo?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top-20">
             <h3 class="text-primary">RDS Primary Science Fair</h3>
             <p>The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
                 Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for
@@ -41,10 +50,15 @@
     <br/>
     <!-- BTYSTE -->
     <div class="row">
-        <div class="col-sm-4 ">
-            <img src="{{ url_for('static', filename='images/hardware/bt.gif') }}" class="img-responsive img-rounded" />
+        <div class="col-sm-5">
+            <img src="{{ url_for('static', filename='images/hardware/bt.gif') }}" class="img-responsive margin-bottom" />
         </div>
-        <div class="col-sm-8 margin-top-20">
+        <div class="col-sm-7">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/w1tUAUJ2h04?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-12 margin-top-20">
             <h3 class="text-primary">BT Young Science and Technology Exhibition</h3>
             <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
         </div>
@@ -54,12 +68,17 @@
     <br/>
     <!-- DM -->
     <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/hardware/dublin_maker.png') }}" class="img-responsive" />
+        <div class="col-sm-5">
+            <img src="{{ url_for('static', filename='images/hardware/dublin_maker.png') }}" class="img-responsive margin-bottom" />
         </div>
-        <div class="col-sm-8 margin-top-20">
+        <div class="col-sm-7">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/TRAVWLO7LeE?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-xs-12 margin-top-20">
             <h3 class="text-primary">Dublin Maker</h3>
-            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+            <p>This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
         </div>
     </div>
     <br/>
@@ -67,13 +86,18 @@
     <br/>
     <!-- SW  -->
     <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/science/science_week.png') }}" class="img-responsive" />
+        <div class="col-sm-5">
+            <img src="{{ url_for('static', filename='images/maker/tech_week.png') }}" class="img-responsive margin-bottom" />
         </div>
-        <div class="col-sm-8">
-            <h3 class="text-primary">Science Week</h3>
-            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
-                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+        <div class="col-sm-7">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/iZkT4jDCWCg?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <h3 class="text-primary">Tech Week</h3>
+            <p>
+                Over 90,000 people participated in and out of classrooms around Ireland. We held a showcase in Dublin Castle to cap Tech Week off. It was brilliant. We had a ball--we hope you did too!
             </p>
         </div>
     </div>
