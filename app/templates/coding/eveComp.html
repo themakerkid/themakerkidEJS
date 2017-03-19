@@ -14,74 +14,79 @@
     .img-responsive {
         width: 80%;
     }
+
+    @media (max-width: 768px) {
+        .img-margin-top {
+            margin-top: 10px;
+        }
+    }
 </style>
 {% endblock %} {% block page_content %}
 <div class="text-left">
     <h1>Events &amp; Competitions</h1>
 </div>
-<br/>
+<br />
 <hr class="top">
 
 <!-- Start of Events -->
-<!-- CDCP  -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/coding/coolest_projects.png') }}" class="img-responsive" />
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/cY6FHBhzyIs?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="col-sm-8">
-            <div>
-                <h3 class="text-primary">Coder Dojo -- Coolest Projects</h3>
-                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
-            </div>
+<!-- Coolest Projects -->
+<div class="row">
+    <div class="col-sm-7">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cY6FHBhzyIs?rel=0" allowfullscreen></iframe>
         </div>
     </div>
-    <br/>
-    <hr class="divider">
-    <br/>
-    <!-- EJS -->
-    <div class="row">
-        <div class="col-sm-4 ">
-            <img src="{{ url_for('static', filename='images/coding/ejs.png') }}" class="img-responsive img-rounded" />
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/hw8n2ve21ms?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="col-md-8">
-            <div>
-                <h3 class="text-primary">Eir Junior Spiders</h3>
-                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
-            </div>
+    <div class="col-sm-5">
+        <img src="{{ url_for('static', filename='images/coding/coolest_projects.png') }}" class="img-responsive img-margin-top" />
+        <h3 class="text-primary">Coder Dojo -- Coolest Projects</h3>
+        <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+    </div>
+</div>
+<br />
+<hr class="divider">
+<br />
+<!-- EJS -->
+<div class="row">
+    <div class="col-sm-7">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/hw8n2ve21ms?rel=0" allowfullscreen></iframe>
         </div>
     </div>
-    <br/>
-    <hr class="divider">
-    <br/>
-    <!-- INSF -->
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/coding/scratchie.png') }}" class="img-responsive" />
-        </div>
-        <div class="col-md-8">
-            <div>
-                <h3 class="text-primary">Irish Scratch National Finals</h3>
-                <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
-            </div>
+    <div class="col-sm-5">
+        <img src="{{ url_for('static', filename='images/coding/ejs.png') }}" class="img-responsive img-margin-top" />
+        <h3 class="text-primary">Eir Junior Spiders</h3>
+        <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+    </div>
+</div>
+<br />
+<hr class="divider">
+<br />
+<!-- INSF -->
+<div class="row">
+    <div class="col-sm-4">
+        <img src="{{ url_for('static', filename='images/coding/scratchie.png') }}" class="img-responsive" />
+    </div>
+    <div class="col-md-8">
+        <div>
+            <h3 class="text-primary">Irish Scratch National Finals</h3>
+            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
         </div>
     </div>
-    <br/>
-    <hr class="divider">
-    <br/>
-    <!-- AIPO  -->
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/coding/aipo.jpg') }}" class="img-responsive" />
-        </div>
-        <div class="col-md-8">
-            <div>
-                <h3 class="text-primary">All Ireland Programming Olympiad</h3>
-                <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
-            </div>
+</div>
+<br />
+<hr class="divider">
+<br />
+<!-- AIPO  -->
+<div class="row">
+    <div class="col-sm-4">
+        <img src="{{ url_for('static', filename='images/coding/aipo.jpg') }}" class="img-responsive" />
+    </div>
+    <div class="col-md-8">
+        <div>
+            <h3 class="text-primary">All Ireland Programming Olympiad</h3>
+            <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
         </div>
     </div>
-    <br/>
-    <hr class="top"> {% endblock %}
+</div>
+<hr class="top">
+{% endblock %}

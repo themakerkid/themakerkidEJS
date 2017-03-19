@@ -30,7 +30,7 @@
                 <ul class="media-list">
                     {% set postNum = 4 %}
                     {% if g.current_user.is_authenticated %}
-                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_(g.post.published == True, g.post.author == g.current_user)).limit(postNum) %}
+                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_(g.post.published == True, g.post.author == g.current_user, g.current_user.admin())).limit(postNum) %}
                     <li class="media">
                         <div class="media-left">
                             <a href="{{ url_for('blog.profile', username=post.author.username) }}">

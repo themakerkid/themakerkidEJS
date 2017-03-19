@@ -2,7 +2,7 @@ from flask import request, Markup, current_app
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from markdown import markdown
 from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
@@ -97,8 +97,17 @@ class User(db.Model, UserMixin):
         db.session.add(self)
         return True
 
+    def admin(self):
+        return self.username == "Benjamin"
+
     def __repr__(self):
         return 'User <%s>' % self.username
+
+class AnonymousUser(AnonymousUserMixin):
+    def admin(self):
+        return False
+
+login.anonymous_user = AnonymousUser
 
 class Post(db.Model):
     __tablename__ = 'posts'

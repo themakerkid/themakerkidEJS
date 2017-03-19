@@ -187,7 +187,7 @@ def filteredPosts():
         # If the post is not published and the post author isn't the logged in user
         # (authors of private posts can only see their private posts (or drafts))
         if current_user.is_authenticated:
-            if not post.published and post.author.username != current_user.username:
+            if not post.published and post.author.username != current_user.username and not current_user.admin():
                 # Delete it from the list
                 # Use counter variable to get the right index.
                 posts.pop(i)
@@ -225,7 +225,7 @@ def post(id):
     post = Post.query.get_or_404(id)
     
     # If the post isn't public and the author is not the current user
-    if post.published == False and post.author != current_user:
+    if post.published == False and post.author != current_user and not current_user.admin():
         # Return a 403 status code (forbidden)
         abort(403)
 
@@ -266,7 +266,7 @@ def edit(id):
     form = PostForm()
 
     # Issue a 403 (forbidden) error if post author is not the logged in user
-    if current_user.username != post.author.username:
+    if current_user.username != post.author.username and not current_user.admin():
         abort(403)
 
     # If request method is POST (a form was submitted)
@@ -307,7 +307,7 @@ def public(id):
     post = Post.query.get_or_404(id)
 
     # Issue a 403 (forbidden) error if post author is not the logged in user
-    if post.author.username != current_user.username:
+    if post.author.username != current_user.username and not current_user.admin():
         abort(403)
 
     # Change status of post
@@ -327,7 +327,7 @@ def draft(id):
     post = Post.query.get_or_404(id)
 
     # Issue a 403 (forbidden) error if post author is not the logged in user
-    if post.author.username != current_user.username:
+    if post.author.username != current_user.username and not current_user.admin():
         abort(403)
 
     # Change status of post
@@ -462,6 +462,38 @@ def editProfile():
 
     # Render template
     return render_template("blog/editProfile.html", title="Blog - Edit Your Profile", year=year, form=form)
+
+# Edit a user's profile (admin)
+@blog.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editProfileAdmin(id):
+    # Retrieve user or 404 code
+    user = User.query.get_or_404(id)
+    
+    if current_user.username != user.username and not current_user.admin():
+        abort(403)
+    # Create form object
+    form = EditProfile()
+
+    # If request method is POST (the form was submitted)
+    if request.method == "POST":
+        if checkBtn("cancel", form):
+            # If cancel button is pressed, issue a redirect to profile page
+            return redirect(url_for('.profile', username=user.username))
+        elif checkBtn("submit", form):
+            # If submit button is pressed, update about me.
+            user.about_me = form.about_me.data
+
+            # Flash message
+            flash("The profile has been successfully updated.", 'success')
+
+            # Issue redirect
+            return redirect(url_for('.profile', username=user.username))
+    # Set initial value
+    form.about_me.data = user.about_me
+
+    # Render template
+    return render_template("blog/editProfile.html", title="Blog - User's Profile", year=year, form=form, user=user)
 
 # Reset password, getting email
 @blog.route('/reset-password', methods=['GET', 'POST'])

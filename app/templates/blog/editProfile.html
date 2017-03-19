@@ -3,18 +3,12 @@
 
 {% block page_content %}
     <div class="page-header">
+        {% if user and not current_user.username == user.username %}
+        <h1>Edit {{ user.username|capitalize }}&#39;s Profile</h1>
+        {% else %}
         <h1>Edit Your Profile, {{ current_user.username|capitalize }}</h1>
         <p class="bg-danger">Please do <strong>not</strong> put any personal information in the text box.</p>
+        {% endif %}
     </div>
     {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script>
-        $("#submit").removeClass("btn-default").addClass("btn-success");
-        $cancelBtn = $("#cancel");
-        $cancelBtn.addClass("btn btn-danger");
-        //$cancelBtn.attr("id", "cancel-btn");
-    </script>
 {% endblock %}

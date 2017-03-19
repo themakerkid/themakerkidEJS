@@ -22,26 +22,25 @@ Keep Coding.
 -->
 
 {% extends "bootstrap/base.html" %} {% block title %}CodeMaker Buddy - {{ title }}{% endblock %} {% block styles %} {{ super() }}
-<!-- Favicon is the icon displayed in the address bar of this website-->
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<!-- Bootstrap Core CSS -->
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
-<!-- Base CSS Stlyesheet for this website -->
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
-<!-- CSS Styles for highlighting Code Snippets -->
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
-<!-- Font Awesome scalable vector icons. I use them for the "Back To Top" icon to scroll back to the top of long pages.-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- Favicon is the icon displayed in the address bar of this website-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
+    <!-- Base CSS Stlyesheet for this website -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
+    <!-- CSS Styles for highlighting Code Snippets -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+    <!-- Font Awesome scalable vector icons. I use them for the "Back To Top" icon to scroll back to the top of long pages.-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-{% endblock %} {% block navbar %}
+{% endblock %}
+{% block navbar %}
 <!-- Start of Body  -->
 
 <!-- Main Navigation Bar  -->
@@ -201,7 +200,7 @@ Keep Coding.
 {% endblock %} {% block content %}
 <!-- Start of Page Content -->
 <div class="container">
-    <p id="noscript" class="text-danger"><strong>Please enable Javascript to improve your experience.</strong></p>
+    <noscript class="text-danger"><p><strong>Please enable Javascript to improve your experience.</strong></p></noscript>
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="alert alert-{{ category }} alert-dissmissable fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
@@ -224,11 +223,10 @@ Keep Coding.
 <!-- End of Page Content -->{% endblock %} {% block scripts %}
 <!-- Start of Global Scripts -->{{ super() }}
 <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
-<!-- Activate Submenus and remove "enabling JavaScript message" -->
+<!-- Activate Submenus, Scroll to Top and tooltip activation -->
 <script>
     $(function() {
         $('[data-submenu]').submenupicker();
-        $('#noscript').remove();
         $('#scroll-top').hide();
         $('#scroll-top').on('click', function() {
             $("html, body").animate({

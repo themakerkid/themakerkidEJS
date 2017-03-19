@@ -1,92 +1,94 @@
 {% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% import "_macros.html" as macros %} {% block styles %} {{ super() }}
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
-<style type="text/css">
-    h2.no-margin-bottom {
-        /* Get rid of the extra spacing underneath the Search Posts h2 element. */
-        margin-bottom: 0;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style type="text/css">
+        h2.no-margin-bottom {
+            /* Get rid of the extra spacing underneath the Search Posts h2 element. */
+            margin-bottom: 0;
+        }
+    </style>
 {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
-<!-- Start of Row -->
-<div class="row">
-    <!-- Blog Entries Column -->
-    <div class="col-md-9">
-        <div class="page-header">
-            {% if logged_in %}
-            <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#create-new-post">Create A New Post</button> {% endif %}
-            <h2>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h2>
-            {% if logged_in %}
-            <!-- Modal -->
-            <div class="modal fade no-center" id="create-new-post" role="dialog">
-                <div class="modal-dialog modal-lg">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Create A New Post</h4>
-                        </div>
-                        <div class="modal-body">
-                            {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
+    <!-- Start of Row -->
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-9">
+            <div class="page-header">
+                {% if logged_in %}
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#create-new-post">Create A New Post</button> {% endif %}
+                <h2>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h2>
+                {% if logged_in %}
+                <!-- Modal -->
+                <div class="modal fade no-center" id="create-new-post" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Create A New Post</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
 
-        <h2 id="posts-scroll">{% if filtered %}Search Results for "{{ request.args["q"] }}"{% else %}Posts{% endif %}</h2>
-        {% if posts %}
-        <ul id="posts" class="media-list">
-            {% for post in posts %} {% if post.published or post.author == current_user %}
-            <li class="post media">
-                <div class="pull-left">
-                    <img class="img-circle media-object" src="{{ post.author.getAvatar(size=60) }}">
-                </div>
-                <div class="media-body">
-                    <h2 class="media-heading"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a></h2>
-                    <a href="{{ url_for('blog.profile', username=post.author.username) }}">By {{ post.author.username|capitalize }}</a><br /><span class="glyphicon glyphicon-time"></span> {{ moment(post.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
-                    <br /> {% if not post.summary == post.body %}
-                    <div class="less">{{ post.summary_html|safe }}</div>
-                    <div class="more">{{ post.body_html|safe }}</div>
-                    <button class="btn btn-xs btn-info show-more">Show more <span class="glyphicon glyphicon-chevron-right"></span></button> {% else %}
-                    <div>{{ post.body_html|safe }}</div>
-                    {% endif %}
-                    <hr />
-                    <div class="pull-right">
-                        <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }}
-                        {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == post.author.username %}
-                        <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a> {% if post.published %}
-                        <a href="{{ url_for('blog.draft', id=post.id) }}"><span class="label label-danger">Make Draft</span></a> {% else %}
-                        <a href="{{ url_for('blog.public', id=post.id) }}"><span class="label label-success">Make Public</span></a> {% endif %} {% endif %}
+            <h2 id="posts-scroll">{% if filtered %}Search Results for "{{ request.args["q"] }}"{% else %}Posts{% endif %}</h2>
+            {% if posts %}
+            <ul id="posts" class="media-list">
+                {% for post in posts %} {% if post.published or post.author == current_user or current_user.admin() %}
+                <li class="post media">
+                    <div class="pull-left">
+                        <a href="{{ url_for('blog.profile', username=post.author.username) }}">
+                            <img class="img-circle media-object" src="{{ post.author.getAvatar(size=60) }}">
+                        </a>
                     </div>
-                    <p>Tags: {% for tag in post.tags %} {% if tag.id == post.tags[-1].id %} {# The last tag should not have a comma after it. #}
-                        <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a> {% else %}
-                        <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a>, {% endif %} {% endfor %}
-                    </p>
-                </div>
-            </li>
-            {% endif %} {% endfor %}
-        </ul>
-    </div>
-    <!-- Blog Sidebar Column -->
-    <div class="col-md-3">
-
-        <!-- Blog Search Well -->
-        <div class="well">
-            <h2 class="no-margin-bottom">Search Posts</h2>
-            {{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
+                    <div class="media-body">
+                        <h2 class="media-heading"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a></h2>
+                        <a href="{{ url_for('blog.profile', username=post.author.username) }}">By {{ post.author.username|capitalize }}</a><br /><span class="glyphicon glyphicon-time"></span> {{ moment(post.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
+                        <br /> {% if not post.summary == post.body %}
+                        <div class="less">{{ post.summary_html|safe }}</div>
+                        <div class="more">{{ post.body_html|safe }}</div>
+                        <button class="btn btn-xs btn-info show-more">Show more <span class="glyphicon glyphicon-chevron-right"></span></button> {% else %}
+                        <div>{{ post.body_html|safe }}</div>
+                        {% endif %}
+                        <hr />
+                        <div class="pull-right">
+                            <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }}
+                            {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == post.author.username or current_user.admin() %}
+                            <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a> {% if post.published %}
+                            <a href="{{ url_for('blog.draft', id=post.id) }}"><span class="label label-danger">Make Draft</span></a> {% else %}
+                            <a href="{{ url_for('blog.public', id=post.id) }}"><span class="label label-success">Make Public</span></a> {% endif %} {% endif %}
+                        </div>
+                        <p>Tags: {% for tag in post.tags %} {% if tag.id == post.tags[-1].id %} {# The last tag should not have a comma after it. #}
+                            <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a> {% else %}
+                            <a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }}</a>, {% endif %} {% endfor %}
+                        </p>
+                    </div>
+                </li>
+                {% endif %} {% endfor %}
+            </ul>
         </div>
-        <!-- End of Blog Search Well -->
-        {{ macros.blogSidebar() }}
-    </div>
+        <!-- Blog Sidebar Column -->
+        <div class="col-md-3">
 
-</div>
-<!-- End of Row -->
-{% else %}
-<p>No posts</p>
-{% endif %} {% if filtered %} {{ macros.addPagination(pagination, '.index', filtered=True) }} {% else %} {{ macros.addPagination(pagination, '.index') }} {% endif %} {% endblock %}
+            <!-- Blog Search Well -->
+            <div class="well">
+                <h2 class="no-margin-bottom">Search Posts</h2>
+                {{ wtf.quick_form(search_form, button_map={'submit': 'success'}) }}
+            </div>
+            <!-- End of Blog Search Well -->
+            {{ macros.blogSidebar() }}
+        </div>
+
+    </div>
+    <!-- End of Row -->
+    {% else %}
+    <p>No posts</p>
+    {% endif %} {% if filtered %} {{ macros.addPagination(pagination, '.index', filtered=True) }} {% else %} {{ macros.addPagination(pagination, '.index') }} {% endif %} {% endblock %}
 <!-- End of Container -->{% block scripts %} {{ super() }}
 <!-- Start of local Page Scripts -->
 <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
