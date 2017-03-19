@@ -1,7 +1,7 @@
-{% extends "base.html" %} {% block styles %} {{ super() }} {% include "_img_left.html" %}
+{% extends "base.html" %} {% block styles %} {{ super() }}
 <style>
     h2 {
-        color: #fcd062;
+        color: maroon;
         text-shadow: grey 0.1em 0.1em 0.2em;
         margin-top: -10px;
     }
@@ -11,7 +11,17 @@
             margin-top: 10px;
         }
     }
+    
+    p {
+        font-size: 1.22em;
+    }
+    
+    .row {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
 </style> {% endblock %} {% block page_content %}
+
 <div class="row">
     <div class="col-md-2">
         <img src="{{ url_for('static', filename='images/coding/magic_wand1.png') }}" alt="technology logo" class="img-responsive" />
@@ -20,11 +30,7 @@
         <img src="{{ url_for('static', filename='images/coding/welcome_code.gif') }}" alt="technology logo" class="img-responsive" />
         </br> <img src="{{ url_for('static', filename='images/coding/coding_magic2.gif') }}" alt="technology logo" class="img-responsive" />
     </div>
-    </br>
 </div>
-</br>
-</br>
-
 <!-- What is Code -->
 <div class="row">
     <div class="col-sm-7">
@@ -33,18 +39,17 @@
         </div>
     </div>
     <div class="col-sm-5">
+        <h2 class="text-primary">But what is code?</h2>
         <div class="video-text-right">
-            <h2 class="text-primary">But what is code?</h2>
-            <p>Learn about what code is by watching this cool video.</p>
-            </br>
-            <p>
+            <p>Learn about what code is by watching this cool video. You might be suprised to learn that code is all around you, in your home,in your parents car, on aeroplanes, in games consoles, in space and in your classroom on the whiteboard.</p>
+            <p>Just as people all around the world speak different languages, there are also many different coding languages. Depending on what you want to do, you will choose a particular language. These languages do different things. For example, you probably
+                heard about Minecraft right? Well that was written in a language called Java. And this webpage that you are looking at right now uses HTML,CSS and JavaScript. If you want to control physical devices in the real world you will probably
+                use a language called C/C++.
                 <h5><em> Video courtesy of Coding@CC4G  Thank you!</em></h5>
             </p>
         </div>
     </div>
 </div>
-<br/>
-<br/>
 <!-- What is a Computer Program -->
 <div class="row">
     <div class="col-sm-7">
@@ -62,56 +67,77 @@
         </div>
     </div>
 </div>
-<br/>
-<br/>
-<br/>
+
 <!-- Getting Started -->
 <div class="row">
-    <h2 class="text-primary">So how do I get started?</h2>
-    <p>
-        Getting Started: Intro to Coding Video Choosing a Language Choosing a platform Choosing an editor My recommendations: Join a Dojo, then choose a language: Scratch, Processing, Python Web (HTML/CSS/Javascript), Mobile Video: Khanacademy coding resources
-        or choose an editors: Scratch Offline Explorer, Notepad++, Nano, Sublime Text, Brackets, Video, Bluefish, Idle, Other Tools: Simage Editors (Gimp and InkscAPE) ???
-    </p>
+    <div class="col-md-10">
+        <h2 class="text-primary">So how do I get started?</h2>
+        <p> If you want to get into coding, here are some suggestions. Just hover and click on any of the sections below: </p>
+        <p>
+            Getting Started: Intro to Coding Video Choosing a Language Choosing a platform Choosing an editor My recommendations: Join a Dojo, then choose a language: Scratch, Processing, Python Web (HTML/CSS/Javascript), Mobile Video: Khanacademy coding resources
+            or choose an editors: Scratch Offline Explorer, Notepad++, Nano, Sublime Text, Brackets, Video, Bluefish, Idle, Other Tools: Simage Editors (Gimp and InkscAPE) ???
+        </p>
+    </div>
 </div>
 
 
 
-
-<h2 class=bs-docs-featurette-title>So where do I go from Here?</h2>
-<p> If you want to get into coding, here are some suggestions. Just hover and click on any of the sections below: </p><br />
-
 <div class="list-group">
     <a href="https://coderdojo.com/" class="list-group-item ">
+        <img src="{{ url_for('static', filename='images/about/coderdojo.jpg') }}" class="pull-left" />
         <h3 class="list-group-item-heading ">Join Coder Dojo!</h3>
-        <p class="list-group-item-text">I have been attending Coderdojo for over a year now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
+        <p class="list-group-item-text">I have been attending Coderdojo for almost 2 years now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
             websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.</p>
     </a>
     <br />
     <a href="{{ url_for('main.scratch') }}" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/coding/scratch_cat.png') }}" class="pull-left" />
         <h3 class="list-group-item-heading ">Learn Scratch</h3>
         <p class="list-group-item-text">Scratch is a programming language and an online community where children can program and share interactive media such as stories, games, and animation with people from all over the world. To get started kead on over to the Scratch Page, by clicking
-            on this text now.</p>
+            on this text now. If you are wondering what you can create with Scratch, then ckeck out some of these Projects here or my project Snapshot of our world.(Link herre)</p>
     </a>
     <br />
     <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/coding/processing.png') }}" class="pull-left" />
         <h3 class="list-group-item-heading ">Learn the Processing Language on Khan Academy</h3>
         <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
-            a visual context, and to serve as the foundation for electronic sketchbooks.</p>
+            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
     </a>
     <br />
 
     <a href="https://www.khanacademy.org/computing/computer-programming/html-css" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/about/html5.svg') }}" class="pull-left" />
+        <img src="{{ url_for('static', filename='images/about/js.svg') }}" class="pull-left" /><img src="{{ url_for('static', filename='images/about/css3.svg') }}" class="pull-left" />
         <h3 class="list-group-item-heading ">Learn how to create Webpages</h3>
         <p class="list-group-item-text">Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change
             the color, font, layout, and more.</p>
     </a>
     <br />
-
-
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/coding/processing.png') }}" class="pull-left" />
+        <h3 class="list-group-item-heading ">Learn how to code Mobile Apps.</h3>
+        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+    </a>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/about/python.svg') }}" class="pull-left" />
+        <h3 class="list-group-item-heading ">Learn the Python Language.</h3>
+        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+    </a>
+    <br/>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+        <img src="{{ url_for('static', filename='images/about/python.svg') }}" class="pull-left" />
+        <h3 class="list-group-item-heading ">Learn the Python Language.</h3>
+        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+    </a>
+    <br/>
     <a href="{{ url_for('main.drawing') }}" class="list-group-item">
         <h3 class="list-group-item-heading ">Check out some of my Processing code</h3>
         <p class="list-group-item-text">I created these Processing examples on the KHAN Academy Animations</p>
     </a>
 </div>
-</p>
 {% endblock %}
