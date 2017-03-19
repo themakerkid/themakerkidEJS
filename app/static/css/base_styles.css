@@ -11,7 +11,7 @@ li.dropdown-submenu a {
     cursor: pointer;
 }
 
-footer p {
+footer p:first-child {
     float: left !important;
 }
 
@@ -70,4 +70,25 @@ body {
     opacity: 0.75;
     z-index: 10000;
     cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .margin-top-20 {
+        margin-top: -20px;
+    }
+
+    .margin-top-10 {
+        margin-top: -10px;
+    }
+}
+
+.rating {
+    color: #ffffff;
+    background-color: #000000;
+    padding: 5px 5px 2px 5px;
+    font-size: 0.75em;
+}
+
+.rating span.glyphicon-star {
+    color: #ffff00;
 }

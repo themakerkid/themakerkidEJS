@@ -1,24 +1,54 @@
-from flask import request
+# blog/forms.py - All the form classes for the Blog
+# By Benjamin
+
+# For redirecting to last url
+from flask import redirect, session, url_for
+
+# Import the base form class
 from flask_wtf import FlaskForm
+
+# Import all the necessary fields such as a textarea (TextAreaField()).
 from wtforms import BooleanField, PasswordField, SelectMultipleField, StringField, SubmitField, TextAreaField, ValidationError
+
+# Import all the validators such as making sure that there is something inside of a field (DataRequired())
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
+
+# Import some models to check credentials and to loop through all the Tags (multiple select)
 from ..models import Tag, User, db
 
-
+# Login Form class
 class LoginForm(FlaskForm):
-    user_or_email = StringField('Username or Email', validators=[DataRequired(), Length(1, 64,
+    # Username or email
+    user_or_email = StringField('Username or Email', validators=[Length(max=64,
                     message="Your username or email is too long.")])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField("Remember Me")
-    submit = SubmitField("Submit")
-    cancel = SubmitField("Cancel")
+    
+    # Password
+    password = PasswordField('Password')
 
-    def validate_credentials(self, username_field, psswd_field):
-        user = User.query.filter(db.or_(User.username==username_field.data, User.parents_email==username_field.data)).first()
-        if not user == None and user.chk_psswd(psswd_field.data):
-            return user
-        else:
-            return False
+    # Remember me
+    remember_me = BooleanField("Remember Me")
+
+    
+    submit = SubmitField("Submit", false_values="submit")
+    cancel = SubmitField("Cancel", false_values="cancel")
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.user = None
+
+    def validate_user_or_email(self, field):
+        # Import checkBtn function to check which button was pressed (at the top is too early to import)
+        from views import checkBtn
+        if checkBtn("submit", self, validation=False):
+            user = User.query.filter(db.or_(User.username==field.data, User.parents_email==field.data)).first()
+            if not user == None:
+                self.user = user
+            else:
+                raise ValidationError("Invalid username or email.")
+    
+    def validate_password(self, field):
+        if self.user != None and not self.user.chk_psswd(field.data):
+            raise ValidationError("Invalid password.")
 
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])

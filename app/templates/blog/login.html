@@ -14,7 +14,7 @@
     {{ super() }}
     <script>
         $("#cancel").on("click", function() {
-            window.history.go(-1);
+            window.location.assign("{{ session['last_url'] }}");
         });
     </script>
 {% endblock %}

@@ -14,10 +14,6 @@
     .img-responsive {
         width: 80%;
     }
-    
-    .margin-top-20 {
-        margin-top: -20px;
-    }
 </style>
 {% endblock %} {% block page_content %}
 <div class="text-center">
@@ -25,65 +21,109 @@
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPython') }}">Getting Started</a></li>
     <a role="button" class="btn btn-success" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyThis') }}">This Website</a></li>
-    <hr />
 </div>
 
 <hr class="top">
 
 <!-- Start of Events -->
-<!-- PF  -->
+<!-- Python Basics -->
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/python/python_basics.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Python Basics (Python 3)</h3>
-            <p>The competition is open to fourth, fifth and sixth classes across the island of Ireland, the Fairs will take place in Dublin, alongside the BT Young Scientist and Technology Exhibition at the RDS, and in Limerick, at the Mary Immaculate College.
-                Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for a stand. Schools can choose which venue they would prefer to exhibit at when they submit their Expression of Interest for
-                a stand. Please click here for more information. <a target="_blank" href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a></p>
+            <h3 class="text-primary">
+                Python Basics
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    3/5
+                </span>
+            </h3>
+            <p>
+                This is a book by Cambridge University on Python 3 only <i class="fa fa-frown-o" aria-hidden="true"></i>. In the end you make a drawing program where you can draw on a canvas using Tkinter.
+            </p>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
-    <!-- BTYSTE -->
+    <br />
+    <!-- Hello World Second Edition -->
     <div class="row">
         <div class="col-sm-4 ">
             <img src="{{ url_for('static', filename='images/book_reviews/python/hello_world.jpg') }}" class="img-responsive img-rounded" />
         </div>
         <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Hello World Second Edition (Python 2.7 and 3 but mostly 2.7)</h3>
-            <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+            <h3 class="text-primary">
+                Hello World Second Edition
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    4/5
+                </span>
+            </h3>
+            <p>
+                This book has 26 chapters (which is a lot!) and you will first learn the basics of Python with Warren and Carter Sande and then move on to games like a virtual pet, hangman or a battle.
+                This book covers Python 2.7 but does point out the some differences for Python 3 in some of the chapters.
+            </p>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
-    <!-- DM -->
+    <br />
+    <!-- Adventures In Minecraft -->
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/python/adventures_in_minecraft.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Adventures in Minecraft (Python 2.7 (extra important) )</h3>
-            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+            <h3 class="text-primary">
+                Adventures in Minecraft
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    5/5
+                </span>
+            </h3>
+            <p>
+                In this book you will control Minecraft with Python. Create an alien invasion, a complete Crafty Crossing game and a new block friend in Minecraft with Python alone. Create clocks, pyramids
+                and a complete city (Manhattan, America to be exact). You must use Python 2.7 to try out the code because the
+                <span data-toggle="tooltip" data-placement="top" title="Application Programming Interface">API</span> to connect with Minecraft only works with Python 2.7 currently.
+            </p>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
-    <!-- SW  -->
+    <br />
+    <!-- Automate the Boring Stuff with Python -->
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/python/automate_boring.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-sm-8">
-            <h3 class="text-primary">Automate the Boring Stuff with Python (Python 3)</h3>
-            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
-                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+            <h3 class="text-primary">
+                Automate the Boring Stuff with Python
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    4/5
+                </span>
+            </h3>
+            <p>
+                In this book you will learn ways to automate things that are very boring like if your friend is in America and you want to change the format of the dates.
+                You can use Python to do all of this boring stuff! Python can also automatically fill in forms using Selenium.
             </p>
         </div>
     </div>
 </div>
-<hr class="top"> {% endblock %}
+<hr class="top">
+{% endblock %}

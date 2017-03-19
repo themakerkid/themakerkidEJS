@@ -1,7 +1,7 @@
  {% extends "base.html" %} {% block styles %} {{ super() }}
 <style>
     hr.divider {
-        background-color: #fff;
+        background-color: #ffffff;
         border-top: 1px dashed #8c8b8b;
     }
     
@@ -15,8 +15,20 @@
         width: 80%;
     }
     
-    .margin-top-20 {
-        margin-top: -20px;
+    @media (max-width: 768px) {
+        li.list-group-item-success span.glyphicon-ok {
+            float: none !important;
+            margin-left: 10px;
+        }
+
+        li.list-group-item-danger span.glyphicon-remove {
+            float: none !important;
+            margin-left: 10px;
+        }
+    }
+
+    .glyphicon-ok {
+        color: #00ff00;
     }
 </style>
 {% endblock %} {% block page_content %}
@@ -27,76 +39,230 @@
 <hr class="top">
 
 <!-- Start of Events -->
-<!-- SC  -->
+<!-- Snap Circuits -->
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <img src="{{ url_for('static', filename='images/book_reviews/toys/snap_circuits.jpg') }}" class="img-responsive" />
+    <div class="row">        
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/xDpLvUghfBg?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
-        <iframe width="640" height="360" src="https://www.youtube.com/embed/xDpLvUghfBg?rel=0" frameborder="0" allowfullscreen></iframe>
-        <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Snap Circuits</h3>
-            <p>Snap Circuits<a target="_blank" href="http://www.rds.ie/primarysciencefair"> RDS Primary Science Fair. </a></p>
+        <div class="col-sm-6 margin-top-20">
+            <div class="video-text-right">
+                <h3 class="text-primary">
+                    Snap Circuits
+                    <span class="rating">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        4/5
+                    </span>
+                </h3>
+                <p>Snap Circuits is a toy that allows you to create circuits but with snap together pieces. It is safer than normal circuits and you program in a language called BASIC.</p>
+                <p class="text-success">
+                    Pros:
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">It is easier on the eye because they are big pieces.</li>
+                        <li class="list-group-item list-group-item-success">BASIC is easier than Arduino C++</li>
+                        <li class="list-group-item list-group-item-success">Kid-friendly</li>
+                    </ul>
+                </p>
+                <p class="text-danger">
+                    Cons:
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger">It is quite expensive compared to buying regular electronics components.</li>
+                        <li class="list-group-item list-group-item-danger">It is limited in the amount of components.</li>
+                    </ul>
+                </p>
+                <small><em>Thanks to Home Science Tools for the video.</em></small>
+            </div>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
-    <!-- BTYSTE -->
+    <br />
+    <!-- Catapult -->
     <div class="row">
-        <div class="col-sm-4 ">
-            <img src="{{ url_for('static', filename='images/book_reviews/toys/leonardo_catapult.jpg') }}" class="img-responsive img-rounded" />
-            <iframe width="640" height="360" src="https://www.youtube.com/embed/G12U1fYsHqg?rel=0" frameborder="0" allowfullscreen></iframe>
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/G12U1fYsHqg?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
-        <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Leonardo Da Vinci Catapult</h3>
-            <p>This is about a cat called Scratchy, a guy called Mitch and some cosmic defenders. You will learn to program in a simple language called Scratch and your projects will be part of the adventure.</p>
+        <div class="col-sm-6 margin-top-20">
+            <div class="video-text-right">
+                <h3 class="text-primary">
+                    Leonardo Da Vinci Catapult
+                    <span class="rating">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        4/5
+                    </span>
+                </h3>
+                <p>This toy is a catapult that can be adjusted. You pull the swing arm down and pull the string and it shoots! It would assemble everything without glue and then glue it all together
+                    (I did that to mine).</p>
+                <p class="text-success">
+                    Pros:
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-success">It launches the object quite far.</li>
+                        <li class="list-group-item list-group-item-success">It is fairly easy to make (you could start and finish building it on the same day).</li>
+                        <li class="list-group-item list-group-item-success">It is fun to make.</li>
+                    </ul>
+                </p>
+                <p class="text-danger">
+                    Cons:
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger">You could hurt your hand when the swing arm comes down.</li>
+                        <li class="list-group-item list-group-item-danger">Young kids might shoot an object into someone&#39;s eye.</li>
+                    </ul>
+                </p>
+                <small><em>Thanks to GreatKidsToys for the video.</em></small>
+            </div>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
+    <br />
     <!-- Tha Cube!!!! -->
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/toys/rubik_cube.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">Rubik's Cube</h3>
-            <p> This is a book that covers both versions of Scratch which is pretty cool. <em>(Additional text here.)</em> I would recommend it for ages 6 - 8.</p>
+            <h3 class="text-primary">
+                Rubik's Cube
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    4/5
+                </span>
+            </h3>
+            <p>
+                The Rubik's Cube is a logic puzzle that can only be solved if you know the solution (unless you break apart the cube and put it back together or
+                peel off all the stickers and stick them back on). My record is <span class="glyphicon glyphicon-time"></span> 45 seconds <span class="glyphicon glyphicon-time"></span> using
+                an Advanced method.
+            </p>
+            <p class="text-success">
+                Pros:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">The solution is fairly easy to learn (it requires some memorising).</li>
+                    <li class="list-group-item list-group-item-success">It is amazing to see someone solve it fast.</li>
+                    <li class="list-group-item list-group-item-success">It is entertaining.</li>
+                </ul>
+            </p>
+            <p class="text-danger">
+                Cons:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">It can annoy some people after a while.</li>
+                    <li class="list-group-item list-group-item-danger">It can be frustrating to memorise all the algorithims.</li>
+                </ul>
+            </p>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
+    <br />
     <!-- River Crossing  -->
     <div class="row">
         <div class="col-sm-4">
             <img src="{{ url_for('static', filename='images/book_reviews/toys/river_crossing.jpg') }}" class="img-responsive" />
         </div>
         <div class="col-sm-8">
-            <h3 class="text-primary">River Crossing</h3>
-            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
-                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+            <h3 class="text-primary">
+                River Crossing
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    4/5
+                </span>
+            </h3>
+            <p>
+                River Crossing is another logic puzzle that can also be frustrating. You must move planks around to get to the other side (Level 40 is the hardest!).
+            </p>
+            <p class="text-success">
+                Pros:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">It exercises your brain.</li>
+                    <li class="list-group-item list-group-item-success">It can be fun on a rainy day.</li>
+                </ul>
+            </p>
+            <p class="text-danger">
+                Cons:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">It might seem like it is for babies (like my Mum said to me when we saw it in Easons).</li>
+                </ul>
             </p>
         </div>
     </div>
-    <br/>
+    <br />
     <hr class="divider">
-    <br/>
+    <br />
     <!-- Meccanoid  -->
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-5">
             <img src="{{ url_for('static', filename='images/book_reviews/toys/meccanoid.jpg') }}" class="img-responsive" />
         </div>
-        <iframe width="640" height="360" src="https://www.youtube.com/embed/rZOGKqEDJKQ?rel=0" frameborder="0" allowfullscreen></iframe>
-        <div class="col-sm-8">
-            <h3 class="text-primary">Meccanoid</h3>
-            <p>Science week 2016 2016 marks the 21st year of Science Week; a national, annual event that celebrates the fascinating worlds of science, technology, engineering and mathematics (STEM). Science Week 2016 takes place from the 13th to 20th November.
-                There will be lots of events happening across the country which you can find out more about on www.scienceweek.ie.
+        <div class="col-sm-7">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rZOGKqEDJKQ?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <h3 class="text-primary">
+                Meccanoid
+                <span class="rating">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    5/5 <span class="glyphicon glyphicon-ok"></span>
+                </span>
+            </h3>
+            <p>
+                Meccanoid is a voice controlled robot that can tell jokes and dance. It has two models: Meccanoid G15 and Meccanoid G15KS. Meccanoid G15 is the model shown in the video.
+                Meccanoid G15KS is the same as the Meccanoid G15 except that is has eight motors on the model and the Meccanoid G15 has four and it is red in colour.
+            </p>
+            <p class="text-success">
+                Pros:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">It can record movements and play them back (L.I.M).</li>
+                    <li class="list-group-item list-group-item-success">It is fun to play with (as I said, it can tell jokes).</li>
+                    <li class="list-group-item list-group-item-success">It can be controlled from your phone or tablet. (This time you can use <span class="glyphicon glyphicon-apple"></span> Apple.)</li>
+                </ul>
+            </p>
+            <p class="text-danger">
+                Cons:
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">It is quite expensive.</li>
+                </ul>
             </p>
         </div>
     </div>
 </div>
+{% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        okIcon = $("<span>");
+        okIcon.addClass("glyphicon glyphicon-ok pull-right");
+        okIcon.css({
+            color: "#00ff00"
+        });
+        okIcon.appendTo($(".list-group-item-success"));
+        
+        xIcon = $("<span>");
+        xIcon.addClass("glyphicon glyphicon-remove pull-right");
+        xIcon.css({
+            color: "#ff0000"
+        });
+        xIcon.appendTo($(".list-group-item-danger"));
+    </script>
 {% endblock %}

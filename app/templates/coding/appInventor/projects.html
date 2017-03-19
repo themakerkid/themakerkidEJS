@@ -6,6 +6,10 @@
         .img-responsive {
             width: 30%;
         }
+
+        .download-btn {
+            margin-top: 10px;
+        }
     </style>
 {% endblock %}
 
@@ -46,8 +50,21 @@
 
 <h2>Bluetooth Controlled NeoPixel LEDs</h2>
 <p>
-    <img src="{{ url_for('static', filename='images/coding/disconnected.png') }}" class="img-responsive pull-left" height="300" /> I presume you have watched the video on the <a href="{{ url_for('main.hardProj') }}">Bluetooth Controlled NeoPixel LEDs</a> becuase this app relies on the
+    <img src="{{ url_for('static', filename='images/coding/disconnected.png') }}" class="img-responsive pull-left" height="300" /> I presume you have watched the video on the <a href="{{ url_for('main.makeProj') }}">Bluetooth Controlled NeoPixel LEDs</a> becuase this app relies on the
     circuit. <br />
-    <a class="btn btn-success" href="{{ url_for('static', filename='NeoPixelControl.apk') }}">Download the NeoPixel Control App</a>
+    <a class="btn btn-success download-btn" href="{{ url_for('static', filename='NeoPixelControl.apk') }}" data-loading-text="Downloading App...">Download the NeoPixel Control App</a>
 </p>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        $('.download-btn').on('click', function() {
+            var btn = $(this).button("loading");
+            setTimeout(function() {
+                btn.button("reset");
+            }, 1000);
+            $("#scroll-top").click();
+        });
+    </script>
 {% endblock %}

@@ -36,7 +36,7 @@
             {% endif %}
         </div>
 
-        <h2 id="posts-scroll">Posts</h2>
+        <h2 id="posts-scroll">{% if filtered %}Search Results for "{{ request.args["q"] }}"{% else %}Posts{% endif %}</h2>
         {% if posts %}
         <ul id="posts" class="media-list">
             {% for post in posts %} {% if post.published or post.author == current_user %}

@@ -60,12 +60,19 @@ def unparseMultiplePost(post):
     # Return the list of ids back to the caller
     return return_list
 
-def checkBtn(false_value, form):
-    if false_value in request.form and form.validate(): # Check that the false value (a value associated with a submit button) on the button is the false value
-                                                        # that was given and that the form validates
-        return True
-    else: # If one thing fails
-        return False
+def checkBtn(false_value, form, validation=True):
+    if validation:
+        if false_value in request.form and form.validate(): # Check that the false value (a value associated with a submit button) on the button is the false value
+                                                            # that was given and that the form validates
+            return True
+        else: # If one thing fails
+            return False
+    else:
+        # No validation (Login Form)
+        if false_value in request.form:
+            return True
+        else:
+            return False
 
 @blog.before_request
 def before():
@@ -340,20 +347,23 @@ def login():
 
     # If form validates on submit
     if form.validate_on_submit():
-        # and if the credentials are correct
-        user = form.validate_credentials(form.user_or_email, form.password)
-        if user:
+        if checkBtn("cancel", form):
+            # If cancel button is pressed
+            if request.args.get("next"):
+                flash("You must login to visit that page.", "info")
+                return redirect(url_for(".login", next=request.args["next"]))
+            else:
+                return redirect(session.get("last_url") or url_for(".index"))
+        elif checkBtn("submit", form):
+            # If submit button is pressed
             # Login the user
-            login_user(user, form.remember_me.data)
+            login_user(form.user, form.remember_me.data)
 
             # Issue a redirect to:
             # 1. If a user visited a protected route, redirect them back to that url
             # 2. the last url, if it exists in session
             # 3. otherwise redirect to index page
             return redirect(request.args.get('next') or session.get("last_url") or url_for(".index"))
-        else:
-            # If invalid credentials, flash a message
-            flash("You have entered something incorrectly!", 'warning')
     # Render template
     return render_template("blog/login.html", form=form, title="Blog - Login", year=year)
 
