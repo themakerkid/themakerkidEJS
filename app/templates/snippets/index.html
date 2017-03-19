@@ -59,8 +59,7 @@
             </div>
             {% endif %}
             <div class="snippet-controls pull-right">
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username
-                == snippet.author.username %}
+                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == snippet.author.username or current_user.admin() %}
                 <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a> {% endif %}
             </div>
         </div>

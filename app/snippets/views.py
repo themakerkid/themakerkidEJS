@@ -5,6 +5,8 @@ from forms import SnippetForm, CommentForm, SearchForm
 from ..models import SnippetComment, User, Snippet, db
 from . import snippets
 
+year = datetime.now().year
+
 def checkBtn(false_value, form):
     if false_value in request.form and form.validate():
         return True
@@ -55,7 +57,7 @@ def index():
         return redirect(url_for('.snippet', id=snippet.id))
     elif search_form.validate_on_submit():
         return redirect(url_for('.filtered', q=search_form.search.data))
-    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
 
 @snippets.route('/filtered', methods=['GET', 'POST'])
 def filtered():
@@ -74,7 +76,7 @@ def filtered():
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
     snippets = pagination.items
-    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=datetime.now().year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination, filtered=True)
+    return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination, filtered=True)
 
 @snippets.route('/<int:id>', methods=['GET', 'POST'])
 def snippet(id):
@@ -89,7 +91,7 @@ def snippet(id):
             db.session.add(comment)
             return redirect(url_for('.snippet', id=snippet.id) + "#comments")
     comments = snippet.comments.order_by(SnippetComment.date_posted.asc())
-    return render_template("snippets/snippet.html", title="Snippet - " + snippet.title, year=datetime.now().year, snippet=snippet, form=form, comments=comments, language=language)
+    return render_template("snippets/snippet.html", title="Snippet - " + snippet.title, year=year, snippet=snippet, form=form, comments=comments, language=language)
 
 @snippets.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -109,4 +111,24 @@ def edit(id):
     form.title.data = snippet.title
     form.body.data = snippet.body
     form.language.data = snippet.code_type_id
-    return render_template("snippets/edit.html", title="Edit Snippet - " + snippet.title, year=datetime.now().year, snippet=snippet, form=form, language=language)
+    return render_template("snippets/edit.html", title="Edit Snippet - " + snippet.title, year=year, snippet=snippet, form=form, language=language)
+
+# Someone's snippets
+@snippets.route('/<username>')
+def someonesSnippets(username):
+    # Get pagination
+    page = request.args.get("page", 1, type=int)
+
+    # Get user (if user does not exist, return 404 code)
+    user = User.query.filter_by(username=username).first_or_404()
+
+    # Create pagination
+    pagination = Snippet.query.order_by(Snippet.date_posted.desc()).filter_by(author=user).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+    
+    # Get snippets out of pagination
+    snippets = pagination.items
+
+    # Render template
+    return render_template("snippets/someonesSnippets.html", title="%s's Code Snippets" % user.username.capitalize(), year=year, snippets=snippets, pagination=pagination, user=user)

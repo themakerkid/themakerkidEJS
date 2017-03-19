@@ -19,9 +19,7 @@
         <br />Member since {{ moment(user.date_registered).format('DD/MM/YYYY') }}.
         <br />Last seen {{ moment(user.last_seen).fromNow(refresh=True) }}.
         <br /><a class="btn btn-sm btn-info" href="{{ url_for('blog.posts', username=user.username) }}"><span class="badge">{{ user.posts.filter_by(published=True).count() }}</span> public {% if user.posts.filter_by(published=True).count() != 1 %}posts{% else %}post{% endif %}.</a>
-        <br /><button class="btn btn-sm btn-info"><span class="badge">{{ user.comments.count() }}</span> {% if user.comments.count() != 1 %}comments on posts{% else %}comment on posts{% endif %}.</button>
-        <br /><button class="btn btn-sm btn-info"><span class="badge">{{ user.snippets.count() }}</span> {% if user.snippets.count() != 1 %}snippets{% else %}snippet{% endif %}.</button>
-        <br /><button class="btn btn-sm btn-info"><span class="badge">{{ user.snippet_comments.count() }}</span> {% if user.snippet_comments.count() != 1 %}comments on snippets{% else %}comment on snippets{% endif %}.</button>
+        <br /><a class="btn btn-sm btn-info" href="{{ url_for('snippets.someonesSnippets', username=user.username) }}"><span class="badge">{{ user.snippets.count() }}</span> {% if user.snippets.count() != 1 %}snippets{% else %}snippet{% endif %}.</a>
     </p>
     {% if current_user.username == user.username %}
     <a href="{{ url_for('blog.editProfile') }}" class="btn btn-primary">Edit Profile</a>
