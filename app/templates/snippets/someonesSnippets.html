@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+{% endblock %}
+
+{% if current_user.is_authenticated %}
+    {% set logged_in = True %}
+{% else %}
+    {% set logged_in = False %}
+{% endif %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>{{ user.username|capitalize }}&#39;s Code Snippets</h1>
+    </div>
+
+    {% if snippets|length > 0 %}
+    <ul id="snippets" class="media-list">
+        {% for snippet in snippets %}
+        <li class="snippet media">
+            <div class="media-left">
+                <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">
+                    <img src="{{ snippet.author.getAvatar(size=100) }}" class="img-circle media-object" />
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading"><a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }} written in {{ checkLanguage(snippet) }}</a></h2>
+                By <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">{{ snippet.author.username|capitalize }}</a>
+                <br />
+                <span class="glyphicon glyphicon-time"></span> {{ moment(snippet.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
+                {% if not snippet.summary == snippet.body %}
+                <div class="less">{{ snippet.summary_html|safe }}
+                    <p>More content on this snippet...</p>
+                </div>
+                <div class="more">{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
+                <button class="btn btn-sm btn-info show-more" id="{{ snippet.id }}">Show more &raquo;</button> {% else %}
+                <div>{{ snippet.body_html|safe }}
+                    <p>This is the end of the snippet.</p>
+                </div>
+                {% endif %}
+                <div class="snippet-controls pull-right">
+                    <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == snippet.author.username or current_user.admin() %}
+                    <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a> {% endif %}
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No snippets have been created by {{ user.username.capitalize }}</p>
+    {% endif %}
+    {{ macros.addPagination(pagination, '.index') }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        $(".more").hide();
+
+        $(".snippet button").each(function() {
+            $(this).on("click", function() {
+                $this = $(this);
+                if ($this.hasClass("show-more")) {
+                    $this.html("Show less &raquo;");
+                    $this.removeClass("show-more");
+                    $this.siblings("div.less").hide();
+                    $this.prev().slideDown(1000);
+                } else {
+                    $this.html("Show more &raquo;");
+                    $this.addClass("show-more");
+                    $this.siblings("div.less").slideDown(1000);
+                    $this.prev().hide();
+                }
+            });
+        });
+    </script>
+    {{ moment.include_moment() }}
+{% endblock %}
