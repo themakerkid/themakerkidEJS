@@ -192,13 +192,12 @@
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/creeper5.jpg') }}" />
             <p>
-                Are you a kid who is interested in getting started with coding, or in making cool stuff using code and electronic hardware, but don't know where to get started?
+                Are you a kid who is interested in getting started with coding, or in making cool stuff using code and electronics, but don't know where to get started?
                 <br />
                 <br /> Welcome to the CodeMaker Buddy website. It is a place where kids aged 6-14 can get started learning to code. You can then use your coding skills to control cool hardware projects. You can even share ideas, code and projects with
                 other kids, and see what they are working on. This website is meant to get kids started with code, and show them what is possible. It is not an in-depth learning website for teaching kids coding! There are already many great websites for
                 doing that, like Khan Academy or Code Academy. There are links to these and other websites in the Learning Resources pages.
             </p>
-
             <p>
                 Have a look around this website. There are simple coding projects to get you started with, or more advanced projects which use coding and hardware.
             </p>
@@ -211,14 +210,13 @@
         </div>
         <!-- End accordion-content-->
     </div>
-
-
     <div class="accordion-container">
         <button href="#" class="accordion-toggle">CodeMaker Buddy Features<span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
+            <h4 class="bg-danger"><em> Click on any of the sections below to link to the relevant section!</em></h4>
             <div class="list-group">
                 <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The coding section has fun example projects creted by me in Scratch, App Inventor, Processing and Python. All example projects have the source code </a>
-                <a href="{{ url_for('main.maker') }}" class="list-group-item list-group-item-action">The maker section has projects with Arduino, and BBC Microbit. There is a forum where kids can blog, share ideas, discuss projects and learn together. </a>
+                <a href="{{ url_for('main.maker') }}" class="list-group-item list-group-item-action">The maker section has projects with Arduino. Over time additional projects on Raspberry PI and BBC Microbit will be added. </a>
                 <a href="{{ url_for('blog.index') }}" class="list-group-item list-group-item-action">The Buddy section allows kids to post messages and comments. In order to post kids must register with their parent's/guardian's permission if they are under 13 years of age.</a>
                 <a href="{{ url_for('snippets.index') }}" class="list-group-item list-group-item-action">The Share section has a code snippet sharing facility, where kids can add snippets of code, which other kids may find useful.</a>
                 <a href="{{ url_for('main.arduinoProject') }}" class="list-group-item list-group-item-action">There are many video tutorials some of which created by me to help kids get started.</a>
@@ -235,16 +233,13 @@
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/me_wizard.png') }}" />
             <p>
-                Hi Kids, I'm Benjamin, creator of the <strong>CodeMaker Buddy website</strong>. I am 10 years old and live in Dublin, Ireland, and I love to code.
-            </p>
-            <p>
-                Ever since I was a little kid, I was always trying to figure out how things worked. I started off on Lego&reg; and Meccano&reg;, building lots of challenging models, before asking my parents for a Lego&reg; Mindstorms Robot. Unfortunately, I didn't get
-                the Mindstorms Robot, but I did get an <a href="{{ url_for('main.arduinoStart') }}">Arduino</a> and later a <a href="https://www.raspberrypi.org" target="_blank">Raspberry Pi</a>.
+                Hi Kids, I'm Benjamin, creator of the <strong>CodeMaker Buddy website</strong>. I am 10 years old and live in Dublin, Ireland, and I love to code. Ever since I was a little kid, I was always trying to figure out how things worked. I started
+                off on Lego&reg; and Meccano&reg;, building lots of challenging models, before asking my parents for a Lego&reg; Mindstorms Robot. Unfortunately, I didn't get the Mindstorms Robot, but I did get an <a href="{{ url_for('main.arduinoStart') }}">Arduino</a>                and later a <a href="https://www.raspberrypi.org" target="_blank">Raspberry Pi</a>.
             </p>
             <p>
                 I began coding when I was 6 years old (a long time ago!), starting off with the <a href="https://scratch.mit.edu/" target="_blank">Scratch</a> 1.4 programming language on the Raspberry Pi. I was very pleased to win the Best Educational
-                Content Award at the annual <a href="http://scratch.ie" target="_blank">Irish National Scratch competition</a> in early 2015, with my project Snapshot Of our World. You can see it <a href="https://scratch.mit.edu/projects/49812240/" target="_blank">here</a>.
-                I joined CoderDojo in Summer 2015 at the
+                Content Award at the annual <a href="http://scratch.ie" target="_blank">Irish National Scratch competition </a>in early 2015, with my project Snapshot Of our World. You can see it <a href="https://scratch.mit.edu/projects/49812240/" target="_blank">here</a>.
+                 The website has now been updated to <a href="https://scratch.ics.ie/" target="_blank">Scratch competition 2016. </a>I joined CoderDojo in Summer 2015 at the
                 <a href="https://dublin.sciencegallery.com/" target="_blank">Science Gallery</a>, before we moved to <a href="https://dublin.sciencegallery.com/" target="_blank">Coderdojo Dublin @ the Warehouse</a> in Zalando across the Quay from Google
                 Headquarters.
             </p>
@@ -260,7 +255,7 @@
                 I enjoy swimming, tennis, chess and of course Minecraft.
             </p>
             <p>
-                As you can see from one of the above tabs, I am a big Minecraft fan.
+                As you can see from the first tab above, I am a big Minecraft fan.
             </p>
         </div>
         <!-- End accordion-content-->
