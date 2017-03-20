@@ -8,7 +8,7 @@ from flask import redirect, session, url_for
 from flask_wtf import FlaskForm
 
 # Import all the necessary fields such as a textarea (TextAreaField()).
-from wtforms import BooleanField, PasswordField, SelectMultipleField, StringField, SubmitField, TextAreaField, ValidationError
+from wtforms import BooleanField, PasswordField, SelectMultipleField, StringField, SubmitField, TextAreaField, RadioField, ValidationError
 
 # Import all the validators such as making sure that there is something inside of a field (DataRequired())
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Regexp
@@ -74,7 +74,9 @@ class RegisterForm(FlaskForm):
     email = StringField('Your parents email', validators=[DataRequired(), Email(), Length(1, 64)])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('com_password', message="The two passwords don't match.")])
     com_password = PasswordField('Confirm Password', validators=[DataRequired()])
-    check_email = BooleanField("I agree that I have used my parent's email if I am 12 or under", validators=[DataRequired("Please confirm that you have used your parent's email")])
+    check_email = RadioField("This will not be visible to anyone", choices=[
+                                                                        ('thirteen', 'I am thirteen or over so I can use my own email'), ('under_12', 'I am 12 or under and have used my parent/guardian\'s email')
+                                                                    ], default="under_12", validators=[DataRequired()])
     submit = SubmitField("Register", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 
