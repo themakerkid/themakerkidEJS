@@ -374,7 +374,7 @@ def resendConfirmationEmail():
         flash("We have sent you another confirmation email.", 'info')
     return redirect(url_for('.unconfirmed'))
 
-@main.route('/users')
+@main.route('/buddies')
 def users():
     # Get all the users from the database
     users = User.query.all()

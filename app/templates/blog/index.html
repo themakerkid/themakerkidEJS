@@ -7,6 +7,10 @@
             /* Get rid of the extra spacing underneath the Search Posts h2 element. */
             margin-bottom: 0;
         }
+
+        .margin-right {
+            margin-right: 5px;
+        }
     </style>
 {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
     <!-- Start of Row -->
@@ -15,7 +19,8 @@
         <div class="col-md-9">
             <div class="page-header">
                 {% if logged_in %}
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#create-new-post">Create A New Post</button> {% endif %}
+                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
+                <a class="btn btn-success pull-right margin-right" href="{{ url_for('blog.posts', username=current_user.username) }}">My posts</a>{% endif %}
                 <h2>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h2>
                 {% if logged_in %}
                 <!-- Modal -->

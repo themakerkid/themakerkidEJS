@@ -299,6 +299,36 @@ def edit(id):
     # Render edit page template
     return render_template("blog/edit.html", title="Edit Post - " + post.title, year=year, post=post, form=form)
 
+# Editing a comment
+@blog.route('/edit/comment/<int:id>', methods=["GET", "POST"])
+@login_required
+def editComment(id):
+    # Get comment from database (if it doesn't exist return 404 code)
+    comment = Comment.query.filter_by(id=id).first_or_404()
+
+    # Create form object
+    form = CommentForm()
+
+    # Issue 403 or forbidden code if user is not owner and is not administrator
+    if current_user.username != comment.author.username and not current_user.admin():
+        abort(403)
+    
+    # If request method is POST (form submitted)
+    if request.method == "POST":
+        if checkBtn("cancel", form):
+            # If cancel btn was pressed, return redirect to comment's post (don't forget to go to comments part of the post)
+            return redirect(url_for('.post', id=comment.post.id) + '#comments')
+        elif checkBtn("submit", form):
+            # If submit was pressed, update content of comment and redirect back
+            comment.body = form.body.data
+            return redirect(url_for('.post', id=comment.post.id) + '#comments')
+    
+    # Set initial values
+    form.body.data = comment.body
+
+    # Render template
+    return render_template("blog/editComment.html", title="Edit Comment for post " + comment.post.title, year=year, comment=comment, form=form)
+
 # Make a post public
 @blog.route('/public/<int:id>')
 @login_required        # Protect the route so that only logged in users can view it

@@ -182,7 +182,7 @@ Keep Coding.
             <!-- Search,Blog, Code Snippets and user options  -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
-                <li><a tabindex="0" href="{{ url_for('main.users') }}">All Users</a></li>
+                <li><a tabindex="0" href="{{ url_for('main.users') }}">Buddies</a></li>
                 <li><a tabindex="0" href="{{ url_for('snippets.index') }}">Code Snippets</a></li>
                 <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
                 {% if current_user.is_authenticated %}

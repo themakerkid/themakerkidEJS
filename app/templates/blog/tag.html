@@ -4,11 +4,11 @@
 </div>
 
 <h2>Posts in the Tag</h2>
-{% if tag.posts.count() > 0 %}
+{% if tag.posts.filter(g.db.or_(g.post.published == True, g.post.author_id == current_user.id, current_user.admin())).count() > 0 %}
 <ul class="list-group">
     {% for post in tag.posts %}
-    {% if post.published %}
-    <li class="list-group-item"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a></li>
+    {% if post.published or post.author.username == current_user.username or current_user.admin() %}
+    <li class="list-group-item"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a>{% if not post.published %} (Draft){% endif %}<p class="pull-right pull-xs-none">By <a href="{{ url_for('blog.profile', username=post.author.username) }}">{{ post.author.username }}</a></p></li>
     {% endif %}
     {% endfor %}
 </ul>

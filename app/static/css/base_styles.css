@@ -96,3 +96,9 @@ body {
 li.dropdown-header {
     cursor: default;
 }
+
+@media (max-width: 768px) {
+    .pull-xs-none {
+        float: none !important;
+    }
+}

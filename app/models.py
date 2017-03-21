@@ -104,6 +104,8 @@ class User(db.Model, UserMixin):
         return 'User <%s>' % self.username
 
 class AnonymousUser(AnonymousUserMixin):
+    id = 0
+
     def admin(self):
         return False
 

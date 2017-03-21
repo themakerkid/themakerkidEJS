@@ -1,10 +1,27 @@
-{% extends "base.html" %} {% block page_content %}
-<div class="page-header">
-    <h1>Registered Users</h1>
-</div>
-{% for user in users %}
-<div class="clearfix">
-    <a href="{{ url_for('blog.profile', username=user.username) }}"><img src="{{ user.getAvatar(size=90) }}" class="pull-left img-rounded">{{ user.username|capitalize }}</a>
-    <p>{% if user.about_me %}{{ user.about_me }}{% else %}No information about {{ user.username|capitalize }} has been given.{% endif %}</p>
-</div>
-<br /> {% endfor %} {% endblock %}
+{% extends "base.html" %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Registered Buddies</h1>
+    </div>
+    {% for user in users %}
+    <div class="clearfix">
+        <a href="{{ url_for('blog.profile', username=user.username) }}"><img src="{{ user.getAvatar(size=90) }}" class="pull-left img-rounded">{{ user.username|capitalize }}</a>
+        <span class="pull-right pull-xs-none">
+        Member since {{ moment(user.date_registered).format('DD/MM/YYYY') }}.
+        Last seen {{ moment(user.last_seen).fromNow(refresh=True) }}.
+        </span>
+        <p>{% if user.about_me %}{{ user.about_me }}{% else %}No information about {{ user.username|capitalize }} has been given.{% endif %}</p>
+        <a class="btn btn-sm btn-info" href="{{ url_for('blog.posts', username=user.username) }}"><span class="badge">{{ user.posts.filter_by(published=True).count() }}</span> public {% if user.posts.filter_by(published=True).count() != 1 %}posts{% else %}post{% endif %}.</a>
+        <a class="btn btn-sm btn-info" href="{{ url_for('snippets.someonesSnippets', username=user.username) }}"><span class="badge">{{ user.snippets.count() }}</span> {% if user.snippets.count() != 1 %}snippets{% else %}snippet{% endif %}.</a>
+    </div>
+    {% if not user.id == users|length %}
+    <br />
+    {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
