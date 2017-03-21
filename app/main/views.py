@@ -220,10 +220,12 @@ def makeBooks():
     return render_template('maker/books.html', title="Maker - Books", year=year)
 # End of Learning Resources and Books
 
+# Electronics has been taken out for the same reason
 @main.route('/maker/electronics')
 def makeElec():
     """Renders the Maker Electronics page."""
     return render_template('maker/elec.html', title="Maker - Electronics - Getting Started", year=year)
+# End of Electronics
 
 @main.route('/maker/arduino/start')
 def arduinoStart():
@@ -268,10 +270,12 @@ def makeCompEv():
     """Renders the Maker Competitions and events page."""
     return render_template('maker/compEv.html', title="Maker - Compitions & Events", year=year)
 
+# The Glossary has been taken out for the same reason
 @main.route('/maker/glossary')
 def makeGlossary():
     """Renders the Maker Glossary page."""
     return render_template('maker/glossary.html', title="Maker - Glossary", year=year)
+# End of Maker Glossary
 
 @main.route('/coding')
 def coding():
@@ -298,10 +302,12 @@ def techEveComp():
     """Renders the Coding Events and Competitions page."""
     return render_template('coding/eveComp.html', title="Technology - Events & Competitions", year=year)
 
+# The Glossary has been taken out for the same reason
 @main.route('/coding/glossary')
 def techGlossary():
     """Renders the Coding Glossary page."""
     return render_template('coding/glossary.html', title="Technology - Python - This Website", year=year)
+# End of Coding Glossary
 
 # Fun Toys has been taken out for the same reason as the other pages that were taken out
 @main.route('/funstuff/toys')

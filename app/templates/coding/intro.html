@@ -81,64 +81,103 @@
         </p>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 text-center">
-        <h4 class="bg-danger"><em> Click on any of the sections below to link to the relevant section!</em></h4>
-    </div>
+<div class="text-center">
+    <h4 class="bg-danger"><em> Click on any of the sections below to link to the relevant section!</em></h4>
 </div>
 <div class="list-group">
-    <a href="https://coderdojo.com/" class="list-group-item ">
-        <img src="{{ url_for('static', filename='images/about/coderdojo.jpg') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Join your local CoderDojo!</h3>
-        <p class="list-group-item-text">I have been attending Coderdojo for almost 2 years now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
-            websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.</p>
+    <a href="https://coderdojo.com/" class="list-group-item">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/about/coderdojo.jpg') }}" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Join your local CoderDojo!</h3>
+                <p class="list-group-item-text">
+                    I have been attending Coderdojo for almost 2 years now. It's fantastic!! CoderDojo is a global movement of free, volunteer-led, community based programming clubs for young people. At a Dojo, young people, between 7 and 17, learn how to code, develop
+                    websites, apps, programs, games and explore technology in an informal and creative environment. In addition to learning to code attendees meet like minded people and are exposed to the possibilities of technology.
+                </p>
+            </div>
+        </div>
     </a>
     <br />
     <a href="{{ url_for('main.scratch') }}" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/coding/scratch_cat.png') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn Scratch</h3>
-        <p class="list-group-item-text">Scratch is a programming language and an online community where children can program and share interactive media such as stories, games, and animation with people from all over the world. To get started kead on over to the Scratch Page, by clicking
-            on this text now. If you are wondering what you can create with Scratch, then ckeck out some of these Projects here or my project Snapshot of our world.(Link herre)</p>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/coding/scratch_cat.png') }}" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Learn Scratch</h3>
+                <p class="list-group-item-text">
+                    Scratch is a programming language and an online community where children can program and share interactive media such as stories, games, and animation with people from all over the world. To get started kead on over to the Scratch Page, by clicking
+                    on this text now. If you are wondering what you can create with Scratch, then ckeck out some of these Projects here or my project Snapshot of our world.
+                </p>
+            </div>
+        </div>
     </a>
     <br />
     <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/coding/processing.png') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn the Processing Language on Khan Academy</h3>
-        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
-            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/coding/processing.png') }}" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Learn the Processing Language on Khan Academy</h3>
+                <p class="list-group-item-text">
+                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+                    a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what you can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
+                </p>
+            </div>
+        </div>
     </a>
     <br />
 
     <a href="https://www.khanacademy.org/computing/computer-programming/html-css" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/about/html5.svg') }}" class="pull-left" />
-        <img src="{{ url_for('static', filename='images/about/js.svg') }}" class="pull-left" /><img src="{{ url_for('static', filename='images/about/css3.svg') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn how to create Webpages</h3>
-        <p class="list-group-item-text">Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change
-            the color, font, layout, and more.</p>
+    <div class="row">
+        <div class="col-sm-3 col-xs-12">
+            <img src="{{ url_for('static', filename='images/about/html5.svg') }}" />
+            <img src="{{ url_for('static', filename='images/about/js.svg') }}" />
+            <img src="{{ url_for('static', filename='images/about/css3.svg') }}" />
+        </div>
+        <div class="col-sm-9 col-xs-12">
+            <h3 class="list-group-item-heading">Learn how to create Webpages</h3>
+            <p class="list-group-item-text">
+                Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change
+                the color, font, layout, and more.
+            </p>
+        </div>
+    </div>
     </a>
     <br />
     <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/coding/processing.png') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn how to code Mobile Apps.</h3>
-        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
-            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/coding/app_inventor_for_coding_intro.png') }}" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Learn how to code Mobile Apps.</h3>
+                <p class="list-group-item-text">
+                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+                    a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
+                </p>
+            </div>
+        </div>
     </a>
     <br />
     <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/about/python.svg') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn the Python Language.</h3>
-        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
-            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
+        <div class="row">
+            <div class="col-sm-2 col-xs-12">
+                <img src="{{ url_for('static', filename='images/about/python.svg') }}" />
+            </div>
+            <div class="col-sm-10 col-xs-12">
+                <h3 class="list-group-item-heading">Learn the Python Language.</h3>
+                <p class="list-group-item-text">
+                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
+                    a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
+                </p>
+            </div>
+        </div>
     </a>
-    <br/>
     <br />
-    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-        <img src="{{ url_for('static', filename='images/about/python.svg') }}" class="pull-left" />
-        <h3 class="list-group-item-heading ">Learn the Python Language.</h3>
-        <p class="list-group-item-text">Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in
-            a visual context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.</p>
-    </a>
-    <br/>
     <a href="{{ url_for('main.drawing') }}" class="list-group-item">
         <h3 class="list-group-item-heading ">Check out some of my Processing code</h3>
         <p class="list-group-item-text">I created these Processing examples on the KHAN Academy Animations</p>

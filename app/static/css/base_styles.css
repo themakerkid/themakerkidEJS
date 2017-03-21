@@ -92,3 +92,7 @@ body {
 .rating span.glyphicon-star {
     color: #ffff00;
 }
+
+li.dropdown-header {
+    cursor: default;
+}

@@ -71,7 +71,7 @@ class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(1, 64), Regexp('^[a-zA-Z._][a-zA-Z0-9._]*$', 0,
                                                                       'Your username can only contain letters, numbers, dots, underscores '
                                                                       'and cannot start with a number.')])
-    email = StringField('Your parents email', validators=[DataRequired(), Email(), Length(1, 64)])
+    email = StringField('Your parent/guardian\'s or your own email', validators=[DataRequired(), Email(), Length(1, 64)])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('com_password', message="The two passwords don't match.")])
     com_password = PasswordField('Confirm Password', validators=[DataRequired()])
     check_email = RadioField("This will not be visible to anyone", choices=[

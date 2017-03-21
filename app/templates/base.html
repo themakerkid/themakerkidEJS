@@ -9,6 +9,8 @@ That's Great! That's how I learn too.
 You can see that I used Bootstrap to make the site responsive, JQuery for some cool effects and Font Awesome for the
 scroll to top icon.
 
+I didn't get time to do the Glossary, Raspberry Pi and Electronics for the Eir Junior Spiders competition.
+
 I have used Python and Flask for all the server side stuff. Flask is a micro web framework written in Python
 
 I used PythonAnywhere to host this website on the web.
@@ -108,7 +110,7 @@ Keep Coding.
                         <li class="divider"></li>
                         <li><a tabindex="0" href="{{ url_for('main.famousCoders') }}">Famous Coders</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.techEveComp') }}">Events &amp; Competitions</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>
+                        <!--<li><a tabindex="0" href="{{ url_for('main.techGlossary') }}">Glossary</a></li>-->
                     </ul>
                 </li>
                 <!-- End Coder Submenu  -->
@@ -118,7 +120,7 @@ Keep Coding.
                     <ul class="dropdown-menu">
                         <li><a tabindex="0" href="{{ url_for('main.maker') }}">Introduction</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>
+                        <!--<li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>-->
                         <!-- <li class="dropdown-submenu">
                             <a tabindex="0">Electronics</a>
                             <ul class="dropdown-menu">
@@ -127,14 +129,19 @@ Keep Coding.
                         </li> -->
                         <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
                         <li><a tabindex="0" href="{{ url_for('main.makeBooks') }}">Engineering Books</a></li> -->
+                        
+                        <!-- A submenu would be silly with the amount of things on the Maker dropdown
                         <li class="dropdown-submenu">
                             <a tabindex="0">Arduino</a>
-                            <ul class="dropdown-menu">
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
-                                <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
+                            <ul class="dropdown-menu">-->
+                        <li class="dropdown-header">Arduino</li>
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
+                            <!--
                             </ul>
                         </li>
+                        -->
                         <!-- <li><a tabindex="0" href="{{ url_for('main.makeRobot') }}">Robotics</a></li>
                     <li><a tabindex="0" href="{{ url_for('main.makeProj') }}">Projects</a></li>
                     -->
@@ -167,7 +174,7 @@ Keep Coding.
                         <li><a tabindex="0" href="{{ url_for('main.startCompEvents') }}">Events</a></li>
                         -->
                         <li><a tabindex="0" href="{{ url_for('main.makeCompEv') }}">Events &amp; Competitions</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.makeGlossary') }}">Glossary</a></li>
+                        <!--<li><a tabindex="0" href="{{ url_for('main.makeGlossary') }}">Glossary</a></li>-->
                     </ul>
                 </li>
                 <!-- End Coder Submenu  -->
@@ -203,12 +210,13 @@ Keep Coding.
     <noscript class="text-danger"><p><strong>Please enable Javascript to improve your experience.</strong></p></noscript>
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="alert alert-{{ category }} alert-dissmissable fade in">
-        <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
     </div>
     {% endfor %}
     <!--[if lt IE 9]>
-            <a class="btn btn-danger" href="browsehappy.com">Please upgrade your browser to improve your experience.</a>
-        <![endif]-->
+        <a class="btn btn-danger" href="browsehappy.com">Please upgrade your browser to improve your experience.</a>
+    <![endif]-->
     {% block page_content %}{% endblock %}
     <footer>
         <br /> {% if year %}
@@ -221,26 +229,26 @@ Keep Coding.
 </div>
 <i class="fa fa-3x fa-arrow-circle-up" id="scroll-top"></i>
 <!-- End of Page Content -->{% endblock %} {% block scripts %}
-<!-- Start of Global Scripts -->{{ super() }}
-<script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
-<!-- Activate Submenus, Scroll to Top and tooltip activation -->
-<script>
-    $(function() {
-        $('[data-submenu]').submenupicker();
-        $('#scroll-top').hide();
-        $('#scroll-top').on('click', function() {
-            $("html, body").animate({
-                scrollTop: 0
-            }, 1000);
+    <!-- Start of Global Scripts -->{{ super() }}
+    <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
+    <!-- Activate Submenus, Scroll to Top and tooltip activation -->
+    <script>
+        $(function() {
+            $('[data-submenu]').submenupicker();
+            $('#scroll-top').hide();
+            $('#scroll-top').on('click', function() {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 1000);
+            });
+            $(document).on('scroll', function() {
+                if ($(window).scrollTop() > 100) {
+                    $("#scroll-top").fadeIn(500);
+                } else {
+                    $("#scroll-top").fadeOut(500);
+                }
+            });
+            $('[data-toggle="tooltip"]').tooltip();
         });
-        $(document).on('scroll', function() {
-            if ($(window).scrollTop() > 100) {
-                $("#scroll-top").fadeIn(500);
-            } else {
-                $("#scroll-top").fadeOut(500);
-            }
-        });
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+    </script>
 {% endblock %}
