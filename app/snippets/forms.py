@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, SelectField, TextAreaField, Valida
 from wtforms.validators import Length, DataRequired
 from ..models import Snippet
 
-choices = ((0, "Please select a language"), (Snippet.HTML, "HTML"), (Snippet.CSS, "CSS"), (Snippet.JAVASCRIPT, "JavaScript"), (Snippet.ARDUINO_C, "Arduino C++"), (Snippet.PYTHON, "Python"), (Snippet.OTHER, "Other"))
+choices = ((0, "Please select a language"), (Snippet.HTML, "HTML"), (Snippet.CSS, "CSS"), (Snippet.JAVASCRIPT, "JavaScript"), (Snippet.ARDUINO_C, "Arduino C++"), (Snippet.PYTHON, "Python"), (Snippet.PROCESSING, "Processing"), (Snippet.OTHER, "Other"))
 
 class SnippetForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, 'Title should be no more than 64 characters')])
@@ -48,3 +48,5 @@ class SearchForm(FlaskForm):
                 self.language_used = True
         elif (not self.language_used) and (field.data is None):
             raise ValidationError("You must choose either a language or type in a search query.")
+        else:
+            raise ValidationError("Error!")

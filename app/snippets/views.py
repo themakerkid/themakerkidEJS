@@ -24,8 +24,10 @@ def checkLanguage(snippet):
         return "Arduino C++"
     elif snippet.code_type_id == 5:
         return "Python"
+    elif snippet.code_type_id == 6:
+        return "Processing"
     else:
-        return "a language not recognized"
+        return "Other"
 
 @snippets.before_request
 def before():
@@ -60,12 +62,31 @@ def index():
         session["search_query"] = search_form.search_query
         session["language_id"] = search_form.language.data
         session["both"] = search_form.both
-        return redirect(url_for('.filtered', q=search_form.search.data))
+        if int(session["language_id"]) == 0:
+            return redirect(url_for('.index'))
+        if not search_form.search.data:
+            if int(session["language_id"]) == 1:
+                q = "HTML"
+            elif int(session["language_id"]) == 2:
+                q = "CSS"
+            elif int(session["language_id"]) == 3:
+                q = "JavaScript"
+            elif int(session["language_id"]) == 4:
+                q = "Arduino C++"
+            elif int(session["language_id"]) == 5:
+                q = "Python"
+            elif int(session["language_id"]) == 6:
+                q = "Processing"
+            else:
+                q = "Other"
+        else:
+            q = search_form.search.data
+        return redirect(url_for('.filtered', q=q))
     return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
 
 @snippets.route('/filtered', methods=['GET', 'POST'])
 def filtered():
-    if not session.get("language") or not session.get("search_query") or not session.get("language_id") or not session.get("both"):
+    if not session.get("language", False) and not session.get("search_query", False) and not session.get("language_id", False) and not session.get("both", False):
         return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     snippet_form = SnippetForm()
@@ -81,7 +102,26 @@ def filtered():
         session["search_query"] = search_form.search_query
         session["language_id"] = search_form.language.data
         session["both"] = search_form.both
-        return redirect(url_for('.filtered', q=search_form.search.data))
+        if int(session["language_id"]) == 0:
+            return redirect(url_for('.filtered', q=q))
+        if not search_form.search.data:
+            if int(session["language_id"]) == 1:
+                q = "HTML"
+            elif int(session["language_id"]) == 2:
+                q = "CSS"
+            elif int(session["language_id"]) == 3:
+                q = "JavaScript"
+            elif int(session["language_id"]) == 4:
+                q = "Arduino C++"
+            elif int(session["language_id"]) == 5:
+                q = "Python"
+            elif int(session["language_id"]) == 6:
+                q = "Processing"
+            else:
+                q = "Other"
+        else:
+            q = search_form.search.data
+        return redirect(url_for('.filtered', q=q))
     if session["both"]:
         pagination = Snippet.query.whoosh_search(q, 50).filter_by(code_type_id=int(session.get("language_id"))).paginate(
             page, per_page=current_app.config["ITEMS_PER_PAGE"],
@@ -126,6 +166,7 @@ def edit(id):
         elif checkBtn("submit", form):
             snippet.title = form.title.data
             snippet.body = form.body.data
+            snippet.code_type_id = form.language.data
             return redirect(url_for('.snippet', id=id))
     form.title.data = snippet.title
     form.body.data = snippet.body

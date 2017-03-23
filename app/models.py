@@ -206,7 +206,8 @@ class Snippet(db.Model):
     JAVASCRIPT = 3
     ARDUINO_C = 4
     PYTHON = 5
-    OTHER = 6
+    PROCESSING = 6
+    OTHER = 7
 
     __tablename__ = 'snippets'
     __searchable__ = ['title', 'body']
