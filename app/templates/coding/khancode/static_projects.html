@@ -18,13 +18,12 @@
     }
 </style>
 {% endblock %} {% block page_content %}
-<h1>Some of my Khan Processing Projects</h1>
+<h1>Static Projects</h1>
 <ul class="grid-nav">
-    <li><a href="{{ url_for('.animations') }}">Animation</a></li>
+    <li><a href="{{ url_for('.animations') }}">Animated</a></li>
     <li><a href="{{ url_for('.mouseOver') }}">Mouse Over</a></li>
     <li><a href="{{ url_for('.drawing') }}" class="active">Drawings</a></li>
 </ul>
-<div class="container">
     <div class="col-md-3 col-sm-6 col-xs-12 text-center img-surround">
         <h4>Animal Attack</h4>
         <img src="/static/images/tech/khan_static_pictures/animalAttack.png" class="img-responsive  center-block" />
@@ -216,7 +215,7 @@
             </div>
         </div>
     </div>
-</div>
+    <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
 {% endblock %} {% block scripts %} {{ super() }}
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>

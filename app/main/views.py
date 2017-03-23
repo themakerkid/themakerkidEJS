@@ -93,40 +93,15 @@ def scratchProjectVideos():
     """Renders the Scratch 'Award Winning Project' videos page."""
     return render_template('coding/scratch/scratchProjectVideos.html', title='Scratch - Award Winning Project Videos - Page 1', year=year)
 
-@main.route('/processing')
-def processing():
-    """Renders the Processing home page."""
-    return render_template('coding/processing/gettingStarted.html', title="Processing - Getting Started", year=year)
-
-@main.route('/processing/learn')
-def processingLearn():
-    """Renders the Processing learning resources page."""
-    return render_template('coding/processing/learn.html', title="Processing - Learning Resources", year=year)
-
-@main.route('/webCoding')
-def websiteCoding():
-    """Renders the website coding home page."""
-    return render_template('coding/websiteCode/gettingStarted.html', title="Website Coding - Home Page", year=year)
-
 @main.route('/webCoding/learn')
 def webCodeLearn():
     """Renders the website coding learning resources page."""
     return render_template('coding/websiteCode/learn.html', title="Website Coding - Learning Resources", year=year)
 
-@main.route('/webCoding/thisWebsite')
-def webCodeThis():
-    """Renders the website coding page that is about this website."""
-    return render_template('coding/websiteCode/thisWebsite.html', title="Website Coding - Learning Resources", year=year)
-
 @main.route('/appInventor')
 def appInventor():
     """Renders the app inventor home page."""
     return render_template('coding/appInventor/intro.html', title="App Inventor - Home", year=year)
-
-@main.route('/appInventor/learn')
-def appInventorLearn():
-    """Renders the app inventor learning resources page."""
-    return render_template('coding/appInventor/learn.html', title="App Inventor - Learning Resources", year=year)
 
 @main.route('/appInventor/projects')
 def appInventorProjects():
@@ -161,17 +136,17 @@ def raspiHardware():
     return render_template('coding/websiteCode/thisWebsite.html', title="Website Coding - Learning Resources", year=year)
 # End of raspberry pi routes
 
-@main.route('/processing/khan/drawing')
+@main.route('/coding/sample/drawing')
 def drawing():
     """Renders the khan projects drawing page."""
     return render_template('coding/khancode/static_projects.html', title="My Khan Projects", year=year)
 
-@main.route('/processing/khan/mouseOver')
+@main.route('/coding/sample/mouseOver')
 def mouseOver():
     """Renders the khan projects mouse over page."""
     return render_template('coding/khancode/mouseOverProjects.html', title="Mouse Over Projects", year=year)
 
-@main.route('/processing/khan/animations')
+@main.route('/coding/sample/animated')
 def animations():
     """Renders the khan projects animations page."""
     return render_template('coding/khancode/animationProjects.html', title="Animations", year=year)
@@ -280,33 +255,28 @@ def makeGlossary():
 @main.route('/coding')
 def coding():
     """Renders the Coding home page."""
-    return render_template('coding/intro.html', title="Coding (Basic) - Introduction", year=year)
-
-@main.route('/coding/python')
-def techPython():
-    """Renders the Coding Python home page."""
-    return render_template('coding/python/gettingStarted.html', title="Technology - Python - Getting Started", year=year)
+    return render_template('coding/intro.html', title="Coding - Introduction", year=year)
 
 @main.route('/coding/python/learn')
 def techPyLearn():
     """Renders the Coding Python learning resources page."""
-    return render_template('coding/python/learn.html', title="Technology - Python - Learning Resources", year=year)
+    return render_template('coding/python/learn.html', title="Coding - Python - Learning Resources", year=year)
 
 @main.route('/coding/python/this')
 def techPyThis():
     """Renders the Coding, Python about this website page."""
-    return render_template('coding/python/thisWebsite.html', title="Technology - Python - This Website", year=year)
+    return render_template('coding/python/thisWebsite.html', title="Coding - Python - This Website", year=year)
 
 @main.route('/coding/eventsCompetitions')
 def techEveComp():
     """Renders the Coding Events and Competitions page."""
-    return render_template('coding/eveComp.html', title="Technology - Events & Competitions", year=year)
+    return render_template('coding/eveComp.html', title="Coding - Events & Competitions", year=year)
 
 # The Glossary has been taken out for the same reason
 @main.route('/coding/glossary')
 def techGlossary():
     """Renders the Coding Glossary page."""
-    return render_template('coding/glossary.html', title="Technology - Python - This Website", year=year)
+    return render_template('coding/glossary.html', title="Coding - Python - This Website", year=year)
 # End of Coding Glossary
 
 # Fun Toys has been taken out for the same reason as the other pages that were taken out

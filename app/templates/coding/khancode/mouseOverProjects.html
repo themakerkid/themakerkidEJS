@@ -36,9 +36,9 @@
 <!-- The body of the webpage, where all visible stuff lies. -->
 
 {% block page_content %}
-    <h1>Some of my Mouse Over Projects</h1>
+    <h1>Mouse Over Projects</h1>
     <ul class="grid-nav">
-        <li><a href="{{ url_for('.animations') }}">Animation</a></li>
+        <li><a href="{{ url_for('.animations') }}">Animated</a></li>
         <li><a href="{{ url_for('.mouseOver') }}" class="active">Mouse Over</a></li>
         <li><a href="{{ url_for('.drawing') }}">Drawings</a></li>
         <!--
@@ -58,7 +58,7 @@
             <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#flower-grower" href="{{ url_for('static', filename='getTheCode/flowerMaker.html') }}">Get the Code!!</button>
             <!-- Modal -->
             <div class="modal fade" id="flower-grower" role="dialog">
-                <div class="modal-dialog modal-md">
+                <div class="modal-dialog modal-lg">
 
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -170,8 +170,7 @@
             <button type="button" class="btn-success btn-sm reload-one" id="crazyReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         </div>
     </div>
-    <br />
-    <em><small>Reload icons are free <a href="http://getbootstrap.com/components/#glyphicons" target="_blank">Bootstrap glyphicons</a>.</small></em>
+    <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
 {% endblock %}
 {% block scripts %}
     {{ super() }}   

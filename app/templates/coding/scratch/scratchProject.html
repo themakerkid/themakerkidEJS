@@ -41,45 +41,6 @@
     <a role="button" class="btn btn-success" href="{{ url_for('main.scratchProject') }}">My Project</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.scratchProjectVideos') }}">Project Videos</a>
 </div>
-<!--
-<section>
-    <div class="slider">
-        <div class="slide-viewer">
-            <div class="slide-group">
-                <div class="slide slide-1">
-                    <img src="{{ url_for('static', filename='images/slide-1.jpg') }}" class="img-responsive" alt="Description of my project" />
-                </div>
-                <div class="slide slide-2">
-                    <img src="{{ url_for('static', filename='images/slide-2.jpg') }}" class="img-responsive" alt="Continents" />
-                </div>
-                <div class="slide slide-3">
-                    <img src="{{ url_for('static', filename='images/slide-3.jpg') }}" class="img-responsive" alt="Wonders & Landmarks" />
-                </div>
-                <div class="slide slide-4">
-                    <img src="{{ url_for('static', filename='images/slide-4.jpg') }}" class="img-responsive" alt="Wonders & Landmarks Mini Quiz" />
-                </div>
-                <div class="slide slide-5">
-                    <img src="{{ url_for('static', filename='images/slide-5.jpg') }}" class="img-responsive" alt="Oceans & Seas" />
-                </div>
-                <div class="slide slide-6">
-                    <img src="{{ url_for('static', filename='images/slide-6.jpg') }}" class="img-responsive" alt="Animals" />
-                </div>
-                <div class="slide slide-7">
-                    <img src="{{ url_for('static', filename='images/slide-7.jpg') }}" class="img-responsive" alt="Countries & Flags" />
-                </div>
-                <div class="slide slide-8">
-                    <img src="{{ url_for('static', filename='images/slide-8.jpg') }}" class="img-responsive" alt="Master Quiz Question" />
-                </div>
-                <div class="slide slide-9">
-                    <img src="{{ url_for('static', filename='images/slide-9.jpg') }}" class="img-responsive" alt="End of my project (Party!!!)" />
-                </div>
-            </div>
-        </div>
-        <div class="slide-buttons"></div>
-    </div>
-
-</section>
--->
 <div id="scratchCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -139,11 +100,18 @@
 <hr />
 
 <p>I began coding when I was 6 years old, starting off with the <a target="_blank" href="https://scratch.mit.edu/">Scratch</a> programming language on the Raspberry Pi. This is a slideshow of my project which won Best Educational Content award
-    <a href="http://scratch.ie/home"> Scratch National Competition</a> in Ireland in 2015. with my project Snapshot Of our World. If you click this link,<a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flask must be activated.">Snapshot Of our World</a>.
+    <a href="http://scratch.ie/home"> Scratch National Competition</a> in Ireland in 2015. with my project Snapshot Of our World.
     you will be taken to the Scratch project page and you can try out the project. Best of luck in the Master Quiz!!</p>
-<p>The Project Videos button above will take you to the videos page which show a run though of the project. </p>
+<p>The Project Videos button above will take you to the videos page which show a run though of the project.</p>
 <p><i id="scratch-project">(Note: Please be patient as this project is quite large.)</i></p>
-<p>To download the source code of this project complete the following steps. </p>
+<p>To download the source code of this project complete the following steps.</p>
+<ol>
+    <li><p>Go to my project page: <a target="_blank" href=" https://scratch.mit.edu/projects/49812240/" title="Flask must be activated.">Snapshot Of our World</a>.</p></li>
+    <li><p>Click on the <strong>See Inside</strong> button.</p></li>
+    <li><p>Go to <strong>File</strong> and then click on <strong>Download to your computer</strong>.</p></li>
+    <li><p>Save the project where ever you like.</p></li>
+    <li><p>Now go an open it in <strong>Scratch 2.0 Offline Editor</strong> <em>(<a href="{{ url_for('main.scratch') }}#getting-started">Click here for a video</a>)</em>.</p></li>
+</ol>
 <p>If you have any questions on the project code, then simply <a tabindex="0" href="{{ url_for('blog.index') }}">post on the Blog</a>, and I will get back to you.</p>
 <!-- <iframe allowtransparency="true" width="485" height="402" src="//scratch.mit.edu/projects/embed/49812240/?autostart=false" frameborder="0" allowfullscreen></iframe>-->
 
