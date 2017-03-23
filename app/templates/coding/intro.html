@@ -127,41 +127,7 @@
         </div>
     </a>
     <br />
-    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
-        <div class="row">
-            <div class="col-md-2 col-sm-3 col-xs-12">
-                <img src="{{ url_for('static', filename='images/coding/processing.png') }}" />
-            </div>
-            <div class="col-md-10 col-sm-9 col-xs-12">
-                <h3 class="list-group-item-heading">Learn the Processing Language on Khan Academy</h3>
-                <p class="list-group-item-text">
-                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in a visual
-                    context, and to serve as the foundation for electronic sketchbooks. If you are wondering what you can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
-                </p>
-            </div>
-        </div>
-    </a>
-    <br />
-
-    <a href="https://www.khanacademy.org/computing/computer-programming/html-css" class="list-group-item">
-        <div class="row">
-            <div class="col-sm-3 col-xs-12">
-                <img src="{{ url_for('static', filename='images/about/html5.svg') }}" />
-                <img src="{{ url_for('static', filename='images/about/js.svg') }}" />
-                <img src="{{ url_for('static', filename='images/about/css3.svg') }}" />
-            </div>
-            <div class="col-sm-9 col-xs-12">
-                <h3 class="list-group-item-heading">Learn how to create Webpages</h3>
-                <p class="list-group-item-text">
-                    Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the
-                    color, font, layout, and more. Getting Started: Intro to Coding Video Choosing a Language Choosing a platform Choosing an editor My recommendations: Join a Dojo, then choose a language: Scratch, Processing, Python Web (HTML/CSS/Javascript),
-                    Mobile Video: Khanacademy coding resources or choose an editors: Scratch Offline Explorer, Notepad++, Nano, Sublime Text, Brackets, Video, Bluefish, Idle, Other Tools: Simage Editors (Gimp and InkscAPE) ???
-                </p>
-            </div>
-        </div>
-    </a>
-    <br />
-    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank" class="list-group-item">
         <div class="row">
             <div class="col-md-2 col-sm-3 col-xs-12">
                 <img src="{{ url_for('static', filename='images/coding/app_inventor_for_coding_intro.png') }}" />
@@ -169,31 +135,91 @@
             <div class="col-md-10 col-sm-9 col-xs-12">
                 <h3 class="list-group-item-heading">Learn how to code Mobile Apps.</h3>
                 <p class="list-group-item-text">
-                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in a visual
-                    context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
+                    App Inventor for Android is an open-source web application originally provided by Google, and now maintained by the <span data-toggle="tooltip" data-placement="top" title="Massachusetts Institute of Technology">MIT</span>.
+                    It allows newcomers to computer programming to create software applications for the Android <span data-toggle="tooltip" data-placement="top" title="Operating System">OS</span>. It uses a graphical interface, very similar to Scratch and the StarLogo TNG user interface, which allows users to drag-and-drop visual objects to create an application that can run on Android devices.
                 </p>
             </div>
         </div>
     </a>
     <br />
-    <a href="https://www.khanacademy.org/computing/computer-programming/programming" class="list-group-item">
+    <a href="{{ url_for('main.webCodeLearn') }}" class="list-group-item">
         <div class="row">
-            <div class="col-sm-2 col-xs-12">
-                <img src="{{ url_for('static', filename='images/about/python.svg') }}" />
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/coding/khanLogo.jpg') }}" />
             </div>
-            <div class="col-sm-10 col-xs-12">
-                <h3 class="list-group-item-heading">Learn the Python Language.</h3>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Get Started with Khan Academy</h3>
                 <p class="list-group-item-text">
-                    Processing is an open source programming language and integrated development environment (IDE) built for the electronic arts, new media art, and visual design communities with the purpose of teaching the fundamentals of computer programming in a visual
-                    context, and to serve as the foundation for electronic sketchbooks. If you are wondering what y9u can do with Processing then check out some of these cool animations that I made while learning processing on KHAN Academy.
+                    Khan Academy is my favourite learning website. I have been using it for 3 years for Maths and Coding. Their motto is <em>You can Learn Anything</em> which I definitely believe in.
+                    Click on this tab to show you the video I made.
+                </p>
+            </div>
+        </div>
+    </a>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/html-css" target="_blank" class="list-group-item">
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-12">
+                <img src="{{ url_for('static', filename='images/about/html5.svg') }}" />
+                <img src="{{ url_for('static', filename='images/about/css3.svg') }}" />
+            </div>
+            <div class="col-md-11 col-sm-10 col-xs-12">
+                <h3 class="list-group-item-heading">Learn how to create Webpages</h3>
+                <p class="list-group-item-text">
+                    Learn how to use HTML and CSS to make webpages. HTML is the markup language that you surround content with, to tell browsers about headings, lists, tables, etc. CSS is the stylesheet language that you style the page with, to tell browsers to change the
+                    color, font, layout, and more.
+                </p>
+            </div>
+        </div>
+    </a>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank" class="list-group-item">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+                <img src="{{ url_for('static', filename='images/coding/processing.png') }}" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+                <h3 class="list-group-item-heading">Learn the Processing JS language on Khan Academy</h3>
+                <p class="list-group-item-text">
+                    Processing JS is a JavaScript port of Processing, a programming language designed to write visualizations, images, and interactive content. It allows web browsers to display animations, visual applications, games and other graphical rich content without the need for a Java applet or Flash plugin.
                 </p>
             </div>
         </div>
     </a>
     <br />
     <a href="{{ url_for('main.drawing') }}" class="list-group-item">
-        <h3 class="list-group-item-heading ">Check out some of my Processing code</h3>
-        <p class="list-group-item-text">I created these Processing examples on the KHAN Academy Animations</p>
+        <h3 class="list-group-item-heading ">Check out some of my Processing JS code that I created on Khan Academy</h3>
+        <p class="list-group-item-text">
+            If you are wondering what you can do with Processing JS then check out some of these cool animations that I made while learning Processing JS on KHAN Academy.
+        </p>
+    </a>
+    <br />
+    <a href="https://www.khanacademy.org/computing/computer-programming/html-css-js" target="_blank" class="list-group-item">
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-4">
+                <img src="{{ url_for('static', filename='images/about/js.svg') }}" />
+            </div>
+            <div class="col-md-11 col-sm-10 col-xs-8">
+                <h3 class="list-group-item-heading">Making webpages interactive with JavaScript</h3>
+                <p class="list-group-item-text">
+                    Once you've taken both Intro to JS and Intro to HTML/CSS, take this course to learn how use HTML/CSS with the JavaScript DOM API to make your webpages interactive.
+                </p>
+            </div>
+        </div>
+    </a>
+    <br />
+    <a href="https://www.python.org/" target="_blank" class="list-group-item">
+        <div class="row">
+            <div class="col-md-1 col-sm-2 col-xs-4">
+                <img src="{{ url_for('static', filename='images/about/python.svg') }}" />
+            </div>
+            <div class="col-md-11 col-sm-10 col-xs-8">
+                <h3 class="list-group-item-heading">Learn the Python Language.</h3>
+                <p class="list-group-item-text">
+                    An interpreted language, Python has a design philosophy which emphasizes code readability (notably using whitespace indentation to delimit code blocks rather than curly braces or keywords), and a syntax which allows programmers to express concepts in fewer lines of code than possible in languages such as C++ or Java.
+                </p>
+            </div>
+        </div>
     </a>
 </div>
 {% endblock %}
