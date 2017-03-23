@@ -205,7 +205,7 @@
                 Do you have any questions or comments? Then simply <a href="{{ url_for('blog.register') }}">register</a> with this website and you can post messages and comments, share code with other kids, and hopefully get an answer to your questions.
             </p>
             <p class="bg-danger">
-                Very Important: If you are aged 12 or under you must use your parents of guardians email when registering.
+                Very Important: If you are aged 12 or under you must use your parents or guardians email when registering.
             </p>
         </div>
         <!-- End accordion-content-->
@@ -215,21 +215,21 @@
         <div class="accordion-content">
             <h4 class="bg-danger"><em> Click on any of the sections below to link to the relevant section!</em></h4>
             <div class="list-group">
-                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The coding section has fun example projects creted by me in Scratch, App Inventor, Processing and Python. All example projects have the source code </a>
+                <a href="{{ url_for('main.coding') }}" class="list-group-item list-group-item-action">The coding section has fun example projects created by me in Scratch, App Inventor, Javascript, Processing and Python. All example projects have the source code.</a>
                 <a href="{{ url_for('main.maker') }}" class="list-group-item list-group-item-action">The maker section has projects with Arduino. Over time additional projects on Raspberry PI and BBC Microbit will be added. </a>
-                <a href="{{ url_for('blog.index') }}" class="list-group-item list-group-item-action">The Buddy section allows kids to post messages and comments. In order to post kids must register with their parent's/guardian's permission if they are under 13 years of age.</a>
-                <a href="{{ url_for('snippets.index') }}" class="list-group-item list-group-item-action">The Share section has a code snippet sharing facility, where kids can add snippets of code, which other kids may find useful.</a>
-                <a href="{{ url_for('main.arduinoProject') }}" class="list-group-item list-group-item-action">There are many video tutorials some of which created by me to help kids get started.</a>
+                <a href="{{ url_for('blog.index') }}" class="list-group-item list-group-item-action">The Buddy section allows kids to post messages and comments. In order to post messages,  kids must register with their parent's/guardian's permission if they are under 13 years of age.</a>
+                <a href="{{ url_for('snippets.index') }}" class="list-group-item list-group-item-action">The Share section has a code snippet sharing facility, where kids can add snippets of code, which other kids may find useful. </a>
+                <a href="{{ url_for('main.scratch') }}" class="list-group-item list-group-item-action">There are many video tutorials, some of which were created by me, to help kids get started.</a>
                 <a href="{{ url_for('main.famousCoders') }}" class="list-group-item list-group-item-action">There are other sections on Famous Coders and Famous Makers to help inspire kids. </a>
-                <a href="{{ url_for('main.makeToys') }}" class="list-group-item list-group-item-action">There are useful links to top learning resources Reviews of useful technology books and some cool STEM toys and kits which I have used/built. </a>
-                <a href="{{ url_for('main.techEveComp') }}" class="list-group-item list-group-item-action">Irish coder and maker events and competitions like Dublin Maker, and Coolest Projects and Eir Junior Spiders.</a>
+                <a href="{{ url_for('main.makeToys') }}" class="list-group-item list-group-item-action">There are useful links to top learning resources, reviews of useful coding books, and some cool STEM (Science Technology Engineering,Maths) toys and kits which I have used/built. </a>
+                <a href="{{ url_for('main.techEveComp') }}" class="list-group-item list-group-item-action">There is useful information on Irish coder and maker events and competitions, some of which I have participated in like Dublin Maker, and Coolest Projects and Eir Junior Spiders.</a>
             </div>
         </div>
         <!-- End accordion-content-->
     </div>
     <!-- End accordion-container-->
     <div class="accordion-container">
-        <button href="#" class="accordion-toggle">A little about me <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <button href="#" class="accordion-toggle">A bit about me <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/me_wizard.png') }}" />
             <p>
@@ -239,23 +239,20 @@
             <p>
                 I began coding when I was 6 years old (a long time ago!), starting off with the <a href="https://scratch.mit.edu/" target="_blank">Scratch</a> 1.4 programming language on the Raspberry Pi. I was very pleased to win the Best Educational
                 Content Award at the annual <a href="http://scratch.ie" target="_blank">Irish National Scratch competition </a>in early 2015, with my project Snapshot Of our World. You can see it <a href="https://scratch.mit.edu/projects/49812240/" target="_blank">here</a>.
-                 The website has now been updated to <a href="https://scratch.ics.ie/" target="_blank">Scratch competition 2016. </a>I joined CoderDojo in Summer 2015 at the
-                <a href="https://dublin.sciencegallery.com/" target="_blank">Science Gallery</a>, before we moved to <a href="https://dublin.sciencegallery.com/" target="_blank">Coderdojo Dublin @ the Warehouse</a> in Zalando across the Quay from Google
+                 The Irish SCRATCH website has now been updated to <a href="https://scratch.ics.ie/" target="_blank">Scratch competition 2016.</a> I joined CoderDojo in Summer 2015 at the
+                <a href="https://dublin.sciencegallery.com/" target="_blank">Science Gallery</a>, before we moved to <a href="http://www.coderdojowarehouse.com/" target="_blank">Coderdojo Dublin @ the Warehouse</a> in Zalando across the Quay from Google
                 Headquarters.
             </p>
 
             <p>
                 At <a href="https://coderdojo.com" target="_blank">CoderDojo</a>, I learned how to code websites and mobile devices, before moving onto Raspberry Pi and Python. I attended <a href="https://coderdojo.com/news/2015/12/16/coolest-projects-2016-is-on-the-18th-of-june/"
-                    target="_blank">Coolest Projects 2016</a>. Some of the kids from my Dojo have made some fantastic inventions, and won awards. I was lucky enough to pick up a runner up award in the Web Design Category. After that I started working on this
-                website, originally called The MAKER Kid, and now called CodeMaker Buddy.
+                    target="_blank">Coolest Projects 2016</a>. Last year there were 16 entrants presenting 12 <a href="http://coderdojowarehouse.com/blog/?cat=8" target="_blank">projects from our Dojo</a> and some of the kids made some fantastic inventions,
+                and won awards. I was lucky enough to pick up a runner up award in the Web Design Category. After that I started working on this website, originally called The MAKER Kid, and now called CodeMaker Buddy.
             </p>
             <p>
-                I was thrilled to be invited by CoderDojo to showcase my Maker Kid project at the RDS BTYSTE exhibition. You can read my blog here My Day at BTYSTE
-                <a href="http://coderdojowarehouse.com/blog/?cat=17" target="_blank" title="You might have to scroll down.">here</a>. Since then, a coding club has started at my school, and I am helping out with the mentoring my schoolmates. Besides coding,
-                I enjoy swimming, tennis, chess and of course Minecraft.
-            </p>
-            <p>
-                As you can see from the first tab above, I am a big Minecraft fan.
+                I was thrilled to be invited by CoderDojo to showcase my Maker Kid project at the RDS BTYSTE exhibition. I had a great time. You can read <strong>My Day at BTYSTE</strong> blog
+                <a href="http://coderdojowarehouse.com/blog/?cat=17" target="_blank" title="You might have to scroll down.">here</a>. Since then, a coding club has started at my school, and I am helping out with mentoring my schoolmates in Scratch. Besides
+                coding, I enjoy swimming, tennis, chess, bowling, maths and of course Minecraft. As you can see from the <strong>Purpose of this Website</strong> tab above, I am a big Minecraft fan. That's my DIY Halloween costume.
             </p>
         </div>
         <!-- End accordion-content-->
@@ -266,62 +263,65 @@
         <div class="accordion-content">
             <ul class="list-group">
                 <li class="list-group-item list-group-item-info">I wanted to show other kids that coding and making stuff with code is fantastic fun.</li>
-                <li class="list-group-item list-group-item-info">If kids try some of the projects they will soon realise that making stuff with code is great fun, and that there are fun events and great technology resources in our own country. My website is built by a kid, for Irish kids and for kids
-                    all around the world.
+                <li class="list-group-item list-group-item-info">I wanted to learn from other kids who like technology and find out about the projects they are working on.</li>
+                <li class="list-group-item list-group-item-info">I couldn’t find a website where younger kids could talk about coding and technology. I am too young to have a facebook or twitter account, so I built this website instead.</li>
+                <li class="list-group-item list-group-item-info">If kids try some of the projects they will soon realise that making stuff with code is great fun.</li>
+                <li class="list-group-item list-group-item-info">Some kids may not realise that there are great technology clubs and fun events in our own country, like CoderDojo and Dublin Maker.
                 </li>
-                <li class="list-group-item list-group-item-info">I want to give back to the community by using the skills and experience that I have got over the last 4 years to help other kids. I got my knowledge from the mentors in CoderDojo and from the internet coding community and from KHAN Academy.
+                <li class="list-group-item list-group-item-info">I wanted to give back to the community by using the skills and experience that I have got over the last 4 years to help other kids. I got my knowledge from the mentors in CoderDojo and from the internet coding community and from KHAN Academy.
                     I want other kids to get involved, so that we can help and learn from each other.</li>
-                <li class="list-group-item list-group-item-info">I wanted to get in contact with other kids who are interested in making stuff with code.</li>
                 <li class="list-group-item list-group-item-info">I wanted to make a dynamic website and get really good at Python and SQL.</li>
                 <li class="list-group-item list-group-item-info">I wanted to learn other skills like making videos and editing images.</li>
+                <li class="list-group-item list-group-item-info">I wanted to learn how to use Github, and how to register a domain name, and how to configure a web host.</li>
             </ul>
         </div>
         <!-- End accordion-content-->
     </div>
     <!-- End accordion-container-->
     <div class="accordion-container">
-        <button href="#" class="accordion-toggle">How I built this Website <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
+        <button href="#" class="accordion-toggle">How this Website was built. <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
-            <p>This website was hand coded from scratch using the all the skills I learned at CoderDojo @ Warehouse, and on various websites.</p>
+            <p>This website was hand coded from scratch using the all the skills I learned at CoderDojo @ Warehouse, and on various websites mainly KHAN Academy.</p>
             <img src="{{ url_for('static', filename='images/about/css3.svg') }}" class="pull-left" />
             <p>
-                I built this website using CSS/Bootstrap,
+                I used CSS and Twitter Bootstrap. Bootstrap is used to make the site responsive. I used CSS on individual pages if they needed seome tweaking, like this one here.
             </p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/html5.svg') }}" class="pull-left" />
             <p>
-                HTML,
+                HTML. I started originally laying out all my pages in HTML as static pages. I then converted all the HTML pages into Jinja2 templates to make them dynamic. Jinja2 is a modern templating language for Python,
             </p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/js.svg') }}" class="pull-left" />
             <p>
-                JavaScript/JQuery,
+                JavaScript/JQuery, I used JQuery for some cool effects on individual pages. I have included some JavaScript code in the website coding and code snippets sections.
             </p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/python.svg') }}" class="pull-left" />
             <p>
-                Python and
-            </p>
+                Python is used as the server side language. I was going to use PHP originally, but as I knew Python already I stuck with it. I love Python as you can use it for games coding, writing scripts, mathematics and website coding. I have been coding in Python
+                for over 2 years now. </p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/flask.jpg') }}" class="pull-left" />
             <p>
-                Flask which a micro web framework written in Python.
+                Flask is a micro web framework written in Python and based on the Werkzeug toolkit and Jinja2 template engine. I used some Flask extensions (libraries) such as Flask-SQLAlchemy, Flask-Mail, and Flask-WTF. Applications that use the Flask framework include
+                Pinterest and LinkedIn. I have been coding with Flask for the last 10 months.
             </p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/sqlite.svg') }}" class="pull-left" />
             <p>
-                There is a SQLite database wich stores the Posts, Comments and Code Snippets.
+                There is a SQLite database which stores the Posts, Comments and Code Snippets. I plan to migrate this to MySQL for production soon.
             </p>
             <p>
                 If you are wondering what these languages are, then check out some of the links on the the <a href="{{ url_for('main.coding') }}">Coding</a> section of the Website. Also you can register and add a post with any questions that you may have.
             </p>
             <p>
-                I also used the following tools: Notepad++, IDLE, SQLite Browser, Adobe Brackets, Visual Studio Code, GIMP, Inkscape, Cam Studio, Movie Maker, Fritzing and Audacity.
+                I also used the following tools for editing the pages/videos/images: Notepad++, IDLE, Adobe Brackets, Visual Studio Code, GIMP, Inkscape, Cam Studio, Movie Maker, Fritzing and Audacity.
             </p>
         </div>
         <!-- End accordion-content-->
@@ -331,7 +331,8 @@
         <button href="#" class="accordion-toggle">Credits <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
             <img src="{{ url_for('static', filename='images/about/coderdojo.jpg') }}" class="pull-left" />
-            <p>Thanks to all the Mentors and committee at CoderDojo Dublin @ Warehouse, especially Brian and Anna. Thanks to Ren&eacute; who got me started with Appinventor and Edmundas who started me with PHP and Bootstrap.</p>
+            <p>Thanks to all the Mentors and committee at CoderDojo Dublin @ Warehouse, especially Brian and Anna. Thanks to Ren&eacute; who got me started with Appinventor and Edmundas who started me with PHP and Bootstrap. Thanks to Derek for always doing
+                cool projects.</p>
             <br />
             <br />
             <img src="{{ url_for('static', filename='images/about/khan.jpg') }}" class="pull-left" />
@@ -361,13 +362,13 @@
         <button href="#" class="accordion-toggle">Future Enhancements <span class="toggle-icon"><i class="fa fa-plus-circle"></i></span></button>
         <div class="accordion-content">
             <p>
-                My website is far from complete, but I had great fun learning all the code I needed to get this far. I hope that you kids will like it and suggest improvements, so that I can make it better.
+                The website is far from complete, but I had great fun learning all the code I needed to get this far. The Blog took the most time as there is a lot of Python behind it. I hope that kids will like it and suggest improvements, so that I can make it better.
             </p>
             <p>
-                I have many plans to make the website better. Here are some things that I have planned:
+                I have many plans to make the website better. Here are some things that are planned:
             </p>
             <ul class="list-group">
-                <li class="list-group-item list-group-item-info">An image upload facility, so that kids can add and manage their images. At the moment if kids want to include an image they need to have it up on the internet already.</li>
+                <li class="list-group-item list-group-item-info">An image upload facility, so that kids can add and manage their images. At the moment if kids want to include an image in a post or snippet, they need to have it up on the internet already and link to it.</li>
                 <li class="list-group-item list-group-item-info">A projects section, with a projects template. Here kids will be able to document their projects using a standard template, and add images of their creations.</li>
                 <li class="list-group-item list-group-item-info">More content on coding with added projects on Arduino, Raspberry PI, BBC Microbit, and ESP8266.</li>
                 <li class="list-group-item list-group-item-info">Reorganise the Blog, so that it works more like a Forum.</li>
@@ -375,7 +376,7 @@
                 <li class="list-group-item list-group-item-info">Add a Glossary of Terms in the maker section.</li>
             </ul>
             <p>
-                Please register and post posts or post comments on the Blog if you want to contribute, <a href="{{ url_for('blog.index') }}">click here</a>.
+                Please register to post or comment on the Blog if you want to contribute, <a href="{{ url_for('blog.index') }}">click here</a>.
             </p>
         </div>
         <!-- End accordion-content-->

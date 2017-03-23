@@ -4,18 +4,29 @@ Hi there.
 
 This is Benjamin here. So, you like looking behind the Page at the source code!!
 
-That's Great! That's how I learn too.
+That's Great! That's how I learn as well.
 
-You can see that I used Bootstrap to make the site responsive, JQuery for some cool effects and Font Awesome for the
-scroll to top icon.
+I have used the following to create this website.
 
-I didn't get time to do the Glossary, Raspberry Pi and Electronics for the Eir Junior Spiders competition.
+Front End:
+    CSS and Bootstrap CSS framework. I used Bootstrap to make the site responsive.
+    HTML.
+    JavaScript/JQuery. I used JQuery for some cool effects
+    Font Awesome scalable vector icons. I used Font Awesome for the scroll to top op page icon.
 
-I have used Python and Flask for all the server side stuff. Flask is a micro web framework written in Python
+Server Side:
+    Python/Flask web Framework. Flask is a micro web framework written in Python and based on he Werkzeug 
+    toolkit and Jinja2 template engine. 
 
-I used PythonAnywhere to host this website on the web.
+Backend:
+    The Posts/Snippete/Comment/Used datails are stored in a SQL Database.
 
-If you have any questions about how the website was made, just make a post on the blog, and one of the members or myself will get back to you.  
+I didn't get time to do the Glossary, Raspberry Pi and Electronics for the Eir Junior Spiders competition, but will add them soon.
+These are commented out on the Navbar code below.
+
+
+If you have any questions about how the website was made, just make a post on the blog, and one of the buddies or myself will get back to you.  
+
 
 Keep Coding.
 
@@ -24,25 +35,24 @@ Keep Coding.
 -->
 
 {% extends "bootstrap/base.html" %} {% block title %}CodeMaker Buddy - {{ title }}{% endblock %} {% block styles %} {{ super() }}
-    <!-- Favicon is the icon displayed in the address bar of this website-->
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
-    <!-- Base CSS Stlyesheet for this website -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
-    <!-- CSS Styles for highlighting Code Snippets -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
-    <!-- Font Awesome scalable vector icons. I use them for the "Back To Top" icon to scroll back to the top of long pages.-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- Favicon is the icon displayed in the address bar of this website-->
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-submenu.min.css') }}" />
+<!-- Base CSS Stlyesheet for this website -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base_styles.css') }}" />
+<!-- CSS Styles for highlighting Code Snippets -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hilite.css') }}" />
+<!-- Font Awesome scalable vector icons. I use them for the "Back To Top" icon to scroll back to the top of long pages.-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> {% endblock %} {% block head %} {{ super() }}
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-{% endblock %}
-{% block navbar %}
+{% endblock %} {% block navbar %}
 <!-- Start of Body  -->
 
 <!-- Main Navigation Bar  -->
@@ -129,7 +139,7 @@ Keep Coding.
                         </li> -->
                         <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
                         <li><a tabindex="0" href="{{ url_for('main.makeBooks') }}">Engineering Books</a></li> -->
-                        
+
                         <!-- A submenu would be silly with the amount of things on the Maker dropdown
                         <li class="dropdown-submenu">
                             <a tabindex="0">Arduino</a>
@@ -138,7 +148,7 @@ Keep Coding.
                         <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
                         <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
-                            <!--
+                        <!--
                             </ul>
                         </li>
                         -->
@@ -207,11 +217,9 @@ Keep Coding.
 {% endblock %} {% block content %}
 <!-- Start of Page Content -->
 <div class="container">
-    <noscript class="text-danger"><p><strong>Please enable Javascript to improve your experience.</strong></p></noscript>
-    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <noscript class="text-danger"><p><strong>Please enable Javascript to improve your experience.</strong></p></noscript> {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="alert alert-{{ category }} alert-dissmissable fade in">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message }}
     </div>
     {% endfor %}
     <!--[if lt IE 9]>
@@ -220,35 +228,34 @@ Keep Coding.
     {% block page_content %}{% endblock %}
     <footer>
         <br /> {% if year %}
-        <p>&copy; {{ year }} - CodeMaker Buddy
-        {% else %}
-        <p>
-        {% endif %}
-        <span class="pull-right">Designed and Coded by Benjamin Murray</span></p>
+        <p>&copy; {{ year }} - CodeMaker Buddy {% else %}
+            <p>
+                {% endif %}
+                <span class="pull-right">Designed and Coded by Benjamin Murray</span></p>
     </footer>
 </div>
 <i class="fa fa-3x fa-arrow-circle-up" id="scroll-top"></i>
 <!-- End of Page Content -->{% endblock %} {% block scripts %}
-    <!-- Start of Global Scripts -->{{ super() }}
-    <script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
-    <!-- Activate Submenus, Scroll to Top and tooltip activation -->
-    <script>
-        $(function() {
-            $('[data-submenu]').submenupicker();
-            $('#scroll-top').hide();
-            $('#scroll-top').on('click', function() {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 1000);
-            });
-            $(document).on('scroll', function() {
-                if ($(window).scrollTop() > 100) {
-                    $("#scroll-top").fadeIn(500);
-                } else {
-                    $("#scroll-top").fadeOut(500);
-                }
-            });
-            $('[data-toggle="tooltip"]').tooltip();
+<!-- Start of Global Scripts -->{{ super() }}
+<script src="{{ url_for('static', filename='js/bootstrap-submenu.min.js') }}"></script>
+<!-- Activate Submenus, Scroll to Top and tooltip activation -->
+<script>
+    $(function() {
+        $('[data-submenu]').submenupicker();
+        $('#scroll-top').hide();
+        $('#scroll-top').on('click', function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 1000);
         });
-    </script>
+        $(document).on('scroll', function() {
+            if ($(window).scrollTop() > 100) {
+                $("#scroll-top").fadeIn(500);
+            } else {
+                $("#scroll-top").fadeOut(500);
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 {% endblock %}

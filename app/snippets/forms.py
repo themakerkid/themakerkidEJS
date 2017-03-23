@@ -26,5 +26,25 @@ class CommentForm(FlaskForm):
     cancel = SubmitField("Cancel", false_values="cancel")
 
 class SearchForm(FlaskForm):
-    search = StringField("Search Query", validators=[DataRequired()])
+    search = StringField("Search Query")
+    language = SelectField("Language", choices=choices, coerce=int)
     submit = SubmitField("Search")
+
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+        self.search_query = False
+        self.language_used = False
+        self.both = False
+    
+    def validate_language(self, field):
+        if field.data is not None:
+            self.language_used = True
+
+    def validate_search(self, field):
+        if field.data is not None:
+            if self.language_used:
+                self.both, self.language_used = True, True
+            else:
+                self.language_used = True
+        elif (not self.language_used) and (field.data is None):
+            raise ValidationError("You must choose either a language or type in a search query.")

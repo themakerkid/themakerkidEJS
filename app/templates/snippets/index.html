@@ -1,11 +1,18 @@
 {% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% import "_macros.html" as macros %} {% block styles %} {{ super() }}
 <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" /> {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
+<style type="text/css">
+    @media (min-width: 768px) {
+        .margin-right {
+            margin-right: 5px;
+        }
+    }
+</style>{% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
 <div class="page-header">
     {% if logged_in %}
-        <button type="button" class="btn btn-success pull-right" id="create-new-code-snippet-btn" data-toggle="modal" data-target="#create-new-code-snippet">Create A New Code Snippet</button>
-    {% endif %}
+    <button type="button" class="btn btn-success pull-right pull-xs-none" id="create-new-code-snippet-btn" data-toggle="modal" data-target="#create-new-code-snippet">Create A New Code Snippet</button>
+    <a class="btn btn-success pull-right pull-xs-none margin-right" href="{{ url_for('snippets.someonesSnippets', username=current_user.username) }}">My Snippets</a> {% endif %}
     <h1>Welcome to the Code Snippet Sharing{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h1>
     {% if logged_in %}
     <!-- Modal -->
@@ -45,8 +52,7 @@
             <h2 class="media-heading"><a href="{{ url_for('snippets.snippet', id=snippet.id) }}">{{ snippet.title }} written in {{ checkLanguage(snippet) }}</a></h2>
             By <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">{{ snippet.author.username|capitalize }}</a>
             <br />
-            <span class="glyphicon glyphicon-time"></span> {{ moment(snippet.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
-            {% if not snippet.summary == snippet.body %}
+            <span class="glyphicon glyphicon-time"></span> {{ moment(snippet.date_posted).format('MMMM Do YYYY, h:mm:ss a') }} {% if not snippet.summary == snippet.body %}
             <div class="less">{{ snippet.summary_html|safe }}
                 <p>More content on this snippet...</p>
             </div>
@@ -59,7 +65,8 @@
             </div>
             {% endif %}
             <div class="snippet-controls pull-right">
-                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == snippet.author.username or current_user.admin() %}
+                <a href="{{ url_for('snippets.snippet', id=snippet.id) }}#comments"><span class="label label-primary">{{ snippet.comments.count() }} {% if snippet.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username
+                == snippet.author.username or current_user.admin() %}
                 <a href="{{ url_for('snippets.edit', id=snippet.id) }}"><span class="label label-primary">Edit</span></a> {% endif %}
             </div>
         </div>

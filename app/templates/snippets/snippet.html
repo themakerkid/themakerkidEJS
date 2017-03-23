@@ -1,36 +1,25 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" />
-{% endblock %}
-
-{% block page_content %}
-    <div class="snippet media">
-        <div class="media-left">
-            <img src="{{ snippet.author.getAvatar(size=100) }}" class="media-object img-circle">
-        </div>
-        <div class="media-body">
-            {% if current_user.username == snippet.author.username %}
-            <a href="{{ url_for('blog.edit', id=snippet.id) }}" class="btn btn-primary pull-right">Edit</a>
-            {% endif %}
-            <h1 class="text-primary media-heading">{{ snippet.title }} By {{ snippet.author.username|capitalize }}, {{ language }}</h1>
-            By <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">{{ snippet.author.username|capitalize }}</a>
-            <br />
-            <span class="glyphicon glyphicon-time"></span> {{ moment(snippet.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
-            {{ snippet.body_html|safe }}
-        </div>
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block styles %} {{ super() }}
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/snippet_and_posts.css') }}" /> {% endblock %} {% block page_content %}
+<div class="snippet media">
+    <div class="media-left">
+        <img src="{{ snippet.author.getAvatar(size=100) }}" class="media-object img-circle">
     </div>
-    <hr />
-    {% if current_user.is_authenticated %}
-    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#comForm" id="comBtn">Add a comment!</button>
-    {% endif %}
-    <h2 id="comments">Comments</h2>
-    {% if current_user.is_authenticated %}
-    <!-- Modal 
+    <div class="media-body">
+        {% if current_user.username == snippet.author.username or current_user.admin() %}
+        <a href="{{ url_for('snippets.edit', id=snippet.id) }}" class="btn btn-primary pull-right">Edit</a> {% endif %}
+        <h1 class="text-primary media-heading">{{ snippet.title }} By {{ snippet.author.username|capitalize }}, {{ language }}</h1>
+        By <a href="{{ url_for('blog.profile', username=snippet.author.username) }}">{{ snippet.author.username|capitalize }}</a>
+        <br />
+        <span class="glyphicon glyphicon-time"></span> {{ moment(snippet.date_posted).format('MMMM Do YYYY, h:mm:ss a') }} {{ snippet.body_html|safe }}
+    </div>
+</div>
+<hr /> {% if current_user.is_authenticated %}
+<button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#comForm" id="comBtn">Add a comment!</button> {% endif %}
+<h2 id="comments">Comments</h2>
+{% if current_user.is_authenticated %}
+<!-- Modal 
     <div class="modal fade" id="comForm" role="dialog">
         <div class="modal-dialog modal-md">
 
@@ -50,54 +39,46 @@
 
         </div>
     </div>-->
-    <div id="formAcc">
-        {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
-    </div>
-    <br />
-    {% endif %}
-    {% if snippet.comments.count() >= 1 %}
-    <ul class="media-list">
-        {% for comment in comments %}
-        <li class="media">
-            <div class="media-left">
-                <img src="{{ comment.author.getAvatar(size=100) }}" class="media-object img-circle">
-            </div>
-            <div class="media-body">
-                <h3 class="media-heading">By <a href="{{ url_for('blog.profile', username=comment.author.username) }}">{{ comment.author.username|capitalize }}</a></h3>
-                <span class="glyphicon glyphicon-time"></span> {{ moment(comment.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
-                {% if comment.body_html %}{{ comment.body_html|safe }}{% else %}{{ comment.body }}{% endif %}
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No one has commented on this snippet yet.</p>
-    {% endif %}
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js" /></script>
-    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js" /></script>
-    <script>
-        $('textarea').attr('data-provide', 'markdown');
-        //$("#submit").addClass("btn btn-success");
-        $("#formAcc").hide()
-        $("#comBtn").on("click", function() {
-            $("#formAcc").slideToggle();
-        });
-        $cancelBtn = $("#cancel");
-        //$("form").after($cancelBtn);
-        //$cancelBtn.addClass("btn btn-danger");
-        //$cancelBtn.attr('id', 'cancel-btn');
-        //$cancelBtn.text("Cancel");
-        $cancelBtn.on("click", function() {
-            $("#formAcc").slideUp();
-        });
-        /*
-        $cancelBtn.on("click", function() {
-            $("#body").val("");
-        });*/
-    </script>
-    {{ moment.include_moment() }}
-{% endblock %}
+<div id="formAcc">
+    {{ wtf.quick_form(form, button_map={'submit': 'success', 'cancel': 'danger'}) }}
+</div>
+<br /> {% endif %} {% if snippet.comments.count() >= 1 %}
+<ul class="media-list">
+    {% for comment in comments %}
+    <li class="media">
+        <div class="media-left">
+            <img src="{{ comment.author.getAvatar(size=100) }}" class="media-object img-circle">
+        </div>
+        <div class="media-body">
+            <h3 class="media-heading">By <a href="{{ url_for('blog.profile', username=comment.author.username) }}">{{ comment.author.username|capitalize }}</a></h3>
+            <span class="glyphicon glyphicon-time"></span> {{ moment(comment.date_posted).format('MMMM Do YYYY, h:mm:ss a') }} {% if comment.body_html %}{{ comment.body_html|safe }}{% else %}{{ comment.body }}{% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No one has commented on this snippet yet.</p>
+{% endif %} {% endblock %} {% block scripts %} {{ super() }}
+<script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js" /></script>
+<script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js" /></script>
+<script>
+    $('textarea').attr('data-provide', 'markdown');
+    //$("#submit").addClass("btn btn-success");
+    $("#formAcc").hide()
+    $("#comBtn").on("click", function() {
+        $("#formAcc").slideToggle();
+    });
+    $cancelBtn = $("#cancel");
+    //$("form").after($cancelBtn);
+    //$cancelBtn.addClass("btn btn-danger");
+    //$cancelBtn.attr('id', 'cancel-btn');
+    //$cancelBtn.text("Cancel");
+    $cancelBtn.on("click", function() {
+        $("#formAcc").slideUp();
+    });
+    /*
+    $cancelBtn.on("click", function() {
+        $("#body").val("");
+    });*/
+</script>
+{{ moment.include_moment() }} {% endblock %}

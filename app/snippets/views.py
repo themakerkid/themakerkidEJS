@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, request, url_for, abort, current_app
+from flask import render_template, flash, redirect, request, url_for, abort, current_app, session
 from flask_login import login_user, logout_user, current_user, login_required
 from forms import SnippetForm, CommentForm, SearchForm
 from ..models import SnippetComment, User, Snippet, db
@@ -56,11 +56,17 @@ def index():
         db.session.commit()
         return redirect(url_for('.snippet', id=snippet.id))
     elif search_form.validate_on_submit():
+        session["language"] = search_form.language_used
+        session["search_query"] = search_form.search_query
+        session["language_id"] = search_form.language.data
+        session["both"] = search_form.both
         return redirect(url_for('.filtered', q=search_form.search.data))
     return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
 
 @snippets.route('/filtered', methods=['GET', 'POST'])
 def filtered():
+    if not session.get("language") or not session.get("search_query") or not session.get("language_id") or not session.get("both"):
+        return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     snippet_form = SnippetForm()
     search_form = SearchForm()
@@ -71,10 +77,23 @@ def filtered():
         db.session.commit()
         return redirect(url_for('.snippet', id=post.id))
     elif search_form.validate_on_submit():
+        session["language"] = search_form.language_used
+        session["search_query"] = search_form.search_query
+        session["language_id"] = search_form.language.data
+        session["both"] = search_form.both
         return redirect(url_for('.filtered', q=search_form.search.data))
-    pagination = Snippet.query.whoosh_search(q, 50).paginate(
-        page, per_page=current_app.config["ITEMS_PER_PAGE"],
-        error_out=True)
+    if session["both"]:
+        pagination = Snippet.query.whoosh_search(q, 50).filter_by(code_type_id=int(session.get("language_id"))).paginate(
+            page, per_page=current_app.config["ITEMS_PER_PAGE"],
+            error_out=True)
+    elif session["search_query"]:
+        pagination = Snippet.query.whoosh_search(q, 50).paginate(
+            page, per_page=current_app.config["ITEMS_PER_PAGE"],
+            error_out=True)
+    elif session["language"]:
+        pagination = Snippet.query.filter_by(code_type_id=int(session.get("language_id"))).paginate(
+            page, per_page=current_app.config["ITEMS_PER_PAGE"],
+            error_out=True)
     snippets = pagination.items
     return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination, filtered=True)
 
@@ -99,7 +118,7 @@ def edit(id):
     snippet = Snippet.query.get_or_404(id)
     language = checkLanguage(snippet)
     form = SnippetForm()
-    if current_user.username != snippet.author.username:
+    if current_user.username != snippet.author.username and not current_user.admin():
         abort(403)
     if request.method == "POST":
         if checkBtn("cancel", form):
