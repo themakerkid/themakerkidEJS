@@ -48,6 +48,21 @@ def error_500(e):
 def error_403(e):
     return render_template("403.html", title="Forbidden", year=year), 403
 
+# Template filter to check just make first letter capital
+@main.app_template_filter('capitalize')
+def capitalizeFirstLetter(word):
+    # Get first letter
+    first_letter = word[0]
+
+    # Capitalize it
+    first_letter.capitalize()
+
+    # Create new word and change first letter
+    new_word = first_letter + word[1:]
+
+    # Return capitalized word
+    return new_word
+
 # Check if the user is unconfirmed
 @main.before_app_request
 def checkConfirm():
@@ -348,4 +363,4 @@ def resendConfirmationEmail():
 def users():
     # Get all the users from the database
     users = User.query.all()
-    return render_template('users.html', title="Registered Users", year=year, users=users)
+    return render_template('users.html', title="Buddies", year=year, users=users)
