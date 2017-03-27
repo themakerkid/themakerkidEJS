@@ -21,9 +21,7 @@
     <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
     <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoProject') }}">Projects</a>
-    <hr />
 </div>
-
 
 <hr class="top">
 
@@ -76,50 +74,5 @@
         </div>
     </div>
     <br />
-    <hr class="divider">
-    <br />
-    <!--  Exploring Arduino -->
-    <div class="row">
-        <div class="col-sm-4 ">
-            <img src="{{ url_for('static', filename='images/book_reviews/arduino/exploring_arduino.jpg') }}" class="img-responsive img-rounded" />
-        </div>
-        <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">
-                Exploring Arduino.
-                <span class="rating">
-                    <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span> 4/5
-                </span>
-            </h3>
-            <p>
-                Txxx
-            </p>
-        </div>
-    </div>
-    <br />
-    <hr class="divider">
-    <br />
-    <!--  Arduino for Teens -->
-    <div class="row">
-        <div class="col-sm-4 ">
-            <img src="{{ url_for('static', filename='images/book_reviews/arduino/arduino_teens.jpg') }}" class="img-responsive img-rounded" />
-        </div>
-        <div class="col-sm-8 margin-top-20">
-            <h3 class="text-primary">
-                Arduino for Teens (Advanced)
-                <span class="rating">
-                    <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>3/5
-                </span>
-            </h3>
-            <p>
-                xxxx
-            </p>
-        </div>
-    </div>
-    <br />
-    <hr class="divider">
-    <br /> {% endblock %}
+    <hr class="top">
+{% endblock %}
