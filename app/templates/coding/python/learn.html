@@ -14,13 +14,51 @@
     .img-responsive {
         width: 80%;
     }
+
+    .margin-minus-20 {
+        margin-top: -20px;
+    }
 </style>
 {% endblock %} {% block page_content %}
-<div class="text-center">
+<div class="page-header text-center">
     <h1>Learning Resources</h1>
     <a role="button" class="btn btn-success" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyThis') }}">This Website</a></li>
 </div>
+
+<div class="row">
+    <div class="col-md-1 col-sm-2 col-xs-3">
+        <img src="{{ url_for('static', filename='images/about/python.svg') }}">
+    </div>
+    <div class="col-md-11 col-sm-10 col-xs-9 margin-minus-20">
+        <h2>What is Python?</h2>
+        <p>
+            An interpreted language, Python has a design philosophy which emphasizes code readability (notably using whitespace indentation to delimit code blocks rather than curly braces or keywords), and a syntax which allows programmers to express concepts in fewer lines of code than possible in languages such as C++ or Java.
+        </p>
+    </div>
+</div>
+
+<h2>How can I learn Python?</h2>
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+        <img src="{{ url_for('static', filename='images/coding/code_academy.svg') }}">
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+        <p>
+            The best place to start is definitely <a href="https://www.codecademy.com/learn/python/" target="_blank">Code Academy (Python Course)</a>. The Python course is a great introduction to both fundamental programming concepts and the Python programming language.
+        </p>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+        <img src="{{ url_for('static', filename='images/coding/tutorials_point.png') }}">
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+        <p>
+            <a href="https://www.tutorialspoint.com/python/index.htm" target="_blank">Tutorials Point (Python Course)</a> is another good free learning website after you have finished Code Academy.
+        </p>
+    </div>
+</div>
+<br />
+<p>Or you can buy one of the books below. I would recommend Hello World before Adventures in Minecraft.
 
 <hr class="top">
 
@@ -58,9 +96,10 @@
                 Hello World Second Edition
                 <span class="rating">
                     <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span> 4/5
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span> 5/5
                 </span>
             </h3>
             <p>

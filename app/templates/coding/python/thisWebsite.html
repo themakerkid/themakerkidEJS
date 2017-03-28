@@ -1,4 +1,15 @@
-{% extends "base.html" %} {% block page_content %}
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <style type="text/css">
+        .margin-minus-15 {
+            margin-top: -15px;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
 <div class="text-center">
     <h1>This Website <small>Using Flask</small></h1>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
@@ -9,7 +20,7 @@
     <div class="col-md-1 col-sm-2 col-xs-3">
         <img src="{{ url_for('static', filename='images/about/flask.jpg') }}">
     </div>
-    <div class="col-md-11 col-sm-10 col-xs-9">
+    <div class="col-md-11 col-sm-10 col-xs-9 margin-minus-15">
         <h2>What is Flask?</h2>
         <p>
             Well, Flask is a micro web framework written
@@ -20,7 +31,7 @@
             Flask-Mail and Flask-WTF. Applications that use the Flask framework include Pinterest and LinkedIn. I have been coding with Flask for the
             last 10 months.
         </p>
-        <h2>Now can I learn Flask?</h2>
+        <h2>How can I learn Flask?</h2>
         <p>
             Miguel Grinberg has a <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank">Flask Mega Tutorial</a> on his blog.
             He also has a <a href="http://flaskbook.com" target="_blank">Flask Web Development</a> book.

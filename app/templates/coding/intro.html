@@ -25,10 +25,10 @@
 </style> {% endblock %} {% block page_content %}
 
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-sm-2">
         <img src="{{ url_for('static', filename='images/coding/magic_wand1.png') }}" alt="technology logo" class="img-responsive" />
     </div>
-    <div class="col-md-10">
+    <div class="col-sm-10">
         <img src="{{ url_for('static', filename='images/coding/welcome_code.gif') }}" alt="technology logo" class="img-responsive" />
         </br> <img src="{{ url_for('static', filename='images/coding/coding_magic2.gif') }}" alt="technology logo" class="img-responsive" />
     </div>
@@ -208,7 +208,7 @@
         </div>
     </a>
     <br />
-    <a href="https://www.python.org/" target="_blank" class="list-group-item">
+    <a href="{{ url_for('main.techPyLearn') }}" class="list-group-item">
         <div class="row">
             <div class="col-md-1 col-sm-2 col-xs-4">
                 <img src="{{ url_for('static', filename='images/about/python.svg') }}" />
