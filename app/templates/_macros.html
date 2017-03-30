@@ -71,18 +71,13 @@
         <h4>Blog Categories</h4>
         <div class="row">
             <div class="col-xs-12">
-                <ul class="list-unstyled">
-                    {% set half = (Tag.query.all()|length / 2.0) + 0.5 %}
-                    {% for tag in Tag.query.order_by(Tag.name.asc()).all()[:half|int] %}
-                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }} <span class="badge pull-right">{{ tag.posts.filter(g.db.or_(g.post.published == True, g.post.author_id == g.current_user.id, g.current_user.admin())).count() }}</span></a></li>
-                    {% endfor %}
+                <ul class="list-unstyled">{% set half = (Tag.query.all()|length / 2.0) + 0.5 %}{% for tag in Tag.query.order_by(Tag.name.asc()).all()[:half|int] %}
+                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }} <span class="badge pull-right">{{ tag.posts.filter(g.db.or_(g.post.published == True, g.post.author_id == g.current_user.id, g.current_user.admin())).count() }}</span></a></li>{% endfor %}
                 </ul>
             </div>
             <div class="col-xs-12">
-                <ul class="list-unstyled">
-                    {% for tag in Tag.query.order_by(Tag.name.asc()).all()[half|int:] %}
-                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }} <span class="badge pull-right">{{ tag.posts.filter(g.db.or_(g.post.published == True, g.post.author_id == g.current_user.id, g.current_user.admin())).count() }}</span></a></li>
-                    {% endfor %}
+                <ul class="list-unstyled">{% for tag in Tag.query.order_by(Tag.name.asc()).all()[half|int:] %}
+                    <li><a href="{{ url_for('blog.tag', id=tag.id) }}">{{ tag.name }} <span class="badge pull-right">{{ tag.posts.filter(g.db.or_(g.post.published == True, g.post.author_id == g.current_user.id, g.current_user.admin())).count() }}</span></a></li>{% endfor %}
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
