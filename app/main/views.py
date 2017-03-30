@@ -55,7 +55,7 @@ def capitalizeFirstLetter(word):
     first_letter = word[0]
 
     # Capitalize it
-    first_letter.capitalize()
+    first_letter = first_letter.upper()
 
     # Create new word and change first letter
     new_word = first_letter + word[1:]

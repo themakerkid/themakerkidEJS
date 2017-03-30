@@ -60,7 +60,7 @@ class PostForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(PostForm, self).__init__(*args, **kwargs)
-        self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.all()]
+        self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by(Tag.name.asc()).all()]
 
 class CommentForm(FlaskForm):
     body = TextAreaField("Content", validators=[DataRequired()])

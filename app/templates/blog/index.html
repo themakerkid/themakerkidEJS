@@ -61,7 +61,7 @@
                         <div>{{ post.body_html|safe }}</div>
                         {% endif %}
                         <hr />
-                        <div class="pull-right">
+                        <div class="pull-right pull-xs-none">
                             <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }}
                             {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == post.author.username or current_user.admin() %}
                             <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a> {% if post.published %}

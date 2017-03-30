@@ -232,17 +232,19 @@ class Snippet(db.Model):
         markdown_content = markdown(self.body, extensions=[hilite, extras])
         return markdown_content
 
-    def summary_html_default(context):
-        markdown_content = markdown(context.current_parameters['summary'], extensions=[hilite, extras])
+    @property
+    def summary_html(self):
+        markdown_content = markdown(self.summary, extensions=[hilite, extras])
         return markdown_content
-    
-    @staticmethod
-    def on_changed_summary(target, value, oldvalue, initiator):
-        target.summary_html = markdown(value, extensions=[hilite, extras])
 
-    summary_html = db.Column(db.Text, default=summary_html_default)
-
-db.event.listen(Snippet.summary, 'set', Snippet.on_changed_summary)
+    def changedBody(self):
+        new_summary = self.body
+        new_summary = new_summary.split(' ')
+        new_summary = new_summary[:80]
+        new_summary = ' '.join(new_summary)
+        if not new_summary == self.body:
+            new_summary += '...'
+        self.summary = new_summary
 
 class SnippetComment(db.Model):
     __tablename__ = 'snippet_comments'

@@ -54,7 +54,7 @@
         {% endfor %}
     </ul>
     {% else %}
-    <p>No snippets have been created by {{ user.username.capitalize }}</p>
+    <p>No snippets have been created by {{ user.username|capitalize }}.</p>
     {% endif %}
     {{ macros.addPagination(pagination, '.index') }}
 {% endblock %}

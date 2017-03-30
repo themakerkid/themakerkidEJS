@@ -46,16 +46,8 @@ def index():
     snippet_form = SnippetForm()
     search_form = SearchForm()
     if snippet_form.validate_on_submit():
-        summary = snippet_form.body.data
-        summary = summary.split(' ')
-        if snippet_form.language.data == 1:
-            summary = summary[:40]
-        else:
-            summary = summary[:80]
-        summary = ' '.join(summary)
-        if not summary == snippet_form.body.data:
-            summary += '...'
-        snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object(), code_type_id=snippet_form.language.data, summary=summary)
+        snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object(), code_type_id=snippet_form.language.data)
+        snippet.changedBody()
         db.session.add(snippet)
         db.session.commit()
         return redirect(url_for('.snippet', id=snippet.id))
@@ -96,6 +88,7 @@ def filtered():
     q = request.args.get("q")
     if snippet_form.validate_on_submit():
         snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object())
+        snippet.changedBody()
         db.session.add(snippet)
         db.session.commit()
         return redirect(url_for('.snippet', id=post.id))
@@ -169,6 +162,7 @@ def edit(id):
             snippet.title = form.title.data
             snippet.body = form.body.data
             snippet.code_type_id = form.language.data
+            snippet.changedBody()
             return redirect(url_for('.snippet', id=id))
     form.title.data = snippet.title
     form.body.data = snippet.body
