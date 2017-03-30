@@ -25,7 +25,9 @@ def checkLanguage(snippet):
     elif snippet.code_type_id == 5:
         return "Python"
     elif snippet.code_type_id == 6:
-        return "Processing"
+        return "Processing.js"
+    elif snippet.code_type_id == 7:
+        return "SQL"
     else:
         return "Other"
 
