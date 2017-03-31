@@ -1,63 +1,58 @@
-{% extends "base.html" %}
-
-{% block styles %}
-    {{ super() }}
-    <style type="text/css">
-        #arduino-vid, #christmas-vid {
-            margin-top: 20px;
-        }
-    </style>
-{% endblock %}
-
-{% block page_content %}
-    <div class="text-center">
-        <h1>Introduction</h1>
-        <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
-        <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
-        <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoProject') }}">Projects</a>
-        <hr />
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<style type="text/css">
+    #arduino-vid,
+    #christmas-vid {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %} {% block page_content %}
+<div class="text-center">
+    <h1>Introduction</h1>
+    <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoProject') }}">Projects</a>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-sm-2 col-xs-12">
+        <a href="https://www.arduino.cc/" target="_blank" title="Arduino Logo">
+            <img src="{{ url_for('static', filename='images/hardware/arduino_logo.png') }}" class="img-responsive" alt="Arduino Logo">
+        </a>
     </div>
-    <div class="row">
-        <div class="col-sm-2 col-xs-12">
-            <a href="http://ai2.appinventor.mit.edu/" target="_blank" title="App Inventor Logo">
-                <img src="{{ url_for('static', filename='images/coding/app_inventor.png') }}" class="img-responsive" alt="App Inventor Logo">
-            </a>
-        </div>
-        <div class="col-sm-10 col-xs-12">
-            <div class="what-is-app-inventor">
-                <h2>What is <a href="https://www.arduino.cc" target="_blank">Arduino</a>?</h2>
-                <p>
-                    Arduino is an open source, computer hardware and software company, project,
-                    and user community that designs and manufactures microcontroller kits for
-                    building digital devices and interactive objects that can sense and control objects in the physical world.
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="row" id="arduino-vid">
-        <div class="col-sm-6">
-            <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JkbAz5osHuQ?rel=0" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <h2 class="text-primary">Introduction to Arduino</h2>
+    <div class="col-sm-10 col-xs-12">
+        <div class="what-is-app-inventor">
+            <h2>What is <a href="https://www.arduino.cc" target="_blank">Arduino</a>?</h2>
             <p>
-                This is an unfinished introduction to Arduino
+                Arduino is an open source, computer hardware and software company, project, and user community that designs and manufactures microcontroller kits for building digital devices and interactive objects that can sense and control objects in the physical world.
             </p>
         </div>
     </div>
-    <div class="row" id="christmas-vid">
-        <div class="col-sm-6">
-            <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/m9D2Jgqu1II?rel=0" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <h2 class="text-primary">Message Scroller Board made by me</h2>
-            <p>
-                I made this scroller for Christmas 2015 to wish my CoderDojo Happy Christmas!
-            </p>
+</div>
+<div class="row" id="arduino-vid">
+    <div class="col-sm-6">
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JkbAz5osHuQ?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
+    <div class="col-sm-6">
+        <h2 class="text-primary">Introduction to Arduino</h2>
+        <p>
+            This is an unfinished introduction to Arduino. This first part explains what an Arduino is and how to download the software. I need to make a second video and show how the IDE works, and how to download code. Coming soon!
+        </p>
+    </div>
+</div>
+<div class="row" id="christmas-vid">
+    <div class="col-sm-6">
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/m9D2Jgqu1II?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h2 class="text-primary">Message Scroller Board made by me</h2>
+        <p>
+            I made this scroller for Christmas 2015 to wish my CoderDojo Happy Christmas! It consists of an Arduino Nano and six MAX7219 controlled 8x8 Dot matrix modules. I will document this project soon, as other kids might be interested in making a scroller display
+            as well. The project does require some soldering though. Coming soon!
+        </p>
+    </div>
+</div>
 {% endblock %}
