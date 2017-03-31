@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block styles %}
+    {{ super() }}
+    <style type="text/css">
+        .video-top-20 {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
 {% block page_content %}
     <div class="text-center">
         <h1>Projects</h1>
@@ -8,9 +17,34 @@
         <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoProject') }}">Projects</a>
         <hr />
     </div>
-    <h2>Bluetooth controlled NeoPixels with Arduino</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/mPt6O2TAXwE?rel=0" frameborder="0" allowfullscreen></iframe>
-
-    <h2>Neopixel Ring with Adafruit Gemma</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed//-kVkTiLTzfA?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-primary margin-top-10">Bluetooth controlled NeoPixels with Arduino (Short demo)</h2>
+        </div>
+    </div>
+    <div class="row video-top-20">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mPt6O2TAXwE?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-primary margin-top-10">Bluetooth controlled NeoPixels with Arduino</h2>
+        </div>
+    </div>
+    <div class="row video-top-20">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/K7mybHPHmL4?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-primary margin-top-10">Neopixel Ring with Adafruit Gemma</h2>
+        </div>
+    </div>
 {% endblock %}
