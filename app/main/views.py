@@ -21,14 +21,14 @@ from . import main
 from ..blog.views import checkBtn
 
 # Import send_email function to resend the confirmation email in case the
-# original email was lost
+# original email was lost and for contact page
 from ..mail import send_email
 
 # Import all the database models for the full-text search
 from ..models import Comment, Post, Snippet, SnippetComment, User, db
 
-# SearchForm class is needed to display and handle the full-text search form
-from .forms import SearchForm
+# SearchForm class is needed to display and handle the full-text search form and ContactForm for the contact page
+from .forms import SearchForm, ContactForm
 
 # Define a year variable to reduce the amount of repetition
 year = datetime.now().year
@@ -337,7 +337,7 @@ def confirm(token):
         return redirect(url_for('blog.index'))
     else:
         # If not successful
-        flash("The confirmation link is invalid or has expired.", 'error')
+        flash("The confirmation link is invalid or has expired.", 'warning')
         return redirect(url_for('blog.index'))
 
 @main.route('/unconfirmed')
@@ -364,3 +364,14 @@ def users():
     # Get all the users from the database
     users = User.query.all()
     return render_template('users.html', title="Buddies", year=year, users=users)
+
+@main.route('/contact', methods=["GET", "POST"])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        if send_email('codemakerbuddy@gmail.com', 'Contact - %s' % form.subject.data,
+                      'contact', form=form):
+            # If successful, flash a message
+            flash("Your comment has been emailed to the owner of this site (Benjamin).", 'success')
+        return redirect(session["last_url"])
+    return render_template('contact.html', title="Contact Me", year=year, form=form)

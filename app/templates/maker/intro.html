@@ -1,6 +1,10 @@
 {% extends "base.html" %} {% block styles %} {{ super() }}
 
 <style>
+    h1 {
+        text-shadow: grey 0.2em 0.2em 0.3em;
+    }
+
     h2,
     h3 {
         color: #fcd062;
@@ -24,7 +28,7 @@
         margin-bottom: 10px;
     }
 </style> {% endblock %} {% block page_content %}
-<h1>Welcome to The Maker page</h1>
+<h1 class="text-warning text-center">Maker Introduction</h1>
 <div class="row">
     <div class="text-center">
         <h2 class="text-primary">What is a Maker?</h2><br />
@@ -112,7 +116,8 @@
     <div class="col-sm-6">
         <div class="video-text-right">
             <h2 class="text-primary">Breadboards and Circuit Construction.</h2>
-            <p>Fake placeholder</p>
+            <p>Solderless breadboards are a device designed to allow the quick construction of an electronic circuit. They are often used in circuit design and testing. This video demonstrates the basic use of a breadboard.</p>
+            <h5><em>Video Courtesy of ScienceOnline. Thank you!</em></h5>
         </div>
     </div>
 </div>
@@ -126,7 +131,8 @@
     <div class="col-sm-6">
         <div class="video-text-right">
             <h2 class="text-primary">What tools do I need?</h2>
-            <p>Fake placeholder</p>
+            <p>Get geared up for circuit-making &mdash; check out Collin's list of tools no electronaut should be without!</p>
+            <h5><em>Video Courtesy of Make. Thank you!</em></h5>
         </div>
     </div>
 </div>
@@ -140,7 +146,8 @@
     <div class="col-sm-6">
         <div class="video-text-right">
             <h2 class="text-primary">Arduino</h2>
-            <p>Fake placeholder</p>
+            <p>How to breadboard simple electronic circuits from a schematic.</p>
+            <h5><em>Video Courtesy of eTechTom. Thank you!</em></h5>
         </div>
     </div>
 </div>

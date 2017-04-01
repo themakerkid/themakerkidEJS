@@ -84,7 +84,7 @@ def before():
 def beforeApp():
     try:
         if request.endpoint[:6] != "static" and request.endpoint != "blog.login" and request.endpoint != "blog.logout" and request.endpoint != "blog.public" and request.endpoint != "blog.draft" \
-                and request.endpoint != "main.unconfirmed":
+                and request.endpoint != "main.unconfirmed" and request.endpoint != "main.contact":
             # Set the last_url in the session so that routes can redirect back to the last page.
             # Routes that use last_url cannot change this (because it would otherwise be redirecting back to itself)
             session["last_url"] = request.url

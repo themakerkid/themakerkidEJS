@@ -1,0 +1,10 @@
+{{ form.name.data }} has contacted you.
+
+Here is the comment:
+
+{{ form.comment.data }}
+
+Email:
+{{ form.email.data }}
+
+{{ form.name.data }}

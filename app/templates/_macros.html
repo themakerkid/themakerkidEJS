@@ -93,8 +93,23 @@
             If you need to make a post, please hit the Create A New Post button {% if is_blog_page %}above{% else %}on the blog home page{% endif %}.
         </p>
     {% endif %}
-        <p>
-            I will be creating a markdown video very soon.
-        </p>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#post-intro">How to Create A Post</button>
+        <!-- Modal -->
+        <div class="modal fade" id="post-intro" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">How to Create A Post</h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endmacro %}
