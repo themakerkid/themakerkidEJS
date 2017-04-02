@@ -134,6 +134,7 @@ Keep Coding.
                     <a tabindex="0" data-toggle="dropdown" data-submenu id="hardware">Maker <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a tabindex="0" href="{{ url_for('main.maker') }}">Introduction</a></li>
+                        <li><a tabindex="0" href="{{ url_for('main.makeStart') }}">Getting Started</a></li>
                         <li class="divider"></li>
                         <!--<li><a href="{{ url_for('main.makeElec') }}">Electronics</a></li>-->
                         <!-- <li class="dropdown-submenu">
@@ -145,18 +146,15 @@ Keep Coding.
                         <!--  <li><a tabindex="0" href="{{ url_for('main.makeLearn') }}">Learning Resources</a></li> 
                         <li><a tabindex="0" href="{{ url_for('main.makeBooks') }}">Engineering Books</a></li> -->
 
-                        <!-- A submenu would be silly with the amount of things on the Maker dropdown
                         <li class="dropdown-submenu">
                             <a tabindex="0">Arduino</a>
-                            <ul class="dropdown-menu">-->
-                        <li class="dropdown-header">Arduino</li>
-                        <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
-                        <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
-                        <!--
+                            <ul class="dropdown-menu">
+                                <li><a tabindex="0" href="{{ url_for('main.arduinoStart') }}">Getting Started</a></li>
+                                <li><a tabindex="0" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a></li>
+                                <li><a tabindex="0" href="{{ url_for('main.arduinoProject') }}">Projects</a></li>
                             </ul>
                         </li>
-                        -->
+                            
                         <!-- <li><a tabindex="0" href="{{ url_for('main.makeRobot') }}">Robotics</a></li>
                     <li><a tabindex="0" href="{{ url_for('main.makeProj') }}">Projects</a></li>
                     -->

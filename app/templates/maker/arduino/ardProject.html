@@ -3,8 +3,27 @@
 {% block styles %}
     {{ super() }}
     <style type="text/css">
+        hr.divider {
+            background-color: #fff;
+            border-top: 1px dashed #8c8b8b;
+        }
+        
+        hr.top {
+            height: 10px;
+            border: 0;
+            box-shadow: 0 10px 10px -10px #8c8b8b inset;
+        }
+        
         .video-top-20 {
             margin-top: 20px;
+        }
+
+        .margin-top {
+            margin-top: 20px;
+        }
+
+        .no-margin-top {
+            margin-top: 0;
         }
     </style>
 {% endblock %}
@@ -15,9 +34,51 @@
         <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoStart') }}">Getting Started</a>
         <a role="button" class="btn btn-primary" href="{{ url_for('main.arduinoLearn') }}">Learning Resources</a>
         <a role="button" class="btn btn-success" href="{{ url_for('main.arduinoProject') }}">Projects</a>
-        <hr />
     </div>
+    <div class="row margin-top">
+        <div class="col-sm-2 col-xs-12">
+            <img src="{{ url_for('static', filename='images/hardware/arduino_logo.png') }}" class="img-responsive" />
+        </div>
+        <div class="col-sm-10 col-xs-12">
+            <h2 class="text-primary no-margin-top">Welcome to the Projects page</h2>
+            <p>
+                These are some that I have made using Arduino, ATTiny85 and Adafruit Gemma. These projects aren&#39;t fully documented yet but I will add some tutorials which will help you
+                make these when I get time.
+            </p>
+        </div>
+    </div>
+    <hr class="top">
     <div class="row">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/gyyU1cJKZuA?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-primary margin-top-10">Knight Rider using ATTiny85 by Benjamin</h2>
+            <p>
+                This is a simple flasher made by me for my Halloween costume 2 years ago that displays the Knight Rider sequence. It was programmed using the Arduino IDE
+                and consists of an ATTiny85 micro controller, some LEDs, a battery, a switch, vero board, a resistor and some wires.
+            </p>
+        </div>
+    </div>
+    <hr class="divider">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/m9D2Jgqu1II?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-primary margin-top-10">Message Scroller Board made by Benjamin</h2>
+            <p>
+                I made this scroller for Christmas 2015 to wish my CoderDojo Happy Christmas! It consists of an Arduino Nano and six MAX7219 controlled 8x8 Dot matrix modules. I will document this project soon, as other kids might be interested in making a scroller display
+                as well. The project does require some soldering though. Coming soon!
+            </p>
+        </div>
+    </div>
+    <hr class="divider">
+    <div class="row video-top-20">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed//-kVkTiLTzfA?rel=0" allowfullscreen></iframe>
@@ -27,6 +88,7 @@
             <h2 class="text-primary margin-top-10">Bluetooth controlled NeoPixels with Arduino (Short demo)</h2>
         </div>
     </div>
+    <hr class="divider">
     <div class="row video-top-20">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-16by9">
@@ -37,6 +99,7 @@
             <h2 class="text-primary margin-top-10">Bluetooth controlled NeoPixels with Arduino</h2>
         </div>
     </div>
+    <hr class="divider">
     <div class="row video-top-20">
         <div class="col-sm-6">
             <div class="embed-responsive embed-responsive-16by9">
@@ -47,4 +110,5 @@
             <h2 class="text-primary margin-top-10">Neopixel Ring with Adafruit Gemma</h2>
         </div>
     </div>
+    <hr class="top">
 {% endblock %}

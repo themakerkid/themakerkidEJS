@@ -198,6 +198,11 @@ def maker():
     """Renders the Maker home page."""
     return render_template('maker/intro.html', title="Maker - Home Page", year=year)
 
+@main.route('/maker/starting')
+def makeStart():
+    """Renders the Maker getting started page."""
+    return render_template('maker/starting.html', title="Maker - Getting Started", year=year)
+
 # This Learning Resources page and Books has been taken out for the same reason as the Getting Started pages.
 @main.route('/maker/learn')
 def makeLearn():

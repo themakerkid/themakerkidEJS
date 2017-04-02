@@ -27,6 +27,10 @@
         margin-top: 30px;
         margin-bottom: 10px;
     }
+
+    #continue {
+        margin-right: 10px;
+    }
 </style> {% endblock %} {% block page_content %}
 <h1 class="text-warning text-center">Maker Introduction</h1>
 <div class="row">
@@ -77,78 +81,6 @@
         </div>
     </div>
 </div>
+<a class="btn btn-primary pull-right" id="continue" href="{{ url_for('main.makeStart') }}">Continue to Getting Started &rarr;</a>
 <br />
-
-<div class="row">
-    <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/exlRjDKHGRg?list=PLlyYGDb15zaEAQrPNGd84BmHyko0magnj&rel=0"></iframe>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="video-text-right">
-            <h2 class="text-primary">Adafruit Circuit Playground.</h2>
-            <p>
-                This series of videos introduces kids to the electronic components that you use for making circuits. They are really fun.
-            </p>
-            <ol>
-                <li><p>A is for Ampere</p></li>
-                <li><p>B is for Battery</p></li>
-                <li><p>C is for Capacitor</p></li>
-                <li><p>D is for Diode</p></li>
-                <li><p>F is for Frequency</p></li>
-                <li><p>G is for Ground</p></li>
-                <li><p>H is for Hertz</p></li>
-                <li><p>I is for IC</p></li>
-                <li><p>J is for Joule</p></li>
-            </ol>
-            <h5><em>Video Courtesy of Adafruit Industries. Thank you!</em></h5>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/k9jcHB9tWko?rel=0"></iframe>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="video-text-right">
-            <h2 class="text-primary">Breadboards and Circuit Construction.</h2>
-            <p>Solderless breadboards are a device designed to allow the quick construction of an electronic circuit. They are often used in circuit design and testing. This video demonstrates the basic use of a breadboard.</p>
-            <h5><em>Video Courtesy of ScienceOnline. Thank you!</em></h5>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Kv7Y8nAOoFE?list=PL9CDF91EC3585AAD9"></iframe>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="video-text-right">
-            <h2 class="text-primary">What tools do I need?</h2>
-            <p>Get geared up for circuit-making &mdash; check out Collin's list of tools no electronaut should be without!</p>
-            <h5><em>Video Courtesy of Make. Thank you!</em></h5>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-sm-6">
-        <div class="embed-responsive embed-responsive-4by3">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Iy7DY2UbHvM?rel=0"></iframe>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="video-text-right">
-            <h2 class="text-primary">Arduino</h2>
-            <p>How to breadboard simple electronic circuits from a schematic.</p>
-            <h5><em>Video Courtesy of eTechTom. Thank you!</em></h5>
-        </div>
-    </div>
-</div>
 {% endblock %}

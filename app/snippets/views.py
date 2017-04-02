@@ -1,18 +1,35 @@
+# snippets/views.py - views for the snippets blueprint
+# By Benjamin Murray
+
+# Import datetime to get current year
 from datetime import datetime
+
+# Import some built-in flask functions and dictonaries
 from flask import render_template, flash, redirect, request, url_for, abort, current_app, session
-from flask_login import login_user, logout_user, current_user, login_required
+
+# Import logged-in user and route protector
+from flask_login import current_user, login_required
+
+# Import form classes
 from forms import SnippetForm, CommentForm, SearchForm
+
+# Import models to create some comment and snippets
 from ..models import SnippetComment, User, Snippet, db
+
+# Import blueprint
 from . import snippets
 
+# Stop repetition
 year = datetime.now().year
 
+# Check which button has been pressed
 def checkBtn(false_value, form):
     if false_value in request.form and form.validate():
         return True
     else:
         return False
 
+# Check which language a snippet has from an id
 def checkLanguage(snippet):
     if snippet.code_type_id == 1:
         return "HTML"
@@ -31,11 +48,13 @@ def checkLanguage(snippet):
     else:
         return "Other"
 
+# Set last seen for logged-in user
 @snippets.before_request
 def before():
     if current_user.is_authenticated:
         current_user.setLastSeen()
 
+# Index route
 @snippets.route('/', methods=['GET', 'POST'])
 def index():
     page = request.args.get('page', 1, type=int)
@@ -46,7 +65,10 @@ def index():
     snippet_form = SnippetForm()
     search_form = SearchForm()
     if snippet_form.validate_on_submit():
+        # Create snippet
         snippet = Snippet(title=snippet_form.title.data, body=snippet_form.body.data, author=current_user._get_current_object(), code_type_id=snippet_form.language.data)
+
+        # Update summary
         snippet.changedBody()
         db.session.add(snippet)
         db.session.commit()
@@ -78,6 +100,7 @@ def index():
         return redirect(url_for('.filtered', q=q))
     return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination)
 
+# Same as above but with models being searched
 @snippets.route('/filtered', methods=['GET', 'POST'])
 def filtered():
     if not session.get("language", False) and not session.get("search_query", False) and not session.get("language_id", False) and not session.get("both", False):
@@ -132,6 +155,7 @@ def filtered():
     snippets = pagination.items
     return render_template("snippets/index.html", title="Code Snippets - Home Page", year=year, snippet_form=snippet_form, search_form=search_form, snippets=snippets, pagination=pagination, filtered=True)
 
+# Individual snippet
 @snippets.route('/<int:id>', methods=['GET', 'POST'])
 def snippet(id):
     snippet = Snippet.query.get_or_404(id)
@@ -147,6 +171,7 @@ def snippet(id):
     comments = snippet.comments.order_by(SnippetComment.date_posted.asc())
     return render_template("snippets/snippet.html", title="Snippet - " + snippet.title, year=year, snippet=snippet, form=form, comments=comments, language=language)
 
+# Editing a snippet
 @snippets.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit(id):

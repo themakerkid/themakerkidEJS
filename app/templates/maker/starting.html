@@ -1,0 +1,168 @@
+{% extends "base.html" %} {% block styles %} {{ super() }}
+
+<style>
+    h1 {
+        text-shadow: grey 0.2em 0.2em 0.3em;
+    }
+
+    h2,
+    h3 {
+        color: #fcd062;
+        text-shadow: grey 0.1em 0.1em 0.2em;
+        margin-top: -10px;
+    }
+    
+    @media (max-width: 768px) {
+        h2,
+        h3 {
+            margin-top: 10px;
+        }
+    }
+    
+    p {
+        font-size: 1.22em;
+    }
+
+    ol li p {
+        margin-bottom: 0;
+    }
+    
+    .row {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .margin-top {
+        margin-top: 10px;
+    }
+
+    .no-margin {
+        margin-top: 0;
+    }
+</style> {% endblock %} {% block page_content %}
+<h1 class="text-warning text-center">Getting Started</h1>
+<ul class="list-group">
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <img src="{{ url_for('static', filename='images/maker/maker_tools_sm.png') }}" />
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <h2 class="text-primary no-margin">So how do I get started?</h2>
+                <p>
+                    To get started making stuff with electronics, there are some basic tools and components that you will need. If you just want to experiment with some simple circuits, all you will need
+                    is a basic kit consisting of a breadboard, a battery, and some electronic components like resistors, capacitors, 
+                    <span data-toggle="tooltip" data-placement="top" title="Light-Emmiting Diodes">LEDs</span> and diodes. Please go to the <strong><em>Where do I get this stuff?</em></strong> section below for
+                    more information. Now let&#39;s get started by learning about some of these simple components.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/exlRjDKHGRg?list=PLlyYGDb15zaEAQrPNGd84BmHyko0magnj&rel=0"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="video-text-right">
+                    <h2 class="text-primary">Adafruit Circuit Playground.</h2>
+                    <p>
+                        This series of videos introduces kids to the electronic components that you use for making circuits. They are really fun.
+                    </p>
+                    <ol>
+                        <li><p>A is for Ampere</p></li>
+                        <li><p>B is for Battery</p></li>
+                        <li><p>C is for Capacitor</p></li>
+                        <li><p>D is for Diode</p></li>
+                        <li><p>F is for Frequency</p></li>
+                        <li><p>G is for Ground</p></li>
+                        <li><p>H is for Hertz</p></li>
+                        <li><p>I is for IC</p></li>
+                        <li><p>J is for Joule</p></li>
+                    </ol>
+                    <h5><em>Video Courtesy of Adafruit Industries. Thank you!</em></h5>
+                </div>
+            </div>
+        </div>
+    </li>
+    <br />
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <img src="{{ url_for('static', filename='images/maker/breadboard_labelled_connect.svg') }}" />
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <h2 class="text-primary no-margin">So how do I connect all of it up?</h2>
+                <p>
+                    In order to make a circuit you will need some way of connecting all the components and wires together, For this you will need a breadboard.
+                    Also you will need some way of powering the circuit. For this you can use a battery. You can also power the circuit by using a power adapter,
+                    like a mobile phone charger with an appropriate adapter.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="embed-responsive embed-responsive-4by3">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/k9jcHB9tWko?rel=0"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="video-text-right">
+                    <h2 class="text-primary">Breadboards and Circuit Construction</h2>
+                    <p>
+                        Solderless breadboards are a device designed to allow the quick construction of an electronic circuit. They are often used in circuit design and testing.
+                        This video demonstrates the basic use of a breadboard. You can make cool stuff just using some electronic components, but if you want to control your circuit using code,
+                        you will need a micro controller like an Arduino, or a small single board computer like the Raspberry Pi. Please go to the
+                        <a href="{{ url_for('main.arduinoStart') }}">Arduino section</a> to learn more.
+                    </p>
+                    <h5><em>Video Courtesy of ScienceOnline. Thank you!</em></h5>
+                </div>
+            </div>
+        </div>
+    </li>
+    <br />
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <img src="{{ url_for('static', filename='images/maker/maker_tools_sm.png') }}" />
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <h2 class="text-primary no-margin">Where do I get this stuff?</h2>
+                <p>
+                    The term Maker is used to describe those who love to create things in their spare time (often electronic, often with their own hands). Also called Hobbyists. The term is popular in the open hardware and hardware hacking electronics communities.
+                </p>
+            </div>
+        </div>
+    </li>
+    <br />
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <img src="{{ url_for('static', filename='images/maker/flasher2.jpg') }}" />
+                <img src="{{ url_for('static', filename='images/maker/underside.jpg') }}" class="margin-top" />
+            </div>
+            <div class="col-md-9 col-sm-8 col-xs-12">
+                <h2 class="text-primary no-margin">And what tools do I need?</h2>
+                <p>
+                    If you are just getting started building all your circuits on a breadboard, and you have some patch cables, 
+                    then you don't need to get any tools just yet. If you are want to make your keep your circuit creations permanently, then you will need to get some basic tools.
+                    You will also need to learn how to solder. Your parents or guardians may have some of this stuff lying around the house already.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Kv7Y8nAOoFE?list=PL9CDF91EC3585AAD9"></iframe>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="video-text-right">
+                    <p>Get geared up for circuit-making &mdash; check out Collin's list of tools no electronaut should be without!</p>
+                    <h5><em>Video Courtesy of Make. Thank you!</em></h5>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+{% endblock %}
