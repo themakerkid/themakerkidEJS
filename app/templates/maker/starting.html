@@ -39,6 +39,10 @@
     .no-margin {
         margin-top: 0;
     }
+
+    #continue {
+        margin-right: 10px;
+    }
 </style> {% endblock %} {% block page_content %}
 <h1 class="text-warning text-center">Getting Started</h1>
 <ul class="list-group">
@@ -129,7 +133,8 @@
             <div class="col-md-9 col-sm-8 col-xs-12">
                 <h2 class="text-primary no-margin">Where do I get this stuff?</h2>
                 <p>
-                    The term Maker is used to describe those who love to create things in their spare time (often electronic, often with their own hands). Also called Hobbyists. The term is popular in the open hardware and hardware hacking electronics communities.
+                    You can get this stuff on <a href="https://www.amazon.co.uk">Amazon</a>, <a href="http://cpcireland.farnell.com/">CPC Ireland</a> or on
+                    <a href="http://ie.rs-online.com/web/">Radionics</a>.
                 </p>
             </div>
         </div>
@@ -165,4 +170,6 @@
         </div>
     </li>
 </ul>
+<a class="btn btn-primary pull-right" id="continue" href="{{ url_for('main.arduinoStart') }}">Continue to Arduino section &rarr;</a>
+<br />
 {% endblock %}
