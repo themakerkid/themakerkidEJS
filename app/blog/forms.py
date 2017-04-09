@@ -4,8 +4,8 @@
 # For redirecting to last url
 from flask import redirect, session, url_for
 
-# Import the base form class
-from flask_wtf import FlaskForm
+# Import the base form class and recaptcha
+from flask_wtf import FlaskForm, RecaptchaField, Recaptcha
 
 # Import all the necessary fields such as a textarea (TextAreaField()).
 from wtforms import BooleanField, PasswordField, SelectMultipleField, StringField, SubmitField, TextAreaField, RadioField, ValidationError
@@ -54,6 +54,7 @@ class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
     body = TextAreaField("Content", validators=[DataRequired()])
     tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
+    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     published = BooleanField("Do you want to make this public?")
     submit = SubmitField("Submit")
     cancel = SubmitField("Cancel", false_values="cancel")
@@ -62,8 +63,21 @@ class PostForm(FlaskForm):
         super(PostForm, self).__init__(*args, **kwargs)
         self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by(Tag.name.asc()).all()]
 
+class PostEditForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
+    body = TextAreaField("Content", validators=[DataRequired()])
+    tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
+    published = BooleanField("Do you want to make this public?")
+    submit = SubmitField("Submit")
+    cancel = SubmitField("Cancel", false_values="cancel")
+
+    def __init__(self, *args, **kwargs):
+        super(PostEditForm, self).__init__(*args, **kwargs)
+        self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by(Tag.name.asc()).all()]
+
 class CommentForm(FlaskForm):
     body = TextAreaField("Content", validators=[DataRequired()])
+    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     submit = SubmitField("Save", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 
@@ -74,6 +88,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Your parent/guardian\'s or your own email', validators=[DataRequired(), Email(), Length(1, 64)])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('com_password', message="The two passwords don't match.")])
     com_password = PasswordField('Confirm Password', validators=[DataRequired()])
+    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     check_email = RadioField("This will not be visible to anyone", choices=[
                                                                         ('thirteen', 'I am thirteen or over so I can use my own email'), ('under_12', 'I am 12 or under and have used my parent/guardian\'s email')
                                                                     ], default="under_12", validators=[DataRequired()])

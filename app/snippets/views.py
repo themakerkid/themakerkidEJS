@@ -11,7 +11,7 @@ from flask import render_template, flash, redirect, request, url_for, abort, cur
 from flask_login import current_user, login_required
 
 # Import form classes
-from forms import SnippetForm, CommentForm, SearchForm
+from forms import SnippetForm, CommentForm, SearchForm, SnippetEditForm
 
 # Import models to create some comment and snippets
 from ..models import SnippetComment, User, Snippet, db
@@ -177,7 +177,7 @@ def snippet(id):
 def edit(id):
     snippet = Snippet.query.get_or_404(id)
     language = checkLanguage(snippet)
-    form = SnippetForm()
+    form = SnippetEditForm()
     if current_user.username != snippet.author.username and not current_user.admin():
         abort(403)
     if request.method == "POST":

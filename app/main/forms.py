@@ -1,8 +1,8 @@
-# main/forms.py - form class for the search
+# main/forms.py - form class for the search and contact me
 # By Benjamin Murray
 
-# Import the Base Form class to get methods like form.validate_on_submit()
-from flask_wtf import FlaskForm
+# Import the Base Form class to get methods like form.validate_on_submit() and Recaptcha field
+from flask_wtf import FlaskForm, RecaptchaField, Recaptcha
 
 # Import Fields for the form
 from wtforms import StringField, SubmitField, TextAreaField
@@ -34,6 +34,9 @@ class ContactForm(FlaskForm):
 
     # Comment
     comment = TextAreaField("Your comment", validators=[DataRequired()])
+
+    # Recaptcha
+    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
 
     # Submit button
     submit = SubmitField("Send via email")

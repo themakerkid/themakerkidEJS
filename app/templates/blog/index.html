@@ -104,7 +104,13 @@
     $textarea.attr('data-provide', 'markdown');
     $textarea.attr('placeholder', 'Please put your post content here using Markdown or the buttons above.');
     $textarea.attr('rows', 12);
-    $("#cancel").detach();
+    $("#cancel").remove();
+
+    if ($(".modal-body .form .form-group").hasClass('has-error')) {
+        $("#create-new-post").click();
+        $("#search-form .form-group .help-block").detach();
+        $("#search-form .form-group").removeClass('has-error');
+    }
 </script>
 {% if filtered %}
 <script>

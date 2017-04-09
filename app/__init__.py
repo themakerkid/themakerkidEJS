@@ -47,6 +47,9 @@ def create_app():
     app.config["MAIL_USE_SSL"] = True
     app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
     app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
+    app.config["RECAPTCHA_USE_SSL"] = False
+    app.config["RECAPTCHA_PUBLIC_KEY"] = os.environ.get("RECAPTCHA_PUBLIC")
+    app.config["RECAPTCHA_PRIVATE_KEY"] = os.environ.get("RECAPTCHA_PRIVATE")
     app.debug = True
 
     # Initialise all the extensions
