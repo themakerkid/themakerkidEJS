@@ -17,27 +17,10 @@ from ..models import Snippet
 choices = ((0, "Please select a language"), (Snippet.ARDUINO_C, "Arduino C++"), (Snippet.HTML, "HTML"), (Snippet.CSS, "CSS"), (Snippet.JAVASCRIPT, "JavaScript"), (Snippet.PYTHON, "Python"), (Snippet.PROCESSING, "Processing.js"),(Snippet.SQL, "SQL"), (Snippet.OTHER, "Other"))
 
 # Form to create/edit a snippet
-class SnippetEditForm(FlaskForm):
+class SnippetForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, 'Title should be no more than 64 characters')])
     language = SelectField("Language", coerce=int)
     body = TextAreaField("Content", validators=[DataRequired()])
-    submit = SubmitField("Save", false_values="submit")
-    cancel = SubmitField("Cancel", false_values="cancel")
-
-    def __init__(self, *args, **kwargs):
-        super(SnippetEditForm, self).__init__(*args, **kwargs)
-        self.language.choices = choices
-
-    def validate_language(self, field):
-        # Custom validation
-        if field.data == 0:
-            raise ValidationError("You must select a language.")
-
-class SnippetForm(SnippetEditForm):
-    title = StringField("Title", validators=[DataRequired(), Length(1, 64, 'Title should be no more than 64 characters')])
-    language = SelectField("Language", coerce=int)
-    body = TextAreaField("Content", validators=[DataRequired()])
-    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     submit = SubmitField("Save", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 

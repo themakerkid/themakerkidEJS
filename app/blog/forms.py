@@ -54,7 +54,6 @@ class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
     body = TextAreaField("Content", validators=[DataRequired()])
     tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
-    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     published = BooleanField("Do you want to make this public?")
     submit = SubmitField("Submit")
     cancel = SubmitField("Cancel", false_values="cancel")
@@ -63,21 +62,8 @@ class PostForm(FlaskForm):
         super(PostForm, self).__init__(*args, **kwargs)
         self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by(Tag.name.asc()).all()]
 
-class PostEditForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired(), Length(1, 64, message="Title should be no more than 64 characters.")])
-    body = TextAreaField("Content", validators=[DataRequired()])
-    tags = SelectMultipleField("Tags (You can hold down Ctrl or Command to select more than one)", coerce=int)
-    published = BooleanField("Do you want to make this public?")
-    submit = SubmitField("Submit")
-    cancel = SubmitField("Cancel", false_values="cancel")
-
-    def __init__(self, *args, **kwargs):
-        super(PostEditForm, self).__init__(*args, **kwargs)
-        self.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by(Tag.name.asc()).all()]
-
 class CommentForm(FlaskForm):
     body = TextAreaField("Content", validators=[DataRequired()])
-    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     submit = SubmitField("Save", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 

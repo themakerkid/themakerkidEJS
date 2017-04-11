@@ -14,7 +14,7 @@ from flask import render_template, flash, redirect, request, url_for, abort, ses
 from flask_login import login_user, logout_user, current_user, login_required
 
 # Import all the form classes related to the blog to display and handle the forms
-from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm, PostEditForm
+from forms import LoginForm, PostForm, CommentForm, RegisterForm, EditProfile, ResetPasswordRequest, ResetPassword, SearchForm
 
 # Import some models to gather all the content in them
 from ..models import Comment, User, Post, Tag, db
@@ -263,7 +263,7 @@ def edit(id):
     post = Post.query.get_or_404(id)
 
     # Create form object
-    form = PostEditForm()
+    form = PostForm()
 
     # Issue a 403 (forbidden) error if post author is not the logged in user
     if current_user.username != post.author.username and not current_user.admin():
