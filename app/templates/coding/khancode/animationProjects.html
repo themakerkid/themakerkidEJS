@@ -2,14 +2,18 @@
 
 {% block styles %}
     {{ super() }}
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/khanProjStyle.css') }}">
     <style>
         
         .canvas-caption {
             display: inline-block;
-            text-align: center;
         }
         
+        .canvas-group {
+            text-align: center;
+        }
+
         .no-center {
             text-align: left;
         }
@@ -23,115 +27,117 @@
         <li><a href="{{ url_for('.mouseOver') }}">Mouse Over</a></li>
         <li><a href="{{ url_for('.drawing') }}">Drawings</a></li>
     </ul>
-    <div class="canvas-caption">
-        <h3>Parting Clouds</h3>
-        <canvas id="mycanvas"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#parting-clouds" href="{{ url_for('static', filename='getTheCode/partingClouds.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="parting-clouds" role="dialog">
-                <div class="modal-dialog modal-md">
+    <div class="canvas-group">
+        <div class="canvas-caption">
+            <h3>Parting Clouds</h3>
+            <canvas id="mycanvas"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#parting-clouds" href="{{ url_for('static', filename='getTheCode/partingClouds.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="parting-clouds" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Public Transport</h3>
-        <canvas id="mycanvas2"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#transport" href="{{ url_for('static', filename='getTheCode/publicTransport.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="transport" role="dialog">
-                <div class="modal-dialog modal-md">
+        <div class="canvas-caption">
+            <h3>Public Transport</h3>
+            <canvas id="mycanvas2"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#transport" href="{{ url_for('static', filename='getTheCode/publicTransport.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="transport" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Bouncing Ball</h3>
-        <canvas id="mycanvas3"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#bouncy" href="{{ url_for('static', filename='getTheCode/bouncyBall.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="bouncy" role="dialog">
-                <div class="modal-dialog modal-md">
+        <div class="canvas-caption">
+            <h3>Bouncing Ball</h3>
+            <canvas id="mycanvas3"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#bouncy" href="{{ url_for('static', filename='getTheCode/bouncyBall.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="bouncy" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Animal Attack (You can tell!)</h3>
-        <canvas id="mycanvas4"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#flashyAnimal" href="{{ url_for('static', filename='getTheCode/flashyAnimalAttack.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="flashyAnimal" role="dialog">
-                <div class="modal-dialog modal-md">
+        <div class="canvas-caption">
+            <h3>Animal Attack (You can tell!)</h3>
+            <canvas id="mycanvas4"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#flashyAnimal" href="{{ url_for('static', filename='getTheCode/flashyAnimalAttack.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="flashyAnimal" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
             </div>
         </div>
+        <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
     </div>
-    <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
 {% endblock %}
 
 {% block scripts %}
@@ -155,7 +161,7 @@
         var canvas4 = document.getElementById("mycanvas4"); //get the canvas that processingjs will use
         var processingInstance4 = new Processing(canvas4, sketchProc4); //pass the function sketchProc (defined in flasyAnimalAttack.js) to Processing's constructor.
         (function() {
-            new Clipboard('#copy-button');
+            new Clipboard('.copy-button');
         })();
     </script>
 {% endblock %}

@@ -39,9 +39,10 @@ img {
     padding: 0px;
 }
         
-button {
-    margin: 8px;
- }
+.button {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
 
 ul.grid-nav {
     list-style: none;
@@ -154,3 +155,9 @@ ul.rig.columns-4 li {
     }
 }
 */
+
+/* To stop unnecessary breaking of words in code */
+pre {
+    word-break: normal;
+    word-wrap: normal;
+}

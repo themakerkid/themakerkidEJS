@@ -2,16 +2,15 @@
 
 {% block styles %}
     {{ super() }}
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/khanProjStyle.css') }}">
     <style>
         .canvas-caption {
             display: inline-block;
         }
         
-        canvas {
-            display: inline-block;
+        .canvas-group {
             text-align: center;
-            margin-right: 0px;
         }
         
         /* If no grey border, circles at the edge will not look good. */
@@ -47,130 +46,132 @@
         <button role="button" id="reload-btn" class="btn btn-success">Reload All <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         -->
     </ul>
-    <div class="canvas-caption">
-        <h3>Flower Grower</h3>
-        <p class="description">            
-        This program makes the flowers grow when
-            <br />you click on the background.
-        </p>
-        <canvas id="mycanvas"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#flower-grower" href="{{ url_for('static', filename='getTheCode/flowerMaker.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="flower-grower" role="dialog">
-                <div class="modal-dialog modal-lg">
+    <div class="canvas-group">
+        <div class="canvas-caption">
+            <h3>Flower Grower</h3>
+            <p class="description">            
+            This program makes the flowers grow when
+                <br />you click on the background.
+            </p>
+            <canvas id="mycanvas"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#flower-grower" href="{{ url_for('static', filename='getTheCode/flowerMaker.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="flower-grower" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
+                <button type="button" class="btn-success btn btn-sm reload-one" id="flowerReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
             </div>
-            <button type="button" class="btn-success btn-sm reload-one" id="flowerReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Mouse Movement Mania</h3>
-        <p class="description">When you move the mouse it draws a circle and
-            <br />changes the colour (or color) of the circle.</p>
-        <canvas id="mycanvas2"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#mouse-movement" href="{{ url_for('static', filename='getTheCode/mouseMovement.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade no-center" id="mouse-movement" role="dialog">
-                <div class="modal-dialog modal-lg">
+        <div class="canvas-caption">
+            <h3>Mouse Movement Mania</h3>
+            <p class="description">When you move the mouse it draws a circle and
+                <br />changes the colour (or color) of the circle.</p>
+            <canvas id="mycanvas2"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#mouse-movement" href="{{ url_for('static', filename='getTheCode/mouseMovement.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade no-center" id="mouse-movement" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Mouse Movement Mania</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Mouse Movement Mania</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
+
+                <button type="button" class="btn-success btn btn-sm reload-one" id="mouseMovementReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
             </div>
-
-            <button type="button" class="btn-success btn-sm reload-one" id="mouseMovementReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Irish Flag Painter</h3>
-        <p class="description">Like Mouse Movement Mania, but draws the<br />
-            Irish Flag instead.</p>
-        <canvas id="mycanvas3"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#irish-flag" href="{{ url_for('static', filename='getTheCode/irishFlag.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade no-center" id="irish-flag" role="dialog">
-                <div class="modal-dialog modal-lg">
+        <div class="canvas-caption">
+            <h3>Irish Flag Painter</h3>
+            <p class="description">Like Mouse Movement Mania, but draws the<br />
+                Irish Flag instead.</p>
+            <canvas id="mycanvas3"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#irish-flag" href="{{ url_for('static', filename='getTheCode/irishFlag.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade no-center" id="irish-flag" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Mouse</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Mouse</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
+                <button type="button" class="btn-success btn btn-sm reload-one" id="irishReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
             </div>
-            <button type="button" class="btn-success btn-sm reload-one" id="irishReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         </div>
-    </div>
-    <div class="canvas-caption">
-        <h3>Crazy Painter</h3>
-        <p class="description">Like the one before but draws a tiny circle
-            <br />instead.</p>
-        <canvas id="mycanvas4"></canvas>
-        <div class="no-center">
-            <button type="button" class="btn-primary btn-sm" data-toggle="modal" data-target="#crazy-painter" href="{{ url_for('static', filename='getTheCode/crazyPainter.html') }}">Get the Code!!</button>
-            <!-- Modal -->
-            <div class="modal fade" id="crazy-painter" role="dialog">
-                <div class="modal-dialog modal-lg">
+        <div class="canvas-caption">
+            <h3>Crazy Painter</h3>
+            <p class="description">Like the one before but draws a tiny circle
+                <br />instead.</p>
+            <canvas id="mycanvas4"></canvas>
+            <div class="no-center">
+                <button type="button" class="btn-primary btn btn-sm" data-toggle="modal" data-target="#crazy-painter" href="{{ url_for('static', filename='getTheCode/crazyPainter.html') }}">Get the Code!!</button>
+                <!-- Modal -->
+                <div class="modal fade" id="crazy-painter" role="dialog">
+                    <div class="modal-dialog modal-lg">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Error</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Error</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Sorry the file was probably moved.</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <h5>Sorry the file was probably moved.</h5>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
-
                 </div>
+                <button type="button" class="btn-success btn btn-sm reload-one" id="crazyReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
             </div>
-            <button type="button" class="btn-success btn-sm reload-one" id="crazyReload">Reload <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
         </div>
+        <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
     </div>
-    <p>Want to learn how to make Projects like these? Go to <a href="https://www.khanacademy.org/computing/computer-programming/programming" target="_blank">Khan Academy</a>.</p>
 {% endblock %}
 {% block scripts %}
     {{ super() }}   
@@ -195,7 +196,7 @@
     </script>
     <script>
         (function() {
-            new Clipboard('#copy-button');
+            new Clipboard('.copy-button');
         })();
     </script>
     <script type="text/javascript">
