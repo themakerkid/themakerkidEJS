@@ -11,6 +11,13 @@
         .margin-right {
             margin-right: 5px;
         }
+
+        @media (max-width: 768px) {
+            .margin-left {
+                /* Because no float means buttons are switched around */
+                margin-left: 5px;
+            }
+        }
     </style>
 {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
     <!-- Start of Row -->
@@ -19,10 +26,11 @@
         <div class="col-md-9">
             <div class="page-header">
                 {% if logged_in %}
-                <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
-                <a class="btn btn-success pull-right margin-right" href="{{ url_for('blog.posts', username=current_user.username) }}">My posts</a>{% endif %}
+                <button type="button" class="btn btn-success pull-right pull-xs-none" data-toggle="modal" data-target="#create-new-post">Create A New Post</button>
+                <a class="btn btn-success pull-right pull-xs-none margin-right margin-left" href="{{ url_for('blog.posts', username=current_user.username) }}">My posts</a>{% endif %}
                 <h2>Welcome to the blog{% if logged_in %}, {{ current_user.username|capitalize }}{% endif %}!</h2>
                 {% if logged_in %}
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#post-intro">How to Create A Post</button>
                 <!-- Modal -->
                 <div class="modal fade no-center" id="create-new-post" role="dialog">
                     <div class="modal-dialog modal-lg">
@@ -34,6 +42,30 @@
                             </div>
                             <div class="modal-body">
                                 {{ wtf.quick_form(post_form, button_map={'submit': 'success'}) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="post-intro" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title">How to Create A Post</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/oNYbXzobSKg?rel=0" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
