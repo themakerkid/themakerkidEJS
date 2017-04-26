@@ -48,18 +48,6 @@ body {
     }
 }
 
-@media (max-width: 445px) {
-    p.lead {
-        margin-top: 50px;
-    }
-}
-
-@media (max-width: 340px) {
-    p.lead {
-        margin-top: 100px;
-    }
-}
-
 .bg-danger {
     padding: 10px 0 10px 10px;
 }
@@ -101,5 +89,17 @@ li.dropdown-header {
 @media (max-width: 768px) {
     .pull-xs-none {
         float: none !important;
+    }
+
+    #logo img {
+        width: 50px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    body {
+        padding-top: 75px;
     }
 }
