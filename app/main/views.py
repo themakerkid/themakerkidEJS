@@ -367,7 +367,7 @@ def resendConfirmationEmail():
 @main.route('/buddies')
 def users():
     # Get all the users from the database
-    users = User.query.all()
+    users = User.query.order_by(User.date_registered.asc()).all()
     return render_template('users.html', title="Buddies", year=year, users=users)
 
 @main.route('/contact', methods=["GET", "POST"])
