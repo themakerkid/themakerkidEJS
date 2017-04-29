@@ -6,14 +6,19 @@
         .margin-minus-15 {
             margin-top: -15px;
         }
+
+        h1 small {
+            position: relative;
+            top: -0.25em;
+        }
     </style>
 {% endblock %}
 
 {% block page_content %}
 <div class="text-center">
-    <h1>This Website was built<small>using Flask</small></h1>
-    <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
-    <a role="button" class="btn btn-success" href="{{ url_for('main.techPyThis') }}">This Website</a></li>
+    <h1>This Website was built <small>using Flask</small></h1>
+    <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a>
+    <a role="button" class="btn btn-success" href="{{ url_for('main.techPyThis') }}">This Website</a>
     <hr />
 </div>
 <div class="row">
@@ -40,7 +45,7 @@
             Miguel Grinberg has a <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank">Flask Mega Tutorial</a> on his blog.
             He also has a <a href="http://flaskbook.com" target="_blank">Flask Web Development</a> book.
             It is also quite easy to install Flask on the Raspberry Pi. There is an excellent tutorial on the Raspberry Pi website called
-            <a href="http://flaskbook.com" target="_blank">Build a Python Web Server with Flask</a> here.
+            <a href="https://www.raspberrypi.org/learning/python-web-server-with-flask/" target="_blank">Build a Python Web Server with Flask</a> here.
         </p>
             <p>If you have any questions on how this website was created using Flask, then simply <a tabindex="0" href="{{ url_for('blog.index') }}">post on the Blog</a>, and I will get back to you.</p>
     </div>
