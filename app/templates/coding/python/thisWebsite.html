@@ -11,7 +11,7 @@
 
 {% block page_content %}
 <div class="text-center">
-    <h1>This Website <small>Using Flask</small></h1>
+    <h1>This Website was built<small>using Flask</small></h1>
     <a role="button" class="btn btn-primary" href="{{ url_for('main.techPyLearn') }}">Learning Resources</a></li>
     <a role="button" class="btn btn-success" href="{{ url_for('main.techPyThis') }}">This Website</a></li>
     <hr />
@@ -21,10 +21,14 @@
         <img src="{{ url_for('static', filename='images/about/flask.jpg') }}">
     </div>
     <div class="col-md-11 col-sm-10 col-xs-9 margin-minus-15">
+        <p>
+            I buit this website using the Flask micro web framework.
+        </p>
         <h2>What is Flask?</h2>
         <p>
             Well, Flask is a micro web framework written
-            in Python and based on the Werkzeug toolkit and Jinja2 template engine.
+            in Python and based on the Werkzeug toolkit and Jinja2 template engine. Jinja2 is a templating engine for Python. It generates the 
+            dynamic webpages on this website.
         </p>
         <p>
             I used some Flask extensions (libraries) such as Flask-SQLAlchemy,
@@ -35,7 +39,10 @@
         <p>
             Miguel Grinberg has a <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world" target="_blank">Flask Mega Tutorial</a> on his blog.
             He also has a <a href="http://flaskbook.com" target="_blank">Flask Web Development</a> book.
+            It is also quite easy to install Flask on the Raspberry Pi. There is an excellent tutorial on the Raspberry Pi website called
+            <a href="http://flaskbook.com" target="_blank">Build a Python Web Server with Flask</a> here.
         </p>
+            <p>If you have any questions on how this website was created using Flask, then simply <a tabindex="0" href="{{ url_for('blog.index') }}">post on the Blog</a>, and I will get back to you.</p>
     </div>
 </div>
 {% endblock %}
