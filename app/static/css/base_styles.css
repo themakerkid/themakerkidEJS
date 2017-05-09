@@ -15,7 +15,7 @@ footer p:first-child {
     float: left !important;
 }
 
-p {
+p, ol {
     font-size: 1.33em;
 }
 
@@ -86,7 +86,7 @@ li.dropdown-header {
     cursor: default;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .pull-xs-none {
         float: none !important;
     }
@@ -96,10 +96,14 @@ li.dropdown-header {
     }
 
     h1 {
-        font-size: 30px;
+        font-size: 20px;
     }
 
     body {
         padding-top: 75px;
+    }
+
+    .video-text-right {
+        margin-top: 10px;
     }
 }
