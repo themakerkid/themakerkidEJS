@@ -216,7 +216,9 @@ def posts(username):
     posts = pagination.items
 
     # Render a template that is like the index page but slightly different (no search)
-    return render_template("blog/someonesPosts.html", title="Blog - %s's posts" % user.username.capitalize(), year=year, posts=posts, pagination=pagination, user=user)
+    first_letter = username[0].upper()
+    username = first_letter + username[1:]
+    return render_template("blog/someonesPosts.html", title="Blog - %s's posts" % username, year=year, posts=posts, pagination=pagination, user=user)
 
 # Render a full post on its own
 @blog.route('/post/<int:id>', methods=['GET', 'POST'])

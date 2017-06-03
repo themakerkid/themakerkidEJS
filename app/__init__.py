@@ -70,4 +70,7 @@ def create_app():
     from app.snippets import snippets as snippets_bluprint
     app.register_blueprint(snippets_bluprint, url_prefix='/snippets')
 
+    from app.projects import projects as projects_blueprint
+    app.register_blueprint(projects_blueprint, url_prefix='/projects')
+
     return app

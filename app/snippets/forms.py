@@ -36,7 +36,6 @@ class SnippetForm(FlaskForm):
 # Form to create/edit a snippet
 class CommentForm(FlaskForm):
     body = TextAreaField("Content", validators=[DataRequired()])
-    recaptcha = RecaptchaField("Recaptcha", validators=[Recaptcha("You must confirm the recaptcha.")])
     submit = SubmitField("Save", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
 

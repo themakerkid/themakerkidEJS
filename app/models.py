@@ -17,6 +17,11 @@ post_tags = db.Table("post_tags",
     db.Column('post_id', db.Integer, db.ForeignKey('posts.id'))
 )
 
+project_parts = db.Table("project_parts",
+    db.Column('project_id', db.Integer, db.ForeignKey('projects.id')),
+    db.Column('part_id', db.Integer, db.ForeignKey('parts.id'))
+)
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -32,6 +37,10 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref="author", lazy="dynamic")
     snippets = db.relationship('Snippet', backref="author", lazy="dynamic")
     snippet_comments = db.relationship('SnippetComment', backref="author", lazy="dynamic")
+    projects = db.relationship('Project', backref="author", lazy="dynamic")
+    project_comments = db.relationship('ProjectComment', backref="author", lazy="dynamic")
+
+    projects_liked = []
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
@@ -265,10 +274,68 @@ class SnippetComment(db.Model):
 
     @property
     def body_html(self):
-        hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
-        extras = ExtraExtension()
         markdown_content = markdown(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
+
+class Project(db.Model):
+    __tablename__ = 'projects'
+    __searchable__ = ['title', 'description', 'vid_url', 'parts']
+
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    code = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    description = db.Column(db.Text)
+    document_html = db.Column(db.Text)
+    likes = db.Column(db.Integer)
+    parts = db.Column(db.Text)
+    status = db.Column(db.Boolean, default=True)
+    steps = db.Column(db.Integer)
+    title = db.Column(db.String(64))
+    pdf_name = db.Column(db.String(64))
+    vid_url = db.Column(db.String(64))
+    comments = db.relationship('ProjectComment', backref='project', lazy="dynamic")
+    #parts = db.relationship('Part', secondary=project_parts,
+                            #backref=db.backref('projects', lazy='dynamic'))
+
+    @property
+    def description_html(self):
+        markdown_content = markdown(self.description, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+    @property
+    def steps_html(self):
+        markdown_content = markdown(self.steps, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+    @property
+    def code_html(self):
+        markdown_content = markdown(self.code, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+class ProjectComment(db.Model):
+    __tablename__ = 'project_comments'
+    __searchable__ = ['body']
+
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    body = db.Column(db.Text)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+
+    @property
+    def body_html(self):
+        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        return Markup(markdown_content)
+
+class Part(db.Model):
+    __tablename__ = 'parts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+
+    def __repr__(self):
+        return "Part <%s>" % self.name
 
 @login.user_loader
 def load_user(id):

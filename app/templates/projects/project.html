@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style type="text/css">
+        h1, h2, .container > h3 {
+            text-shadow: grey 0.1em 0.1em 0.2em;
+        }
+        
+        .comment {
+            border: 1px solid #808080;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 20px 0 10px !important;
+            overflow-x: auto;
+        }
+
+        .comment:hover {
+            background-color: #f2f2f2;
+        }
+
+        .highlighttable {
+            position: relative;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1 class="text-warning text-center">
+            {{ project.title }} <small>By {{ project.author.username|capitalize }}</small> {{ project.likes }} like(s)
+            {% if current_user.username == project.author.username or current_user.admin() %}<a href="{{ url_for('projects.edit', id=project.id) }}" class="btn btn-primary pull-right">Edit</a>{% endif %}
+        </h1>
+    </div>
+    {{ project.document_html|safe }}
+    {% if current_user.is_authenticated and project.author.username != current_user.username and not project.id in current_user.projects_liked %}
+    <a href="{{ url_for('projects.like', id=project.id) }}" class="btn btn-success">Like this project</a>
+    {% endif %}
+    <h2 class="text-center text-primary">Comments</h2>
+    <hr />
+    {% if current_user.is_authenticated %}
+    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
+    {% endif %}
+    {% if comments %}
+        <ul class="media-list list-unstyled">
+        {% for comment in comments %}
+            <li class="media comment">
+                <div class="pull-left">
+                    <a href="{{ url_for('blog.profile', username=project.author.username) }}">
+                        <img class="img-circle media-object" src="{{ project.author.getAvatar(size=60) }}" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h3 class="media-heading">By <a href="{{ url_for('blog.profile', username=comment.author.username) }}">{{ comment.author.username|capitalize }}</a></h3>
+                    <span class="glyphicon glyphicon-time"></span> {{ moment(comment.date_posted).format('MMMM Do YYYY, h:mm:ss a') }} {% if comment.body_html %}{{ comment.body_html|safe }}{% else %}{{ comment.body }}{% endif %}
+                    {% if comment.author.username == current_user.username or current_user.admin() %}
+                    <div class="pull-right">
+                        <a href="{{ url_for('projects.editComment', id=comment.id) }}">
+                            <span class="label label-primary">Edit</span>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No comments.</p>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
+    <script type="text/javascript">
+        $("#body").attr('data-provide', 'markdown');
+        $(".container > h3").addClass("text-primary");
+        new Clipboard('.copy-btn');
+        $(".copy-btn").prependTo($('.highlighttable'));
+    </script>
+{% endblock %}

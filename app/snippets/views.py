@@ -212,4 +212,6 @@ def someonesSnippets(username):
     snippets = pagination.items
 
     # Render template
-    return render_template("snippets/someonesSnippets.html", title="%s's Code Snippets" % user.username.capitalize(), year=year, snippets=snippets, pagination=pagination, user=user)
+    first_letter = username[0].upper()
+    username = first_letter + username[1:]
+    return render_template("snippets/someonesSnippets.html", title="%s's Code Snippets" % username, year=year, snippets=snippets, pagination=pagination, user=user)

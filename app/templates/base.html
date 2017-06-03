@@ -199,12 +199,15 @@ Keep Coding.
             <ul class="nav navbar-nav navbar-right">
                 <li><a tabindex="0" href="{{ url_for('main.search') }}">Search</a></li>
                 <li><a tabindex="0" href="{{ url_for('main.users') }}">Buddies</a></li>
+                <li><a tabindex="0" href="{{ url_for('projects.index') }}">Projects</a></li>
                 <li><a tabindex="0" href="{{ url_for('snippets.index') }}">Code Snippets</a></li>
                 <li><a tabindex="0" href="{{ url_for('blog.index') }}">Blog</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
                     <a tabindex="0" data-toggle="dropdown" id="account">{{ current_user.username|capitalize }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a tabindex="0" href="{{ url_for('projects.new') }}">Create a New Project</a></li>
+                        <li><a tabindex="0" href="{{ url_for('projects.someonesProjects', username=current_user.username) }}">My Projects</a></li>
                         <li><a tabindex="0" href="{{ url_for('blog.profile', username=current_user.username) }}">Profile</a></li>
                         <li><a tabindex="0" href="{{ url_for('blog.editProfile') }}">Edit Your Profile</a></li>
                     </ul>

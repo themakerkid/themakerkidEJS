@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style type="text/css">
+        h3 {
+            text-shadow: grey 0.1em 0.1em 0.2em;
+            color: #337ab7;
+        }
+
+        h2.modal-title {
+            text-shadow: grey 0.1em 0.1em 0.2em;
+        }
+
+        .highlighttable {
+            position: relative;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div class="modal fade" id="preview" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title text-warning text-center">{{ project.title }}</h2>
+                </div>
+                <div class="modal-body">
+                    {{ project.document_html|safe }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-header">
+        <h1>Edit Project</h1>
+    </div>
+    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
+    <div class="buttons text-center">
+        <a href="{{ url_for('projects.project', id=project.id) }}" class="btn btn-success">Exit</a>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#preview">Preview</button>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.2/clipboard.min.js"></script>
+    <script type="text/javascript">
+        // $("#steps").removeAttr("id").addClass("steps");
+        // $steps = $(".form-group").has("label[for='steps']").detach();
+        // $stepWell = $('<div class="well" style="margin-top: 20px;" />');
+        // $("#parts").after($stepWell);
+        // $steps.appendTo($stepWell);
+        // $addNew = $('<a style="color: grey; cursor: pointer;"><span class="glyphicon glyphicon-plus-sign" /></a>');
+        // $addNew.appendTo($stepWell);
+        $.fn.placeholder = function(value) {
+            $(this).attr("placeholder", value);
+        };
+        // $prevBtn = $("button[data-target=\"#preview\"").detach();
+        // $("#submit").before($prevBtn);
+        $("#description, #steps, #code").attr("data-provide", "markdown");
+        $("#title").placeholder("This is the title of the website.");
+        $("#description").placeholder("Describe what the project is.");
+        $("#vid_url").placeholder("Place your video URL here (if one)");
+        $("#parts").placeholder("Put the parts that is needed for the project here (don't forget quantity and be specific!)");
+        $("#steps").placeholder("Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)");
+        $("#code").placeholder("Put your code here. Here is how you should format it: 3 colons (:) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)");
+        new Clipboard('.copy-btn');
+        $("#submit").after($(".buttons"));
+        $("#submit").prependTo($(".buttons"));
+        $(".copy-btn").prependTo($('.highlighttable'));
+    </script>
+{% endblock %}

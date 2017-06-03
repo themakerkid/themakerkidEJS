@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+    <style type="text/css">
+        .project {
+            border: 1px solid #808080;
+            border-radius: 5px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .project:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Projects</h1>
+    </div>
+    {% if projects %}
+    <ul class="list-unstyled media-list">
+        {% for project in projects %}
+        <li class="project media">
+            <div class="pull-left">
+                <a href="{{ url_for('blog.profile', username=project.author.username) }}">
+                    <img class="img-circle media-object" src="{{ project.author.getAvatar(size=60) }}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading"><a href="{{ url_for('projects.project', id=project.id) }}">{{ project.title }}</a></h2>
+                <a href="{{ url_for('blog.profile', username=project.author.username) }}">By {{ project.author.username|capitalize }}</a><br /><span class="glyphicon glyphicon-time"></span> {{ moment(project.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No projects have been uploaded yet.</p>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}

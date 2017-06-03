@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/lodev09/bootstrap-markdown/master/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pre_codehilite.css') }}" />
+{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Create a new Project</h1>
+    </div>
+    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://rawgit.com/lodev09/bootstrap-markdown/master/js/bootstrap-markdown.js"></script>
+    <script data-require="marked@*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.1/marked.js"></script>
+    <script type="text/javascript">
+        // $("#steps").removeAttr("id").addClass("steps");
+        // $steps = $(".form-group").has("label[for='steps']").detach();
+        // $stepWell = $('<div class="well" style="margin-top: 20px;" />');
+        // $("#parts").after($stepWell);
+        // $steps.appendTo($stepWell);
+        // $addNew = $('<a style="color: grey; cursor: pointer;"><span class="glyphicon glyphicon-plus-sign" /></a>');
+        // $addNew.appendTo($stepWell);
+        $.fn.placeholder = function(value) {
+            $(this).attr("placeholder", value);
+        };
+        $("#description, #steps, #code").attr("data-provide", "markdown");
+        $("#title").placeholder("This is the title of the website.");
+        $("#description").placeholder("Describe what the project is.");
+        $("#vid_url").placeholder("Place your video URL here (if one)");
+        $("#parts").placeholder("Put the parts that is needed for the project here (don't forget quantity and be specific!)");
+        $("#steps").placeholder("Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)");
+        $("#code").placeholder("Put your code here. Here is how you should format it: 3 colons (:) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)")
+    </script>
+{% endblock %}

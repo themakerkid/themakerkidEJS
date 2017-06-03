@@ -20,6 +20,7 @@
         <br />Last seen {{ moment(user.last_seen).fromNow(refresh=True) }}.
         <br /><a class="btn btn-sm btn-info" href="{{ url_for('blog.posts', username=user.username) }}"><span class="badge">{{ user.posts.filter_by(published=True).count() }}</span> public {% if user.posts.filter_by(published=True).count() != 1 %}posts{% else %}post{% endif %}.</a>
         <br /><a class="btn btn-sm btn-info" href="{{ url_for('snippets.someonesSnippets', username=user.username) }}"><span class="badge">{{ user.snippets.count() }}</span> {% if user.snippets.count() != 1 %}snippets{% else %}snippet{% endif %}.</a>
+        <br /><a class="btn btn-sm btn-info" href="{{ url_for('projects.someonesProjects', username=user.username) }}"><span class="badge">{{ user.projects.count() }}</span> {% if user.projects.count() != 1 %}projects{% else %}project{% endif %}.</a>
     </p>
     {% if current_user.username == user.username %}
     <a href="{{ url_for('blog.editProfile') }}" class="btn btn-primary">Edit Profile</a>
