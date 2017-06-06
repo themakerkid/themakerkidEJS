@@ -20,7 +20,7 @@
 {% block page_content %}
     <div class="page-header">
         {% if current_user.is_authenticated and current_user.username == user.username %}
-        <h1>My posts</h1>
+        <h1>My Projects</h1>
         {% else %}
         <h1>{{ user.username|capitalize }}'s Projects</h1>
         {% endif %}
@@ -35,7 +35,7 @@
                 </a>
             </div>
             <div class="media-body">
-                <h2 class="media-heading"><a href="{{ url_for('projects.project', id=project.id) }}">{{ project.title }}</a></h2>
+                <h2 class="media-heading"><a href="{{ url_for('projects.project', id=project.id) }}">{{ project.title }}{% if not project.status %} (Draft){% endif %}</a></h2>
                 <a href="{{ url_for('blog.profile', username=project.author.username) }}">By {{ project.author.username|capitalize }}</a><br /><span class="glyphicon glyphicon-time"></span> {{ moment(project.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
             </div>
         </li>

@@ -114,6 +114,7 @@ class User(db.Model, UserMixin):
 
 class AnonymousUser(AnonymousUserMixin):
     id = 0
+    username = None
 
     def admin(self):
         return False
