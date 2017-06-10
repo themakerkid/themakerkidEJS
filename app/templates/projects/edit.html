@@ -18,8 +18,22 @@
         .highlighttable {
             position: relative;
         }
+
+        .buttons {
+            margin-bottom: 15px;
+        }
     </style>
 {% endblock %}
+
+{% macro field_errors(field) %}
+                            {% if field.errors %}
+                            <p class="help-block">
+                                {% for error in field.errors %}
+                                {{ error }}
+                                {% endfor %}
+                            </p>
+                            {% endif %}
+{% endmacro %}
 
 {% block page_content %}
     <div class="modal fade" id="preview" role="dialog">
@@ -41,11 +55,129 @@
     <div class="page-header">
         <h1>Edit Project</h1>
     </div>
-    {{ wtf.quick_form(form, button_map={'submit': 'success'}) }}
-    <div class="buttons text-center">
-        <a href="{{ url_for('projects.project', id=project.id) }}" class="btn btn-success">Exit</a>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#preview">Preview</button>
-    </div>
+    <form action="" method="post" class="form" role="form">
+        {{ form.csrf_token }}
+        <div class="buttons text-center">
+            <input type="submit" class="btn btn-success" value="Save" id="submit">
+            <a href="{{ url_for('projects.project', id=project.id) }}" class="btn btn-success">Exit</a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#preview">Preview</button>
+        </div>
+        <div class="radio">
+            <label>
+                <input id="status-0" checked="" name="status" value="0" type="radio">
+                Draft
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input id="status-1" name="status" value="1" type="radio">
+                Final
+            </label>
+        </div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="titleHeading">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#titlePanel" aria-expanded="true" aria-controls="titlePanel">
+                            <strong>Title</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="titlePanel" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="titleHeading">
+                    <div class="panel-body">
+                        <div class="form-group required{% if form.title.errors %} has-error{% endif %}">
+                            {{ form.title(class="form-control", placeholder="This is the title of the project.") }}
+                            {{ field_errors(form.title) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="descHeading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#desc" aria-expanded="false" aria-controls="desc">
+                            <strong>Description (with images)</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="desc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="descHeading">
+                    <div class="panel-body">
+                        <div class="form-group required{% if form.description.errors %} has-error{% endif %}">
+                            {{ form.description(class="form-control", placeholder="Describe what the project is.", data_provide="markdown") }}
+                            {{ field_errors(form.description) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="vidUrlHeading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#vid_urlPanel" aria-expanded="false" aria-controls="vid_urlPanel">
+                            <strong>Video URL (optional)</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="vid_urlPanel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="vidUrlHeading">
+                    <div class="panel-body">
+                        <div class="form-group{% if form.vid_url.errors %} has-error{% endif %}">
+                            {{ form.vid_url(class="form-control", placeholder="Place your video URL here (if one)") }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="partsHeading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#partsPanel" aria-expanded="false" aria-controls="partsPanel">
+                            <strong>Parts (each on a new line)</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="partsPanel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="partsHeading">
+                    <div class="panel-body">
+                        <div class="form-group required{% if form.parts.errors %} has-error{% endif %}">
+                            {{ form.parts(class="form-control", placeholder="Put the parts that is needed for the project here (don't forget quantity and be specific!)") }}
+                            {{ field_errors(form.vid_url) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="stepsHeading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#stepsPanel" aria-expanded="false" aria-controls="stepsPanel">
+                            <strong>Steps [Leave 3 stars/astericks (***) between each step]</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="stepsPanel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="stepsHeading">
+                    <div class="panel-body">
+                        <div class="form-group required{% if form.steps.errors %} has-error{% endif %}">
+                            {{ form.steps(class="form-control", placeholder="Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)", data_provide="markdown") }}
+                            {{ field_errors(form.steps) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="codeHeading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#codePanel" aria-expanded="false" aria-controls="codePanel">
+                            <strong>The code!</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="codePanel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="codeHeading">
+                    <div class="panel-body">
+                        <div class="form-group required{% if form.code.errors %} has-error{% endif %}">
+                            {{ form.code(class="form-control", placeholder="Put your code here. Here is how you should format it: 3 colons (:::) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)", data_provide="markdown") }}
+                            {{ field_errors(form.code) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 {% endblock %}
 
 {% block scripts %}
@@ -61,21 +193,21 @@
         // $steps.appendTo($stepWell);
         // $addNew = $('<a style="color: grey; cursor: pointer;"><span class="glyphicon glyphicon-plus-sign" /></a>');
         // $addNew.appendTo($stepWell);
-        $.fn.placeholder = function(value) {
-            $(this).attr("placeholder", value);
-        };
+        // $.fn.placeholder = function(value) {
+        //     $(this).attr("placeholder", value);
+        // };
         // $prevBtn = $("button[data-target=\"#preview\"").detach();
         // $("#submit").before($prevBtn);
-        $("#description, #steps, #code").attr("data-provide", "markdown");
-        $("#title").placeholder("This is the title of the website.");
-        $("#description").placeholder("Describe what the project is.");
-        $("#vid_url").placeholder("Place your video URL here (if one)");
-        $("#parts").placeholder("Put the parts that is needed for the project here (don't forget quantity and be specific!)");
-        $("#steps").placeholder("Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)");
-        $("#code").placeholder("Put your code here. Here is how you should format it: 3 colons (:) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)");
+        // $("#description, #steps, #code").attr("data-provide", "markdown");
+        // $("#title").placeholder("This is the title of the website.");
+        // $("#description").placeholder("Describe what the project is.");
+        // $("#vid_url").placeholder("Place your video URL here (if one)");
+        // $("#parts").placeholder("Put the parts that is needed for the project here (don't forget quantity and be specific!)");
+        // $("#steps").placeholder("Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)");
+        // $("#code").placeholder("Put your code here. Here is how you should format it: 3 colons (:) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)");
         new Clipboard('.copy-btn');
-        $("#submit").after($(".buttons"));
-        $("#submit").prependTo($(".buttons"));
+        // $("#submit").after($(".buttons"));
+        // $("#submit").prependTo($(".buttons"));
         $(".copy-btn").prependTo($('.highlighttable'));
     </script>
 {% endblock %}

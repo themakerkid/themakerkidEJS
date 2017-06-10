@@ -31,9 +31,10 @@
 {% block page_content %}
     <div class="page-header">
         <h1 class="text-warning text-center">
-            {{ project.title }} <small>By {{ project.author.username|capitalize }}</small> {{ project.likes }} like(s){% if not project.status %} (Draft){% endif %}
+            {{ project.title }} <small>By {{ project.author.username|capitalize }}</small>
             {% if current_user.username == project.author.username or current_user.admin() %}<a href="{{ url_for('projects.edit', id=project.id) }}" class="btn btn-primary pull-right">Edit</a>{% endif %}
         </h1>
+        <p class="text-info text-center">{{ project.likes }} like(s){% if not project.status %} (Draft){% endif %}</p>
     </div>
     {{ project.document_html|safe }}
     {% if current_user.is_authenticated and project.author.username != current_user.username and not project.id in current_user.projects_liked %}

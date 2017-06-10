@@ -31,6 +31,8 @@ def generate_document_html(project):
         </div>
     </div>
 </div>""".format(project.vid_url)
+    else:
+        html = ""
     html += """<h3>Description:</h3>
 <em><div class="well">{1}</div></em>
 
@@ -125,6 +127,7 @@ def new():
     form = ProjectForm()
     if form.validate_on_submit():
         project = Project(author=current_user._get_current_object(), title=form.title.data, description=form.description.data, vid_url=form.vid_url.data, parts=form.parts.data, steps=form.steps.data, status=form.status.data, code=form.code.data)
+        project.document_html = generate_document_html(project)
         db.session.add(project)
         db.session.commit()
         return redirect(url_for('.edit', id=project.id))
