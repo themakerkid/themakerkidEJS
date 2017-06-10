@@ -97,7 +97,10 @@
         <p>
             Share Code and Projects!
         </p>
-        <p><a class="btn btn-info" href="{{ url_for('snippets.index') }}">Learn more &raquo;</a></p>
+        <p>
+            <a class="btn btn-info" href="{{ url_for('snippets.index') }}">Snippets &raquo;</a>
+            <a class="btn btn-info" href="{{ url_for('projects.index') }}">Projects &raquo;</a>
+        </p>
         <img src="{{ url_for('static', filename='images/home/share1.png') }}" class="img img-responsive" />
     </div>
     {% endblock %} {% block scripts %} {{ super() }}

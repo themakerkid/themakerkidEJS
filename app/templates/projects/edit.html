@@ -22,18 +22,17 @@
         .buttons {
             margin-bottom: 15px;
         }
+
+        div.panel-default > div.panel-heading {
+            background-color: #eae8dc;
+            border-color: #000000;
+        }
     </style>
 {% endblock %}
 
-{% macro field_errors(field) %}
-                            {% if field.errors %}
-                            <p class="help-block">
-                                {% for error in field.errors %}
-                                {{ error }}
-                                {% endfor %}
-                            </p>
-                            {% endif %}
-{% endmacro %}
+{% macro field_errors(field) %}{% if field.errors %}<p class="help-block">{% for error in field.errors %}
+                                {{ error }}{% endfor %}
+                            </p>{% endif %}{% endmacro %}
 
 {% block page_content %}
     <div class="modal fade" id="preview" role="dialog">
@@ -209,5 +208,6 @@
         // $("#submit").after($(".buttons"));
         // $("#submit").prependTo($(".buttons"));
         $(".copy-btn").prependTo($('.highlighttable'));
+        $("img[id!='icon']").addClass("img-responsive");
     </script>
 {% endblock %}
