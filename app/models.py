@@ -288,7 +288,7 @@ class Project(db.Model):
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     description = db.Column(db.Text)
     document_html = db.Column(db.Text)
-    likes = db.Column(db.Integer)
+    likes = db.Column(db.Integer, default=0)
     parts = db.Column(db.Text)
     status = db.Column(db.Boolean, default=True)
     steps = db.Column(db.Integer)
