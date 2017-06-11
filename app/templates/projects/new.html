@@ -166,5 +166,14 @@
         // $("#parts").placeholder("Put the parts that is needed for the project here (don't forget quantity and be specific!)");
         // $("#steps").placeholder("Place each individual step here (and leave out Step 1, Step 2, etc. because I'll insert them)");
         // $("#code").placeholder("Put your code here. Here is how you should format it: 3 colons (:) followed by language (no spaces) and then the code below it (everything should be indented 4 spaces)")
+        $("#submit").on("mouseleave", function() {
+            $(window).on("beforeunload", function() {
+                return "Are you sure you want to leave?";
+            });
+        });
+
+        $("#submit").on("click", function() {
+            $(window).off("beforeunload");
+        });
     </script>
 {% endblock %}

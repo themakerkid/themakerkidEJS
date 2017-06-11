@@ -209,5 +209,14 @@
         // $("#submit").prependTo($(".buttons"));
         $(".copy-btn").prependTo($('.highlighttable'));
         $("img[id!='icon']").addClass("img-responsive");
+        $("#submit").on("mouseleave", function() {
+            $(window).on("beforeunload", function() {
+                return "Are you sure you want to leave?";
+            });
+        });
+
+        $("#submit").on("click", function() {
+            $(window).off("beforeunload");
+        });
     </script>
 {% endblock %}
