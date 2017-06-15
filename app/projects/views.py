@@ -131,6 +131,8 @@ def new():
         db.session.add(project)
         db.session.commit()
         return redirect(url_for('.edit', id=project.id))
+    form.status.default = "0"
+    form.process()
     return render_template('projects/new.html', title="Projects - New Project", year=year, form=form)
 
 @projects.route('/edit/<int:id>', methods=['GET', 'POST'])
@@ -140,6 +142,7 @@ def edit(id):
     if not current_user.admin() or project.author.username != current_user.username:
         abort(403)
     form = ProjectForm()
+    defaultOption = int(project.status)
     if form.validate_on_submit():
         project.title = form.title.data
         project.description = form.description.data
@@ -149,15 +152,19 @@ def edit(id):
         project.status = form.status.data
         project.code = form.code.data
         project.document_html = generate_document_html(project)
+        if int(form.status.data) != defaultOption and int(form.status.data) == 1:
+            flash("You have now published your project! Now everyone (including users that are not logged in) can see it!", 'success')
+            flash("If at any time you want to make it a Draft again, then click on Draft!", 'info')
         db.session.add(project)
         db.session.commit()
         return redirect(url_for('.edit', id=project.id))
+    form.status.default = defaultOption
+    form.process()
     form.title.data = project.title
     form.description.data = project.description
     form.vid_url.data = project.vid_url
     form.parts.data = project.parts
     form.steps.data = project.steps
-    form.status.data = project.status
     form.code.data = project.code
     return render_template('projects/edit.html', title="Projects - Edit Project", year=year, form=form, project=project)
 

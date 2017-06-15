@@ -11,7 +11,7 @@ class ProjectForm(FlaskForm):
     parts = TextAreaField("Parts (Each on a new line)", validators=[DataRequired()])
     steps = TextAreaField("Steps [Leave 3 stars/asterisks (***) between each step]", validators=[DataRequired()])
     code = TextAreaField("The code!", validators=[DataRequired()])
-    status = RadioField("", coerce=int, choices=[(0, "Draft"), (1, "Final")], default="0")
+    status = RadioField("", coerce=int, choices=[(0, "Draft"), (1, "Final")])
     submit = SubmitField("Save")
 
 class CommentForm(FlaskForm):

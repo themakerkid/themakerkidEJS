@@ -18,26 +18,41 @@
                             </p>{% endif %}{% endmacro %}
 
 {% block page_content %}
+    <!-- Modal -->
+    <div class="modal fade" id="new-vid-modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">How to Create A Project</h3>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="400" id="new-vid" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page-header">
+        <button class="btn btn-success pull-right hidden-xs new-btn" data-toggle="modal" data-target="#new-vid-modal">How to Create A Project</button>
         <h1>Create a new Project</h1>
+        <button class="btn btn-success visible-xs new-btn">How to Create A Project</button>
     </div>
     <form action="" method="post" class="form" role="form">
         {{ form.csrf_token }}
         <div class="buttons text-center">
             <input type="submit" class="btn btn-success" value="Save" id="submit">
         </div>
+        {% for item in form.status %}
         <div class="radio">
             <label>
-                <input id="status-0" checked="" name="status" value="0" type="radio">
-                Draft
+                {{ item|safe }} {{ item.label.text|safe }}
             </label>
         </div>
-        <div class="radio">
-            <label>
-                <input id="status-1" name="status" value="1" type="radio">
-                Final
-            </label>
-        </div>
+        {% endfor %}
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="titleHeading">
@@ -174,6 +189,15 @@
 
         $("#submit").on("click", function() {
             $(window).off("beforeunload");
+        });
+
+        $(".new-btn").on("click", function() {
+            var src = "https://www.youtube.com/embed/vJjyw017uAA?rel=0"
+            $("#new-vid").attr("src", src);
+        });
+
+        $("#new-vid-modal").on("hide.bs.modal", function() {
+            $("#new-vid").removeAttr("src");
         });
     </script>
 {% endblock %}

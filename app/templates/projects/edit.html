@@ -61,18 +61,13 @@
             <a href="{{ url_for('projects.project', id=project.id) }}" class="btn btn-success">Exit</a>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#preview">Preview</button>
         </div>
+        {% for item in form.status %}
         <div class="radio">
             <label>
-                <input id="status-0" checked="" name="status" value="0" type="radio">
-                Draft
+                {{ item|safe }} {{ item.label.text|safe }}
             </label>
         </div>
-        <div class="radio">
-            <label>
-                <input id="status-1" name="status" value="1" type="radio">
-                Final
-            </label>
-        </div>
+        {% endfor %}
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="titleHeading">
