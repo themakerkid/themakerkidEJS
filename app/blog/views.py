@@ -549,6 +549,8 @@ def resetPasswordRequest():
                 flash("An email to reset your password has been sent.", 'success')
             # Issue redirect to login page
             return redirect(url_for('.login'))
+        elif checkBtn("cancel", form):
+            return redirect(url_for("blog.login"))
     # Render template
     return render_template("blog/resetPasswordRequest.html", title="Blog - Reset Your Password", year=year, form=form)
 

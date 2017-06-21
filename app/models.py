@@ -8,6 +8,33 @@ from markdown.extensions.codehilite import CodeHiliteExtension
 from markdown.extensions.extra import ExtraExtension
 from . import db, login
 import hashlib
+import bleach
+
+def markdownSafe(markdown_content, extensions=None):
+    allowed_tags = ['a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code',
+                    'div', 'em', 'hr', 'i', 'img', 'li', 'p', 'ol', 'pre',
+                    'strong', 'span', 'table', 'thead', 'tbody', 'tr',
+                    'td', 'ul', 'h1', 'h2', 'h3', 'h4', 'video']
+    safe_markdown_content = bleach.linkify(bleach.clean(
+        markdown(markdown_content, extensions=extensions),
+        attributes={'a': ['href', 'title', 'target'],
+                    'abbr': ['title'],
+                    'acronym': ['title'],
+                    'img': ['class', 'alt', 'src', 'title', 'width', 'height'],
+                    'div': ['class'],
+                    'table': ['class'],
+                    'td': ['class'],
+                    'span': ['class']}, tags=allowed_tags, strip=True))
+    
+    lines = []
+    if not '<table class="highlighttable">' in safe_markdown_content:
+        for line in safe_markdown_content.split('\n'):
+            if not '<p>' in line:
+                line = '<p>' + line + '</p>'
+            lines.append(line)
+        safe_markdown_content = ''.join(lines)
+    print safe_markdown_content
+    return safe_markdown_content
 
 hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
 extras = ExtraExtension()
@@ -144,12 +171,12 @@ class Post(db.Model):
 
     @property
     def body_html(self):
-        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.body, extensions=[hilite, extras])
         return markdown_content
     
     @property
     def summary_html(self):
-        markdown_content = markdown(self.summary, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.summary, extensions=[hilite, extras])
         return markdown_content
 
     def changedBody(self):
@@ -207,7 +234,7 @@ class Comment(db.Model):
     def body_html(self):
         hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
         extras = ExtraExtension()
-        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
 
 class Snippet(db.Model):
@@ -239,12 +266,12 @@ class Snippet(db.Model):
 
     @property
     def body_html(self):
-        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.body, extensions=[hilite, extras])
         return markdown_content
 
     @property
     def summary_html(self):
-        markdown_content = markdown(self.summary, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.summary, extensions=[hilite, extras])
         return markdown_content
 
     def changedBody(self):
@@ -275,7 +302,7 @@ class SnippetComment(db.Model):
 
     @property
     def body_html(self):
-        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
 
 class Project(db.Model):
@@ -301,17 +328,17 @@ class Project(db.Model):
 
     @property
     def description_html(self):
-        markdown_content = markdown(self.description, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.description, extensions=[hilite, extras])
         return Markup(markdown_content)
 
     @property
     def steps_html(self):
-        markdown_content = markdown(self.steps, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.steps, extensions=[hilite, extras])
         return Markup(markdown_content)
 
     @property
     def code_html(self):
-        markdown_content = markdown(self.code, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.code, extensions=[hilite, extras])
         return Markup(markdown_content)
 
 class ProjectComment(db.Model):
@@ -326,7 +353,7 @@ class ProjectComment(db.Model):
 
     @property
     def body_html(self):
-        markdown_content = markdown(self.body, extensions=[hilite, extras])
+        markdown_content = markdownSafe(self.body, extensions=[hilite, extras])
         return Markup(markdown_content)
 
 class Part(db.Model):

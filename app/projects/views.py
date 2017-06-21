@@ -49,7 +49,7 @@ def generate_document_html(project):
     html += """</ol>
 
 """
-    steps_list = project.steps_html.split('<hr />')
+    steps_list = project.steps_html.split('<hr>')
     i = 1
     for step in steps_list:
         html += """<h3 class="text-success">Step {0}:</h3>

@@ -98,6 +98,10 @@ class ResetPasswordRequest(FlaskForm):
     parents_email = StringField("Your parent's email", validators=[DataRequired(), Email()])
     submit = SubmitField("Submit", false_values="submit")
     cancel = SubmitField("Cancel", false_values="cancel")
+
+    def validate_parents_email(self, field):
+        if not User.query.filter_by(parents_email=field.data).first():
+            raise ValidationError("Email not registered with this website.")
     
 class ResetPassword(FlaskForm):
     password = PasswordField("New Password", validators=[DataRequired(), EqualTo("com_password", "The passwords don't match.")])
