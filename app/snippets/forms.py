@@ -14,7 +14,7 @@ from wtforms.validators import Length, DataRequired
 from ..models import Snippet
 
 # Create choices variable to stop repetition
-choices = ((0, "Please select a language"), (Snippet.ARDUINO_C, "Arduino C++"), (Snippet.HTML, "HTML"), (Snippet.CSS, "CSS"), (Snippet.JAVASCRIPT, "JavaScript"), (Snippet.PYTHON, "Python"), (Snippet.PROCESSING, "Processing.js"),(Snippet.SQL, "SQL"), (Snippet.OTHER, "Other"))
+choices = ((0, "Please select a language"), (Snippet.ARDUINO_C, "Arduino C++"), (Snippet.HTML, "HTML"), (Snippet.CSS, "CSS"), (Snippet.JAVASCRIPT, "JavaScript"), (Snippet.PYTHON, "Python"), (Snippet.PROCESSING, "Processing.js"), (Snippet.SCRATCH, "Scratch"), (Snippet.SQL, "SQL"), (Snippet.OTHER, "Other"))
 
 # Form to create/edit a snippet
 class SnippetForm(FlaskForm):

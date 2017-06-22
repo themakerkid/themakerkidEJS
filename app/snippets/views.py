@@ -45,6 +45,8 @@ def checkLanguage(snippet):
         return "Processing.js"
     elif snippet.code_type_id == 7:
         return "SQL"
+    elif snippet.code_type_id == 9:
+        return "Scratch"
     else:
         return "Other"
 
@@ -93,6 +95,10 @@ def index():
                 q = "Python"
             elif int(session["language_id"]) == 6:
                 q = "Processing"
+            elif int(session["language_id"]) == 7:
+                q = "SQL"
+            elif int(session["language_id"]) == 9:
+                q = "Scratch"
             else:
                 q = "Other"
         else:
@@ -135,6 +141,10 @@ def filtered():
                 q = "Python"
             elif int(session["language_id"]) == 6:
                 q = "Processing"
+            elif int(session["language_id"]) == 7:
+                q = "SQL"
+            elif int(session["language_id"]) == 9:
+                q = "Scratch"
             else:
                 q = "Other"
         else:

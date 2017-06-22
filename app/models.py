@@ -248,6 +248,7 @@ class Snippet(db.Model):
     PROCESSING = 6
     SQL = 7
     OTHER = 8
+    SCRATCH = 9
 
     __tablename__ = 'snippets'
     __searchable__ = ['title', 'body']
