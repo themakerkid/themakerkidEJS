@@ -12,19 +12,22 @@ import bleach
 
 def markdownSafe(markdown_content, extensions=None):
     allowed_tags = ['a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code',
-                    'div', 'em', 'hr', 'i', 'img', 'li', 'p', 'ol', 'pre',
+                    'div', 'em', 'hr', 'i', 'iframe', 'img', 'li', 'p', 'ol', 'pre',
                     'strong', 'span', 'table', 'thead', 'tbody', 'tr',
                     'td', 'ul', 'h1', 'h2', 'h3', 'h4', 'video']
     safe_markdown_content = bleach.linkify(bleach.clean(
         markdown(markdown_content, extensions=extensions),
-        attributes={'a': ['href', 'title', 'target'],
-                    'abbr': ['title'],
-                    'acronym': ['title'],
-                    'img': ['class', 'alt', 'src', 'title', 'width', 'height'],
-                    'div': ['class'],
-                    'table': ['class'],
-                    'td': ['class'],
-                    'span': ['class']}, tags=allowed_tags, strip=True))
+        attributes={
+            'a': ['href', 'title', 'target'],
+            'abbr': ['title'],
+            'acronym': ['title'],
+            'img': ['class', 'alt', 'src', 'title', 'width', 'height'],        
+            'div': ['class'],
+            'table': ['class'],
+            'td': ['class'],
+            'span': ['class', 'style'],
+            'iframe': ['width', 'height', 'src', 'allowfullscreen', 'frameborder', 'class']},
+        tags=allowed_tags, strip=True))
     
     lines = []
     if not '<table class="highlighttable">' in safe_markdown_content:
@@ -33,7 +36,6 @@ def markdownSafe(markdown_content, extensions=None):
                 line = '<p>' + line + '</p>'
             lines.append(line)
         safe_markdown_content = ''.join(lines)
-    print safe_markdown_content
     return safe_markdown_content
 
 hilite = CodeHiliteExtension(linenums=True, css_class='highlight')
