@@ -238,6 +238,11 @@ def arduinoProject():
     """Renders the Maker Arduino Projects page."""
     return render_template('maker/arduino/ardProject.html', title="Arduino - Project Page", year=year)
 
+@main.route('/maker/arduino/project/scroller')
+def scrollerProj():
+    """Renders the Scroller page."""
+    return render_template('/maker/arduino/projects/scroller.html', title="Arduino - Projects - Scroller", year=year)
+
 @main.route('/maker/famous')
 def famousMakers():
     """Renders the Famous Makers page."""
@@ -367,7 +372,7 @@ def resendConfirmationEmail():
 @main.route('/buddies')
 def users():
     # Get all the users from the database
-    users = User.query.order_by(User.date_registered.asc()).all()
+    users = User.query.filter_by(confirmed=True).order_by(User.date_registered.asc()).all()
     return render_template('users.html', title="Buddies", year=year, users=users)
 
 @main.route('/contact', methods=["GET", "POST"])
