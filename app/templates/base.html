@@ -210,6 +210,9 @@ Keep Coding.
                         <li><a tabindex="0" href="{{ url_for('projects.someonesProjects', username=current_user.username) }}">My Projects</a></li>
                         <li><a tabindex="0" href="{{ url_for('blog.profile', username=current_user.username) }}">Profile</a></li>
                         <li><a tabindex="0" href="{{ url_for('blog.editProfile') }}">Edit Your Profile</a></li>
+                        {% if current_user.admin() %}
+                        <li><a tabindex="0" href="{{ url_for('blog.moderatePosts') }}">Moderate Posts</a></li>
+                        {% endif %}
                     </ul>
                 </li>
                 <li><a tabindex="0" href="{{ url_for('blog.logout') }}">Logout</a></li>
