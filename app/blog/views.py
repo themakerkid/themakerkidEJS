@@ -135,7 +135,7 @@ def index():
         # Create a post object
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data)
 
-        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or '</img>' in post.body:
+        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or '<img .*src=".+">' in post.body:
             post.hazard = True
             post.disabled = True
 
