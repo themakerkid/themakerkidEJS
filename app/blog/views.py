@@ -25,6 +25,9 @@ from ..mail import send_email
 # Import the blog Blueprint to attach some routes to the application
 from . import blog
 
+# Import Regular Expression to check posts
+import re
+
 # Stop repetition of getting current year
 year = datetime.now().year
 
@@ -73,6 +76,14 @@ def checkBtn(false_value, form, validation=True):
             return True
         else:
             return False
+
+def correctPostsHazard():
+    for post in Post.query.all():
+        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search('\<img .*src=".+"', post.body, re.DOTALL):
+            post.hazard = True
+            post.disabled = True
+            db.session.add(post)
+    db.session.commit()
 
 @blog.before_request
 def before():
@@ -123,6 +134,10 @@ def index():
 
         # Create a post object
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data)
+
+        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or '</img>' in post.body:
+            post.hazard = True
+            post.disabled = True
 
         # Update the summary (first 80 words). The summary is displayed on the home page.
         post.changedBody()
@@ -596,3 +611,47 @@ def tag(id):
 
     # Render template
     return render_template("blog/tag.html", title="Blog - %s Tag" % tag.name.capitalize(), year=year, tag=tag)
+
+@blog.route('/moderate/')
+@login_required
+def moderatePosts():
+    if not current_user.admin():
+        abort(403)
+    
+    page = int(request.args.get("page", 1))
+
+    # Create a pagination object to add pagination
+    pagination = Post.query.order_by(Post.date_posted.desc()).filter_by(hazard=True).paginate(
+        page, per_page=current_app.config["ITEMS_PER_PAGE"],
+        error_out=True)
+
+    # Get the Post objects out of the paginated results
+    posts = pagination.items
+
+    return render_template("blog/moderate.html", title="Blog - Moderate Posts", year=year, posts=posts, pagination=pagination)
+
+@blog.route('/moderate/enable/posts/<int:id>')
+@login_required
+def moderatePostsEnable(id):
+    if not current_user.admin():
+        abort(403)
+    post = Post.query.get_or_404(id)
+    if not post.hazard:
+        flash("Post is not required to be moderated.", 'info')
+        return redirect(url_for('.moderatePosts'))
+    post.disabled = False
+    flash("Post is enabled.", 'success')
+    return redirect(url_for('.moderatePosts'))
+
+@blog.route('/moderate/disable/posts/<int:id>')
+@login_required
+def moderatePostsDisable(id):
+    if not current_user.admin():
+        abort(403)
+    post = Post.query.get_or_404(id)
+    if not post.hazard:
+        flash("Post is not required to be moderated.", 'info')
+        return redirect(url_for('.moderatePosts'))
+    post.disabled = True
+    flash("Post is disabled.", 'success')
+    return redirect(url_for('.moderatePosts'))

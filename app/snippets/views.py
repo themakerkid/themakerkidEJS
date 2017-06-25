@@ -94,7 +94,7 @@ def index():
             elif int(session["language_id"]) == 5:
                 q = "Python"
             elif int(session["language_id"]) == 6:
-                q = "Processing"
+                q = "Processing.js"
             elif int(session["language_id"]) == 7:
                 q = "SQL"
             elif int(session["language_id"]) == 9:
@@ -140,7 +140,7 @@ def filtered():
             elif int(session["language_id"]) == 5:
                 q = "Python"
             elif int(session["language_id"]) == 6:
-                q = "Processing"
+                q = "Processing.js"
             elif int(session["language_id"]) == 7:
                 q = "SQL"
             elif int(session["language_id"]) == 9:

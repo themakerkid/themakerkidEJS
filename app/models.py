@@ -160,6 +160,8 @@ class Post(db.Model):
     summary = db.Column(db.Text)
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    disabled = db.Column(db.Boolean, default=False)
+    hazard = db.Column(db.Boolean, default=False)
     published = db.Column(db.Boolean, default=True)
     title = db.Column(db.String(64))
     tags = db.relationship('Tag', secondary=post_tags,
@@ -261,6 +263,8 @@ class Snippet(db.Model):
     code_type_id = db.Column(db.SmallInteger)
     comments = db.relationship('SnippetComment', backref='snippet', lazy='dynamic')
     date_posted = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    disabled = db.Column(db.Boolean, default=False)
+    hazard = db.Column(db.Boolean, default=False)
     title = db.Column(db.String(64))
 
     #@staticmethod
