@@ -449,7 +449,7 @@ def register():
             return redirect(url_for('.index'))
         elif checkBtn("submit", form):
             # If submit button was pressed, create and add the user details to database
-            user = User(username=form.username.data, parents_email=form.email.data, password=form.password.data)
+            user = User(username=form.username.data, parents_email=form.email.data.lower(), password=form.password.data)
             db.session.add(user)
 
             # Commit manually to login the user
