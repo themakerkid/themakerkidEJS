@@ -120,7 +120,7 @@ def index():
     search_form = SearchForm()
 
     # Create a pagination object to add pagination
-    pagination = Post.query.order_by(Post.date_posted.desc()).paginate(
+    pagination = Post.query.order_by(Post.date_posted.desc()).filter(db.or_((Post.disabled == False and Post.published == True), Post.author_id == current_user.id, current_user.admin())).paginate(
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
 
@@ -133,11 +133,13 @@ def index():
         tags = parseMultiplePost(post_form)
 
         # Create a post object
-        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data)
-
+        post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data, disabled=True)
+        
+        """
         if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or '<img .*src=".+">' in post.body:
             post.hazard = True
             post.disabled = True
+        """
 
         # Update the summary (first 80 words). The summary is displayed on the home page.
         post.changedBody()
@@ -185,29 +187,13 @@ def filteredPosts():
     
     # This bit is slightly different
     # Search the database using Whoosh and paginate the results
-    pagination = Post.query.whoosh_search(q, 50).paginate(
+    pagination = Post.query.whoosh_search(q, 50).filter(db.or_((Post.disabled == False and Post.published == True), Post.author_id == current_user.id, current_user.admin())).paginate(
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
 
     # Get the Post objects out of the paginated results
     posts = pagination.items
 
-    # Create a counter that is needed for he loop before
-    # (cannot do this is loop because you can't loop through a list of numbers
-    #  and a list of Post objects)
-    i = 0
-
-    # Iterate through the list of filtered posts
-    for post in posts:
-        # If the post is not published and the post author isn't the logged in user
-        # (authors of private posts can only see their private posts (or drafts))
-        if current_user.is_authenticated:
-            if not post.published and post.author.username != current_user.username and not current_user.admin():
-                # Delete it from the list
-                # Use counter variable to get the right index.
-                posts.pop(i)
-        # Increase the counter variable for the next iteration
-        i += 1
     # Render the template as in the index route above but add another template variable
     # called filtered so that the template knows that it is the filtered posts.
     return render_template("blog/index.html", title="Blog - Home Page", year=year, post_form=post_form, search_form=search_form, posts=posts, pagination=pagination, filtered=True)
