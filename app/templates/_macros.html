@@ -4,19 +4,19 @@
         <a href="{% if not paginationObj.has_prev %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page - 1, **kwargs) }}{% endif %}">
             &laquo;
         </a>
-        </li>
-        {% for page in paginationObj.iter_pages() %} {% if page %} {% if page == paginationObj.page %}
-        <li class="active"><a href="#bottom">{{ page }}</a></li>
-        {% else %}
-        <li><a href="{{ url_for(endpoint, page=page, **kwargs) }}">{{ page }}</a></li>
-        {% endif %} {% else %}
-        <li class="disabled"><a href="#bottom">&hellip;</a></li>
-        {% endif %} {% endfor %}
-        <li{% if not paginationObj.has_next %} class="disabled" {% endif %}>
-            <a href="{% if not paginationObj.has_next %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page + 1, **kwargs) }}{% endif %}">
+    </li>
+    {% for page in paginationObj.iter_pages() %} {% if page %} {% if page == paginationObj.page %}
+    <li class="active"><a href="#bottom">{{ page }}</a></li>
+    {% else %}
+    <li><a href="{{ url_for(endpoint, page=page, **kwargs) }}">{{ page }}</a></li>
+    {% endif %} {% else %}
+    <li class="disabled"><a href="#bottom">&hellip;</a></li>
+    {% endif %} {% endfor %}
+    <li{% if not paginationObj.has_next %} class="disabled" {% endif %}>
+        <a href="{% if not paginationObj.has_next %}#bottom{% else %}{{ url_for(endpoint, page=paginationObj.page + 1, **kwargs) }}{% endif %}">
             &raquo;
         </a>
-            </li>
+    </li>
 </ul>
 {% endmacro %}
 
@@ -27,45 +27,15 @@
         <h4>Recent Posts</h4>
         <div class="row">
             <div class="col-lg-12">
-                <ul class="media-list">
-                    {% set postNum = 6 %}
-                    {% if g.current_user.is_authenticated %}
-                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_(g.post.published == True, g.post.author == g.current_user, g.current_user.admin())).limit(postNum) %}
-                    <li class="media">
-                        <div class="media-left">
-                            <a href="{{ url_for('blog.profile', username=post.author.username) }}">
-                                <img class="media-object img-circle" src="{{ post.author.getAvatar(size=40) }}">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">{{ post.author.username }}</h4>
-                            <a href="{{ url_for('blog.post', id=post.id) }}" class="text-muted">{{ post.title }}</a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                    {% else %}
-                    {% for post in g.post.query.order_by(g.post.date_posted.desc()).filter_by(published=True).limit(postNum) %}
-                    <li class="media">
-                        <div class="media-left">
-                            <a href="{{ url_for('blog.profile', username=post.author.username) }}">
-                                <img class="media-object img-circle" src="{{ post.author.getAvatar(size=40) }}">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">{{ post.author.username }}</h4>
-                            <a href="{{ url_for('blog.post', id=post.id) }}" class="text-muted">{{ post.title }}</a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                    {% endif %}
+                <ul class="media-list">{% set postNum = 6 %}{% if g.current_user.is_authenticated %}{% for post in g.post.query.order_by(g.post.date_posted.desc()).filter(g.db.or_((g.post.disabled == False and g.post.published == True), g.post.author == g.current_user, g.current_user.admin())).limit(postNum) %}
+                    {{ recentPostsContent(post) }}{% endfor %}{% else %}{% for post in g.post.query.order_by(g.post.date_posted.desc()).filter_by(disabled=False, published=True).limit(postNum) %}
+                    {{ recentPostsContent(post) }}{% endfor %}{% endif %}
                 </ul>
             </div>
             <!-- /.col-lg-6 -->
         </div>
         <!-- /.row -->
     </div>
-
-
 
     <div class="well">
         <h4>Blog Categories</h4>
@@ -95,3 +65,15 @@
     </div>
     {% endif %}
 {% endmacro %}
+
+{% macro recentPostsContent(post) %}<li class="media">
+                        <div class="media-left">
+                            <a href="{{ url_for('blog.profile', username=post.author.username) }}">
+                                <img class="media-object img-circle" src="{{ post.author.getAvatar(size=40) }}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ post.author.username|capitalize }}</h4>
+                            <a href="{{ url_for('blog.post', id=post.id) }}" class="text-muted">{{ post.title }}</a>
+                        </div>
+                    </li>{% endmacro %}

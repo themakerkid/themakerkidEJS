@@ -298,6 +298,7 @@ def edit(id):
             post.body = form.body.data
             post.tags = parseMultiplePost(form)
             post.published = form.published.data
+            post.date_posted = datetime.utcnow()
 
             # Update the summary (first 80 words)
             post.changedBody()
@@ -621,7 +622,7 @@ def moderatePosts():
     page = int(request.args.get("page", 1))
 
     # Create a pagination object to add pagination
-    pagination = Post.query.order_by(Post.date_posted.desc()).filter_by(hazard=True).paginate(
+    pagination = Post.query.order_by(Post.date_posted.desc()).paginate(
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
 
@@ -636,9 +637,6 @@ def moderatePostsEnable(id):
     if not current_user.admin():
         abort(403)
     post = Post.query.get_or_404(id)
-    if not post.hazard:
-        flash("Post is not required to be moderated.", 'info')
-        return redirect(url_for('.moderatePosts'))
     post.disabled = False
     flash("Post is enabled.", 'success')
     return redirect(url_for('.moderatePosts'))
@@ -649,9 +647,6 @@ def moderatePostsDisable(id):
     if not current_user.admin():
         abort(403)
     post = Post.query.get_or_404(id)
-    if not post.hazard:
-        flash("Post is not required to be moderated.", 'info')
-        return redirect(url_for('.moderatePosts'))
     post.disabled = True
     flash("Post is disabled.", 'success')
     return redirect(url_for('.moderatePosts'))

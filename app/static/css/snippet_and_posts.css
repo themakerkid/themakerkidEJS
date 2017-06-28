@@ -17,3 +17,7 @@
     padding: 5px;
     overflow-x: auto;
 }
+
+.post-controls a, .snippet-controls a {
+    text-decoration: none;
+}

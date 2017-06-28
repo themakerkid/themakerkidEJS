@@ -23,6 +23,10 @@
             position: relative;
             top: -0.25em;
         }
+
+        a.text-muted:hover {
+            color: #777;
+        }
     </style>
 {% endblock %} {% if current_user.is_authenticated %} {% set logged_in = True %} {% else %} {% set logged_in = False %} {% endif %} {% block page_content %}
     <!-- Start of Row -->
@@ -81,7 +85,7 @@
             <h2 id="posts-scroll">{% if filtered %}Search Results for "{{ request.args["q"] }}"{% else %}Posts{% endif %}</h2>
             {% if posts %}
             <ul id="posts" class="media-list">
-                {% for post in posts %} {% if post.published or post.author == current_user or current_user.admin() %}
+                {% for post in posts %} {% if (not post.disabled and post.published) or (post.author == current_user or current_user.admin()) %}
                 <li class="post media">
                     <div class="pull-left">
                         <a href="{{ url_for('blog.profile', username=post.author.username) }}">
@@ -89,16 +93,16 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}</a></h2>
+                        <h2 class="media-heading"><a href="{{ url_for('blog.post', id=post.id) }}">{{ post.title }}{% if post.disabled %} (Disabled){% endif %}</a></h2>
                         <a href="{{ url_for('blog.profile', username=post.author.username) }}">By {{ post.author.username|capitalize }}</a><br /><span class="glyphicon glyphicon-time"></span> {{ moment(post.date_posted).format('MMMM Do YYYY, h:mm:ss a') }}
                         <br /> {% if not post.summary == post.body %}
                         <div class="less">{{ post.summary_html|safe }}</div>
                         <div class="more">{{ post.body_html|safe }}</div>
-                        <button class="btn btn-xs btn-info show-more">Show more <span class="glyphicon glyphicon-chevron-right"></span></button> {% else %}
+                        <button class="btn btn-xs btn-info show-more">Show more &raquo;</button> {% else %}
                         <div>{{ post.body_html|safe }}</div>
                         {% endif %}
                         <hr />
-                        <div class="pull-right pull-xs-none">
+                        <div class="post-controls pull-right pull-xs-none">
                             <a class="comment-btn" href="{{ url_for('blog.post', id=post.id) }}#comments"><span class="label label-primary">{{ post.comments.count() }}
                             {% if post.comments.count() == 1 %}Comment{% else %}Comments{% endif %}</span></a> {% if current_user.username == post.author.username or current_user.admin() %}
                             <a class="edit-btn" href="{{ url_for('blog.edit', id=post.id) }}"><span class="label label-primary">Edit</span></a> {% if post.published %}
