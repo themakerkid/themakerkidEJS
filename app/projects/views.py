@@ -69,7 +69,7 @@ def generate_document_html(project):
 @projects.route('/')
 def index():
     if current_user.is_authenticated:
-        projects = Project.query.filter(db.or_(Project.status == True, Project.author == current_user)).all()
+        projects = Project.query.filter(db.or_(Project.status == True, Project.author == current_user, current_user.admin())).all()
     else:
         projects = Project.query.filter_by(status=True).all()
     return render_template('projects/index.html', title="Projects", year=year, projects=projects)
