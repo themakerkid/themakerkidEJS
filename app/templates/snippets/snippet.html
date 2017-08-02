@@ -45,7 +45,7 @@
 <br /> {% endif %} {% if snippet.comments.count() >= 1 %}
 <ul class="media-list">
     {% for comment in comments %}
-    <li class="media">
+    <li class="comment media">
         <div class="media-left">
             <img src="{{ comment.author.getAvatar(size=100) }}" class="media-object img-circle">
         </div>
@@ -80,5 +80,8 @@
     $cancelBtn.on("click", function() {
         $("#body").val("");
     });*/
+
+    $(".snippet .media-body img").addClass("img-responsive");
+    $(".comment .media-body img").addClass("img-responsive");
 </script>
 {{ moment.include_moment() }} {% endblock %}

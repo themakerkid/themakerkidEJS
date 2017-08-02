@@ -159,7 +159,7 @@
     }, 2000);
 </script>
 {% endif %} {% endif %}
-<!-- Show More button -->
+<!-- Show More button and responsive images -->
 <script>
     $(".more").hide();
 
@@ -179,6 +179,8 @@
             }
         });
     });
+
+    $(".post .media-body img").addClass("img-responsive");
 </script>
 <!-- End of Show More button -->
 <!-- Moment is used for displaying time of blog post created/updated  -->
