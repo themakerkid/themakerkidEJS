@@ -51,7 +51,7 @@
             <li class="media comment">
                 <div class="pull-left">
                     <a href="{{ url_for('blog.profile', username=project.author.username) }}">
-                        <img class="img-circle media-object" src="{{ project.author.getAvatar(size=60) }}" />
+                        <img class="img-circle media-object" src="{{ comment.author.getAvatar(size=60) }}" />
                     </a>
                 </div>
                 <div class="media-body">
