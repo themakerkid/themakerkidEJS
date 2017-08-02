@@ -139,7 +139,7 @@ def new():
 @login_required
 def edit(id):
     project = Project.query.get_or_404(id)
-    if not current_user.admin() or project.author.username != current_user.username:
+    if not current_user.admin() and project.author.username != current_user.username:
         abort(403)
     form = ProjectForm()
     defaultOption = int(project.status)
