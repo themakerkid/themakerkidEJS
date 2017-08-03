@@ -63,6 +63,12 @@ def capitalizeFirstLetter(word):
     # Return capitalized word
     return new_word
 
+@main.before_request
+def before():
+    if request.endpoint == "main.users" and current_user.is_authenticated:
+        # If the user is logged in set their last seen to the current time
+        current_user.setLastSeen()
+
 # Check if the user is unconfirmed
 @main.before_app_request
 def checkConfirm():

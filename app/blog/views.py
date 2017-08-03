@@ -79,7 +79,7 @@ def checkBtn(false_value, form, validation=True):
 
 def correctPostsHazard():
     for post in Post.query.all():
-        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search('\<img .*src=".+"', post.body, re.DOTALL):
+        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'\<img .*src=".+"', post.body, re.DOTALL):
             post.hazard = True
             post.disabled = True
             db.session.add(post)
@@ -135,12 +135,11 @@ def index():
         # Create a post object
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data, disabled=True)
         
-        """
-        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or '<img .*src=".+">' in post.body:
-            post.hazard = True
+        if bool(re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body)):
             post.disabled = True
-        """
-
+        else:
+            post.disabled = False
+        
         # Update the summary (first 80 words). The summary is displayed on the home page.
         post.changedBody()
 
@@ -288,6 +287,11 @@ def edit(id):
 
             # Update the summary (first 80 words)
             post.changedBody()
+            
+            if bool(re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body)):
+                post.disabled = True
+            else:
+                post.disabled = False
 
             # Redirect the user to the page with the post in it
             return redirect(url_for('.post', id=id))

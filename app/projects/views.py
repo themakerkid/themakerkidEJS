@@ -22,6 +22,12 @@ from . import projects
 # Stop repetition of getting current year
 year = datetime.now().year
 
+@projects.before_request
+def before():
+    if current_user.is_authenticated:
+        # If the user is logged in set their last seen to the current time
+        current_user.setLastSeen()
+
 def generate_document_html(project):
     if project.vid_url:
         html = """<div class="row">
