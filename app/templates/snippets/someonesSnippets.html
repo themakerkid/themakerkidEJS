@@ -56,7 +56,7 @@
     {% else %}
     <p>No snippets have been created by {{ user.username|capitalize }}.</p>
     {% endif %}
-    {{ macros.addPagination(pagination, '.index') }}
+    {{ macros.addPagination(pagination, '.snippets', username=user.username) }}
 {% endblock %}
 
 {% block scripts %}
@@ -80,6 +80,7 @@
                 }
             });
         });
+        $(".snippet .media-body img").addClass("img-responsive");
     </script>
     {{ moment.include_moment() }}
 {% endblock %}

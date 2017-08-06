@@ -28,8 +28,17 @@ from . import blog
 # Import Regular Expression to check posts
 import re
 
+from sqlalchemy import text
+
 # Stop repetition of getting current year
 year = datetime.now().year
+
+# Stop repetition of the gigantic expression that gathers the correct posts
+def getPagination(page):
+    pagination = Post.query.order_by(Post.date_posted.desc()).filter(((Post.disabled == False) & (Post.published == True)) | (Post.author_id == current_user.id) | current_user.admin()).paginate(
+                         page, per_page=current_app.config["ITEMS_PER_PAGE"],
+                         error_out=True)
+    return pagination
 
 # Get Tag objects from a list of Tag ids
 def parseMultiplePost(form):
@@ -79,7 +88,7 @@ def checkBtn(false_value, form, validation=True):
 
 def correctPostsHazard():
     for post in Post.query.all():
-        if re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'\<img .*src=".+"', post.body, re.DOTALL):
+        if bool(re.search(r'!.*\[.+\]', post.body, re.DOTALL) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body, re.DOTALL)):
             post.hazard = True
             post.disabled = True
             db.session.add(post)
@@ -120,9 +129,11 @@ def index():
     search_form = SearchForm()
 
     # Create a pagination object to add pagination
-    pagination = Post.query.order_by(Post.date_posted.desc()).filter(db.or_((Post.disabled == False and Post.published == True), Post.author_id == current_user.id, current_user.admin())).paginate(
-        page, per_page=current_app.config["ITEMS_PER_PAGE"],
-        error_out=True)
+    #pagination = Post.query.order_by(Post.date_posted.desc()).filter(db.or_((Post.disabled == False and Post.published == True), Post.author_id == current_user.id, current_user.admin())).paginate(
+    #    page, per_page=current_app.config["ITEMS_PER_PAGE"],
+    #    error_out=True)
+
+    pagination = getPagination(page)
 
     # Get the Post objects out of the paginated results
     posts = pagination.items
@@ -135,7 +146,7 @@ def index():
         # Create a post object
         post = Post(title=post_form.title.data, body=post_form.body.data, author=current_user._get_current_object(), tags=tags, published=post_form.published.data, disabled=True)
         
-        if bool(re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body)):
+        if bool(re.search(r'!.*\[.+\]', post.body, re.DOTALL) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body, re.DOTALL)):
             post.disabled = True
         else:
             post.disabled = False
@@ -201,14 +212,19 @@ def filteredPosts():
 @blog.route('/posts/<username>')
 def posts(username):
     # Get pagination page.
-    page = request.args.get("page")
+    page = request.args.get("page", 1, type=int)
 
     # Get the user from the database and if the username doesn't exist,
     # return a 404 error code.
     user = User.query.filter_by(username=username).first_or_404()
 
     # Create pagination object.
-    pagination = Post.query.order_by(Post.date_posted.desc()).filter_by(author=user).paginate(
+    pagination = Post.query.order_by(Post.date_posted.desc()).filter_by(author=user)
+    
+    if not user.id == current_user.id and not current_user.admin():
+        pagination = pagination.filter_by(disabled=False, published=True)
+
+    pagination = pagination.paginate(
         page, per_page=current_app.config["ITEMS_PER_PAGE"],
         error_out=True)
 
@@ -227,7 +243,7 @@ def post(id):
     post = Post.query.get_or_404(id)
     
     # If the post isn't public and the author is not the current user
-    if post.published == False and post.author != current_user and not current_user.admin():
+    if (post.disabled == True or post.published == False) and post.author != current_user and not current_user.admin():
         # Return a 403 status code (forbidden)
         abort(403)
 
@@ -288,7 +304,7 @@ def edit(id):
             # Update the summary (first 80 words)
             post.changedBody()
             
-            if bool(re.search(r'!\[.+\]', post.body) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body)):
+            if bool(re.search(r'!.*\[.+\]', post.body, re.DOTALL) or '</iframe>' in post.body or re.search(r'<img .*src=".+".*>', post.body, re.DOTALL)):
                 post.disabled = True
             else:
                 post.disabled = False

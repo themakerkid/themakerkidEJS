@@ -25,7 +25,6 @@
         {% if posts %}
         <ul id="posts" class="media-list">
             {% for post in posts %}
-            {% if post.published or post.author == current_user %}
             <li class="post media">
                 <div class="pull-left">
                     <a href="{{ url_for('blog.profile', username=post.author.username) }}">
@@ -60,7 +59,6 @@
                     </p>
                 </div>
             </li>
-            {% endif %}
             {% endfor %}
         </ul>
         {% else %}
@@ -75,7 +73,7 @@
 </div>
 <!-- /.row -->
 
-{{ macros.addPagination(pagination, '.index') }}
+{{ macros.addPagination(pagination, '.posts', username=user.username) }}
 {% endblock %}
 <!-- /.container -->
 {% block scripts %}
@@ -101,6 +99,7 @@
                 }
             });
         });
+        $(".post .media-body img").addClass("img-responsive");
     </script>
     {{ moment.include_moment() }}
 {% endblock %}
